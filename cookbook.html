@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>EL YES! Cookbook</title>
+<style>
+
+/* === RESET & BASE === */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg:         #f5f0e8;
+  --surface:    #ffffff;
+  --surface2:   #faf7f3;
+  --surface3:   #f0ebe2;
+  --accent:     #b8700e;
+  --accent-dim: #7a4a06;
+  --accent-hi:  #d4870a;
+  --accent-bg:  #fdf4e4;
+  --text:       #1c1208;
+  --muted:      #7a6a58;
+  --dim:        #b8a898;
+  --border:     #e2d8c8;
+  --border-mid: #c8b89e;
+  --green:      #2a7038;
+  --green-bg:   #eef7f1;
+  --green-bdr:  #a0d0ae;
+  --red:        #b83030;
+  --red-bg:     #fdf0f0;
+  --warn:       #b8700e;
+  --warn-bg:    #fdf4e4;
+  --warn-bdr:   #e8b870;
+}
+html { font-size: 15px; -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+button { font-family: inherit; cursor: pointer; }
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border-mid); border-radius: 3px; }
+
+/* === LIBRARY === */
+#lib-view { max-width: 960px; margin: 0 auto; padding: 48px 24px 80px; }
+
+.lib-hdr { margin-bottom: 40px; }
+.lib-hdr h1 {
+  font-size: 28px; font-weight: 700; letter-spacing: -0.6px;
+  color: var(--text); margin-bottom: 4px;
+}
+.lib-hdr h1 span { color: var(--accent); }
+.lib-hdr .lib-sub { color: var(--muted); font-size: 14px; margin-bottom: 16px; }
+.lib-meta { display: flex; gap: 10px; flex-wrap: wrap; }
+.lib-pill {
+  font-size: 12px; color: var(--muted);
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 20px; padding: 4px 12px;
+}
+.lib-pill span { color: var(--accent); font-weight: 600; }
+
+.recipe-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 14px;
+}
+.recipe-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 20px 22px;
+  display: flex; flex-direction: column; gap: 10px;
+  transition: border-color .2s, box-shadow .2s;
+}
+.recipe-card:not(.placeholder) { cursor: pointer; }
+.recipe-card:not(.placeholder):hover {
+  border-color: var(--accent-dim);
+  box-shadow: 0 2px 12px rgba(180,112,14,0.10);
+}
+.recipe-card.placeholder { opacity: .5; }
+
+.card-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+.card-tag {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.3px;
+  color: var(--accent); background: var(--accent-bg);
+  border: 1px solid var(--warn-bdr); border-radius: 4px; padding: 2px 7px;
+}
+.card-title { font-size: 16px; font-weight: 600; color: var(--text); line-height: 1.35; }
+.card-sub { font-size: 13px; color: var(--muted); line-height: 1.4; }
+.card-btn {
+  margin-top: auto; display: block; width: 100%;
+  background: var(--accent); color: #fff;
+  border: none; border-radius: 7px; padding: 9px 16px;
+  font-size: 13px; font-weight: 700; letter-spacing: 0.2px;
+  transition: background .15s;
+}
+.card-btn:hover { background: var(--accent-hi); }
+.card-soon { font-size: 12px; color: var(--dim); margin-top: auto; }
+
+/* === COOK VIEW === */
+#cook-view { display: none; }
+#cook-view.active { display: block; }
+
+/* Fixed header */
+#cook-hdr {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+  height: 54px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 10px; padding: 0 18px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+}
+.back-btn {
+  background: none; border: 1px solid var(--border); color: var(--muted);
+  font-size: 13px; padding: 5px 10px; border-radius: 6px;
+  transition: all .15s; white-space: nowrap; flex-shrink: 0;
+}
+.back-btn:hover { color: var(--text); border-color: var(--border-mid); }
+#hdr-title {
+  font-size: 14px; font-weight: 600; color: var(--text); flex: 1;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.preheat-badge {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.5px;
+  color: var(--accent); background: var(--accent-bg);
+  border: 1px solid var(--warn-bdr); border-radius: 5px;
+  padding: 4px 9px; white-space: nowrap; flex-shrink: 0;
+}
+.scale-toggle {
+  display: flex; border: 1px solid var(--border); border-radius: 7px;
+  overflow: hidden; flex-shrink: 0;
+}
+.scale-btn {
+  background: none; border: none; color: var(--muted);
+  font-size: 12px; font-weight: 700; padding: 5px 10px;
+  transition: all .15s; letter-spacing: 0.2px;
+}
+.scale-btn + .scale-btn { border-left: 1px solid var(--border); }
+.scale-btn.on { background: var(--accent); color: #fff; }
+.scale-btn:not(.on):hover { background: var(--surface2); color: var(--text); }
+
+/* Fixed timer bar */
+#timer-bar {
+  position: fixed; top: 54px; left: 0; right: 0; z-index: 299;
+  background: var(--surface2); border-bottom: 1px solid var(--border);
+  max-height: 0; overflow: hidden;
+  transition: max-height .25s ease, padding .25s ease;
+  padding: 0 18px;
+}
+#timer-bar.vis { max-height: 70px; padding: 10px 18px; }
+.t-pills { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.t-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 20px; padding: 5px 13px; flex-shrink: 0;
+}
+.t-pill.urg { border-color: var(--red); background: var(--red-bg); }
+.t-pill.urg .t-count { color: var(--red); }
+.t-pill.alerted {
+  border-color: var(--warn-bdr); cursor: pointer;
+  animation: amberpulse 1.2s ease-in-out infinite;
+}
+.t-pill.alerted .t-count {
+  color: var(--warn); font-size: 11px; font-weight: 700;
+  letter-spacing: 0.5px; text-transform: uppercase;
+}
+@keyframes amberpulse {
+  0%, 100% { background: var(--surface); }
+  50%       { background: var(--warn-bg); }
+}
+.t-name  { font-size: 12px; color: var(--muted); }
+.t-count { font-size: 15px; font-weight: 600; font-variant-numeric: tabular-nums; min-width: 40px; color: var(--text); }
+
+/* Cook body */
+#cook-body {
+  padding-top: 70px;
+  padding-left: 20px; padding-right: 20px; padding-bottom: 80px;
+  max-width: 760px; margin: 0 auto;
+  transition: padding-top .25s ease;
+}
+#cook-body.bar-vis { padding-top: 130px; }
+
+/* Tabs */
+.cook-tabs {
+  display: flex; border: 1px solid var(--border);
+  border-radius: 8px; overflow: hidden; margin-bottom: 18px;
+  background: var(--surface);
+}
+.cook-tab {
+  flex: 1; background: none; border: none; color: var(--muted);
+  font-size: 12px; font-weight: 700; padding: 10px;
+  letter-spacing: 1px; transition: all .15s;
+}
+.cook-tab.on { background: var(--accent); color: #fff; }
+.cook-tab:not(.on):hover { background: var(--surface2); color: var(--text); }
+.cook-tab + .cook-tab { border-left: 1px solid var(--border); }
+
+/* Panes */
+.cook-pane { display: none; }
+.cook-pane.on { display: block; }
+
+/* Section label */
+.sec-lbl {
+  font-size: 11px; font-weight: 700; letter-spacing: 2px;
+  color: var(--muted); text-transform: uppercase;
+  margin: 22px 0 0; padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 8px;
+  cursor: pointer; user-select: none;
+  transition: color .2s;
+}
+.sec-lbl:first-child { margin-top: 4px; }
+.mise-section.collapsed .sec-lbl { color: var(--dim); border-bottom-color: transparent; }
+
+/* Section collapse checkbox */
+.sec-cb {
+  width: 15px; height: 15px; border: 1.5px solid var(--border-mid);
+  border-radius: 3px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .15s;
+}
+.mise-section.collapsed .sec-cb { background: var(--green); border-color: var(--green); }
+.sec-cb-mark { color: white; font-size: 9px; font-weight: 800; opacity: 0; line-height: 1; }
+.mise-section.collapsed .sec-cb-mark { opacity: 1; }
+
+/* Collapsible items wrapper */
+.sec-items {
+  overflow: hidden;
+  max-height: 2000px;
+  transition: max-height .3s ease, opacity .25s ease, margin .25s ease;
+  opacity: 1;
+  margin-bottom: 0;
+}
+.mise-section.collapsed .sec-items { max-height: 0; opacity: 0; }
+
+/* Checklist items (shared by equipment + ingredients) */
+.check-item {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 9px 0; border-bottom: 1px solid var(--border);
+  cursor: pointer; transition: opacity .15s; user-select: none;
+}
+.check-item:last-child { border-bottom: none; }
+.check-item.ck { opacity: .38; }
+.check-item.ck .check-name { text-decoration: line-through; }
+.cb {
+  width: 18px; height: 18px; border: 1.5px solid var(--dim);
+  border-radius: 4px; flex-shrink: 0; margin-top: 2px;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .15s;
+}
+.check-item.ck .cb { background: var(--green); border-color: var(--green); }
+.cb-mark { color: white; font-size: 10px; font-weight: 700; opacity: 0; line-height: 1; }
+.check-item.ck .cb-mark { opacity: 1; }
+.check-name { font-size: 14px; color: var(--text); flex: 1; line-height: 1.5; }
+.check-note { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+/* Steps */
+.step-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; margin-bottom: 10px; transition: opacity .15s;
+}
+.step-card.done { opacity: .32; }
+.step-hdr { display: flex; align-items: flex-start; gap: 13px; padding: 16px 18px; }
+.step-num {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--surface3); color: var(--muted);
+  font-size: 13px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; transition: all .2s; margin-top: 1px;
+}
+.step-card.done .step-num { background: var(--green-bg); color: var(--green); }
+.step-inner { flex: 1; }
+.step-lbl {
+  font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+  color: var(--muted); text-transform: uppercase; margin-bottom: 5px;
+}
+.step-txt { font-size: 14px; line-height: 1.8; color: var(--text); }
+.step-tip {
+  font-size: 13px; color: var(--muted); font-style: italic;
+  margin-top: 9px; line-height: 1.5;
+  padding-left: 10px; border-left: 2px solid var(--border);
+}
+.step-ftr {
+  display: flex; gap: 6px; padding: 2px 18px 14px 59px;
+  flex-wrap: wrap; align-items: center;
+}
+
+/* Timer controls */
+.t-set { display: inline-flex; align-items: center; gap: 3px; }
+.t-adj {
+  width: 26px; height: 28px;
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: 6px; color: var(--muted); font-size: 16px;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .15s; flex-shrink: 0; line-height: 1;
+}
+.t-adj:hover { color: var(--text); border-color: var(--border-mid); background: var(--surface3); }
+.t-btn {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: var(--surface2); border: 1px solid var(--border);
+  color: var(--text); font-size: 12px; font-weight: 600;
+  padding: 5px 10px; border-radius: 6px; height: 28px;
+  white-space: nowrap; transition: border-color .15s, color .15s, background .15s;
+}
+.t-btn:hover { border-color: var(--border-mid); }
+.t-btn.running { border-color: var(--red); color: var(--red); background: var(--red-bg); }
+.t-btn.warn30  { border-color: var(--warn-bdr); color: var(--warn); background: var(--warn-bg); }
+.t-btn.fin     { border-color: var(--warn-bdr); color: var(--warn); animation: amberpulse 1.2s ease-in-out infinite; }
+.done-btn {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: none; border: 1px solid var(--border);
+  color: var(--muted); font-size: 12px;
+  padding: 5px 10px; border-radius: 6px; height: 28px;
+  transition: all .15s;
+}
+.done-btn:hover { border-color: var(--border-mid); color: var(--text); }
+.step-card.done .done-btn { color: var(--green); border-color: var(--green-bdr); }
+
+/* Ingredient refs in steps */
+.qref {
+  border-bottom: 1px dashed var(--border-mid);
+  cursor: default; white-space: nowrap;
+}
+
+/* Tooltip */
+#tooltip {
+  position: fixed; display: none; z-index: 999;
+  background: var(--text); color: var(--bg);
+  border-radius: 6px; padding: 5px 10px;
+  font-size: 12px; font-weight: 600;
+  pointer-events: none; white-space: nowrap;
+  transform: translateX(-50%);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+/* Notes */
+#notes-section {
+  margin-top: 36px; border-top: 1px solid var(--border); padding-top: 26px;
+}
+#notes-area {
+  width: 100%; min-height: 90px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 8px; color: var(--text); font-family: inherit;
+  font-size: 14px; line-height: 1.65; padding: 12px 14px;
+  resize: vertical; transition: border-color .15s;
+}
+#notes-area:focus { outline: none; border-color: var(--accent-dim); }
+#notes-area::placeholder { color: var(--dim); }
+.notes-row {
+  display: flex; align-items: center; justify-content: flex-end;
+  gap: 10px; margin-top: 8px;
+}
+.notes-status { font-size: 12px; color: var(--green); opacity: 0; transition: opacity .3s; }
+.notes-status.vis { opacity: 1; }
+.notes-save-btn {
+  background: none; border: 1px solid var(--border);
+  color: var(--muted); font-size: 12px; padding: 5px 12px;
+  border-radius: 6px; transition: all .15s;
+}
+.notes-save-btn:hover { border-color: var(--green-bdr); color: var(--green); }
+
+@media (max-width: 520px) {
+  .preheat-badge { display: none; }
+  #hdr-title { font-size: 13px; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ===== LIBRARY ===== -->
+<div id="lib-view">
+  <div class="lib-hdr">
+    <h1>EL <span>YES!</span> cookbook</h1>
+    <p class="lib-sub">Elimination diet · phase 1 baseline · tracking what works</p>
+    <div class="lib-meta">
+      <div class="lib-pill">Started <span>April 22</span></div>
+      <div class="lib-pill">Protocol <span>phase 1</span></div>
+      <div class="lib-pill">Household <span>2 people</span></div>
+    </div>
+  </div>
+  <div class="recipe-grid" id="recipe-grid"></div>
+</div>
+
+<!-- ===== COOK VIEW ===== -->
+<div id="cook-view">
+
+  <div id="cook-hdr">
+    <button class="back-btn" onclick="goLib()">← recipes</button>
+    <div id="hdr-title"></div>
+    <div class="preheat-badge" id="preheat-badge" style="display:none"></div>
+    <div class="scale-toggle">
+      <button class="scale-btn on" id="scale-1" onclick="setScale(1)">1×</button>
+      <button class="scale-btn"    id="scale-2" onclick="setScale(2)">2×</button>
+      <button class="scale-btn"    id="scale-3" onclick="setScale(3)">3×</button>
+    </div>
+  </div>
+
+  <div id="timer-bar">
+    <div class="t-pills" id="t-pills"></div>
+  </div>
+
+  <div id="cook-body">
+    <div class="cook-tabs">
+      <button class="cook-tab on" id="tab-mise" onclick="swTab('mise',this)">MISE EN PLACE</button>
+      <button class="cook-tab"    id="tab-cook" onclick="swTab('cook',this)">COOK</button>
+    </div>
+    <div class="cook-pane on" id="pane-mise"></div>
+    <div class="cook-pane"    id="pane-cook">
+      <div id="steps-container"></div>
+      <div id="notes-section">
+        <div class="sec-lbl">cook notes</div>
+        <textarea id="notes-area" placeholder="what worked, what to change next time…"></textarea>
+        <div class="notes-row">
+          <span class="notes-status" id="notes-status">saved</span>
+          <button class="notes-save-btn" onclick="saveNotes()">save note</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div id="tooltip"></div>
+
+<script>
+
+// =====================================================================
+// RECIPE DATA
+// Scale 1 = 1 person, 2 = 2 people, 3 = 3 people
+// byScale: { 1: 'qty for 1', 2: 'qty for 2', 3: 'qty for 3' }
+// items without byScale don't change with scale (oils, salt, etc.)
+// refs.tips: { 1: '...', 2: '...', 3: '...' } for ingredient tooltips
+// =====================================================================
+
+const RECIPES = [
+{
+  id: 'vadouvan-chicken',
+  title: 'Vadouvan chicken thighs with pan gravy',
+  subtitle: 'Haiga rice · charred broccoli · sweet potato mash',
+  preheat: '425°F',
+  serves: '1–3',
+  tags: ['chicken', 'weeknight', 'phase 1'],
+
+  equipment: [
+    { name: '12-inch cast iron skillet',          note: 'for the sear and gravy — needs to be big enough for all the thighs flat' },
+    { name: 'Two sheet pans',                      note: 'one for sweet potatoes, one for broccoli' },
+    { name: 'Zojirushi rice cooker' },
+    { name: 'Meat thermometer',                    note: 'pull thighs at 165°F' },
+    { name: 'Small bowl for arrowroot slurry' }
+  ],
+
+  mise: [
+    { group: 'Chicken', items: [
+      { byScale: { 1: '2 boneless skinless chicken thighs',  2: '4 boneless skinless chicken thighs',  3: '6 boneless skinless chicken thighs'  }, note: 'pat dry' },
+      { byScale: { 1: '¾ tsp vadouvan',                     2: '1½ tsp vadouvan',                      3: '2¼ tsp vadouvan'                      } },
+      { byScale: { 1: '½ tsp garlic granules',              2: '1 tsp garlic granules',                3: '1½ tsp garlic granules'               } },
+      { byScale: { 1: '¼ tsp black pepper',                 2: '½ tsp black pepper',                   3: '¾ tsp black pepper'                   } },
+      { name: 'Non-iodized sea salt, generous' },
+      { name: 'Avocado oil' }
+    ]},
+    { group: 'Pan gravy', items: [
+      { byScale: { 1: '1–2 garlic cloves, minced',          2: '3 garlic cloves, minced',              3: '4–5 garlic cloves, minced'            } },
+      { byScale: { 1: '½ cup bone broth',                   2: '1 cup bone broth',                     3: '1½ cups bone broth'                   } },
+      { byScale: { 1: '½ tsp Bragg\'s ACV',                 2: '1 tsp Bragg\'s ACV',                   3: '1½ tsp Bragg\'s ACV'                  }, note: 'finish only — set aside separately' },
+      { byScale: { 1: '1½ tsp arrowroot + 1 tbsp cold water', 2: '1 tbsp arrowroot + 2 tbsp cold water', 3: '1½ tbsp arrowroot + 3 tbsp cold water' }, note: 'mix now, before anything hits the stove' },
+      { name: 'Olive oil splash' }
+    ]},
+    { group: 'Broccoli', items: [
+      { byScale: { 1: '½ large head broccoli, florets',     2: '1 large head broccoli, florets',       3: '1–2 heads broccoli, florets'          } },
+      { name: 'Avocado oil + non-iodized sea salt' }
+    ]},
+    { group: 'Sweet potato mash', items: [
+      { byScale: { 1: '1 medium sweet potato, 1-inch cubes', 2: '2 medium sweet potatoes, 1-inch cubes', 3: '3 medium sweet potatoes, 1-inch cubes' } },
+      { name: 'Olive oil + non-iodized sea salt' }
+    ]},
+    { group: 'Rice', items: [
+      { byScale: { 1: '1 cup haiga rice, rinsed',           2: '2 cups haiga rice, rinsed',            3: '3 cups haiga rice, rinsed'            } }
+    ]}
+  ],
+
+  refs: {
+    'sp':       { display: 'sweet potatoes',  tips: { 1: '1 medium, 1-inch cubes',       2: '2 medium, 1-inch cubes',       3: '3 medium, 1-inch cubes'       } },
+    'oil-toss': { display: 'olive oil',       tips: { 1: 'generous drizzle',             2: 'generous drizzle',             3: 'generous drizzle'             } },
+    'rice':     { display: 'rice',            tips: { 1: '1 cup haiga, rinsed',          2: '2 cups haiga, rinsed',         3: '3 cups haiga, rinsed'         } },
+    'vadouvan': { display: 'vadouvan',        tips: { 1: '¾ tsp',                        2: '1½ tsp',                       3: '2¼ tsp'                       } },
+    'gg':       { display: 'garlic granules', tips: { 1: '½ tsp',                        2: '1 tsp',                        3: '1½ tsp'                       } },
+    'pepper':   { display: 'black pepper',   tips: { 1: '¼ tsp',                        2: '½ tsp',                        3: '¾ tsp'                        } },
+    'broccoli': { display: 'broccoli',        tips: { 1: '½ large head, large florets',  2: '1 large head, large florets',  3: '1–2 heads, large florets'     } },
+    'avo-oil':  { display: 'avocado oil',     tips: { 1: 'thin coat',                   2: 'thin coat',                   3: 'thin coat'                    } },
+    'avo-toss': { display: 'avocado oil',     tips: { 1: 'generous drizzle',             2: 'generous drizzle',             3: 'generous drizzle'             } },
+    'oil-pan':  { display: 'olive oil',       tips: { 1: 'small splash if dry',          2: 'small splash if dry',          3: 'small splash if dry'          } },
+    'garlic':   { display: 'garlic',          tips: { 1: '1–2 cloves, minced',           2: '3 cloves, minced',             3: '4–5 cloves, minced'           } },
+    'broth':    { display: 'bone broth',      tips: { 1: '½ cup',                        2: '1 cup',                        3: '1½ cups'                      } },
+    'slurry':   { display: 'arrowroot slurry', tips: { 1: '1½ tsp arrowroot + 1 tbsp cold water', 2: '1 tbsp arrowroot + 2 tbsp cold water', 3: '1½ tbsp arrowroot + 3 tbsp cold water' } },
+    'acv':      { display: 'ACV',             tips: { 1: '½ tsp, finish only',           2: '1 tsp, finish only',           3: '1½ tsp, finish only'          } },
+    'sp-mash':  { display: 'sweet potatoes',  tips: { 1: '1 medium sweet potato',        2: '2 medium sweet potatoes',      3: '3 medium sweet potatoes'      } },
+    'oil-mash': { display: 'olive oil',       tips: { 1: 'generous drizzle',             2: 'generous drizzle',             3: 'generous drizzle'             } }
+  },
+
+  timers: {
+    'sp':       { label: 'Sweet potatoes', preset: 2280, bell: false },
+    'rice':     { label: 'Rice',           preset: 2100, bell: false },
+    'brocwait': { label: 'Add broccoli',   preset: 960,  bell: true  },
+    'broc':     { label: 'Broccoli',       preset: 1320, bell: false },
+    's1t':      { label: 'Side 1',         preset: 300,  bell: false },
+    's2t':      { label: 'Side 2',         preset: 300,  bell: false },
+    'g1':       { label: 'Garlic',         preset: 60,   bell: false },
+    'g2':       { label: 'Reduce',         preset: 240,  bell: false },
+    'g3':       { label: 'Thicken',        preset: 90,   bell: false }
+  },
+
+  steps: [
+    {
+      label: 'Sweet potatoes + rice',
+      text:  'Toss {{sp}} in {{oil-toss}} and salt. Sheet pan into the oven. Start {{rice}} in the Zojirushi. The "add broccoli" timer tells you when to go do step 3.',
+      tip:   null,
+      timers: ['sp','rice','brocwait']
+    },
+    {
+      label: 'Rub the chicken',
+      text:  'Combine {{vadouvan}}, {{gg}}, salt, and {{pepper}}. Rub generously on both sides of all the thighs. Let sit at room temp while you wait.',
+      tip:   'Generous means more than you think. Vadouvan fades a bit in the sear.',
+      timers: []
+    },
+    {
+      label: 'Broccoli into oven',
+      text:  'Toss {{broccoli}} in {{avo-toss}} and salt. Second sheet pan into the oven — start the timer now. You want black edges. Don\'t pull early.',
+      tip:   'If you\'re second-guessing whether it\'s done, it isn\'t.',
+      timers: ['broc']
+    },
+    {
+      label: 'Sear — side one',
+      text:  '12-inch cast iron ripping hot with a thin layer of {{avo-oil}}. Lay thighs flat — don\'t touch them.',
+      tip:   'Smoke is fine. Panic is not.',
+      timers: ['s1t']
+    },
+    {
+      label: 'Flip — side two',
+      text:  'Flip all thighs. Pull at 165°F internal. Rest on a plate, tent loosely.',
+      tip:   null,
+      timers: ['s2t']
+    },
+    {
+      label: 'Gravy — base',
+      text:  'Medium heat, same pan, don\'t wipe it. Splash of {{oil-pan}} if dry. Add {{garlic}} — 60 seconds. Get every bit of vadouvan fond off that pan.',
+      tip:   'This is where all the flavor lives. Slow down here.',
+      timers: ['g1']
+    },
+    {
+      label: 'Gravy — reduce',
+      text:  'Pour in {{broth}}. Scrape up the fond. Reduce by about a third at a steady simmer.',
+      tip:   null,
+      timers: ['g2']
+    },
+    {
+      label: 'Gravy — thicken + finish',
+      text:  'Lower heat to medium-low. Whisk in {{slurry}} gradually. Simmer gently — do not boil hard after it goes in. Finish with {{acv}}, taste, adjust salt.',
+      tip:   'ACV is a background note here, not a lead.',
+      timers: ['g3']
+    },
+    {
+      label: 'Mash + plate',
+      text:  'Pull {{sp-mash}}. Rough mash with {{oil-mash}} and salt — savory only. Plate: rice → thighs → gravy over top → broccoli alongside → mash.',
+      tip:   null,
+      timers: []
+    }
+  ]
+},
+
+{
+  id: 'lamb-blueberry',
+  title: 'Lamb loin chops with blueberry-mint sauce',
+  subtitle: 'Roasted carrots · arugula & cucumber salad',
+  preheat: '425°F',
+  serves: '1–3',
+  tags: ['lamb', 'weekend', 'phase 1'],
+
+  equipment: [
+    { name: '12-inch cast iron skillet',        note: 'essential for the crust — get it properly ripping hot' },
+    { name: 'Small saucepan',                   note: 'for the blueberry sauce' },
+    { name: 'Sheet pan',                        note: 'for the carrots' },
+    { name: 'Meat thermometer',                 note: 'pull at 130–135°F for medium-rare' },
+    { name: 'Large salad bowl' }
+  ],
+
+  mise: [
+    { group: 'Lamb', items: [
+      { byScale: { 1: '2 lamb loin chops', 2: '4 lamb loin chops', 3: '6 lamb loin chops' }, note: '~1 inch thick, pat dry' },
+      { name: 'Non-iodized sea salt, generous' },
+      { name: 'Black pepper' },
+      { name: 'Avocado oil' }
+    ]},
+    { group: 'Blueberry-mint sauce', items: [
+      { byScale: { 1: '½ cup blueberries',   2: '1 cup blueberries',   3: '1½ cups blueberries'   } },
+      { byScale: { 1: '1 tbsp Bragg\'s ACV', 2: '2 tbsp Bragg\'s ACV', 3: '3 tbsp Bragg\'s ACV'   } },
+      { byScale: { 1: '½ tbsp bone broth',   2: '1 tbsp bone broth',   3: '1½ tbsp bone broth'    } },
+      { byScale: { 1: '1 tsp fresh mint, chiffonade', 2: '2 tsp fresh mint', 3: '1 tbsp fresh mint' } },
+      { name: '1 sprig fresh rosemary' },
+      { name: 'Salt to taste' }
+    ]},
+    { group: 'Roasted carrots', items: [
+      { byScale: { 1: '2–3 large carrots, bias-cut thick', 2: '4–6 large carrots', 3: '6–8 large carrots' } },
+      { name: 'Avocado oil + non-iodized sea salt' }
+    ]},
+    { group: 'Arugula salad', items: [
+      { byScale: { 1: '1 handful arugula', 2: '2 large handfuls arugula', 3: '3 large handfuls arugula' } },
+      { byScale: { 1: '¼ English cucumber, thin rounds', 2: '½ English cucumber', 3: '1 English cucumber' } },
+      { byScale: { 1: 'Small handful blackberries', 2: 'Large handful blackberries', 3: '2 large handfuls blackberries' } },
+      { name: 'Bragg\'s ACV + olive oil, for dressing' }
+    ]}
+  ],
+
+  refs: {
+    'blueberries': { display: 'blueberries',   tips: { 1: '½ cup fresh',    2: '1 cup fresh',    3: '1½ cups fresh'    } },
+    'acv-sauce':   { display: 'ACV',           tips: { 1: '1 tbsp',         2: '2 tbsp',         3: '3 tbsp'           } },
+    'broth-sauce': { display: 'bone broth',    tips: { 1: '½ tbsp',         2: '1 tbsp',         3: '1½ tbsp'          } },
+    'mint':        { display: 'mint',          tips: { 1: '1 tsp chiffonade', 2: '2 tsp chiffonade', 3: '1 tbsp chiffonade' } },
+    'carrots':     { display: 'carrots',       tips: { 1: '2–3 large, bias-cut thick', 2: '4–6 large', 3: '6–8 large'  } },
+    'avo-oil':     { display: 'avocado oil',   tips: { 1: 'thin coat',      2: 'thin coat',      3: 'thin coat'        } },
+    'avo-toss':    { display: 'avocado oil',   tips: { 1: 'generous drizzle', 2: 'generous drizzle', 3: 'generous drizzle' } }
+  },
+
+  timers: {
+    'carrots': { label: 'Carrots',  preset: 1500, bell: false },
+    'l-s1':    { label: 'Side 1',   preset: 240,  bell: false },
+    'l-s2':    { label: 'Side 2',   preset: 180,  bell: false },
+    'sauce':   { label: 'Sauce',    preset: 300,  bell: false }
+  },
+
+  steps: [
+    {
+      label: 'Carrots into oven',
+      text:  'Toss {{carrots}} in {{avo-toss}} and salt. Sheet pan into the 425°F oven. Bias-cut thick — you want caramelized edges, not steamed.',
+      tip:   null,
+      timers: ['carrots']
+    },
+    {
+      label: 'Season lamb',
+      text:  'Pat chops dry. Season both sides generously with salt and pepper. Rest at room temp.',
+      tip:   'The crust on lamb loin chops is the whole thing. Wet meat ruins it.',
+      timers: []
+    },
+    {
+      label: 'Blueberry sauce',
+      text:  'Combine {{blueberries}}, {{acv-sauce}}, {{broth-sauce}}, and rosemary sprig in a small saucepan. Medium heat until berries burst and sauce thickens, stirring occasionally. Off heat, stir in {{mint}}. Remove rosemary. Taste and adjust ACV.',
+      tip:   'The sauce should be tart and bright — err on the side of more ACV.',
+      timers: ['sauce']
+    },
+    {
+      label: 'Sear — side one',
+      text:  'Cast iron ripping hot with {{avo-oil}}. Chops in — good sizzle required. Don\'t touch.',
+      tip:   'You want a dark crust, not just color. Push past where you think it should go.',
+      timers: ['l-s1']
+    },
+    {
+      label: 'Flip + finish',
+      text:  'Flip chops. Second side. Pull at 130–135°F for medium-rare. Rest 5 minutes — non-negotiable.',
+      tip:   'Lamb rests fast but the carry-over is real. Don\'t skip it.',
+      timers: ['l-s2']
+    },
+    {
+      label: 'Plate',
+      text:  'Pull {{carrots}} from oven. Dress arugula and cucumber with ACV and olive oil, add blackberries. Plate: chops → blueberry sauce over top → carrots alongside → salad.',
+      tip:   null,
+      timers: []
+    }
+  ]
+}
+];
+
+const PLACEHOLDERS = [
+  { title: 'Latin avo smash with chicken', subtitle: 'Plantain chips', tags: ['chicken', 'quick'] },
+  { title: 'Salmon with crispy skin',      subtitle: 'Wild rice · broccolini', tags: ['fish', 'weeknight'] }
+];
+
+// =====================================================================
+// STATE
+// =====================================================================
+
+let currentRecipe  = null;
+let currentScale   = 2;     // default: cooking for 2
+let T              = {};
+let audioCtx       = null;
+let tipTimeout     = null;
+let notesSaveTimer = null;
+
+// =====================================================================
+// LIBRARY
+// =====================================================================
+
+function renderLibrary() {
+  const grid = document.getElementById('recipe-grid');
+  grid.innerHTML = '';
+  RECIPES.forEach(r => {
+    const card = document.createElement('div');
+    card.className = 'recipe-card';
+    card.innerHTML = `
+      <div class="card-tags">${r.tags.map(t => `<span class="card-tag">${t}</span>`).join('')}</div>
+      <div class="card-title">${r.title}</div>
+      <div class="card-sub">${r.subtitle}</div>
+      <button class="card-btn" onclick="loadRecipe('${r.id}')">cook now</button>
+    `;
+    grid.appendChild(card);
+  });
+  PLACEHOLDERS.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'recipe-card placeholder';
+    card.innerHTML = `
+      <div class="card-tags">${p.tags.map(t => `<span class="card-tag">${t}</span>`).join('')}</div>
+      <div class="card-title">${p.title}</div>
+      <div class="card-sub">${p.subtitle}</div>
+      <div class="card-soon">coming soon</div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function goLib() {
+  Object.values(T).forEach(t => { if (t.iv) clearInterval(t.iv); });
+  T = {};
+  document.getElementById('lib-view').style.display = '';
+  document.getElementById('cook-view').classList.remove('active');
+  document.getElementById('timer-bar').classList.remove('vis');
+  document.getElementById('cook-body').classList.remove('bar-vis');
+  document.title = 'EL YES! Cookbook';
+  window.scrollTo(0, 0);
+}
+
+// =====================================================================
+// COOK MODE
+// =====================================================================
+
+function loadRecipe(id) {
+  currentRecipe = RECIPES.find(r => r.id === id);
+  if (!currentRecipe) return;
+
+  currentScale = 2;   // default to 2 people
+  [1,2,3].forEach(n => {
+    document.getElementById('scale-' + n).classList.toggle('on', n === currentScale);
+  });
+
+  T = {};
+  Object.entries(currentRecipe.timers).forEach(([tid, td]) => {
+    T[tid] = { label: td.label, preset: td.preset, rem: td.preset, bell: td.bell, running: false, alerted: false, iv: null };
+  });
+
+  document.getElementById('hdr-title').textContent = currentRecipe.title;
+  const pb = document.getElementById('preheat-badge');
+  if (currentRecipe.preheat) { pb.textContent = '🔥 ' + currentRecipe.preheat; pb.style.display = ''; }
+  else pb.style.display = 'none';
+
+  renderMise();
+  renderSteps();
+  loadNotes();
+
+  document.querySelectorAll('.cook-pane').forEach(p => p.classList.remove('on'));
+  document.querySelectorAll('.cook-tab').forEach(b => b.classList.remove('on'));
+  document.getElementById('pane-mise').classList.add('on');
+  document.getElementById('tab-mise').classList.add('on');
+
+  document.getElementById('lib-view').style.display = 'none';
+  document.getElementById('cook-view').classList.add('active');
+  document.title = currentRecipe.title + ' — EL YES!';
+  window.scrollTo(0, 0);
+}
+
+function setScale(n) {
+  currentScale = n;
+  [1,2,3].forEach(i => {
+    document.getElementById('scale-' + i).classList.toggle('on', i === n);
+  });
+  renderMise();
+  renderSteps();
+}
+
+function swTab(id, btn) {
+  document.querySelectorAll('.cook-pane').forEach(p => p.classList.remove('on'));
+  document.querySelectorAll('.cook-tab').forEach(b => b.classList.remove('on'));
+  document.getElementById('pane-' + id).classList.add('on');
+  btn.classList.add('on');
+}
+
+// =====================================================================
+// MISE (equipment + ingredients)
+// =====================================================================
+
+function renderMise() {
+  const pane = document.getElementById('pane-mise');
+  pane.innerHTML = '';
+  let sIdx = 0;
+
+  function makeSection(title, items) {
+    const sid = 'mise-sec-' + sIdx++;
+    const section = document.createElement('div');
+    section.className = 'mise-section';
+    section.id = sid;
+
+    const lbl = document.createElement('div');
+    lbl.className = 'sec-lbl';
+    lbl.innerHTML = `<div class="sec-cb"><span class="sec-cb-mark">✓</span></div>${title}`;
+    lbl.onclick = () => section.classList.toggle('collapsed');
+
+    const itemsDiv = document.createElement('div');
+    itemsDiv.className = 'sec-items';
+
+    items.forEach(item => {
+      const displayName = item.byScale ? item.byScale[currentScale] : item.name;
+      const div = document.createElement('div');
+      div.className = 'check-item';
+      div.innerHTML = `
+        <div class="cb"><span class="cb-mark">✓</span></div>
+        <div class="check-name">
+          ${displayName}
+          ${item.note ? `<div class="check-note">${item.note}</div>` : ''}
+        </div>
+      `;
+      div.onclick = () => div.classList.toggle('ck');
+      itemsDiv.appendChild(div);
+    });
+
+    section.appendChild(lbl);
+    section.appendChild(itemsDiv);
+    pane.appendChild(section);
+  }
+
+  if (currentRecipe.equipment && currentRecipe.equipment.length) {
+    makeSection('Equipment', currentRecipe.equipment);
+  }
+  currentRecipe.mise.forEach(group => makeSection(group.group, group.items));
+}
+
+// =====================================================================
+// STEPS
+// =====================================================================
+
+function parseText(text) {
+  return text.replace(/\{\{([\w-]+)\}\}/g, (_, id) => {
+    const ref = currentRecipe.refs[id];
+    if (!ref) return id;
+    const tip = ref.tips[currentScale] || ref.tips[2];
+    return `<span class="qref" data-tip="${tip}">${ref.display}</span>`;
+  });
+}
+
+function renderSteps() {
+  const container = document.getElementById('steps-container');
+  container.innerHTML = '';
+
+  currentRecipe.steps.forEach((step, i) => {
+    const card = document.createElement('div');
+    card.className = 'step-card';
+    card.id = 'step-' + i;
+
+    let timerHtml = '';
+    step.timers.forEach(tid => {
+      if (!T[tid]) return;
+      const icon = T[tid].bell ? '🔔' : '⏱';
+      timerHtml += `
+        <div class="t-set">
+          <button class="t-adj" onclick="adjTimer('${tid}',-60)">−</button>
+          <button class="t-btn" id="tbtn-${tid}" onclick="toggleTimer('${tid}',this)">
+            ${icon} <span id="tlbl-${tid}">${T[tid].label} · ${fmt(T[tid].preset)}</span>
+          </button>
+          <button class="t-adj" onclick="adjTimer('${tid}',60)">+</button>
+        </div>
+      `;
+    });
+
+    card.innerHTML = `
+      <div class="step-hdr">
+        <div class="step-num">${i + 1}</div>
+        <div class="step-inner">
+          <div class="step-lbl">${step.label}</div>
+          <div class="step-txt">${parseText(step.text)}</div>
+          ${step.tip ? `<div class="step-tip">${step.tip}</div>` : ''}
+        </div>
+      </div>
+      <div class="step-ftr">
+        ${timerHtml}
+        <button class="done-btn" onclick="markDone(this,'step-${i}')">✓ done</button>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+
+  bindTooltips();
+}
+
+function markDone(btn, cardId) {
+  const card = document.getElementById(cardId);
+  card.classList.toggle('done');
+  btn.textContent = card.classList.contains('done') ? '↩ undo' : '✓ done';
+}
+
+// =====================================================================
+// TOOLTIPS
+// =====================================================================
+
+function bindTooltips() {
+  const tip = document.getElementById('tooltip');
+  document.querySelectorAll('.qref').forEach(el => {
+    const show = () => {
+      clearTimeout(tipTimeout);
+      tip.textContent = el.dataset.tip;
+      tip.style.display = 'block';
+      const r  = el.getBoundingClientRect();
+      let left = r.left + r.width / 2;
+      const tw = tip.offsetWidth;
+      left = Math.max(tw/2 + 8, Math.min(left, window.innerWidth - tw/2 - 8));
+      tip.style.left = left + 'px';
+      tip.style.top  = (r.top - tip.offsetHeight - 8) + 'px';
+    };
+    const hide = () => { tipTimeout = setTimeout(() => { tip.style.display = 'none'; }, 100); };
+    el.addEventListener('mouseenter', show);
+    el.addEventListener('mouseleave', hide);
+    el.addEventListener('click', e => { e.stopPropagation(); tip.style.display === 'block' ? hide() : show(); });
+  });
+}
+
+// =====================================================================
+// TIMER SYSTEM
+// =====================================================================
+
+function fmt(s) {
+  if (s <= 0) return '0:00';
+  if (s < 60)  return s + 's';
+  const m = Math.floor(s / 60), sc = s % 60;
+  return m + ':' + (sc < 10 ? '0' : '') + sc;
+}
+
+function updateBtnLabel(id) {
+  const t = T[id], el = document.getElementById('tlbl-' + id);
+  if (!el) return;
+  if (t.running) el.textContent = t.label + ' · ' + fmt(t.rem);
+  else if (t.alerted) el.textContent = t.label + ' · done ✕';
+  else el.textContent = t.label + ' · ' + fmt(t.preset);
+}
+
+function renderBar() {
+  const bar    = document.getElementById('timer-bar');
+  const pills  = document.getElementById('t-pills');
+  const body   = document.getElementById('cook-body');
+  const active = Object.entries(T).filter(([, t]) => t.running || t.alerted);
+
+  if (!active.length) {
+    bar.classList.remove('vis'); body.classList.remove('bar-vis'); pills.innerHTML = ''; return;
+  }
+  bar.classList.add('vis'); body.classList.add('bar-vis');
+  pills.innerHTML = active.map(([id, t]) => {
+    if (t.alerted) return `<span class="t-pill alerted" onclick="dismissAlert('${id}')" title="tap to dismiss"><span class="t-name">${t.label}</span><span class="t-count">done ✕</span></span>`;
+    const urg = t.rem <= 60 ? ' urg' : '';
+    return `<span class="t-pill${urg}"><span class="t-name">${t.label}</span><span class="t-count">${fmt(t.rem)}</span></span>`;
+  }).join('');
+}
+
+function dismissAlert(id) {
+  const t = T[id]; t.alerted = false; t.rem = t.preset;
+  const btn = document.getElementById('tbtn-' + id);
+  if (btn) btn.classList.remove('fin', 'warn30');
+  updateBtnLabel(id); renderBar();
+}
+
+function toggleTimer(id, btn) {
+  unlockAudio();
+  const t = T[id];
+  if (t.alerted) { dismissAlert(id); return; }
+  if (t.running) {
+    clearInterval(t.iv); t.running = false;
+    btn.classList.remove('running', 'warn30');
+    updateBtnLabel(id); renderBar(); return;
+  }
+  if (t.iv) clearInterval(t.iv);
+  t.rem = t.rem > 0 ? t.rem : t.preset;
+  t.running = true;
+  btn.classList.add('running'); btn.classList.remove('fin', 'warn30');
+  renderBar(); updateBtnLabel(id);
+
+  t.iv = setInterval(() => {
+    t.rem--;
+    if (t.rem === 30) { playWarn(); btn.classList.remove('running'); btn.classList.add('warn30'); }
+    updateBtnLabel(id); renderBar();
+    if (t.rem <= 0) {
+      clearInterval(t.iv); t.running = false; t.alerted = true;
+      btn.classList.remove('running', 'warn30'); btn.classList.add('fin');
+      playDone(); updateBtnLabel(id); renderBar();
+    }
+  }, 1000);
+}
+
+function adjTimer(id, delta) {
+  const t = T[id], btn = document.getElementById('tbtn-' + id);
+  if (t.running) { t.rem = Math.max(5, t.rem + delta); renderBar(); updateBtnLabel(id); }
+  else { t.preset = Math.max(5, t.preset + delta); t.rem = t.preset; if (t.alerted) { t.alerted = false; if (btn) btn.classList.remove('fin','warn30'); } updateBtnLabel(id); }
+}
+
+// =====================================================================
+// AUDIO
+// =====================================================================
+
+function unlockAudio() {
+  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+}
+
+function tone(freq, start, dur, vol) {
+  if (!audioCtx) return;
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+  vol = vol || 0.28;
+  const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+  o.connect(g); g.connect(audioCtx.destination);
+  o.type = 'sine'; o.frequency.value = freq;
+  g.gain.setValueAtTime(0, audioCtx.currentTime + start);
+  g.gain.linearRampToValueAtTime(vol, audioCtx.currentTime + start + 0.02);
+  g.gain.linearRampToValueAtTime(0, audioCtx.currentTime + start + dur);
+  o.start(audioCtx.currentTime + start);
+  o.stop(audioCtx.currentTime + start + dur + 0.05);
+}
+
+function playWarn() {
+  try { unlockAudio(); tone(440,0,0.12,0.16); tone(550,0.18,0.12,0.16); } catch(e) {}
+}
+function playDone() {
+  try { unlockAudio(); tone(660,0,0.18); tone(880,0.22,0.18); tone(1100,0.44,0.28,0.22); } catch(e) {}
+}
+
+// =====================================================================
+// NOTES
+// =====================================================================
+
+function loadNotes() {
+  const key = 'notes-' + currentRecipe.id;
+  document.getElementById('notes-area').value = localStorage.getItem(key) || '';
+}
+function saveNotes() {
+  if (!currentRecipe) return;
+  localStorage.setItem('notes-' + currentRecipe.id, document.getElementById('notes-area').value);
+  const msg = document.getElementById('notes-status');
+  msg.classList.add('vis');
+  setTimeout(() => msg.classList.remove('vis'), 2000);
+}
+document.getElementById('notes-area').addEventListener('input', () => {
+  clearTimeout(notesSaveTimer);
+  notesSaveTimer = setTimeout(saveNotes, 1500);
+});
+
+// =====================================================================
+// INIT
+// =====================================================================
+renderLibrary();
+
+</script>
+</body>
+</html>
