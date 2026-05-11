@@ -667,12 +667,210 @@ const RECIPES = [
       timers: []
     }
   ]
+},
+
+{
+  id: 'beef-bowl-guac',
+  title: '7-Layer I\'m Fine',
+  subtitle: 'Arugula · guac · coconut yogurt crema · plantain chips',
+  preheat: null,
+  serves: '1–3',
+  tags: ['beef', 'weeknight', 'phase 1'],
+
+  equipment: [
+    { name: '10- or 12-inch skillet or cast iron', note: 'needs to get hot enough to brown, not steam' },
+    { name: 'Large bowl',                          note: 'for the cabbage — you\'ll scrunch it in here' },
+    { name: 'Small bowl',                          note: 'for the yogurt crema' }
+  ],
+
+  mise: [
+    { group: 'Quick-pickled cabbage', items: [
+      { byScale: { 1: '1½ cups green cabbage, thinly sliced',  2: '3 cups green cabbage, thinly sliced',  3: '4–5 cups green cabbage, thinly sliced'  }, note: 'as thin as you can get it' },
+      { byScale: { 1: '¼ small red onion, thinly sliced',      2: '½ red onion, thinly sliced',           3: '¾ red onion, thinly sliced'             }, note: 'half goes in the pickle, half stays fresh for topping' },
+      { byScale: { 1: '1 tbsp Bragg\'s ACV',                   2: '2 tbsp Bragg\'s ACV',                  3: '3 tbsp Bragg\'s ACV'                    } },
+      { byScale: { 1: '¼ tsp raw sugar',                       2: '½ tsp raw sugar',                      3: '¾ tsp raw sugar'                        } },
+      { name: 'Non-iodized sea salt, for scrunching' }
+    ]},
+    { group: 'Coconut yogurt crema', items: [
+      { byScale: { 1: '3 tbsp plain coconut yogurt',           2: '6 tbsp plain coconut yogurt',          3: '½ cup plain coconut yogurt'             } },
+      { byScale: { 1: '½ tsp Bragg\'s ACV',                    2: '1 tsp Bragg\'s ACV',                   3: '1½ tsp Bragg\'s ACV'                    } },
+      { name: 'Pinch garlic granules' },
+      { name: 'Pinch cumin' },
+      { name: 'Non-iodized sea salt' }
+    ]},
+    { group: 'Seasoned ground beef', items: [
+      { byScale: { 1: '½ lb ground beef',                      2: '1 lb ground beef',                     3: '1½ lbs ground beef'                     } },
+      { byScale: { 1: '¼ tsp whole fennel seeds',              2: '½ tsp whole fennel seeds',             3: '¾ tsp whole fennel seeds'               }, note: 'toasted dry in the pan first' },
+      { byScale: { 1: '½ tsp cumin',                           2: '1 tsp cumin',                          3: '1½ tsp cumin'                           } },
+      { byScale: { 1: '½ tsp coriander',                       2: '1 tsp coriander',                      3: '1½ tsp coriander'                       } },
+      { byScale: { 1: '½ tsp garlic granules',                 2: '1 tsp garlic granules',                3: '1½ tsp garlic granules'                 } },
+      { byScale: { 1: '¼ tsp Mexican oregano',                 2: '½ tsp Mexican oregano',                3: '¾ tsp Mexican oregano'                  } },
+      { name: 'Small pinch mushroom umami powder' },
+      { name: 'Black pepper + non-iodized sea salt' },
+      { name: 'Avocado oil' },
+      { name: 'Splash coconut aminos' },
+      { name: 'Small splash Bragg\'s ACV', note: 'finish only' }
+    ]},
+    { group: 'Bowl build', items: [
+      { byScale: { 1: '1 large handful arugula',               2: '2 large handfuls arugula',             3: '3 large handfuls arugula'               } },
+      { name: 'Guac — leftover or fresh, cold is fine' },
+      { name: 'Plantain chips' },
+      { name: 'Fresh cilantro' },
+      { name: 'Green onion, sliced' },
+      { name: 'Sumac, for dusting' }
+    ]}
+  ],
+
+  refs: {
+    'cabbage':    { display: 'cabbage',         tips: { 1: '1½ cups, thinly sliced',                         2: '3 cups, thinly sliced',                         3: '4–5 cups, thinly sliced'                        } },
+    'red-onion':  { display: 'red onion',       tips: { 1: '¼ small — half to pickle, half fresh',           2: '½ onion — half to pickle, half fresh',           3: '¾ onion — half to pickle, half fresh'            } },
+    'acv-pickle': { display: 'ACV',             tips: { 1: '1 tbsp',                                         2: '2 tbsp',                                         3: '3 tbsp'                                          } },
+    'sugar':      { display: 'raw sugar',       tips: { 1: '¼ tsp',                                          2: '½ tsp',                                          3: '¾ tsp'                                           } },
+    'yogurt':     { display: 'coconut yogurt',  tips: { 1: '3 tbsp',                                         2: '6 tbsp',                                         3: '½ cup'                                           } },
+    'acv-crema':  { display: 'ACV',             tips: { 1: '½ tsp',                                          2: '1 tsp',                                          3: '1½ tsp'                                          } },
+    'beef':       { display: 'ground beef',     tips: { 1: '½ lb',                                           2: '1 lb',                                           3: '1½ lbs'                                          } },
+    'fennel':     { display: 'fennel seeds',    tips: { 1: '¼ tsp whole',                                    2: '½ tsp whole',                                    3: '¾ tsp whole'                                     } },
+    'cumin':      { display: 'cumin',           tips: { 1: '½ tsp',                                          2: '1 tsp',                                          3: '1½ tsp'                                          } },
+    'coriander':  { display: 'coriander',       tips: { 1: '½ tsp',                                          2: '1 tsp',                                          3: '1½ tsp'                                          } },
+    'garlic-g':   { display: 'garlic granules', tips: { 1: '½ tsp',                                          2: '1 tsp',                                          3: '1½ tsp'                                          } },
+    'oregano':    { display: 'Mexican oregano', tips: { 1: '¼ tsp',                                          2: '½ tsp',                                          3: '¾ tsp'                                           } },
+    'aminos':     { display: 'coconut aminos',  tips: { 1: 'small splash',                                   2: 'small splash',                                   3: 'small splash'                                    } },
+    'acv-beef':   { display: 'ACV',             tips: { 1: 'small splash, finish only',                      2: 'small splash, finish only',                      3: 'small splash, finish only'                       } },
+    'arugula':    { display: 'arugula',         tips: { 1: '1 large handful',                                2: '2 large handfuls',                               3: '3 large handfuls'                                } }
+  },
+
+  timers: {
+    'pickle': { label: 'Pickle rest', preset: 900, bell: true }
+  },
+
+  steps: [
+    {
+      label: 'Start the pickle',
+      text:  'Thinly slice {{cabbage}}. Slice {{red-onion}} — half goes in now, half set aside for fresh topping. Combine cabbage and pickle half of onion in your large bowl. Generous pinch of salt, then scrunch hard with your hands for a full minute until the cabbage starts to weep. Add {{acv-pickle}} and {{sugar}}, toss to coat. Set aside — the bell tells you when it\'s ready.',
+      tip:   'The scrunch step matters. You\'re breaking down the cell walls so the acid can do its job. Don\'t shortcut it.',
+      timers: ['pickle']
+    },
+    {
+      label: 'Make the crema',
+      text:  'Combine {{yogurt}}, {{acv-crema}}, a pinch of garlic granules, a pinch of cumin, and salt. Stir and taste — should be tangy and savory. Adjust ACV and salt. Set aside.',
+      tip:   null,
+      timers: []
+    },
+    {
+      label: 'Toast fennel + cook beef',
+      text:  'Dry skillet over medium-high. Add {{fennel}} — toast 30–45 seconds until fragrant, shaking the pan. Add a thin layer of avocado oil and the {{beef}}. Break it up fine — crumbles, not chunks. Season with {{cumin}}, {{coriander}}, {{garlic-g}}, {{oregano}}, mushroom umami powder, salt, and pepper. Once cooked through, deglaze with {{aminos}} and {{acv-beef}} — let it reduce into the meat for 30 seconds.',
+      tip:   'Higher heat than you think. You want browning, not steaming. Crumbles need surface contact with the pan.',
+      timers: []
+    },
+    {
+      label: 'Assemble',
+      text:  'Drain any excess liquid from the pickle. Build the bowl: {{arugula}} base → hot beef → guac spooned generously → crema → pickled cabbage → reserved fresh red onion → cilantro and green onion → heavy dusting of sumac over everything. Plantain chips on top or alongside.',
+      tip:   'Hot beef under cold guac is intentional — it softens slightly and the fat melds. Don\'t pre-mix.',
+      timers: []
+    }
+  ]
+},
+
+{
+  id: 'latin-avo-smash',
+  title: 'Latin avo smash with chicken',
+  subtitle: 'Wilted spinach · rough guac · plantain chips',
+  preheat: null,
+  serves: '1–3',
+  tags: ['chicken', 'quick', 'phase 1'],
+
+  equipment: [
+    { name: '10-inch carbon steel skillet', note: 'needs to get ripping hot — this is the whole move' },
+    { name: 'Bowl for guac' },
+    { name: 'Fork or potato masher',        note: 'rough mash only, not smooth' }
+  ],
+
+  mise: [
+    { group: 'Spiced chicken', items: [
+      { byScale: { 1: '260g / ½ lb boneless chicken thighs, 1-inch chunks', 2: '520g / 1 lb boneless chicken thighs, 1-inch chunks', 3: '780g / 1½ lbs boneless chicken thighs, 1-inch chunks' } },
+      { byScale: { 1: '½ tsp cumin',          2: '1 tsp cumin',          3: '1½ tsp cumin'          } },
+      { byScale: { 1: '½ tsp coriander',      2: '1 tsp coriander',      3: '1½ tsp coriander'      } },
+      { byScale: { 1: '½ tsp sumac',          2: '1 tsp sumac',          3: '1½ tsp sumac'          } },
+      { byScale: { 1: '½ tsp garlic granules',2: '1 tsp garlic granules',3: '1½ tsp garlic granules'} },
+      { name: 'Non-iodized sea salt, generous' },
+      { name: 'Olive oil' }
+    ]},
+    { group: 'Rough guac', items: [
+      { byScale: { 1: '1 large avocado',                       2: '2 avocados',                       3: '3 avocados'                       } },
+      { byScale: { 1: '¼ white or yellow onion, diced fine',   2: '½ onion, diced fine',              3: '¾ onion, diced fine'              } },
+      { byScale: { 1: 'Small handful cilantro, rough chop',    2: 'Medium handful cilantro',          3: 'Large handful cilantro'           } },
+      { byScale: { 1: '1 tsp Bragg\'s ACV',                    2: '2 tsp Bragg\'s ACV',               3: '1 tbsp Bragg\'s ACV'              } },
+      { name: 'Non-iodized sea salt' }
+    ]},
+    { group: 'Spinach + finish', items: [
+      { byScale: { 1: '2 large handfuls spinach',              2: '4 large handfuls spinach',         3: '6 large handfuls spinach'         } },
+      { name: 'Olive oil, for finishing drizzle' },
+      { name: 'Plantain chips' }
+    ]}
+  ],
+
+  refs: {
+    'chicken':   { display: 'chicken thighs',  tips: { 1: '260g / ½ lb, 1-inch chunks',     2: '520g / 1 lb, 1-inch chunks',      3: '780g / 1½ lbs, 1-inch chunks'     } },
+    'cumin':     { display: 'cumin',           tips: { 1: '½ tsp',                           2: '1 tsp',                           3: '1½ tsp'                           } },
+    'coriander': { display: 'coriander',       tips: { 1: '½ tsp',                           2: '1 tsp',                           3: '1½ tsp'                           } },
+    'sumac':     { display: 'sumac',           tips: { 1: '½ tsp',                           2: '1 tsp',                           3: '1½ tsp'                           } },
+    'garlic-g':  { display: 'garlic granules', tips: { 1: '½ tsp',                           2: '1 tsp',                           3: '1½ tsp'                           } },
+    'avo':       { display: 'avocado',         tips: { 1: '1 large',                         2: '2 avocados',                      3: '3 avocados'                       } },
+    'onion':     { display: 'onion',           tips: { 1: '¼ onion, diced fine',             2: '½ onion, diced fine',             3: '¾ onion, diced fine'              } },
+    'cilantro':  { display: 'cilantro',        tips: { 1: 'small handful, rough chop',       2: 'medium handful, rough chop',      3: 'large handful, rough chop'        } },
+    'acv':       { display: 'ACV',             tips: { 1: '1 tsp',                           2: '2 tsp',                           3: '1 tbsp'                           } },
+    'spinach':   { display: 'spinach',         tips: { 1: '2 large handfuls',                2: '4 large handfuls',                3: '6 large handfuls'                 } }
+  },
+
+  timers: {
+    'sear':    { label: 'Sear',    preset: 240, bell: false },
+    'finish':  { label: 'Finish',  preset: 180, bell: false },
+    'spinach': { label: 'Spinach', preset: 30,  bell: true  }
+  },
+
+  steps: [
+    {
+      label: 'Season chicken',
+      text:  'Cut {{chicken}} into rough 1-inch chunks. Toss with {{cumin}}, {{coriander}}, {{sumac}}, {{garlic-g}}, and a generous amount of salt. The sumac is doing citrus-adjacent work here — don\'t be shy with it.',
+      tip:   null,
+      timers: []
+    },
+    {
+      label: 'Make the guac',
+      text:  'Rough-mash {{avo}} with a fork — texture, not smooth. Fold in {{onion}}, {{cilantro}}, {{acv}}, and salt. Taste and adjust. Set aside.',
+      tip:   'You want chunks. This is a base, not a dip.',
+      timers: []
+    },
+    {
+      label: 'Sear — don\'t touch',
+      text:  'Carbon steel ripping hot with olive oil. {{chicken}} in — spread out, don\'t crowd. Do not touch it.',
+      tip:   'If it\'s not sizzling aggressively on contact, the pan isn\'t hot enough and you\'re about to steam your chicken. Pull it out, wait longer.',
+      timers: ['sear']
+    },
+    {
+      label: 'Toss + finish',
+      text:  'Toss the chicken, finish cooking through. Total time 6–8 minutes. Pull and set aside.',
+      tip:   null,
+      timers: ['finish']
+    },
+    {
+      label: 'Wilt spinach',
+      text:  '{{spinach}} straight into the same pan — don\'t wipe it, those drippings are the seasoning. 30 seconds, toss once.',
+      tip:   'Don\'t walk away. Spinach goes from perfect to sad in about 15 extra seconds.',
+      timers: ['spinach']
+    },
+    {
+      label: 'Plate',
+      text:  'Guac on the bottom. Wilted spinach over the guac. Chicken on top. Drizzle of olive oil to finish. The spiced drippings will run down into the guac — that\'s the point. Plantain chips alongside.',
+      tip:   null,
+      timers: []
+    }
+  ]
 }
 ];
 
 const PLACEHOLDERS = [
-  { title: 'Latin avo smash with chicken', subtitle: 'Plantain chips', tags: ['chicken', 'quick'] },
-  { title: 'Salmon with crispy skin',      subtitle: 'Wild rice · broccolini', tags: ['fish', 'weeknight'] }
+  { title: 'Salmon with crispy skin', subtitle: 'Wild rice · broccolini', tags: ['fish', 'weeknight'] }
 ];
 
 // =====================================================================
