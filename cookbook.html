@@ -360,8 +360,17 @@ button { font-family: inherit; cursor: pointer; }
 }
 .notes-save-btn:hover { border-color: var(--green-bdr); color: var(--green); }
 
+.share-btn {
+  background: none; border: 1px solid var(--border); color: var(--muted);
+  font-size: 12px; padding: 5px 10px; border-radius: 6px;
+  transition: all .15s; white-space: nowrap; flex-shrink: 0;
+}
+.share-btn:hover { color: var(--text); border-color: var(--border-mid); }
+.share-btn.copied { color: var(--green); border-color: var(--green-bdr); background: var(--green-bg); }
+
 @media (max-width: 520px) {
   .preheat-badge { display: none; }
+  .share-btn { display: none; }
   #hdr-title { font-size: 13px; }
 }
 
@@ -390,6 +399,7 @@ button { font-family: inherit; cursor: pointer; }
     <button class="back-btn" onclick="goLib()">← recipes</button>
     <div id="hdr-title"></div>
     <div class="preheat-badge" id="preheat-badge" style="display:none"></div>
+    <button class="share-btn" id="share-btn" onclick="copyLink()">copy link</button>
     <div class="scale-toggle">
       <button class="scale-btn on" id="scale-1" onclick="setScale(1)">1×</button>
       <button class="scale-btn"    id="scale-2" onclick="setScale(2)">2×</button>
@@ -1160,6 +1170,7 @@ function goLib() {
   document.getElementById('timer-bar').classList.remove('vis');
   document.getElementById('cook-body').classList.remove('bar-vis');
   document.title = 'EL YES! Cookbook';
+  history.pushState(null, '', location.pathname);
   window.scrollTo(0, 0);
 }
 
@@ -1198,6 +1209,7 @@ function loadRecipe(id) {
   document.getElementById('lib-view').style.display = 'none';
   document.getElementById('cook-view').classList.add('active');
   document.title = currentRecipe.title + ' — EL YES!';
+  history.pushState({ recipeId: id }, '', '#' + id);
   window.scrollTo(0, 0);
 }
 
@@ -1480,9 +1492,32 @@ document.getElementById('notes-area').addEventListener('input', () => {
 });
 
 // =====================================================================
+// SHARE / DEEP LINK
+// =====================================================================
+
+function copyLink() {
+  navigator.clipboard.writeText(location.href).then(() => {
+    const btn = document.getElementById('share-btn');
+    btn.textContent = '✓ copied';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'copy link'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+window.addEventListener('popstate', e => {
+  if (e.state && e.state.recipeId) {
+    loadRecipe(e.state.recipeId);
+  } else {
+    goLib();
+  }
+});
+
+// =====================================================================
 // INIT
 // =====================================================================
 renderLibrary();
+const _initHash = location.hash.slice(1);
+if (_initHash && RECIPES.find(r => r.id === _initHash)) loadRecipe(_initHash);
 
 </script>
 </body>
