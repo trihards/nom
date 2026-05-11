@@ -866,6 +866,243 @@ const RECIPES = [
       timers: []
     }
   ]
+},
+
+{
+  id: 'black-pepper-garlic-chicken',
+  title: 'Black Pepper Garlic Chicken',
+  subtitle: 'Gai lan in garlic oil · jasmine rice',
+  preheat: null,
+  serves: '1–3',
+  tags: ['chicken', 'weeknight', 'phase 1'],
+
+  equipment: [
+    { name: '12-inch cast iron or carbon steel skillet', note: 'does everything — garlic fry, chicken sear, gai lan finish, all in sequence' },
+    { name: 'Zojirushi rice cooker' },
+    { name: 'Small bowl',                               note: 'for the sauce — mix before the stove turns on' },
+    { name: 'Slotted spoon',                            note: 'for pulling the garlic — have it ready before garlic goes in' },
+    { name: 'Meat thermometer',                         note: 'optional — thighs are forgiving, pull at 165°F' }
+  ],
+
+  mise: [
+    { group: 'Rice', items: [
+      { byScale: { 1: '1 cup jasmine rice, rinsed', 2: '2 cups jasmine rice, rinsed', 3: '3 cups jasmine rice, rinsed' } }
+    ]},
+    { group: 'Velveted chicken', items: [
+      { byScale: { 1: '2 boneless chicken thighs, 1½-inch chunks', 2: '4 boneless chicken thighs, 1½-inch chunks', 3: '6 boneless chicken thighs, 1½-inch chunks' }, note: 'cut before marinating' },
+      { byScale: { 1: '1 tbsp coconut aminos',       2: '2 tbsp coconut aminos',       3: '3 tbsp coconut aminos'       } },
+      { byScale: { 1: '1½ tsp arrowroot',            2: '1 tbsp arrowroot',            3: '1½ tbsp arrowroot'           } },
+      { byScale: { 1: '½-inch fresh ginger, grated', 2: '¾-inch fresh ginger, grated', 3: '1-inch fresh ginger, grated' }, note: 'or ¼ tsp ground ginger from the drawer' },
+      { name: 'Drizzle avocado oil' }
+    ]},
+    { group: 'Sauce', items: [
+      { byScale: { 1: '2 tbsp coconut aminos',               2: '3 tbsp coconut aminos',               3: '4 tbsp coconut aminos'               } },
+      { byScale: { 1: '1 tsp Bragg\'s ACV',                  2: '1½ tsp Bragg\'s ACV',                 3: '2 tsp Bragg\'s ACV'                  } },
+      { byScale: { 1: '½ tsp mushroom umami powder',         2: '1 tsp mushroom umami powder',         3: '1½ tsp mushroom umami powder'        } },
+      { byScale: { 1: '¾ tsp coarsely ground black pepper',  2: '1½ tsp coarsely ground black pepper', 3: '2 tsp coarsely ground black pepper'  }, note: 'the star — more than you think' },
+      { byScale: { 1: '¼ tsp ground white pepper',           2: '½ tsp ground white pepper',           3: '¾ tsp ground white pepper'           } },
+      { name: 'Pinch raw sugar' },
+      { name: '¼ tsp Chinese five spice', note: 'optional — ghost note only, do not double it' }
+    ]},
+    { group: 'Aromatics & veg', items: [
+      { byScale: { 1: '8 large garlic cloves, thinly sliced',   2: '12 large garlic cloves, thinly sliced',  3: '16 large garlic cloves, thinly sliced'   }, note: 'Costco colossal cloves — size matters for even frying' },
+      { byScale: { 1: '1 shallot, sliced',                      2: '2 shallots, sliced',                     3: '3 shallots, sliced'                      } },
+      { byScale: { 1: '1 cup shiitake mushrooms, sliced thick',  2: '2 cups shiitake mushrooms, sliced thick', 3: '3 cups shiitake mushrooms, sliced thick' }, note: 'thick slices only — thin ones disappear' },
+      { name: 'Avocado oil — enough to shallow-fry the garlic' },
+      { byScale: { 1: '3–4 green onions, sliced',               2: '5–6 green onions, sliced',               3: '7–8 green onions, sliced'                }, note: 'finish garnish — set aside now' }
+    ]},
+    { group: 'Gai lan', items: [
+      { byScale: { 1: '1 bunch gai lan, stems halved',       2: '1 large bunch gai lan, stems halved',   3: '2 bunches gai lan, stems halved'        }, note: 'dry it well — wet gai lan steams instead of chars' },
+      { name: 'Splash coconut aminos' },
+      { name: 'Splash Bragg\'s ACV' },
+      { name: 'Pinch mushroom umami powder' }
+    ]}
+  ],
+
+  refs: {
+    'rice':        { display: 'jasmine rice',   tips: { 1: '1 cup, rinsed',                         2: '2 cups, rinsed',                         3: '3 cups, rinsed'                         } },
+    'chicken':     { display: 'chicken',        tips: { 1: '2 thighs, 1½-inch chunks',              2: '4 thighs, 1½-inch chunks',               3: '6 thighs, 1½-inch chunks'               } },
+    'aminos-v':    { display: 'coconut aminos', tips: { 1: '1 tbsp (velvet)',                        2: '2 tbsp (velvet)',                         3: '3 tbsp (velvet)'                        } },
+    'arrowroot':   { display: 'arrowroot',      tips: { 1: '1½ tsp',                                2: '1 tbsp',                                 3: '1½ tbsp'                                } },
+    'ginger':      { display: 'fresh ginger',   tips: { 1: '½-inch, grated',                        2: '¾-inch, grated',                         3: '1-inch, grated'                         } },
+    'all-sauce':   { display: 'sauce',          tips: { 1: '2 tbsp aminos · 1 tsp ACV · ¾ tsp black pepper', 2: '3 tbsp aminos · 1½ tsp ACV · 1½ tsp black pepper', 3: '4 tbsp aminos · 2 tsp ACV · 2 tsp black pepper' } },
+    'garlic':      { display: 'garlic',         tips: { 1: '8 large cloves, thinly sliced',         2: '12 large cloves, thinly sliced',         3: '16 large cloves, thinly sliced'         } },
+    'avo-oil':     { display: 'avocado oil',    tips: { 1: 'enough to shallow-fry',                 2: 'enough to shallow-fry',                  3: 'enough to shallow-fry'                  } },
+    'shiitakes':   { display: 'shiitakes',      tips: { 1: '1 cup, sliced thick',                   2: '2 cups, sliced thick',                   3: '3 cups, sliced thick'                   } },
+    'shallots':    { display: 'shallots',       tips: { 1: '1 shallot, sliced',                     2: '2 shallots, sliced',                     3: '3 shallots, sliced'                     } },
+    'gai-lan':     { display: 'gai lan',        tips: { 1: '1 bunch, stems halved',                 2: '1 large bunch, stems halved',            3: '2 bunches, stems halved'                } },
+    'green-onion': { display: 'green onion',    tips: { 1: '3–4 stalks, sliced',                    2: '5–6 stalks, sliced',                     3: '7–8 stalks, sliced'                     } }
+  },
+
+  timers: {
+    'rice':    { label: 'Rice',         preset: 2100, bell: false },
+    'velvet':  { label: 'Velvet rest',  preset: 900,  bell: true  },
+    'garlic':  { label: 'Watch garlic', preset: 120,  bell: true  },
+    'sear-1':  { label: 'Side 1',       preset: 150,  bell: false },
+    'sear-2':  { label: 'Side 2',       preset: 150,  bell: false },
+    'lacquer': { label: 'Lacquer',      preset: 90,   bell: false },
+    'gai-lan': { label: 'Gai lan',      preset: 90,   bell: true  }
+  },
+
+  steps: [
+    {
+      label: 'Rice + velvet',
+      text:  'Start {{rice}} in the Zojirushi. Cut and toss {{chicken}} with {{aminos-v}}, {{arrowroot}}, {{ginger}}, and a drizzle of avocado oil — every chunk should look shiny. Set the velvet timer and prep everything else while it marinates.',
+      tip:   'The arrowroot does two things: tenderizes the chicken and gives you that glossy restaurant coating when the sauce hits.',
+      timers: ['rice', 'velvet']
+    },
+    {
+      label: 'Mix the sauce',
+      text:  'Combine all sauce ingredients in a small bowl. Stir and taste — it should be aggressively peppery and savory. If the black pepper isn\'t a little alarming, add more. Set it where you can grab it without turning around.',
+      tip:   null,
+      timers: []
+    },
+    {
+      label: 'Fry the garlic',
+      text:  'Heat a generous pour of {{avo-oil}} in your pan over medium — enough to shallow-fry. When shimmering, add {{garlic}} and stir immediately. Watch it the whole time. You want deep golden, not blonde, not brown. The timer is a guide; your eyes are the actual timer.',
+      tip:   'Have the slotted spoon in your hand before the garlic goes in. Thirty seconds is the difference between perfect and wrecked.',
+      timers: ['garlic']
+    },
+    {
+      label: 'Pull garlic + sear chicken',
+      text:  'Scoop {{garlic}} onto a paper towel — you now have garlic-infused oil. Crank heat to high. Add {{chicken}} in batches — do not crowd the pan, do not touch them.',
+      tip:   'Batches are non-negotiable. One crowded pan of steamed chicken ruins the whole thing.',
+      timers: ['sear-1']
+    },
+    {
+      label: 'Flip + rest',
+      text:  'Flip all pieces. Second side. Pull and rest on a plate when cooked through.',
+      tip:   null,
+      timers: ['sear-2']
+    },
+    {
+      label: 'Mushrooms + lacquer',
+      text:  'Drop to medium-high. Add {{shiitakes}} and {{shallots}} to the garlic oil — let shiitakes blister, about 2 minutes. Return {{chicken}}. Pour {{all-sauce}} over everything and toss to coat. Let it reduce and lacquer. Off heat. Pile on the fried garlic and {{green-onion}}.',
+      tip:   'If it looks greasy, add a tablespoon of water and toss hard — that\'s the emulsification fix. Keep it moving and it\'ll coat.',
+      timers: ['lacquer']
+    },
+    {
+      label: 'Gai lan',
+      text:  'Same pan, no wipe, medium-high. {{gai-lan}} in — stems first, leaves after 30 seconds. Let them char. Splash of coconut aminos, splash of ACV, pinch of mushroom umami powder. Toss and pull.',
+      tip:   'You want black edges on the stems. Don\'t add liquid until the very end or you\'ll steam it.',
+      timers: ['gai-lan']
+    },
+    {
+      label: 'Plate',
+      text:  'Rice base. Chicken over rice with all the sauce. Gai lan alongside. Pile the fried garlic on top — it\'s not optional.',
+      tip:   null,
+      timers: []
+    }
+  ]
+},
+
+{
+  id: 'bavette-beef-broccoli',
+  title: 'Bavette Beef & Broccoli',
+  subtitle: 'Wok-style in carbon steel · five spice · takeout energy',
+  preheat: null,
+  serves: '1–3',
+  tags: ['beef', 'weeknight', 'phase 1'],
+
+  equipment: [
+    { name: '10-inch carbon steel skillet', note: 'needs to get ripping hot — this is wok technique in a flat pan' },
+    { name: 'Small pot',                    note: 'for blanching the broccoli' },
+    { name: 'Zojirushi rice cooker' },
+    { name: 'Small bowl',                   note: 'for the sauce — mix before anything hits the stove' },
+    { name: 'Sharp knife',                  note: 'bavette grain can shift almost 90° mid-steak — stay vigilant' }
+  ],
+
+  mise: [
+    { group: 'Rice', items: [
+      { byScale: { 1: '1 cup jasmine rice, rinsed', 2: '2 cups jasmine rice, rinsed', 3: '3 cups jasmine rice, rinsed' } }
+    ]},
+    { group: 'Beef & marinade', items: [
+      { byScale: { 1: '6 oz bavette steak',  2: '12 oz bavette steak',  3: '18 oz bavette steak'  }, note: 'slice thin, bias cut, against the grain — watch for grain direction shifts mid-steak' },
+      { byScale: { 1: '1 tbsp coconut aminos', 2: '2 tbsp coconut aminos', 3: '3 tbsp coconut aminos' } },
+      { byScale: { 1: '½ tbsp arrowroot',    2: '1 tbsp arrowroot',     3: '1½ tbsp arrowroot'    } },
+      { byScale: { 1: '⅛ tsp Chinese five spice', 2: '¼ tsp Chinese five spice', 3: '⅓ tsp Chinese five spice' }, note: 'it\'s loud — do not go higher' }
+    ]},
+    { group: 'Sauce', items: [
+      { byScale: { 1: '1½ tbsp coconut aminos', 2: '3 tbsp coconut aminos', 3: '4½ tbsp coconut aminos' } },
+      { byScale: { 1: '3 tbsp bone broth',   2: '⅓ cup bone broth',     3: '½ cup bone broth'     } },
+      { byScale: { 1: '½ tsp arrowroot',     2: '1 tsp arrowroot',      3: '1½ tsp arrowroot'     } },
+      { byScale: { 1: '½ tsp Bragg\'s ACV',  2: '1 tsp Bragg\'s ACV',   3: '1½ tsp Bragg\'s ACV'  } },
+      { byScale: { 1: '¼ tsp black garlic salt', 2: '½ tsp black garlic salt', 3: '¾ tsp black garlic salt' } },
+      { byScale: { 1: '⅛ tsp mushroom umami powder', 2: '¼ tsp mushroom umami powder', 3: '⅓ tsp mushroom umami powder' } }
+    ]},
+    { group: 'Veg & aromatics', items: [
+      { byScale: { 1: '2 cups broccoli florets', 2: '4 cups broccoli florets', 3: '6 cups broccoli florets' } },
+      { byScale: { 1: '2 garlic cloves, minced', 2: '4 garlic cloves, minced', 3: '6 garlic cloves, minced' } },
+      { name: 'Avocado oil' },
+      { byScale: { 1: '¼ tsp sumac',         2: '½ tsp sumac',          3: '¾ tsp sumac'          }, note: 'finishing only — set aside for the table' }
+    ]}
+  ],
+
+  refs: {
+    'rice':        { display: 'jasmine rice',   tips: { 1: '1 cup, rinsed',                     2: '2 cups, rinsed',                     3: '3 cups, rinsed'                     } },
+    'beef':        { display: 'bavette',        tips: { 1: '6 oz, thinly sliced against grain', 2: '12 oz, thinly sliced against grain', 3: '18 oz, thinly sliced against grain' } },
+    'aminos-m':    { display: 'coconut aminos', tips: { 1: '1 tbsp (marinade)',                  2: '2 tbsp (marinade)',                  3: '3 tbsp (marinade)'                  } },
+    'arrowroot-m': { display: 'arrowroot',      tips: { 1: '½ tbsp (marinade)',                  2: '1 tbsp (marinade)',                  3: '1½ tbsp (marinade)'                 } },
+    'five-spice':  { display: 'five spice',     tips: { 1: '⅛ tsp',                             2: '¼ tsp',                              3: '⅓ tsp'                              } },
+    'broccoli':    { display: 'broccoli',       tips: { 1: '2 cups florets',                    2: '4 cups florets',                     3: '6 cups florets'                     } },
+    'garlic':      { display: 'garlic',         tips: { 1: '2 cloves, minced',                  2: '4 cloves, minced',                   3: '6 cloves, minced'                   } },
+    'all-sauce':   { display: 'sauce',          tips: { 1: '1½ tbsp aminos · 3 tbsp broth · ½ tsp arrowroot · ½ tsp ACV', 2: '3 tbsp aminos · ⅓ cup broth · 1 tsp arrowroot · 1 tsp ACV', 3: '4½ tbsp aminos · ½ cup broth · 1½ tsp arrowroot · 1½ tsp ACV' } },
+    'sumac':       { display: 'sumac',          tips: { 1: '¼ tsp',                             2: '½ tsp',                              3: '¾ tsp'                              } }
+  },
+
+  timers: {
+    'rice':     { label: 'Rice',     preset: 2100, bell: false },
+    'marinate': { label: 'Marinate', preset: 600,  bell: true  },
+    'blanch':   { label: 'Blanch',   preset: 90,   bell: true  },
+    'sear-1':   { label: 'Side 1',   preset: 75,   bell: false },
+    'sear-2':   { label: 'Side 2',   preset: 75,   bell: false },
+    'sauce':    { label: 'Sauce',    preset: 45,   bell: true  }
+  },
+
+  steps: [
+    {
+      label: 'Rice + marinate',
+      text:  'Start {{rice}} in the Zojirushi. Slice {{beef}} thin on the bias against the grain. Toss with {{aminos-m}}, {{arrowroot-m}}, and {{five-spice}}. Set the marinate timer and prep everything else.',
+      tip:   'Bavette\'s grain can rotate almost 90° mid-steak. Keep checking as you slice or you\'ll get chewy instead of silky.',
+      timers: ['rice', 'marinate']
+    },
+    {
+      label: 'Mix the sauce',
+      text:  'Whisk all sauce ingredients together in a small bowl until arrowroot is fully dissolved. Set it right next to the stove — it goes in fast and you won\'t have time to look for it.',
+      tip:   'The sauce thickens almost instantly once it hits the hot pan. Pre-mixed and within arm\'s reach is non-negotiable.',
+      timers: []
+    },
+    {
+      label: 'Blanch the broccoli',
+      text:  'Boil {{broccoli}} for 90 seconds. Drain well and set aside. This is what separates char from steamed sadness — pre-cooked florets take color in the hot pan instead of weeping.',
+      tip:   null,
+      timers: ['blanch']
+    },
+    {
+      label: 'Sear the beef',
+      text:  'Carbon steel ripping hot with avocado oil. {{beef}} in a single layer — don\'t touch it. You need dark color, not gray.',
+      tip:   'If the pan isn\'t smoking when the beef hits, it\'s not hot enough. Pull it out and wait.',
+      timers: ['sear-1']
+    },
+    {
+      label: 'Flip + rest',
+      text:  'Flip, second side. Do a second batch if needed — don\'t crowd. Pull and rest.',
+      tip:   null,
+      timers: ['sear-2']
+    },
+    {
+      label: 'Sauce + broccoli',
+      text:  'Drop to medium-high. Add a splash of oil if dry. Add {{garlic}} — 30 seconds. Add {{broccoli}}, toss in the garlic. Pour in the {{all-sauce}} — it will thicken fast. Keep tossing.',
+      tip:   'If the sauce over-thickens, a splash of bone broth loosens it right back up.',
+      timers: ['sauce']
+    },
+    {
+      label: 'Combine + plate',
+      text:  'Return {{beef}}, fold everything together, 30 more seconds. Taste — add a small splash more ACV if it needs lift. Plate over rice. Hit it with {{sumac}} at the table.',
+      tip:   'The sumac at the end is doing more than you think — it\'s the brightness that makes it feel complete.',
+      timers: []
+    }
+  ]
 }
 ];
 
