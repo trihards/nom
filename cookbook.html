@@ -127,6 +127,13 @@ button { font-family: inherit; cursor: pointer; }
   border: 1px solid var(--warn-bdr); border-radius: 5px;
   padding: 4px 9px; white-space: nowrap; flex-shrink: 0;
 }
+.recipe-headnote {
+  font-size: 13px; color: var(--dim); line-height: 1.55;
+  padding: 12px 2px 16px; border-bottom: 1px solid var(--border-mid);
+  margin-bottom: 6px;
+}
+.recipe-headnote strong { color: var(--text); font-weight: 600; }
+.recipe-headnote em { color: var(--muted); font-style: normal; font-size: 12px; }
 .scale-toggle {
   display: flex; border: 1px solid var(--border); border-radius: 7px;
   overflow: hidden; flex-shrink: 0;
@@ -202,8 +209,8 @@ button { font-family: inherit; cursor: pointer; }
 
 /* Section label */
 .sec-lbl {
-  font-size: 11px; font-weight: 700; letter-spacing: 2px;
-  color: var(--muted); text-transform: uppercase;
+  font-size: 12px; font-weight: 700; letter-spacing: 1.5px;
+  color: var(--accent); text-transform: uppercase;
   margin: 22px 0 0; padding-bottom: 6px;
   border-bottom: 1px solid var(--border);
   display: flex; align-items: center; gap: 8px;
@@ -211,7 +218,7 @@ button { font-family: inherit; cursor: pointer; }
   transition: color .2s;
 }
 .sec-lbl:first-child { margin-top: 4px; }
-.mise-section.collapsed .sec-lbl { color: var(--dim); border-bottom-color: transparent; }
+.mise-section.collapsed .sec-lbl { color: var(--accent-dim); border-bottom-color: transparent; }
 
 /* Section collapse checkbox */
 .sec-cb {
@@ -680,6 +687,87 @@ const RECIPES = [
 },
 
 {
+  id: 'berry-herb-sauce',
+  title: 'Berry-herb reduction sauce',
+  subtitle: 'Three variants · makes ahead · 15 minutes',
+  preheat: null,
+  serves: '1–3',
+  tags: ['sauce', 'make-ahead', 'phase 1'],
+
+  headnote: `<strong>Pick one variant — only prep that group.</strong> Same method across all three: reduce with rosemary and ACV, finish with mint off-heat. <strong>Classic blueberry</strong> is jammy and wine-forward, best body naturally. <strong>Strawberry-blueberry</strong> (2:1 blues to macerated strawberries) is brighter and more aromatic — the maceration liquid is already your sauce base, skip the bone broth. <strong>Pure strawberry</strong> is the sweetest and thinnest; add arrowroot slurry at the end if you want more body.<br><br><strong>Use on:</strong> lamb loin chops (cast iron or grilled) · bone-in pork loin rib chops · pan-seared salmon · drizzled over roasted sweet potato<br><br><em>Keeps 4–5 days refrigerated. Reheat low and slow with a splash of broth to loosen — don't boil or the mint goes flat.</em>`,
+
+  equipment: [
+    { name: 'Small saucepan' },
+    { name: 'Wooden spoon or silicone spatula' },
+    { name: 'Small jar', note: 'if making ahead' }
+  ],
+
+  mise: [
+    { group: 'Classic blueberry', items: [
+      { byScale: { 1: '½ cup fresh blueberries',      2: '1 cup fresh blueberries',      3: '1½ cups fresh blueberries'      } },
+      { byScale: { 1: '1 tbsp Bragg\'s ACV',           2: '2 tbsp Bragg\'s ACV',           3: '3 tbsp Bragg\'s ACV'            } },
+      { byScale: { 1: '½ tbsp bone broth',             2: '1 tbsp bone broth',             3: '1½ tbsp bone broth'             } },
+      { name: '1 sprig fresh rosemary' },
+      { byScale: { 1: '1 tsp fresh mint, chiffonade', 2: '2 tsp fresh mint, chiffonade', 3: '1 tbsp fresh mint, chiffonade' } },
+      { name: 'Non-iodized sea salt' }
+    ]},
+    { group: 'Strawberry-blueberry variant (swap for above)', items: [
+      { byScale: { 1: '⅓ cup blueberries + ¼ cup macerated strawberries + their liquid', 2: '⅔ cup blueberries + ½ cup macerated strawberries + liquid', 3: '1 cup blueberries + ¾ cup macerated strawberries + liquid' } },
+      { byScale: { 1: '1½ tbsp Bragg\'s ACV',          2: '2½ tbsp Bragg\'s ACV',          3: '3½ tbsp Bragg\'s ACV'           }, note: 'start here — sweeter berries need more acid' },
+      { name: '1 sprig fresh rosemary' },
+      { byScale: { 1: '1 tsp fresh mint, chiffonade', 2: '2 tsp fresh mint, chiffonade', 3: '1 tbsp fresh mint, chiffonade' } },
+      { name: 'Non-iodized sea salt' }
+    ]},
+    { group: 'Pure strawberry variant (swap for above)', items: [
+      { byScale: { 1: '½ cup macerated strawberries + their liquid', 2: '1 cup macerated strawberries + liquid', 3: '1½ cups macerated strawberries + liquid' } },
+      { byScale: { 1: '1½ tbsp Bragg\'s ACV',          2: '2½ tbsp Bragg\'s ACV',          3: '3½ tbsp Bragg\'s ACV'           }, note: 'sweeter base — lean acid-forward from the start' },
+      { byScale: { 1: '1 tsp arrowroot + 1 tbsp cold water', 2: '1½ tsp arrowroot + 1½ tbsp cold water', 3: '2 tsp arrowroot + 2 tbsp cold water' }, note: 'mix now, only use if sauce is too thin at the end' },
+      { name: '1 sprig fresh rosemary' },
+      { byScale: { 1: '1 tsp fresh mint, chiffonade', 2: '2 tsp fresh mint, chiffonade', 3: '1 tbsp fresh mint, chiffonade' } },
+      { name: 'Non-iodized sea salt' }
+    ]}
+  ],
+
+  refs: {
+    'acv':       { display: 'ACV',              tips: { 1: '1–1½ tbsp',                       2: '2–2½ tbsp',                        3: '3–3½ tbsp'                        } },
+    'mint':      { display: 'mint',             tips: { 1: '1 tsp chiffonade',                 2: '2 tsp chiffonade',                 3: '1 tbsp chiffonade'                } },
+    'broth':     { display: 'bone broth',       tips: { 1: '½ tbsp (classic only)',            2: '1 tbsp (classic only)',            3: '1½ tbsp (classic only)'           } },
+    'arrowroot': { display: 'arrowroot slurry', tips: { 1: '1 tsp + 1 tbsp cold water',        2: '1½ tsp + 1½ tbsp cold water',     3: '2 tsp + 2 tbsp cold water'        } }
+  },
+
+  timers: {
+    'reduce': { label: 'Reduce', preset: 720, bell: true }
+  },
+
+  steps: [
+    {
+      label: 'Build the base',
+      text:  'Berries (and any maceration liquid) into the saucepan. Add rosemary sprig, {{acv}}, and a pinch of salt. Classic blueberry: add {{broth}}. Strawberry variants: skip the broth — the maceration liquid covers it.',
+      tip:   'Strawberry-blueberry: add the ACV now rather than adjusting at the end so it can cook in and mellow. The macerated strawberries are sweeter than straight blueberries and the sauce needs that acid built in from the start.',
+      timers: []
+    },
+    {
+      label: 'Reduce',
+      text:  'Medium heat. Bring to a strong simmer. Stir occasionally. Reduce by about half until syrupy — 10–12 minutes. Classic blueberry will look jammy and glossy. Strawberry-blueberry goes deep red and slightly thinner.',
+      tip:   'Pure strawberry: if it\'s too thin at the end, stir in {{arrowroot}} dissolved in cold water off heat. Thickens almost immediately — don\'t reboil after or it gets gluey.',
+      timers: ['reduce']
+    },
+    {
+      label: 'Finish and taste',
+      text:  'Off heat. Fish out the rosemary. Taste: should be tart-bright, not candy-sweet. Add more {{acv}} if it needs it. Tear in {{mint}} and stir through.',
+      tip:   'The mint is structural. Add it last, off heat, so it stays vivid. Don\'t skip it.',
+      timers: []
+    },
+    {
+      label: 'If making ahead',
+      text:  'Pour into a jar. Cool uncovered to room temp, then seal and refrigerate. Keeps 4–5 days. To reheat: low heat with a splash of bone broth or water. Don\'t boil — it dulls the mint and tightens the texture.',
+      tip:   null,
+      timers: []
+    }
+  ]
+},
+
+{
   id: 'beef-bowl-guac',
   title: '7-Layer I\'m Fine',
   subtitle: 'Arugula · guac · coconut yogurt crema · plantain chips',
@@ -1114,6 +1202,132 @@ const RECIPES = [
     }
   ]
 }
+,
+
+{
+  id: 'beef-chuck-stew',
+  title: 'Beef chuck stew',
+  subtitle: 'Mashed rutabaga',
+  preheat: '325°F',
+  serves: '2+',
+  tags: ['beef', 'weekend', 'phase 1'],
+
+  equipment: [
+    { name: 'Large enameled Dutch oven (Le Creuset)',  note: 'searing and braising — the whole show' },
+    { name: 'Large pot',                               note: 'for boiling rutabaga separately' },
+    { name: 'Potato masher or fork' },
+    { name: 'Tongs',                                   note: 'for searing in batches without crowding' }
+  ],
+
+  mise: [
+    { group: 'Beef', items: [
+      { byScale: { 1: '2 lbs chuck roast, 2-inch chunks', 2: '3 lbs chuck roast, 2-inch chunks', 3: '4 lbs chuck roast, 2-inch chunks' }, note: 'pat completely dry — critical for a good sear' },
+      { name: 'Non-iodized sea salt, generous' },
+      { name: 'Black pepper' },
+      { name: 'Beef tallow, 2–3 tbsp' }
+    ]},
+    { group: 'Aromatics & veg', items: [
+      { name: '1 large yellow onion, rough dice' },
+      { byScale: { 1: '6–8 garlic cloves, smashed', 2: '8–10 garlic cloves, smashed', 3: '10–12 garlic cloves, smashed' } },
+      { byScale: { 1: '2–3 large carrots, thick bias-cut', 2: '3–4 large carrots', 3: '4–5 large carrots' } },
+      { name: '2 small parsnips, chunked' },
+      { byScale: { 1: '4 oz shiitake or white mushrooms, halved', 2: '6 oz mushrooms', 3: '8 oz mushrooms' } },
+      { name: '2 bay leaves' },
+      { name: 'Several sprigs fresh thyme' },
+      { name: '1 small sprig fresh rosemary' }
+    ]},
+    { group: 'Liquid & pantry', items: [
+      { byScale: { 1: '3 cups bone broth', 2: '4 cups bone broth', 3: '5 cups bone broth' } },
+      { byScale: { 1: '3 tbsp cassava flour', 2: '4 tbsp cassava flour', 3: '5 tbsp cassava flour' }, note: 'for the roux — do not skip' },
+      { name: '2 tbsp coconut aminos' },
+      { name: '2 tbsp Bragg\'s ACV + another hit at the finish' },
+      { name: '1 tsp mushroom umami powder' }
+    ]},
+    { group: 'Mashed rutabaga', items: [
+      { name: '1 medium rutabaga (~1.5 lbs), peeled and cubed' },
+      { name: 'Olive oil, 2–3 tbsp' },
+      { name: 'Non-iodized sea salt + white pepper' },
+      { name: 'Pinch garlic granules (optional)' }
+    ]}
+  ],
+
+  refs: {
+    'chuck':    { display: 'chuck',          tips: { 1: '2 lbs, 2-inch chunks', 2: '3 lbs, 2-inch chunks', 3: '4 lbs, 2-inch chunks' } },
+    'tallow':   { display: 'beef tallow',    tips: { 1: '2–3 tbsp',             2: '3 tbsp',               3: '3–4 tbsp'             } },
+    'cassava':  { display: 'cassava flour',  tips: { 1: '3 tbsp',               2: '4 tbsp',               3: '5 tbsp'               } },
+    'broth':    { display: 'bone broth',     tips: { 1: '3 cups',               2: '4 cups',               3: '5 cups'               } },
+    'aminos':   { display: 'coconut aminos', tips: { 1: '2 tbsp',               2: '2 tbsp',               3: '3 tbsp'               } },
+    'acv':      { display: 'Bragg\'s ACV',   tips: { 1: '2 tbsp',               2: '2 tbsp',               3: '2 tbsp'               } },
+    'umami':    { display: 'umami powder',   tips: { 1: '1 tsp',                2: '1 tsp',                3: '1½ tsp'               } },
+    'ruta':     { display: 'rutabaga',       tips: { 1: '1 medium (~1.5 lbs)',  2: '1–2 medium',           3: '2 medium'             } },
+    'oil-mash': { display: 'olive oil',      tips: { 1: '2–3 tbsp',             2: '2–3 tbsp',             3: '3–4 tbsp'             } }
+  },
+
+  timers: {
+    'sear':    { label: 'Sear per batch', preset: 180,  bell: false },
+    'roux':    { label: 'Cook roux',      preset: 120,  bell: true  },
+    'lid-off': { label: 'Check / lid off',preset: 7200, bell: true  },
+    'braise':  { label: 'Braise total',   preset: 9000, bell: true  },
+    'ruta':    { label: 'Rutabaga',       preset: 1380, bell: true  }
+  },
+
+  steps: [
+    {
+      label: 'Preheat + dry the beef',
+      text:  'Oven to 325°F. Season {{chuck}} generously on all sides with salt and black pepper. Pat completely dry — moisture is the enemy of crust.',
+      tip:   'Do this first. The beef can sit and come up to temp while you prep everything else.',
+      timers: []
+    },
+    {
+      label: 'Sear in batches',
+      text:  'Heat Dutch oven over high with {{tallow}}. Sear beef in batches — do not crowd the pan. Hard crust on all sides. This is where the flavor lives.',
+      tip:   'Smoke is expected. Take your time. Rushed searing = gray, steamed beef.',
+      timers: ['sear']
+    },
+    {
+      label: 'Build the base',
+      text:  'Remove beef, drop to medium. Sauté onion in the drippings until soft and starting to color, 5–6 min. Add garlic, cook 2 more minutes.',
+      tip:   null,
+      timers: []
+    },
+    {
+      label: 'Roux moment',
+      text:  'Add {{cassava}} directly into the onion and garlic. Stir to coat everything. Cook for 2 minutes until slightly nutty-smelling. This is what gives you gravy body — not arrowroot gloss.',
+      tip:   'It will look a little pasty at first. Keep stirring and give it the full 2 minutes.',
+      timers: ['roux']
+    },
+    {
+      label: 'Build the braise',
+      text:  'Deglaze gradually with {{broth}}, scraping up all the fond. Add {{aminos}}, {{acv}}, {{umami}}, bay leaves, thyme, rosemary. Return the beef. Add carrots, parsnips, mushrooms. Liquid should come about ¾ up the beef.',
+      tip:   null,
+      timers: []
+    },
+    {
+      label: 'Into the oven',
+      text:  'Cover and braise at 325°F. The lid-off timer is your 2-hour check — if the gravy looks thin at that point, pull the lid and let it reduce for the remainder.',
+      tip:   'Don\'t open it before 2 hours. Let it work.',
+      timers: ['lid-off', 'braise']
+    },
+    {
+      label: 'Rutabaga — start ~30 min before serving',
+      text:  'Boil {{ruta}} in well-salted water until completely tender. Drain thoroughly and let it steam dry in the pot for a minute before mashing.',
+      tip:   'Rutabaga holds water. Drain aggressively or the mash goes loose.',
+      timers: ['ruta']
+    },
+    {
+      label: 'Mash',
+      text:  'Mash with {{oil-mash}}, white pepper, and salt. Rough or smooth — both work. No added liquid needed if you drained well.',
+      tip:   null,
+      timers: []
+    },
+    {
+      label: 'Finish + plate',
+      text:  'Pull stew from oven. Remove bay leaves and herb stems. Hit it with another splash of ACV to cut the richness. Taste, adjust salt. Serve over or alongside the rutabaga mash.',
+      tip:   'The ACV finish is not optional. Braised beef without a final acid hit tastes flat. You\'ll feel the difference.',
+      timers: []
+    }
+  ]
+}
 ];
 
 const PLACEHOLDERS = [
@@ -1236,6 +1450,12 @@ function swTab(id, btn) {
 function renderMise() {
   const pane = document.getElementById('pane-mise');
   pane.innerHTML = '';
+  if (currentRecipe.headnote) {
+    const hn = document.createElement('div');
+    hn.className = 'recipe-headnote';
+    hn.innerHTML = currentRecipe.headnote;
+    pane.appendChild(hn);
+  }
   let sIdx = 0;
 
   function makeSection(title, items) {
