@@ -87,7 +87,8 @@ button { font-family: inherit; cursor: pointer; }
   border: 1px solid var(--warn-bdr); border-radius: 4px; padding: 2px 7px;
 }
 .card-title { font-size: 16px; font-weight: 600; color: var(--text); line-height: 1.35; }
-.card-sub { font-size: 13px; color: var(--muted); line-height: 1.4; }
+.card-style { font-size: 12px; color: var(--muted); font-style: italic; line-height: 1.4; margin-top: 2px; }
+.card-sub { font-size: 12px; color: var(--dim); line-height: 1.4; margin-top: 2px; }
 .card-btn {
   margin-top: auto; display: block; width: 100%;
   background: var(--accent); color: #fff;
@@ -97,6 +98,13 @@ button { font-family: inherit; cursor: pointer; }
 }
 .card-btn:hover { background: var(--accent-hi); }
 .card-soon { font-size: 12px; color: var(--dim); margin-top: auto; }
+.card-time {
+  display: flex; gap: 12px; flex-wrap: wrap;
+  font-size: 12px; color: var(--muted); margin-top: 2px;
+}
+.card-time-item { display: flex; align-items: center; gap: 4px; }
+.card-time-lbl { font-weight: 600; color: var(--dim); text-transform: uppercase; letter-spacing: 0.5px; font-size: 10px; }
+.card-time-val { color: var(--text); font-weight: 500; }
 
 /* === COOK VIEW === */
 #cook-view { display: none; }
@@ -278,9 +286,14 @@ button { font-family: inherit; cursor: pointer; }
 }
 .step-card.done .step-num { background: var(--green-bg); color: var(--green); }
 .step-inner { flex: 1; }
+.step-lbl-row {
+  display: flex; align-items: center;
+  justify-content: space-between; gap: 10px;
+  margin-bottom: 5px;
+}
 .step-lbl {
   font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
-  color: var(--muted); text-transform: uppercase; margin-bottom: 5px;
+  color: var(--muted); text-transform: uppercase;
 }
 .step-txt { font-size: 14px; line-height: 1.8; color: var(--text); }
 .step-tip {
@@ -324,6 +337,21 @@ button { font-family: inherit; cursor: pointer; }
 .done-btn:hover { border-color: var(--border-mid); color: var(--text); }
 .step-card.done .done-btn { color: var(--green); border-color: var(--green-bdr); }
 
+/* Collapsible step detail */
+.step-detail, .step-timers {
+  overflow: hidden;
+  max-height: 600px;
+  opacity: 1;
+  transition: max-height .3s ease, opacity .25s ease;
+}
+.step-card.done .step-detail,
+.step-card.done .step-timers,
+.step-card.done .step-ftr {
+  max-height: 0;
+  opacity: 0;
+  padding: 0;
+}
+
 /* Ingredient refs in steps */
 .qref {
   border-bottom: 1px dashed var(--border-mid);
@@ -341,31 +369,18 @@ button { font-family: inherit; cursor: pointer; }
   box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
-/* Notes */
-#notes-section {
-  margin-top: 36px; border-top: 1px solid var(--border); padding-top: 26px;
+/* Variant callout */
+.variant-card {
+  background: var(--surface2); border: 1px solid var(--border);
+  border-left: 3px solid var(--accent); border-radius: 8px;
+  padding: 13px 16px; margin-bottom: 12px;
 }
-#notes-area {
-  width: 100%; min-height: 90px;
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: 8px; color: var(--text); font-family: inherit;
-  font-size: 14px; line-height: 1.65; padding: 12px 14px;
-  resize: vertical; transition: border-color .15s;
+.variant-hdr {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 6px;
 }
-#notes-area:focus { outline: none; border-color: var(--accent-dim); }
-#notes-area::placeholder { color: var(--dim); }
-.notes-row {
-  display: flex; align-items: center; justify-content: flex-end;
-  gap: 10px; margin-top: 8px;
-}
-.notes-status { font-size: 12px; color: var(--green); opacity: 0; transition: opacity .3s; }
-.notes-status.vis { opacity: 1; }
-.notes-save-btn {
-  background: none; border: 1px solid var(--border);
-  color: var(--muted); font-size: 12px; padding: 5px 12px;
-  border-radius: 6px; transition: all .15s;
-}
-.notes-save-btn:hover { border-color: var(--green-bdr); color: var(--green); }
+.variant-body { font-size: 13px; line-height: 1.7; color: var(--text); }
 
 .share-btn {
   background: none; border: 1px solid var(--border); color: var(--muted);
@@ -389,12 +404,6 @@ button { font-family: inherit; cursor: pointer; }
 <div id="lib-view">
   <div class="lib-hdr">
     <h1>EL <span>YES!</span> cookbook</h1>
-    <p class="lib-sub">Elimination diet · phase 1 baseline · tracking what works</p>
-    <div class="lib-meta">
-      <div class="lib-pill">Started <span>April 22</span></div>
-      <div class="lib-pill">Protocol <span>phase 1</span></div>
-      <div class="lib-pill">Household <span>2 people</span></div>
-    </div>
   </div>
   <div class="recipe-grid" id="recipe-grid"></div>
 </div>
@@ -425,15 +434,8 @@ button { font-family: inherit; cursor: pointer; }
     </div>
     <div class="cook-pane on" id="pane-mise"></div>
     <div class="cook-pane"    id="pane-cook">
+      <div id="variants-container"></div>
       <div id="steps-container"></div>
-      <div id="notes-section">
-        <div class="sec-lbl">cook notes</div>
-        <textarea id="notes-area" placeholder="what worked, what to change next time…"></textarea>
-        <div class="notes-row">
-          <span class="notes-status" id="notes-status">saved</span>
-          <button class="notes-save-btn" onclick="saveNotes()">save note</button>
-        </div>
-      </div>
     </div>
   </div>
 
@@ -455,10 +457,13 @@ const RECIPES = [
 {
   id: 'vadouvan-chicken',
   title: 'Vadouvan chicken thighs with pan gravy',
+  style: 'Spiced dry rub · cast iron sear · arrowroot pan gravy',
   subtitle: 'Haiga rice · charred broccoli · sweet potato mash',
   preheat: '425°F',
   serves: '1–3',
   tags: ['chicken', 'weeknight', 'phase 1'],
+  prepTime: '15 min',
+  cookTime: '45 min',
 
   equipment: [
     { name: '12-inch cast iron skillet',          note: 'for the sear and gravy — needs to be big enough for all the thighs flat' },
@@ -589,10 +594,19 @@ const RECIPES = [
 {
   id: 'lamb-blueberry',
   title: 'Lamb loin chops with blueberry-mint sauce',
-  subtitle: 'Roasted carrots · arugula & cucumber salad',
+  style: 'Cast iron sear · blueberry-mint-rosemary reduction · pan drippings',
+  subtitle: 'Roasted carrots · arugula & blackberry salad',
+  variants: [
+    {
+      name: 'Grill — indirect then sear',
+      notes: 'Set up 2-zone fire. Place chops on indirect side, cover, and cook until internal hits 115°F — about 15–20 min depending on thickness. Move to direct heat for 60–90 sec per side for crust. Pull at 130–135°F and rest 5 min. Sauce and sides unchanged — make the blueberry sauce on the stovetop while the chops are on indirect heat.'
+    }
+  ],
   preheat: '425°F',
   serves: '1–3',
   tags: ['lamb', 'weekend', 'phase 1'],
+  prepTime: '15 min',
+  cookTime: '30 min',
 
   equipment: [
     { name: '12-inch cast iron skillet',        note: 'essential for the crust — get it properly ripping hot' },
@@ -689,10 +703,13 @@ const RECIPES = [
 {
   id: 'berry-herb-sauce',
   title: 'Berry-herb reduction sauce',
-  subtitle: 'Three variants · makes ahead · 15 minutes',
+  style: 'Stovetop reduction · three variants · 15 minutes',
+  subtitle: 'Blueberry-mint · strawberry-herb · mixed berry · pairs with lamb or chicken',
   preheat: null,
   serves: '1–3',
   tags: ['sauce', 'make-ahead', 'phase 1'],
+  prepTime: '5 min',
+  cookTime: '15 min',
 
   headnote: `<strong>Pick one variant — only prep that group.</strong> Same method across all three: reduce with rosemary and ACV, finish with mint off-heat. <strong>Classic blueberry</strong> is jammy and wine-forward, best body naturally. <strong>Strawberry-blueberry</strong> (2:1 blues to macerated strawberries) is brighter and more aromatic — the maceration liquid is already your sauce base, skip the bone broth. <strong>Pure strawberry</strong> is the sweetest and thinnest; add arrowroot slurry at the end if you want more body.<br><br><strong>Use on:</strong> lamb loin chops (cast iron or grilled) · bone-in pork loin rib chops · pan-seared salmon · drizzled over roasted sweet potato<br><br><em>Keeps 4–5 days refrigerated. Reheat low and slow with a splash of broth to loosen — don't boil or the mint goes flat.</em>`,
 
@@ -770,10 +787,13 @@ const RECIPES = [
 {
   id: 'beef-bowl-guac',
   title: '7-Layer I\'m Fine',
+  style: 'Seared ground beef · cold assembly · big bowl energy',
   subtitle: 'Arugula · guac · coconut yogurt crema · plantain chips',
   preheat: null,
   serves: '1–3',
   tags: ['beef', 'weeknight', 'phase 1'],
+  prepTime: '15 min',
+  cookTime: '15 min',
 
   equipment: [
     { name: '10- or 12-inch skillet or cast iron', note: 'needs to get hot enough to brown, not steam' },
@@ -872,10 +892,13 @@ const RECIPES = [
 {
   id: 'latin-avo-smash',
   title: 'Latin avo smash with chicken',
+  style: 'Quick sauté · Latin-spiced · 20 minutes',
   subtitle: 'Wilted spinach · rough guac · plantain chips',
   preheat: null,
   serves: '1–3',
   tags: ['chicken', 'quick', 'phase 1'],
+  prepTime: '10 min',
+  cookTime: '20 min',
 
   equipment: [
     { name: '10-inch carbon steel skillet', note: 'needs to get ripping hot — this is the whole move' },
@@ -969,10 +992,13 @@ const RECIPES = [
 {
   id: 'black-pepper-garlic-chicken',
   title: 'Black Pepper Garlic Chicken',
+  style: 'Wok-style · aggressive black pepper · garlic-forward',
   subtitle: 'Gai lan in garlic oil · jasmine rice',
   preheat: null,
   serves: '1–3',
   tags: ['chicken', 'weeknight', 'phase 1'],
+  prepTime: '20 min',
+  cookTime: '30 min',
 
   equipment: [
     { name: '12-inch cast iron or carbon steel skillet', note: 'does everything — garlic fry, chicken sear, gai lan finish, all in sequence' },
@@ -1097,10 +1123,13 @@ const RECIPES = [
 {
   id: 'bavette-beef-broccoli',
   title: 'Bavette Beef & Broccoli',
-  subtitle: 'Wok-style in carbon steel · five spice · takeout energy',
+  style: 'High-heat carbon steel · five spice marinade · takeout energy',
+  subtitle: 'Jasmine rice',
   preheat: null,
   serves: '1–3',
   tags: ['beef', 'weeknight', 'phase 1'],
+  prepTime: '15 min',
+  cookTime: '30 min',
 
   equipment: [
     { name: '10-inch carbon steel skillet', note: 'needs to get ripping hot — this is wok technique in a flat pan' },
@@ -1207,10 +1236,13 @@ const RECIPES = [
 {
   id: 'beef-chuck-stew',
   title: 'Beef chuck stew',
+  style: 'Dutch oven braise · cassava flour roux · 3 hours',
   subtitle: 'Mashed rutabaga',
   preheat: '325°F',
   serves: '2+',
   tags: ['beef', 'weekend', 'phase 1'],
+  prepTime: '20 min',
+  cookTime: '3 hrs',
 
   equipment: [
     { name: 'Large enameled Dutch oven (Le Creuset)',  note: 'searing and braising — the whole show' },
@@ -1231,6 +1263,7 @@ const RECIPES = [
       { byScale: { 1: '6–8 garlic cloves, smashed', 2: '8–10 garlic cloves, smashed', 3: '10–12 garlic cloves, smashed' } },
       { byScale: { 1: '2–3 large carrots, thick bias-cut', 2: '3–4 large carrots', 3: '4–5 large carrots' } },
       { name: '2 small parsnips, chunked' },
+      { name: '4 celery stalks, bias-cut' },
       { byScale: { 1: '4 oz shiitake or white mushrooms, halved', 2: '6 oz mushrooms', 3: '8 oz mushrooms' } },
       { name: '2 bay leaves' },
       { name: 'Several sprigs fresh thyme' },
@@ -1259,12 +1292,15 @@ const RECIPES = [
     'aminos':   { display: 'coconut aminos', tips: { 1: '2 tbsp',               2: '2 tbsp',               3: '3 tbsp'               } },
     'acv':      { display: 'Bragg\'s ACV',   tips: { 1: '2 tbsp',               2: '2 tbsp',               3: '2 tbsp'               } },
     'umami':    { display: 'umami powder',   tips: { 1: '1 tsp',                2: '1 tsp',                3: '1½ tsp'               } },
+    'celery':   { display: 'celery',          tips: { 1: '4 stalks, bias-cut',   2: '4 stalks, bias-cut',   3: '5 stalks, bias-cut'   } },
     'ruta':     { display: 'rutabaga',       tips: { 1: '1 medium (~1.5 lbs)',  2: '1–2 medium',           3: '2 medium'             } },
     'oil-mash': { display: 'olive oil',      tips: { 1: '2–3 tbsp',             2: '2–3 tbsp',             3: '3–4 tbsp'             } }
   },
 
   timers: {
     'sear':    { label: 'Sear per batch', preset: 180,  bell: false },
+    'onion':   { label: 'Onion',          preset: 360,  bell: false },
+    'garlic':  { label: 'Garlic',         preset: 120,  bell: true  },
     'roux':    { label: 'Cook roux',      preset: 120,  bell: true  },
     'lid-off': { label: 'Check / lid off',preset: 7200, bell: true  },
     'braise':  { label: 'Braise total',   preset: 9000, bell: true  },
@@ -1288,7 +1324,7 @@ const RECIPES = [
       label: 'Build the base',
       text:  'Remove beef, drop to medium. Sauté onion in the drippings until soft and starting to color, 5–6 min. Add garlic, cook 2 more minutes.',
       tip:   null,
-      timers: []
+      timers: ['onion', 'garlic']
     },
     {
       label: 'Roux moment',
@@ -1298,7 +1334,7 @@ const RECIPES = [
     },
     {
       label: 'Build the braise',
-      text:  'Deglaze gradually with {{broth}}, scraping up all the fond. Add {{aminos}}, {{acv}}, {{umami}}, bay leaves, thyme, rosemary. Return the beef. Add carrots, parsnips, mushrooms. Liquid should come about ¾ up the beef.',
+      text:  'Deglaze gradually with {{broth}}, scraping up all the fond. Add {{aminos}}, {{acv}}, {{umami}}, bay leaves, thyme, rosemary. Return the beef. Add carrots, parsnips, {{celery}}, mushrooms. Liquid should come about ¾ up the beef.',
       tip:   null,
       timers: []
     },
@@ -1343,7 +1379,6 @@ let currentScale   = 2;     // default: cooking for 2
 let T              = {};
 let audioCtx       = null;
 let tipTimeout     = null;
-let notesSaveTimer = null;
 
 // =====================================================================
 // LIBRARY
@@ -1355,10 +1390,17 @@ function renderLibrary() {
   RECIPES.forEach(r => {
     const card = document.createElement('div');
     card.className = 'recipe-card';
+    const timeHtml = (r.prepTime || r.cookTime) ? `
+      <div class="card-time">
+        ${r.prepTime ? `<span class="card-time-item"><span class="card-time-lbl">prep</span> <span class="card-time-val">${r.prepTime}</span></span>` : ''}
+        ${r.cookTime ? `<span class="card-time-item"><span class="card-time-lbl">cook</span> <span class="card-time-val">${r.cookTime}</span></span>` : ''}
+      </div>` : '';
     card.innerHTML = `
       <div class="card-tags">${r.tags.map(t => `<span class="card-tag">${t}</span>`).join('')}</div>
       <div class="card-title">${r.title}</div>
+      ${r.style ? `<div class="card-style">${r.style}</div>` : ''}
       <div class="card-sub">${r.subtitle}</div>
+      ${timeHtml}
       <button class="card-btn" onclick="loadRecipe('${r.id}')">cook now</button>
     `;
     grid.appendChild(card);
@@ -1412,8 +1454,8 @@ function loadRecipe(id) {
   else pb.style.display = 'none';
 
   renderMise();
+  renderVariants();
   renderSteps();
-  loadNotes();
 
   document.querySelectorAll('.cook-pane').forEach(p => p.classList.remove('on'));
   document.querySelectorAll('.cook-tab').forEach(b => b.classList.remove('on'));
@@ -1539,15 +1581,17 @@ function renderSteps() {
       <div class="step-hdr">
         <div class="step-num">${i + 1}</div>
         <div class="step-inner">
-          <div class="step-lbl">${step.label}</div>
-          <div class="step-txt">${parseText(step.text)}</div>
-          ${step.tip ? `<div class="step-tip">${step.tip}</div>` : ''}
+          <div class="step-lbl-row">
+            <div class="step-lbl">${step.label}</div>
+            <button class="done-btn" onclick="markDone(this,'step-${i}')">✓ done</button>
+          </div>
+          <div class="step-detail">
+            <div class="step-txt">${parseText(step.text)}</div>
+            ${step.tip ? `<div class="step-tip">${step.tip}</div>` : ''}
+          </div>
         </div>
       </div>
-      <div class="step-ftr">
-        ${timerHtml}
-        <button class="done-btn" onclick="markDone(this,'step-${i}')">✓ done</button>
-      </div>
+      ${timerHtml ? `<div class="step-ftr"><div class="step-timers">${timerHtml}</div></div>` : ''}
     `;
     container.appendChild(card);
   });
@@ -1695,21 +1739,20 @@ function playDone() {
 // NOTES
 // =====================================================================
 
-function loadNotes() {
-  const key = 'notes-' + currentRecipe.id;
-  document.getElementById('notes-area').value = localStorage.getItem(key) || '';
+function renderVariants() {
+  const container = document.getElementById('variants-container');
+  container.innerHTML = '';
+  if (!currentRecipe.variants || !currentRecipe.variants.length) return;
+  currentRecipe.variants.forEach(v => {
+    const card = document.createElement('div');
+    card.className = 'variant-card';
+    card.innerHTML = `
+      <div class="variant-hdr">⚡ variant — ${v.name}</div>
+      <div class="variant-body">${v.notes}</div>
+    `;
+    container.appendChild(card);
+  });
 }
-function saveNotes() {
-  if (!currentRecipe) return;
-  localStorage.setItem('notes-' + currentRecipe.id, document.getElementById('notes-area').value);
-  const msg = document.getElementById('notes-status');
-  msg.classList.add('vis');
-  setTimeout(() => msg.classList.remove('vis'), 2000);
-}
-document.getElementById('notes-area').addEventListener('input', () => {
-  clearTimeout(notesSaveTimer);
-  notesSaveTimer = setTimeout(saveNotes, 1500);
-});
 
 // =====================================================================
 // SHARE / DEEP LINK
