@@ -1363,6 +1363,125 @@ const RECIPES = [
       timers: []
     }
   ]
+},
+
+{
+  id: 'picadillo',
+  title: 'Protocol Picadillo',
+  style: 'One-pan · spiced ground beef · 30 minutes',
+  subtitle: 'Jasmine rice · green olives · heavy cilantro',
+  preheat: null,
+  serves: '1–3',
+  tags: ['beef', 'weeknight', 'phase 1'],
+
+  equipment: [
+    { name: 'Large skillet or everyday pan',  note: 'carbon steel, cast iron, or the Staub — needs to get hot enough to brown mushrooms' },
+    { name: 'Zojirushi rice cooker' },
+    { name: 'Wooden spoon or spatula',         note: 'for breaking up the beef into small crumbles' }
+  ],
+
+  mise: [
+    { group: 'Beef & mushrooms', items: [
+      { byScale: { 1: '1 lb grass-fed ground beef', 2: '1.5 lbs grass-fed ground beef', 3: '2 lbs grass-fed ground beef' } },
+      { byScale: { 1: '8 oz button or cremini mushrooms, fine dice', 2: '10 oz mushrooms', 3: '12 oz mushrooms' }, note: 'small enough to disappear into the beef' }
+    ]},
+    { group: 'Aromatics', items: [
+      { name: '1 medium yellow onion, fine dice' },
+      { byScale: { 1: '5 garlic cloves, minced', 2: '6 garlic cloves, minced', 3: '8 garlic cloves, minced' } },
+      { byScale: { 1: 'Big handful fresh cilantro, roughly chopped', 2: 'Very large handful fresh cilantro', 3: '2 large handfuls fresh cilantro' }, note: 'lead ingredient, not a garnish — be generous' }
+    ]},
+    { group: 'Pantry', items: [
+      { byScale: { 1: '½ cup green olives, rough chop', 2: '¾ cup green olives', 3: '1 cup green olives' }, note: 'lactic acid brine only — check label' },
+      { name: '2 tbsp olive oil' },
+      { name: '2 tbsp coconut aminos' },
+      { name: '1 tbsp Bragg\'s ACV + splash at finish' },
+      { name: '1 tsp cumin' },
+      { name: '½ tsp coriander' },
+      { name: '¼ tsp cinnamon', note: 'background warmth — don\'t skip it' },
+      { name: 'Non-iodized salt + black pepper' }
+    ]},
+    { group: 'Rice', items: [
+      { byScale: { 1: '1 cup jasmine rice, rinsed', 2: '1.5 cups jasmine rice, rinsed', 3: '2 cups jasmine rice, rinsed' } }
+    ]}
+  ],
+
+  refs: {
+    'beef':    { display: 'ground beef',   tips: { 1: '1 lb',              2: '1.5 lbs',           3: '2 lbs'              } },
+    'mush':    { display: 'mushrooms',     tips: { 1: '8 oz, fine dice',   2: '10 oz, fine dice',  3: '12 oz, fine dice'   } },
+    'garlic':  { display: 'garlic',        tips: { 1: '5 cloves, minced',  2: '6 cloves, minced',  3: '8 cloves, minced'   } },
+    'olives':  { display: 'green olives',  tips: { 1: '½ cup, rough chop', 2: '¾ cup, rough chop', 3: '1 cup, rough chop'  } },
+    'aminos':  { display: 'coconut aminos',tips: { 1: '2 tbsp',            2: '2 tbsp',            3: '3 tbsp'             } },
+    'acv':     { display: 'Bragg\'s ACV',  tips: { 1: '1 tbsp',            2: '1 tbsp',            3: '1½ tbsp'            } },
+    'cilantro':{ display: 'cilantro',      tips: { 1: 'big handful',       2: 'very large handful', 3: '2 large handfuls'  } },
+    'rice':    { display: 'jasmine rice',  tips: { 1: '1 cup, rinsed',     2: '1.5 cups, rinsed',  3: '2 cups, rinsed'    } }
+  },
+
+  timers: {
+    'rice':   { label: 'Rice',             preset: 2100, bell: false },
+    'onion':  { label: 'Onion',            preset: 300,  bell: false },
+    'garlic': { label: 'Garlic',           preset: 120,  bell: false },
+    'mush':   { label: 'Mushrooms',        preset: 540,  bell: true  },
+    'beef':   { label: 'Brown beef',       preset: 420,  bell: false },
+    'spice':  { label: 'Bloom spices',     preset: 60,   bell: false },
+    'reduce': { label: 'Reduce',           preset: 120,  bell: false }
+  },
+
+  steps: [
+    {
+      label: 'Rice first',
+      text:  'Start {{rice}} in the Zojirushi. Everything else fits inside the cook time.',
+      tip:   null,
+      timers: ['rice']
+    },
+    {
+      label: 'Onion',
+      text:  'Heat pan over medium with olive oil. Add onion, cook until soft and translucent.',
+      tip:   null,
+      timers: ['onion']
+    },
+    {
+      label: 'Garlic',
+      text:  'Add {{garlic}}, cook 2 more minutes.',
+      tip:   null,
+      timers: ['garlic']
+    },
+    {
+      label: 'Mushrooms — the critical step',
+      text:  'Add {{mush}} and turn heat up to medium-high. Cook them down hard until they\'ve lost all moisture and started to brown. Stir occasionally but let them sit. Do not rush this — wet mushrooms make gray beef.',
+      tip:   'This takes longer than you think. When the pan looks dry and the mushrooms are starting to stick a little, you\'re there.',
+      timers: ['mush']
+    },
+    {
+      label: 'Brown the beef',
+      text:  'Add {{beef}}. Break it into small crumbles as it cooks — picadillo wants fine texture, not chunks. Brown fully.',
+      tip:   null,
+      timers: ['beef']
+    },
+    {
+      label: 'Spices',
+      text:  'Add cumin, coriander, cinnamon, salt, and pepper. Stir to coat everything. Cook the spices for 1 minute.',
+      tip:   'The cinnamon is background warmth — it shouldn\'t taste like cinnamon. If you\'re nervous, go ⅛ tsp. But don\'t skip it.',
+      timers: ['spice']
+    },
+    {
+      label: 'Aminos + ACV',
+      text:  'Add {{aminos}} and {{acv}}. Stir and let it reduce for 2 minutes. Taste — add a pinch of mushroom umami powder if it needs more depth, but try it without first.',
+      tip:   null,
+      timers: ['reduce']
+    },
+    {
+      label: 'Olives',
+      text:  'Add {{olives}}. Stir, cook 1 minute just to warm them through.',
+      tip:   null,
+      timers: []
+    },
+    {
+      label: 'Cilantro + plate',
+      text:  'Off heat, fold in {{cilantro}} generously. It should look like almost too much. It isn\'t. Serve over rice. Splash of ACV at the table if it needs a lift.',
+      tip:   null,
+      timers: []
+    }
+  ]
 }
 ];
 
