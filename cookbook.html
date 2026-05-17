@@ -1482,6 +1482,271 @@ const RECIPES = [
       timers: []
     }
   ]
+},
+
+{
+  id: 'herby-chicken-shiitake-beans',
+  title: 'Herby Roasted Chicken w/ Schmaltzy Shiitake Beans',
+  style: 'Cast iron sear · oven finish · schmaltz-fried beans',
+  subtitle: 'Roasted mashed orange sweet potato',
+  preheat: '400°F',
+  serves: '1–3',
+  tags: ['chicken', 'weeknight', 'phase 1'],
+  prepTime: '10 min',
+  cookTime: '50 min',
+
+  headnote: `<strong>Sammy-safe throughout.</strong> No fresh garlic or onion — powdered and granular only. Schmaltz is the fat for the beans and mushrooms; it's what makes them taste like something. Get schmaltz from The Local Butcher Shop — don't render at home. Olive oil works if you're out, but schmaltz is the move.<br><br><em>Timeline: potatoes in at T+0, start searing chicken at T+20, oven-finish chicken ~17 min, stovetop beans while chicken rests. Everything lands together.</em>`,
+
+  equipment: [
+    { name: '12-inch cast iron skillet',        note: 'for the stovetop sear — needs to get ripping hot' },
+    { name: 'Large cast iron or Staub everyday pan', note: 'for the shiitake beans while chicken rests' },
+    { name: 'Sheet pan or roasting rack',        note: 'for finishing the chicken in the oven' },
+    { name: 'Sheet pan',                         note: 'for the sweet potatoes — lower rack' },
+    { name: 'Meat thermometer',                  note: 'pull chicken at 165°F' }
+  ],
+
+  mise: [
+    { group: 'Chicken', items: [
+      { byScale: { 1: '3 boneless skinless chicken thighs', 2: '5 boneless skinless chicken thighs', 3: '8 boneless skinless chicken thighs' }, note: 'pat completely dry' },
+      { byScale: { 1: '½ tsp garlic granules',   2: '¾ tsp garlic granules',   3: '1 tsp garlic granules'   } },
+      { byScale: { 1: '½ tsp onion granules',    2: '¾ tsp onion granules',    3: '1 tsp onion granules'    } },
+      { byScale: { 1: '½ tsp dried thyme',       2: '¾ tsp dried thyme',       3: '1 tsp dried thyme'       }, note: 'or herbes de Provence' },
+      { byScale: { 1: '¼ tsp black pepper',      2: '½ tsp black pepper',      3: '½ tsp black pepper'      } },
+      { name: 'Non-iodized sea salt, generous' },
+      { name: 'Avocado oil, for searing' }
+    ]},
+    { group: 'Schmaltzy shiitake green beans', items: [
+      { byScale: { 1: '½ lb green beans, trimmed', 2: '¾ lb green beans, trimmed', 3: '1 lb green beans, trimmed' } },
+      { byScale: { 1: '4 oz fresh shiitakes, stemmed and torn', 2: '6 oz fresh shiitakes, stemmed and torn', 3: '8 oz fresh shiitakes, stemmed and torn' } },
+      { byScale: { 1: '1 tbsp schmaltz',          2: '1½ tbsp schmaltz',         3: '2 tbsp schmaltz'         }, note: 'olive oil if schmaltz unavailable' },
+      { byScale: { 1: '1½ tsp coconut aminos',    2: '2 tsp coconut aminos',     3: '1 tbsp coconut aminos'   } },
+      { name: '¼ tsp garlic granules' },
+      { name: 'Non-iodized sea salt, black pepper' },
+      { name: 'Splash Bragg\'s ACV, finish only' }
+    ]},
+    { group: 'Roasted mashed sweet potato', items: [
+      { byScale: { 1: '1 medium orange sweet potato', 2: '2 medium orange sweet potatoes', 3: '3 medium orange sweet potatoes' }, note: 'halved lengthwise, cut side down' },
+      { byScale: { 1: '1 tbsp olive oil',              2: '2 tbsp olive oil',               3: '3 tbsp olive oil'               }, note: 'or coconut milk for richer mash' },
+      { name: '¼ tsp garlic granules' },
+      { name: 'Non-iodized sea salt' },
+      { name: 'Splash Bragg\'s ACV, optional finish' }
+    ]}
+  ],
+
+  refs: {
+    'thighs':    { display: 'chicken thighs', tips: { 1: '3 boneless skinless, pat dry',    2: '5 boneless skinless, pat dry',    3: '8 boneless skinless, pat dry'    } },
+    'gg':        { display: 'garlic granules', tips: { 1: '½ tsp',                           2: '¾ tsp',                           3: '1 tsp'                            } },
+    'og':        { display: 'onion granules',  tips: { 1: '½ tsp',                           2: '¾ tsp',                           3: '1 tsp'                            } },
+    'thyme-r':   { display: 'thyme',           tips: { 1: '½ tsp',                           2: '¾ tsp',                           3: '1 tsp'                            } },
+    'pepper':    { display: 'black pepper',    tips: { 1: '¼ tsp',                           2: '½ tsp',                           3: '½ tsp'                            } },
+    'avo-oil':   { display: 'avocado oil',     tips: { 1: 'thin coat for sear',              2: 'thin coat for sear',              3: 'thin coat for sear'               } },
+    'beans':     { display: 'green beans',     tips: { 1: '½ lb, trimmed',                   2: '¾ lb, trimmed',                   3: '1 lb, trimmed'                    } },
+    'shiitakes': { display: 'shiitakes',       tips: { 1: '4 oz, stemmed and torn',          2: '6 oz, stemmed and torn',          3: '8 oz, stemmed and torn'           } },
+    'schmaltz':  { display: 'schmaltz',        tips: { 1: '1 tbsp',                          2: '1½ tbsp',                         3: '2 tbsp'                           } },
+    'aminos':    { display: 'coconut aminos',  tips: { 1: '1½ tsp',                          2: '2 tsp',                           3: '1 tbsp'                           } },
+    'acv':       { display: 'ACV',             tips: { 1: 'small splash, finish only',       2: 'small splash, finish only',       3: 'small splash, finish only'        } },
+    'sp':        { display: 'sweet potatoes',  tips: { 1: '1 medium, halved lengthwise',     2: '2 medium, halved lengthwise',     3: '3 medium, halved lengthwise'      } },
+    'sp-fat':    { display: 'olive oil',       tips: { 1: '1 tbsp',                          2: '2 tbsp',                          3: '3 tbsp'                           } }
+  },
+
+  timers: {
+    'sp':           { label: 'Sweet potatoes',  preset: 2700, bell: false },
+    'chicken-wait': { label: 'Start searing in', preset: 1200, bell: true  },
+    'sear-1':       { label: 'Sear side 1',     preset: 120,  bell: true  },
+    'sear-2':       { label: 'Sear side 2',     preset: 120,  bell: true  },
+    'oven':         { label: 'Chicken oven',     preset: 1020, bell: true  },
+    'shiitake':     { label: 'Shiitakes',        preset: 360,  bell: true  },
+    'beans-t':      { label: 'Beans',            preset: 420,  bell: true  }
+  },
+
+  steps: [
+    {
+      label: 'Potatoes in + wait',
+      text:  'Preheat 400°F. Halve {{sp}} lengthwise. Oil cut sides, season with salt. Sheet pan, cut side down, lower rack. Into the oven. Start both timers now — potatoes run the whole cook, the chicken-wait tells you when to start searing.',
+      tip:   'Cut side down is non-negotiable. The caramelized interior is what makes the mash taste good instead of starchy.',
+      timers: ['sp', 'chicken-wait']
+    },
+    {
+      label: 'Season the chicken',
+      text:  'Toss {{thighs}} with a thin coat of avocado oil, {{gg}}, {{og}}, {{thyme-r}}, {{pepper}}, and a generous amount of salt. Coat every surface. Rest at room temp while you wait for the timer.',
+      tip:   null,
+      timers: []
+    },
+    {
+      label: 'Sear — side one',
+      text:  'Cast iron ripping hot with a thin layer of {{avo-oil}}. Thighs in, presentation-side down. Don\'t touch them.',
+      tip:   'Smoke is fine. You\'re building color, not just applying heat.',
+      timers: ['sear-1']
+    },
+    {
+      label: 'Flip + oven',
+      text:  'Flip — second side 2 minutes. Transfer to a sheet pan or rack. Into the 400°F oven. Pull at 165°F internal. Start the oven timer.',
+      tip:   'Skinless thighs cook faster than skin-on. Check at 15 minutes; 17 is usually perfect.',
+      timers: ['sear-2', 'oven']
+    },
+    {
+      label: 'Shiitakes — go alone first',
+      text:  'Chicken is resting. Second pan, medium-high, {{schmaltz}} in. Add {{shiitakes}} — don\'t crowd, don\'t stir. Give them 4–5 minutes until deeply golden. This is where the flavor comes from.',
+      tip:   'Patience. Mushrooms need to dry out and brown before they can taste like anything. Move them too soon and you get steamed rubber.',
+      timers: ['shiitake']
+    },
+    {
+      label: 'Add beans + finish',
+      text:  'Add {{beans}} to the pan. Toss with the schmaltz and mushroom fond. Season with {{aminos}}, garlic granules, salt, and pepper. Cook 5–7 minutes, tossing occasionally — you want some char on the beans, not steamed and soft. Off heat, hit with {{acv}}. Toss.',
+      tip:   'High heat is the point. Don\'t be tempted to lower it.',
+      timers: ['beans-t']
+    },
+    {
+      label: 'Mash + plate',
+      text:  'Pull sweet potatoes — fork goes through with zero resistance. Scoop flesh into a bowl. Mash with {{sp-fat}}, garlic granules, and salt. Taste — a small splash of {{acv}} brightens it if it tastes flat. Plate: thighs, beans and shiitakes alongside, mash.',
+      tip:   null,
+      timers: []
+    }
+  ]
+},
+
+{
+  id: 'baked-cosmic-crisp',
+  title: 'Honey-Baked Cosmic Crisp Apples',
+  style: 'Oven-roasted · honey-cinnamon · warm berry chia compote',
+  subtitle: 'Dessert · no dairy · no coconut · ten minutes of work',
+  preheat: '375°F',
+  serves: '1–3',
+  tags: ['dessert', 'fruit', 'phase 1'],
+  prepTime: '5 min',
+  cookTime: '40 min',
+
+  headnote: `Cosmic Crisp holds its shape under heat — you get tender, jammy flesh instead of apple sauce in a skin. <strong>Timing for after dinner:</strong> apples go in when the main comes out of the oven. They bake while you eat. Compote takes 10 minutes on the stovetop and can be made before or during.<br><br><em>No coconut milk or oil in this recipe. Sammy-safe.</em>`,
+
+  equipment: [
+    { name: '1.5-quart Pyrex casserole or clay pot', note: 'with lid — or cover tightly with foil the first 20 min, then uncover' },
+    { name: '2-quart saucepot',                       note: 'for the berry chia compote' }
+  ],
+
+  mise: [
+    { group: 'Baked apples', items: [
+      { byScale: { 1: '1 Cosmic Crisp apple',  2: '2 Cosmic Crisp apples', 3: '3 Cosmic Crisp apples' }, note: 'cored — leave the bottom intact so honey pools inside the cavity' },
+      { byScale: { 1: '1 tsp raw honey',       2: '2 tsp raw honey',       3: '3 tsp raw honey'       } },
+      { byScale: { 1: '¼ tsp cinnamon',        2: '½ tsp cinnamon',        3: '¾ tsp cinnamon'        } },
+      { name: '2 tbsp water in bottom of dish', note: 'prevents scorching' }
+    ]},
+    { group: 'Berry chia compote', items: [
+      { byScale: { 1: '½ cup blackberries or mixed berries', 2: '¾ cup berries', 3: '1 cup berries' }, note: 'blackberries, raspberries, strawberries, or any mix' },
+      { byScale: { 1: '1 tsp raw honey',                     2: '1½ tsp raw honey',                 3: '2 tsp raw honey'                 } },
+      { byScale: { 1: '1 tsp chia seeds',                    2: '1½ tsp chia seeds',                3: '2 tsp chia seeds'                }, note: 'stir in off heat — thickens as it cools' },
+      { name: 'Pinch non-iodized sea salt' },
+      { name: 'Optional: tiny splash Bragg\'s ACV if it tastes too sweet' }
+    ]}
+  ],
+
+  refs: {
+    'apples':   { display: 'apples',      tips: { 1: '1 Cosmic Crisp, cored',      2: '2 Cosmic Crisp, cored',      3: '3 Cosmic Crisp, cored'       } },
+    'honey-a':  { display: 'honey',       tips: { 1: '1 tsp',                      2: '2 tsp',                      3: '3 tsp'                        } },
+    'cinnamon': { display: 'cinnamon',    tips: { 1: '¼ tsp',                      2: '½ tsp',                      3: '¾ tsp'                        } },
+    'berries':  { display: 'berries',     tips: { 1: '½ cup, blackberries or mix', 2: '¾ cup, berries',             3: '1 cup, berries'               } },
+    'honey-c':  { display: 'honey',       tips: { 1: '1 tsp',                      2: '1½ tsp',                     3: '2 tsp'                        } },
+    'chia':     { display: 'chia seeds',  tips: { 1: '1 tsp',                      2: '1½ tsp',                     3: '2 tsp'                        } }
+  },
+
+  timers: {
+    'apples':   { label: 'Apples',     preset: 2400, bell: true  },
+    'uncover':  { label: 'Uncover',    preset: 1200, bell: true  },
+    'compote':  { label: 'Compote',    preset: 600,  bell: true  },
+    'chia-set': { label: 'Chia sets',  preset: 300,  bell: false }
+  },
+
+  steps: [
+    {
+      label: 'Prep + into oven',
+      text:  'Core {{apples}} with a small spoon or melon baller — leave the bottom intact so the honey stays pooled inside. Mix {{honey-a}} with {{cinnamon}} and spoon into each cavity. 2 tbsp water in the bottom of the Pyrex. Cover with lid or foil. 375°F.',
+      tip:   'Covered for 20 minutes, uncovered for 20 — steam-tender inside, caramelized on top.',
+      timers: ['apples', 'uncover']
+    },
+    {
+      label: 'Compote',
+      text:  '{{berries}}, {{honey-c}}, and a pinch of salt into the saucepot. Medium heat. Stir occasionally until berries burst and the sauce thickens — 8–10 minutes. Off heat: stir in {{chia}}. Let it sit 5 minutes to thicken.',
+      tip:   'Taste before adding chia. If it\'s too sweet, a tiny splash of ACV cuts it. Chia goes in last and off heat — add it to boiling liquid and it clumps.',
+      timers: ['compote', 'chia-set']
+    },
+    {
+      label: 'Uncover + finish',
+      text:  'At the 20-minute mark, pull the lid or foil. Let the tops caramelize the remaining 20 minutes. Done when a skewer goes through with zero resistance and tops are lightly golden.',
+      tip:   null,
+      timers: []
+    },
+    {
+      label: 'Serve',
+      text:  'Apples into bowls. Spoon warm berry chia compote over and around. Serve immediately.',
+      tip:   'Leftover compote keeps 3–4 days refrigerated. It\'s good on the bananaberry faux cream.',
+      timers: []
+    }
+  ]
+},
+
+{
+  id: 'bananaberry-faux-cream',
+  title: 'Bananaberry Faux Cream',
+  style: 'Frozen banana blended · no dairy · no coconut · 3 ingredients',
+  subtitle: 'Freeze bananas 2+ hours ahead · blends in 60 seconds',
+  preheat: null,
+  serves: '1–3',
+  tags: ['dessert', 'fruit', 'phase 1'],
+  prepTime: '5 min + 2 hr freeze',
+  cookTime: '0 min',
+
+  headnote: `<strong>Freeze the bananas now.</strong> This is the only rule. Ripe bananas are essential — spotty skins or riper. Underripe bananas freeze into something bland and slightly grainy. The banana does all the structural work; everything else is flavor and topping.<br><br><em>No coconut, no dairy, no nuts. If you have leftover berry chia compote from the baked apple recipe, it's excellent spooned over the top.</em>`,
+
+  equipment: [
+    { name: 'Beast countertop blender',      note: 'needs torque — the immersion blender won\'t get it smooth enough' },
+    { name: 'Freezer bag or sealed container', note: 'for freezing the banana slices' },
+    { name: 'Tamper',                         note: 'you\'ll need it — this is thick by design' }
+  ],
+
+  mise: [
+    { group: 'Faux cream base', items: [
+      { byScale: { 1: '1 ripe banana, sliced and frozen',    2: '1–2 ripe bananas, sliced and frozen',    3: '2 ripe bananas, sliced and frozen'    }, note: 'must be frozen solid — 2 hours minimum, overnight better' },
+      { byScale: { 1: '½ cup frozen strawberries or fresh raspberries', 2: '¾ cup berries', 3: '1 cup berries' }, note: 'frozen keeps it colder and thicker; fresh works too' },
+      { name: '1–2 tbsp water', note: 'add slowly — just enough to get the blender moving. Less is more.' }
+    ]},
+    { group: 'Toppings (optional)', items: [
+      { name: 'Fresh blackberries, raspberries, or blueberries' },
+      { name: 'Berry chia compote (from baked apple recipe)' },
+      { name: 'Freeze-dried strawberries, crumbled' },
+      { name: 'Chia seeds, scattered' }
+    ]}
+  ],
+
+  refs: {
+    'banana':  { display: 'frozen banana',  tips: { 1: '1 ripe banana, frozen solid',        2: '1–2 ripe bananas, frozen solid',      3: '2 ripe bananas, frozen solid'         } },
+    'berries': { display: 'frozen berries', tips: { 1: '½ cup frozen strawberries or fresh', 2: '¾ cup',                               3: '1 cup'                                } },
+    'liquid':  { display: 'water',          tips: { 1: '1–2 tbsp — add slowly',              2: '1–2 tbsp — add slowly',               3: '2–3 tbsp — add slowly'                } }
+  },
+
+  timers: {
+    'freeze': { label: 'Freeze time', preset: 7200, bell: true },
+    'blend':  { label: 'Blend',       preset: 60,   bell: true }
+  },
+
+  steps: [
+    {
+      label: 'Freeze ahead',
+      text:  'Slice {{banana}} into coins. Into a freezer bag or sealed container in a single layer. Freeze at least 2 hours. Overnight is better. This is the only step that requires planning.',
+      tip:   'Spotty and ripe. A fully yellow banana will blend chalky and bland. When in doubt, go riper.',
+      timers: ['freeze']
+    },
+    {
+      label: 'Blend',
+      text:  'Add frozen {{banana}} and {{berries}} to the blender. Start on low. Add {{liquid}} one tablespoon at a time — you want it barely moving, not pourable. Use the tamper. Increase speed and blend until completely smooth, about 60 seconds.',
+      tip:   'Less liquid is always more. Every extra tablespoon makes it thinner. Push down with the tamper instead of adding water.',
+      timers: ['blend']
+    },
+    {
+      label: 'Serve immediately',
+      text:  'Scoop into bowls. Top with whatever you have — fresh berries, chia compote, chia seeds, freeze-dried strawberries. Eat right away — it melts faster than actual ice cream.',
+      tip:   'If it\'s a little soft from blending, pop the bowls in the freezer for 5 minutes before topping.',
+      timers: []
+    }
+  ]
 }
 ];
 
