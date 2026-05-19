@@ -89,14 +89,6 @@ button { font-family: inherit; cursor: pointer; }
 .card-title { font-size: 16px; font-weight: 600; color: var(--text); line-height: 1.35; }
 .card-style { font-size: 12px; color: var(--muted); font-style: italic; line-height: 1.4; margin-top: 2px; }
 .card-sub { font-size: 12px; color: var(--dim); line-height: 1.4; margin-top: 2px; }
-.card-btn {
-  margin-top: auto; display: block; width: 100%;
-  background: var(--accent); color: #fff;
-  border: none; border-radius: 7px; padding: 9px 16px;
-  font-size: 13px; font-weight: 700; letter-spacing: 0.2px;
-  transition: background .15s;
-}
-.card-btn:hover { background: var(--accent-hi); }
 .card-soon { font-size: 12px; color: var(--dim); margin-top: auto; }
 .card-time {
   display: flex; gap: 12px; flex-wrap: wrap;
@@ -1747,6 +1739,142 @@ const RECIPES = [
       timers: []
     }
   ]
+},
+
+{
+  id: 'ginger-garlic-sirloin-stirfry',
+  title: 'Ginger-Garlic Sirloin Stir Fry',
+  style: 'High-heat cast iron · broccoli two ways · white pepper + sumac',
+  subtitle: 'Charred florets · stem matchsticks · cabbage · mushrooms · jasmine rice',
+  preheat: '425°F',
+  serves: '1–3',
+  tags: ['beef', 'weeknight', 'phase 1'],
+  prepTime: '15 min',
+  cookTime: '35 min',
+
+  headnote: `<strong>Broccoli works two ways here</strong> — florets go into the oven early and come out charred and intense; stems get peeled and cut into thick matchsticks for the stir fry base where they stay crisp and take the sauce differently. The sirloin is thin-sliced, which is an asset: quick sear in batches, set aside, back in at the end.<br><br><em>Sauce is intentionally generous. Keep extra warm broth on the side — if the slurry tightens things too much, a splash brings it back.</em>`,
+
+  equipment: [
+    { name: '12-inch cast iron or Le Creuset everyday pan', note: 'needs to stay screaming hot throughout — don\'t let it cool between steps' },
+    { name: 'Sheet pan',                                    note: 'for the florets at 425°F' },
+    { name: 'Zojirushi rice cooker' },
+    { name: 'Small bowl',                                   note: 'for the sauce — mix before anything hits the stove' },
+    { name: 'Small cup',                                    note: 'for the arrowroot slurry — kept separate from the sauce' }
+  ],
+
+  mise: [
+    { group: 'Rice', items: [
+      { byScale: { 1: '1 cup jasmine rice, rinsed', 2: '2 cups jasmine rice, rinsed', 3: '3 cups jasmine rice, rinsed' } }
+    ]},
+    { group: 'Sirloin', items: [
+      { byScale: { 1: '8 oz sirloin, sliced thin crosswise', 2: '1 lb sirloin, sliced thin crosswise', 3: '1½ lbs sirloin, sliced thin crosswise' } },
+      { name: 'Non-iodized sea salt + white pepper' },
+      { name: 'Avocado oil' }
+    ]},
+    { group: 'Sauce — mix in a bowl before cooking', items: [
+      { byScale: { 1: '1 tbsp coconut aminos',        2: '2 tbsp coconut aminos',        3: '3 tbsp coconut aminos'        } },
+      { byScale: { 1: '6 tbsp bone broth',            2: '¾ cup bone broth',             3: '1 cup bone broth'             }, note: 'keep extra warm on the side' },
+      { byScale: { 1: '½ tsp mushroom umami powder',  2: '1 tsp mushroom umami powder',  3: '1½ tsp mushroom umami powder' } },
+      { byScale: { 1: '¼ tsp ground white pepper',    2: '½ tsp ground white pepper',    3: '¾ tsp ground white pepper'   } },
+      { name: 'Non-iodized sea salt to taste' }
+    ]},
+    { group: 'Arrowroot slurry — keep separate, add last', items: [
+      { byScale: { 1: '1 tsp arrowroot + 1 tbsp cold water', 2: '2 tsp arrowroot + 2 tbsp cold water', 3: '1 tbsp arrowroot + 3 tbsp cold water' }, note: 'whisk until smooth — it settles, stir again before adding' }
+    ]},
+    { group: 'Broccoli', items: [
+      { byScale: { 1: '½ head broccoli — florets separated, stems peeled + thick matchsticks', 2: '1 head broccoli — florets separated, stems peeled + thick matchsticks', 3: '1½ heads broccoli — florets separated, stems peeled + thick matchsticks' } },
+      { name: 'Avocado oil + non-iodized sea salt (florets only)' }
+    ]},
+    { group: 'Stir fry veg & aromatics', items: [
+      { byScale: { 1: '1½ cups green cabbage, thick ribbons', 2: '2–3 cups green cabbage, thick ribbons', 3: '4 cups green cabbage, thick ribbons' } },
+      { byScale: { 1: '2 oz button mushrooms, sliced thick',  2: '4 oz button mushrooms, sliced thick',  3: '6 oz button mushrooms, sliced thick'  } },
+      { byScale: { 1: '½ medium onion, half moons',           2: '1 medium onion, half moons',           3: '1½ onions, half moons'                } },
+      { byScale: { 1: '4 garlic cloves, minced',              2: '8 garlic cloves, minced',              3: '12 garlic cloves, minced'             }, note: 'generous — this is the backbone' },
+      { byScale: { 1: '1-inch fresh ginger, minced',          2: '2-inch fresh ginger, minced',          3: '3-inch fresh ginger, minced'          } }
+    ]},
+    { group: 'Finish', items: [
+      { byScale: { 1: '½ tsp Bragg\'s ACV',       2: '1 tsp Bragg\'s ACV',       3: '1½ tsp Bragg\'s ACV'       }, note: 'off heat only, very end' },
+      { byScale: { 1: '2 green onions, bias-cut', 2: '3–4 green onions, bias-cut', 3: '5–6 green onions, bias-cut' }, note: 'garnish — set aside now' },
+      { name: 'Sumac, generous — finishing only, not cooked in' }
+    ]}
+  ],
+
+  refs: {
+    'rice':        { display: 'jasmine rice',      tips: { 1: '1 cup, rinsed',                    2: '2 cups, rinsed',                    3: '3 cups, rinsed'                    } },
+    'beef':        { display: 'sirloin',           tips: { 1: '8 oz, thin-sliced crosswise',       2: '1 lb, thin-sliced crosswise',       3: '1½ lbs, thin-sliced crosswise'     } },
+    'florets':     { display: 'broccoli florets',  tips: { 1: '½ head, pulled into florets',       2: '1 head, pulled into florets',       3: '1½ heads, pulled into florets'     } },
+    'stems':       { display: 'broccoli stems',    tips: { 1: '½ head worth, thick matchsticks',   2: '1 head worth, thick matchsticks',   3: '1½ heads worth, thick matchsticks' } },
+    'sauce':       { display: 'sauce',             tips: { 1: '1 tbsp aminos · 6 tbsp broth · ½ tsp umami · ¼ tsp white pepper', 2: '2 tbsp aminos · ¾ cup broth · 1 tsp umami · ½ tsp white pepper', 3: '3 tbsp aminos · 1 cup broth · 1½ tsp umami · ¾ tsp white pepper' } },
+    'slurry':      { display: 'arrowroot slurry',  tips: { 1: '1 tsp + 1 tbsp cold water',         2: '2 tsp + 2 tbsp cold water',         3: '1 tbsp + 3 tbsp cold water'        } },
+    'cabbage':     { display: 'cabbage',           tips: { 1: '1½ cups, thick ribbons',            2: '2–3 cups, thick ribbons',           3: '4 cups, thick ribbons'             } },
+    'mush':        { display: 'mushrooms',         tips: { 1: '2 oz, sliced thick',                2: '4 oz, sliced thick',                3: '6 oz, sliced thick'                } },
+    'onion':       { display: 'onion',             tips: { 1: '½ medium, half moons',              2: '1 medium, half moons',              3: '1½, half moons'                    } },
+    'garlic':      { display: 'garlic',            tips: { 1: '4 cloves, minced',                  2: '8 cloves, minced',                  3: '12 cloves, minced'                 } },
+    'ginger':      { display: 'fresh ginger',      tips: { 1: '1-inch, minced',                    2: '2-inch, minced',                    3: '3-inch, minced'                    } },
+    'acv':         { display: 'ACV',               tips: { 1: '½ tsp, off heat only',              2: '1 tsp, off heat only',              3: '1½ tsp, off heat only'             } },
+    'green-onion': { display: 'green onion',       tips: { 1: '2 stalks, bias-cut',                2: '3–4 stalks, bias-cut',              3: '5–6 stalks, bias-cut'              } }
+  },
+
+  timers: {
+    'rice':    { label: 'Rice',            preset: 2100, bell: false },
+    'florets': { label: 'Char florets',    preset: 960,  bell: true  },
+    'beef-s':  { label: 'Beef per side',   preset: 75,   bell: false },
+    'veg':     { label: 'Veg base',        preset: 240,  bell: false },
+    'ag':      { label: 'Garlic + ginger', preset: 60,   bell: false },
+    'cab':     { label: 'Cabbage',         preset: 90,   bell: false },
+    'finish':  { label: 'Sauce + finish',  preset: 90,   bell: true  }
+  },
+
+  steps: [
+    {
+      label: 'Rice + florets into oven',
+      text:  'Start {{rice}} in the Zojirushi. Oven to 425°F. Toss {{florets}} in avocado oil and salt — single layer on a sheet pan, into the oven. You want dark edges, close to burnt. The timer is your floor, not your ceiling.',
+      tip:   'Pull the florets when the tips look like they\'ve been through something. Pulled early is the only mistake.',
+      timers: ['rice', 'florets']
+    },
+    {
+      label: 'Prep + mix sauce',
+      text:  'While the florets char: peel {{stems}} and cut into thick matchsticks. {{cabbage}} into thick ribbons. {{mush}} sliced thick. {{onion}} into half moons. Mince {{garlic}} and {{ginger}} together into one pile. In a small bowl, whisk together {{sauce}}. In a separate small cup, mix {{slurry}} — it settles, stir again before using. Stage everything within arm\'s reach.',
+      tip:   'The active stir fry is about 12 minutes. Everything staged before the first thing hits the pan.',
+      timers: []
+    },
+    {
+      label: 'Sear the beef',
+      text:  'Season {{beef}} with salt and white pepper. Pan screaming hot with avocado oil. Beef in a single layer — batches if needed, don\'t crowd. Don\'t touch it. Flip, second side. Pull to a plate, repeat until done. The beef finishes in the sauce, so pull it just barely cooked through.',
+      tip:   'Thin sirloin goes fast — 60–90 seconds per side. You want color, not gray.',
+      timers: ['beef-s']
+    },
+    {
+      label: 'Veg base',
+      text:  'Same pan, high heat, oil if needed. {{onion}}, {{stems}}, and {{mush}} in. Let them sit before stirring — browning, not steaming. Toss occasionally.',
+      tip:   null,
+      timers: ['veg']
+    },
+    {
+      label: 'Garlic + ginger',
+      text:  'Push veg to the edges. {{garlic}} and {{ginger}} into the center of the pan. Stir constantly — 60 seconds. Fragrant immediately. Pull everything together.',
+      tip:   'Have {{cabbage}} ready to go in right after. Garlic and ginger shouldn\'t sit in a dry pan.',
+      timers: ['ag']
+    },
+    {
+      label: 'Cabbage',
+      text:  '{{cabbage}} in — toss everything together. Let it sit and get some char on the edges before stirring again. Wilted with color, not steamed.',
+      tip:   null,
+      timers: ['cab']
+    },
+    {
+      label: 'Sauce + beef + florets',
+      text:  'Pour in the {{sauce}} — it\'ll sizzle hard. Stir to coat and let it reduce slightly, about 60 seconds. {{beef}} back in, toss to coat. {{florets}} in — fold gently.',
+      tip:   null,
+      timers: ['finish']
+    },
+    {
+      label: 'Slurry + ACV + plate',
+      text:  'Stir the {{slurry}} — it settles — and pour in while tossing. Sauce goes glossy and coats everything in about 30 seconds. Too tight? Splash of extra broth loosens it right back. Off heat: {{acv}} in, final toss. Taste for salt. Over rice — {{green-onion}} and a heavy hand of sumac over the top.',
+      tip:   'Sumac after plating, not in the pan. The tartness stays bright that way.',
+      timers: []
+    }
+  ]
 }
 ];
 
@@ -1774,6 +1902,7 @@ function renderLibrary() {
   RECIPES.forEach(r => {
     const card = document.createElement('div');
     card.className = 'recipe-card';
+    card.onclick = () => loadRecipe(r.id);
     const timeHtml = (r.prepTime || r.cookTime) ? `
       <div class="card-time">
         ${r.prepTime ? `<span class="card-time-item"><span class="card-time-lbl">prep</span> <span class="card-time-val">${r.prepTime}</span></span>` : ''}
@@ -1785,7 +1914,6 @@ function renderLibrary() {
       ${r.style ? `<div class="card-style">${r.style}</div>` : ''}
       <div class="card-sub">${r.subtitle}</div>
       ${timeHtml}
-      <button class="card-btn" onclick="loadRecipe('${r.id}')">cook now</button>
     `;
     grid.appendChild(card);
   });
