@@ -1875,6 +1875,287 @@ const RECIPES = [
       timers: []
     }
   ]
+},
+
+{
+  id: 'celery-chicken-brown-sauce',
+  title: 'Celery chicken in brown sauce',
+  style: 'Velveted chicken breast · shiitakes · Chinese-American brown sauce',
+  subtitle: 'Loads of celery · carrots · toasted sesame · jasmine rice',
+  serves: '1–3',
+  tags: ['chicken', 'weeknight', 'phase 1'],
+  prepTime: '25 min',
+  cookTime: '20 min',
+
+  headnote: `<strong>Cashew chicken without the cashews</strong> — or more precisely, cashew chicken where the shiitakes do more interesting work than cashews ever did. The velveting step (arrowroot + oil marinade on the raw chicken) is what gives you that silky-restaurant texture; don't skip it. Celery is the star, not a supporting player — bias-cut, added last, pulled while it still has snap.<br><br><em>Five spice is the structural move: it's what gives Chinese-American brown sauce its depth without reaching for anything off-protocol. Keep it at ¼ tsp per pound of chicken — it gets loud fast. Sauce volume is intentionally generous. If it tightens too much after the slurry, a splash of extra broth brings it right back.</em>`,
+
+  equipment: [
+    { name: '12-inch cast iron or carbon steel skillet', note: 'needs to stay hot throughout — don\'t let it cool between batches' },
+    { name: 'Zojirushi rice cooker' },
+    { name: 'Small bowl',                                note: 'for the sauce — mix before anything hits the stove' },
+    { name: 'Small cup',                                 note: 'for the arrowroot slurry — kept separate from the sauce' }
+  ],
+
+  mise: [
+    { group: 'Rice', items: [
+      { byScale: { 1: '1 cup jasmine rice, rinsed', 2: '2 cups jasmine rice, rinsed', 3: '3 cups jasmine rice, rinsed' } }
+    ]},
+    { group: 'Velvet marinade — mix, toss with chicken, rest 15 min', items: [
+      { byScale: { 1: '1 lb chicken breast, cut into 1-inch pieces',    2: '1½ lbs chicken breast, cut into 1-inch pieces',    3: '2 lbs chicken breast, cut into 1-inch pieces'    } },
+      { byScale: { 1: '1½ tsp arrowroot starch',                        2: '2 tsp arrowroot starch',                           3: '1 tbsp arrowroot starch'                         } },
+      { byScale: { 1: '1 tbsp avocado oil',                             2: '1½ tbsp avocado oil',                              3: '2 tbsp avocado oil'                              } },
+      { byScale: { 1: '1 tsp coconut aminos',                           2: '1½ tsp coconut aminos',                            3: '2 tsp coconut aminos'                            } },
+      { byScale: { 1: '½ tsp non-iodized sea salt',                     2: '¾ tsp non-iodized sea salt',                       3: '1 tsp non-iodized sea salt'                      } }
+    ]},
+    { group: 'Brown sauce — mix in a bowl before cooking', items: [
+      { byScale: { 1: '4 tbsp coconut aminos',                          2: '6 tbsp coconut aminos',                            3: '½ cup coconut aminos'                            } },
+      { byScale: { 1: '½ cup bone broth',                               2: '¾ cup bone broth',                                 3: '1 cup bone broth'                                }, note: 'keep extra warm on the side' },
+      { byScale: { 1: '1 tsp Bragg\'s ACV',                            2: '1½ tsp Bragg\'s ACV',                              3: '2 tsp Bragg\'s ACV'                              }, note: 'goes in the sauce, not just the finish' },
+      { byScale: { 1: '¼ tsp Chinese five spice',                       2: '⅜ tsp Chinese five spice',                         3: '½ tsp Chinese five spice'                        }, note: 'don\'t exceed — gets loud fast' },
+      { byScale: { 1: '½ tsp ground ginger',                            2: '¾ tsp ground ginger',                              3: '1 tsp ground ginger'                             } }
+    ]},
+    { group: 'Arrowroot slurry — keep separate, add last', items: [
+      { byScale: { 1: '1½ tsp arrowroot + 2 tbsp cold water',          2: '2½ tsp arrowroot + 3 tbsp cold water',             3: '1 tbsp arrowroot + ¼ cup cold water'             }, note: 'whisk until smooth — it settles, stir again before adding' }
+    ]},
+    { group: 'Veg & aromatics', items: [
+      { byScale: { 1: '5 large celery stalks, bias-cut 1-inch',        2: '8 celery stalks, bias-cut 1-inch',                 3: '10–12 celery stalks, bias-cut 1-inch'            }, note: 'the star — added last, keep the snap' },
+      { byScale: { 1: '6–8 shiitakes, stems pulled, torn or sliced',   2: '10–12 shiitakes, stems pulled, torn or sliced',    3: '14–16 shiitakes, stems pulled, torn or sliced'   } },
+      { byScale: { 1: '1 medium carrot, bias-cut thin',                2: '2 medium carrots, bias-cut thin',                  3: '3 medium carrots, bias-cut thin'                 } },
+      { byScale: { 1: '1 medium yellow onion, half-moons',             2: '1½ onions, half-moons',                            3: '2 onions, half-moons'                            } },
+      { byScale: { 1: '4–5 garlic cloves, thin-sliced',                2: '7–8 garlic cloves, thin-sliced',                   3: '10–12 garlic cloves, thin-sliced'                } },
+      { byScale: { 1: '1-inch fresh ginger, minced',                   2: '2-inch fresh ginger, minced',                      3: '3-inch fresh ginger, minced'                     } }
+    ]},
+    { group: 'Finish', items: [
+      { byScale: { 1: '1 tbsp sesame seeds',                           2: '2 tbsp sesame seeds',                              3: '3 tbsp sesame seeds'                             }, note: 'toasted dry in the pan first — set aside' },
+      { byScale: { 1: '2 green onions, bias-cut thin',                 2: '3–4 green onions, bias-cut thin',                  3: '5–6 green onions, bias-cut thin'                 }, note: 'garnish' }
+    ]}
+  ],
+
+  refs: {
+    'rice':    { display: 'jasmine rice',     tips: { 1: '1 cup, rinsed',                              2: '2 cups, rinsed',                             3: '3 cups, rinsed'                              } },
+    'chicken': { display: 'chicken',          tips: { 1: '1 lb, 1-inch pieces, velveted',               2: '1½ lbs, 1-inch pieces, velveted',            3: '2 lbs, 1-inch pieces, velveted'              } },
+    'sauce':   { display: 'sauce',            tips: { 1: '4 tbsp aminos · ½ cup broth · 1 tsp ACV · ¼ tsp five spice · ½ tsp ginger', 2: '6 tbsp aminos · ¾ cup broth · 1½ tsp ACV · ⅜ tsp five spice · ¾ tsp ginger', 3: '½ cup aminos · 1 cup broth · 2 tsp ACV · ½ tsp five spice · 1 tsp ginger' } },
+    'slurry':  { display: 'arrowroot slurry', tips: { 1: '1½ tsp + 2 tbsp cold water',                 2: '2½ tsp + 3 tbsp cold water',                 3: '1 tbsp + ¼ cup cold water'                   } },
+    'celery':  { display: 'celery',           tips: { 1: '5 large stalks, bias-cut 1-inch',             2: '8 stalks, bias-cut 1-inch',                  3: '10–12 stalks, bias-cut 1-inch'               } },
+    'shrooms': { display: 'shiitakes',        tips: { 1: '6–8, stems pulled, torn or sliced',           2: '10–12, stems pulled, torn or sliced',         3: '14–16, stems pulled, torn or sliced'         } },
+    'carrot':  { display: 'carrot',           tips: { 1: '1 medium, bias-cut thin',                     2: '2 medium, bias-cut thin',                    3: '3 medium, bias-cut thin'                     } },
+    'onion':   { display: 'onion',            tips: { 1: '1 medium, half-moons',                        2: '1½ onions, half-moons',                      3: '2 onions, half-moons'                        } },
+    'garlic':  { display: 'garlic',           tips: { 1: '4–5 cloves, thin-sliced',                     2: '7–8 cloves, thin-sliced',                    3: '10–12 cloves, thin-sliced'                   } },
+    'ginger':  { display: 'fresh ginger',     tips: { 1: '1-inch, minced',                              2: '2-inch, minced',                             3: '3-inch, minced'                              } },
+    'sesame':  { display: 'sesame seeds',     tips: { 1: '1 tbsp, toasted',                             2: '2 tbsp, toasted',                            3: '3 tbsp, toasted'                             } },
+    'gon':     { display: 'green onion',      tips: { 1: '2 stalks, bias-cut thin',                     2: '3–4 stalks, bias-cut thin',                  3: '5–6 stalks, bias-cut thin'                   } }
+  },
+
+  timers: {
+    'rice':      { label: 'Rice',             preset: 2100, bell: false },
+    'velvet':    { label: 'Velvet rest',       preset: 900,  bell: true  },
+    'sesame':    { label: 'Sesame seeds',      preset: 120,  bell: true  },
+    'chicken-s': { label: 'Chicken per side',  preset: 180,  bell: false },
+    'aromatics': { label: 'Aromatics',         preset: 30,   bell: false },
+    'veg':       { label: 'Onion + carrot',    preset: 180,  bell: false },
+    'shrooms':   { label: 'Shiitakes',         preset: 120,  bell: false },
+    'celery':    { label: 'Celery',            preset: 60,   bell: true  },
+    'sauce-t':   { label: 'Sauce + chicken',   preset: 90,   bell: false }
+  },
+
+  steps: [
+    {
+      label: 'Velvet the chicken + rice',
+      text:  'Cut {{chicken}} into 1-inch pieces. Toss with the arrowroot, avocado oil, coconut aminos, and salt until every piece is coated. Set aside to rest at room temp. Start {{rice}} in the Zojirushi.',
+      tip:   'The velvet marinade is what gives you the silky-restaurant texture. Don\'t skip the rest — 15 minutes minimum.',
+      timers: ['rice', 'velvet']
+    },
+    {
+      label: 'Mix sauce + prep veg',
+      text:  'In a small bowl, whisk together {{sauce}}. In a separate cup, mix {{slurry}} — it settles, stir again right before using. Prep all veg: {{celery}} on the bias, {{shrooms}} stems pulled and torn, {{carrot}} thin bias-cuts, {{onion}} into half-moons. Mince {{garlic}} and {{ginger}} together into one pile. Stage everything within arm\'s reach.',
+      tip:   'Everything staged before the chicken hits the pan. The active cook is 12–15 minutes and moves fast.',
+      timers: []
+    },
+    {
+      label: 'Toast sesame seeds',
+      text:  'Dry pan over medium. {{sesame}} in — shake or stir constantly until golden and fragrant. Set aside.',
+      tip:   'They go from golden to burnt inside 30 seconds. Off the heat the moment they\'re there.',
+      timers: ['sesame']
+    },
+    {
+      label: 'Sear the chicken',
+      text:  'Ripping hot pan with avocado oil. {{chicken}} in a single layer — batches if needed, don\'t crowd. Don\'t touch it. 3 minutes, flip, second side, pull to a plate while still slightly underdone. It finishes in the sauce.',
+      tip:   'Color is the point. Crowding = steaming. If the pan drops temp between batches, let it recover.',
+      timers: ['chicken-s']
+    },
+    {
+      label: 'Aromatics',
+      text:  'Same pan, high heat, oil if needed. {{garlic}} and {{ginger}} in — stir constantly, 30 seconds.',
+      tip:   'Have {{onion}} ready to go in right after. Garlic and ginger shouldn\'t sit in a dry hot pan.',
+      timers: ['aromatics']
+    },
+    {
+      label: 'Onion + carrot',
+      text:  '{{onion}} and {{carrot}} in. Let them sit and get color before stirring. 3 minutes.',
+      tip:   null,
+      timers: ['veg']
+    },
+    {
+      label: 'Shiitakes',
+      text:  '{{shrooms}} in. Let them sit — you want edges that have been through something. 2 minutes.',
+      tip:   null,
+      timers: ['shrooms']
+    },
+    {
+      label: 'Celery',
+      text:  '{{celery}} in — toss everything together. 1 minute. You\'re keeping the snap.',
+      tip:   'One minute and out. Limp celery is the only real mistake in this dish.',
+      timers: ['celery']
+    },
+    {
+      label: 'Chicken back + sauce + slurry',
+      text:  '{{chicken}} back in. Pour in {{sauce}} — it\'ll sizzle. Stir to coat, reduce slightly, 60–90 seconds. Stir the {{slurry}} and pour in while tossing — sauce goes glossy and clings in about 30 seconds. Too tight? Splash of extra broth. Taste for salt.',
+      tip:   'Sauce should coat everything and look glossy, not gloopy. Err toward saucy — it tightens as it sits.',
+      timers: ['sauce-t']
+    },
+    {
+      label: 'Plate',
+      text:  'Over rice. {{sesame}} scattered over, {{gon}} on top.',
+      tip:   null,
+      timers: []
+    }
+  ]
+}
+,
+
+{
+  id: 'charcoal-kofta',
+  title: 'Charcoal-grilled beef kofta',
+  style: 'Solo Stove charcoal · sumac-finished · ACV chimichurri',
+  subtitle: 'Jasmine rice in bone broth · charred cabbage wedges',
+  preheat: null,
+  serves: '1–3',
+  tags: ['beef', 'weeknight', 'grill', 'phase 1'],
+  prepTime: '15 min',
+  cookTime: '25 min',
+
+  headnote: `Kofta wants direct grate contact — no grilling basket, no foil. The whole point is the char. Skewers help with turning but you can grill free-form if you shape them flat enough. Grated onion in the mix (not chopped) steams from the inside while the outside crusts — don't skip it. <strong>Start the coals before you do anything else.</strong> You need fully ashed-over coals, not a roaring fire.`,
+
+  equipment: [
+    { name: 'Solo Stove charcoal grill',    note: 'fully ashed-over coals — not a roaring fire' },
+    { name: 'Skewers',                      note: 'metal or bamboo soaked 30 min; or skip and grill flat' },
+    { name: 'Zojirushi rice cooker' },
+    { name: 'Beast blender or food processor', note: 'for the chimichurri — or chop by hand' },
+    { name: 'Box grater',                   note: 'for the onion in the kofta mix' },
+    { name: 'Meat thermometer',             note: 'optional — pull at 160°F for ground beef' }
+  ],
+
+  mise: [
+    { group: 'Kofta', items: [
+      { byScale: { 1: '1 lb ground beef',    2: '2 lbs ground beef',    3: '3 lbs ground beef'    }, note: 'room temp before grilling' },
+      { byScale: { 1: '3 tbsp grated yellow onion', 2: '6 tbsp grated yellow onion', 3: '½ cup grated yellow onion' }, note: 'grate on box grater — moisture is the point' },
+      { byScale: { 1: '3 cloves garlic, minced fine', 2: '5 cloves garlic, minced fine', 3: '7 cloves garlic, minced fine' } },
+      { byScale: { 1: '1 tsp cumin',         2: '2 tsp cumin',          3: '1 tbsp cumin'         } },
+      { byScale: { 1: '1 tsp coriander',     2: '2 tsp coriander',      3: '1 tbsp coriander'     } },
+      { byScale: { 1: '½ tsp black pepper',  2: '1 tsp black pepper',   3: '1½ tsp black pepper'  } },
+      { byScale: { 1: '¼ tsp cinnamon',      2: '½ tsp cinnamon',       3: '¾ tsp cinnamon'       } },
+      { byScale: { 1: '¼ cup fresh parsley, roughly chopped', 2: '½ cup fresh parsley', 3: '¾ cup fresh parsley' } },
+      { byScale: { 1: '1 tsp non-iodized sea salt', 2: '2 tsp non-iodized sea salt', 3: '1 tbsp non-iodized sea salt' } },
+      { name: 'Sumac, for finishing — generous' }
+    ]},
+    { group: 'ACV chimichurri', items: [
+      { byScale: { 1: '½ cup fresh parsley, packed', 2: '1 cup fresh parsley', 3: '1½ cups fresh parsley' } },
+      { byScale: { 1: '2 tbsp fresh mint',   2: '¼ cup fresh mint',     3: '6 tbsp fresh mint'    } },
+      { byScale: { 1: '1 clove garlic',      2: '2 cloves garlic',      3: '3 cloves garlic'      } },
+      { byScale: { 1: '1 tbsp Bragg\'s ACV', 2: '2 tbsp Bragg\'s ACV',  3: '3 tbsp Bragg\'s ACV'  }, note: 'start here — taste and adjust' },
+      { byScale: { 1: '3 tbsp olive oil',    2: '5 tbsp olive oil',     3: '½ cup olive oil'      } },
+      { name: 'Non-iodized sea salt to taste' }
+    ]},
+    { group: 'Charred cabbage', items: [
+      { byScale: { 1: '¼ head green cabbage', 2: '½ head green cabbage', 3: '1 head green cabbage' }, note: 'cut into wedges through the core so they hold together' },
+      { name: 'Olive oil + non-iodized sea salt' },
+      { name: 'Bragg\'s ACV, to finish' }
+    ]},
+    { group: 'Rice', items: [
+      { byScale: { 1: '1 cup jasmine or basmati, rinsed', 2: '2 cups jasmine or basmati, rinsed', 3: '3 cups jasmine or basmati, rinsed' } },
+      { byScale: { 1: '1¼ cups bone broth',  2: '2½ cups bone broth',   3: '3¾ cups bone broth'   }, note: 'instead of water — check label for natural flavor' }
+    ]}
+  ],
+
+  refs: {
+    'beef':       { display: 'ground beef',    tips: { 1: '1 lb',                   2: '2 lbs',                  3: '3 lbs'                   } },
+    'onion-g':    { display: 'grated onion',   tips: { 1: '3 tbsp grated',          2: '6 tbsp grated',          3: '½ cup grated'            } },
+    'garlic-k':   { display: 'garlic',         tips: { 1: '3 cloves, minced',       2: '5 cloves, minced',       3: '7 cloves, minced'        } },
+    'cumin':      { display: 'cumin',          tips: { 1: '1 tsp',                  2: '2 tsp',                  3: '1 tbsp'                  } },
+    'coriander':  { display: 'coriander',      tips: { 1: '1 tsp',                  2: '2 tsp',                  3: '1 tbsp'                  } },
+    'pepper':     { display: 'black pepper',   tips: { 1: '½ tsp',                  2: '1 tsp',                  3: '1½ tsp'                  } },
+    'cinnamon':   { display: 'cinnamon',       tips: { 1: '¼ tsp',                  2: '½ tsp',                  3: '¾ tsp'                   } },
+    'parsley-k':  { display: 'parsley',        tips: { 1: '¼ cup, roughly chopped', 2: '½ cup, roughly chopped', 3: '¾ cup, roughly chopped'  } },
+    'salt-k':     { display: 'sea salt',       tips: { 1: '1 tsp',                  2: '2 tsp',                  3: '1 tbsp'                  } },
+    'parsley-s':  { display: 'parsley',        tips: { 1: '½ cup packed',           2: '1 cup packed',           3: '1½ cups packed'          } },
+    'mint-s':     { display: 'mint',           tips: { 1: '2 tbsp',                 2: '¼ cup',                  3: '6 tbsp'                  } },
+    'garlic-s':   { display: 'garlic',         tips: { 1: '1 clove',                2: '2 cloves',               3: '3 cloves'                } },
+    'acv-s':      { display: 'ACV',            tips: { 1: '1 tbsp',                 2: '2 tbsp',                 3: '3 tbsp'                  } },
+    'oil-s':      { display: 'olive oil',      tips: { 1: '3 tbsp',                 2: '5 tbsp',                 3: '½ cup'                   } },
+    'cabbage':    { display: 'cabbage wedges', tips: { 1: '¼ head in wedges',       2: '½ head in wedges',       3: '1 head in wedges'        } },
+    'oil-c':      { display: 'olive oil',      tips: { 1: 'generous coat',          2: 'generous coat',          3: 'generous coat'           } },
+    'rice':       { display: 'rice',           tips: { 1: '1 cup rinsed',           2: '2 cups rinsed',          3: '3 cups rinsed'           } },
+    'broth-r':    { display: 'bone broth',     tips: { 1: '1¼ cups',               2: '2½ cups',                3: '3¾ cups'                 } }
+  },
+
+  timers: {
+    'coals':    { label: 'Coals ready',   preset: 1500, bell: true  },
+    'cabbage1': { label: 'Cabbage — flip', preset: 300, bell: true  },
+    'cabbage2': { label: 'Cabbage — pull', preset: 300, bell: true  },
+    'kofta1':   { label: 'Kofta — flip',  preset: 240,  bell: true  },
+    'kofta2':   { label: 'Kofta — pull',  preset: 210,  bell: true  }
+  },
+
+  steps: [
+    {
+      label: 'Light coals + start rice',
+      text:  'Light the Solo Stove now. Start {{rice}} in the Zojirushi using {{broth-r}} instead of water. Coals need 20–25 minutes to ash over fully. Don\'t rush them.',
+      tip:   'Fully ashed coals = even heat and no flare-ups. A roaring fire is the wrong call for kofta.',
+      timers: ['coals']
+    },
+    {
+      label: 'Mix kofta',
+      text:  'Combine {{beef}}, {{onion-g}}, {{garlic-k}}, {{cumin}}, {{coriander}}, {{pepper}}, {{cinnamon}}, {{parsley-k}}, and {{salt-k}} in a bowl. Mix with your hands until just combined — don\'t overwork it or it gets dense. Form into 4–5 elongated ovals and thread onto skewers. Refrigerate until coals are ready.',
+      tip:   'The grated onion makes the mix tacky — that\'s what holds the kofta on the skewer. Don\'t sub chopped.',
+      timers: []
+    },
+    {
+      label: 'Make chimichurri',
+      text:  'Blend or pulse {{parsley-s}}, {{mint-s}}, {{garlic-s}}, {{acv-s}}, {{oil-s}}, and a pinch of salt. Chunky is fine — this isn\'t a smooth sauce. Taste and adjust ACV. Should be bright and a little sharp.',
+      tip:   'The mint and parsley are both in the kofta too — the sauce echoes and amplifies. Don\'t skip the mint.',
+      timers: []
+    },
+    {
+      label: 'Prep + grill cabbage',
+      text:  'Cut {{cabbage}} into wedges through the core. Brush with {{oil-c}}, season with salt. Grates should be hot — lay wedges flat. You want real char, not marks. Don\'t move them.',
+      tip:   'If you\'re second-guessing whether it\'s charred enough, it isn\'t.',
+      timers: ['cabbage1']
+    },
+    {
+      label: 'Flip cabbage',
+      text:  'Flip cabbage wedges. Second side — same deal. Pull when both sides have deep char and the interior has softened slightly. Hit immediately with a splash of ACV off the grill.',
+      tip:   null,
+      timers: ['cabbage2']
+    },
+    {
+      label: 'Grill kofta — side one',
+      text:  'Lay skewers on the hottest part of the grates. Don\'t touch them. You want a dark, set crust before you flip — if they stick, they\'re not ready.',
+      tip:   'Ground beef on skewers can be fragile until the outside sets. Patience here.',
+      timers: ['kofta1']
+    },
+    {
+      label: 'Flip + finish',
+      text:  'Flip kofta. Second side — 3–4 min. Done when firm to a poke and dark all over. Pull at 160°F if using a thermometer. Rest 2 min off the grill. Dust generously with sumac the moment they come off.',
+      tip:   'Sumac on contact while hot — the residual heat opens it up and you get that tart, wine-y note that replaces what lemon would have done.',
+      timers: ['kofta2']
+    },
+    {
+      label: 'Plate',
+      text:  'Rice base, kofta over top, charred cabbage alongside. Chimichurri in a bowl next to it — drag the kofta through it, don\'t pour it over.',
+      tip:   null,
+      timers: []
+    }
+  ]
 }
 ];
 
