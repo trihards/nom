@@ -2102,8 +2102,8 @@ const RECIPES = [
     'coals':    { label: 'Coals ready',   preset: 1500, bell: true  },
     'cabbage1': { label: 'Cabbage — flip', preset: 300, bell: true  },
     'cabbage2': { label: 'Cabbage — pull', preset: 300, bell: true  },
-    'kofta1':   { label: 'Kofta — flip',  preset: 240,  bell: true  },
-    'kofta2':   { label: 'Kofta — pull',  preset: 210,  bell: true  }
+    'kofta1':   { label: 'Kofta — flip',  preset: 180,  bell: true  },
+    'kofta2':   { label: 'Kofta — pull',  preset: 180,  bell: true  }
   },
 
   steps: [
@@ -2139,8 +2139,8 @@ const RECIPES = [
     },
     {
       label: 'Grill kofta — side one',
-      text:  'Lay skewers on the hottest part of the grates. Don\'t touch them. You want a dark, set crust before you flip — if they stick, they\'re not ready.',
-      tip:   'Ground beef on skewers can be fragile until the outside sets. Patience here.',
+      text:  'Oil the grates first: fold a paper towel into a pad, soak in avocado oil, wipe the grates with tongs right before the kofta goes down. Then lay skewers on. Don\'t touch them — a crust will form and release cleanly. If they\'re sticking, they\'re not ready.',
+      tip:   'Solo Stove runs hot. Watch the clock — 3 min is usually enough, 4 is too many.',
       timers: ['kofta1']
     },
     {
@@ -2152,6 +2152,156 @@ const RECIPES = [
     {
       label: 'Plate',
       text:  'Rice base, kofta over top, charred cabbage alongside. Chimichurri in a bowl next to it — drag the kofta through it, don\'t pour it over.',
+      tip:   null,
+      timers: []
+    }
+  ]
+},
+
+{
+  id: 'lamb-rib-family-feast',
+  title: 'Lamb rib chops — family feast',
+  style: 'Fat cap rendering · cast iron sear · improved pan sauce',
+  subtitle: 'Blueberry-mint-rosemary sauce · roasted carrots + charred garlic scapes · jasmine rice',
+  variants: [
+    {
+      name: 'Grill version',
+      notes: 'Set up 2-zone fire. Fat cap toward direct heat first, 2–3 min to render. Then lay flat on direct heat: 2–3 min per side. Pull at 130–135°F, rest 5 min. Pan sauce on the stovetop: 2 tbsp bone broth + minced garlic in a small saucepan, reduce to coat a spoon, then whisk in 1 tbsp ACV and 2 tbsp blueberry sauce. The fond won\'t be there but the sequence still holds — reduce first, then combine.'
+    }
+  ],
+  preheat: '425°F',
+  serves: '2–6',
+  tags: ['lamb', 'weekend', 'phase 1', 'family'],
+  prepTime: '20 min',
+  cookTime: '45 min',
+
+  headnote: `<strong>The family format of the loin chop recipe.</strong> Rib chops are the more dramatic cut for a group — more fat, more visual presence, and more forgiving when you're juggling sides. The core technique difference from loin chops is the fat cap: stand them on their fatty edge first and render 2–3 minutes before the flat sear. That rendered fat also bastes the chops throughout the cook.<br><br><strong>Pan sauce fix built in.</strong> The original loin chop version had a greasy emulsification problem. The fix is here in step 7: reduce the broth down hard before adding anything else. When it coats a spoon, then you add the ACV and the blueberry binder. The sequence matters more than anything else in that step — reduce first, combine second.<br><br><em>Garlic scapes go into the oven alongside the carrots for the last 8–10 minutes — tips char, middles get sweet. A couple can go into the pan sauce while it reduces; the rest serve as a side.</em>`,
+
+  equipment: [
+    { name: '12-inch cast iron skillet',    note: 'essential — rib chops need the thermal mass' },
+    { name: 'Small saucepan',              note: 'for the blueberry sauce' },
+    { name: 'Two sheet pans',              note: 'one for carrots, one for garlic scapes — or both on one pan if you have room' },
+    { name: 'Zojirushi rice cooker' },
+    { name: 'Meat thermometer',            note: 'pull at 130–135°F for medium-rare' },
+    { name: 'Large salad bowl' }
+  ],
+
+  mise: [
+    { group: 'Lamb rib chops', items: [
+      { byScale: { 1: '~¾ lb lamb rib chops (1 pack)', 2: '~1.5 lbs lamb rib chops (2 packs)', 3: '~2.25 lbs lamb rib chops (3 packs)' }, note: 'pat aggressively dry — cold-water-thawed chops hold extra surface moisture; press hard with paper towels' },
+      { name: 'Non-iodized sea salt, very generous' },
+      { name: 'Black pepper' },
+      { name: 'Avocado oil' }
+    ]},
+    { group: 'Blueberry-mint-rosemary sauce', items: [
+      { byScale: { 1: '¾ cup blueberries',    2: '1½ cups blueberries',    3: '2 cups blueberries'    } },
+      { byScale: { 1: '1½ tbsp Bragg\'s ACV', 2: '3 tbsp Bragg\'s ACV',   3: '4 tbsp Bragg\'s ACV'  } },
+      { byScale: { 1: '1 tbsp bone broth',    2: '2 tbsp bone broth',      3: '3 tbsp bone broth'     } },
+      { name: '1–2 sprigs fresh rosemary' },
+      { byScale: { 1: '1 tsp fresh mint, chiffonade', 2: '2 tsp fresh mint, chiffonade', 3: '1 tbsp fresh mint, chiffonade' } },
+      { name: 'Salt to taste' }
+    ]},
+    { group: 'Roasted carrots', items: [
+      { byScale: { 1: '3–4 large carrots, bias-cut thick', 2: '5–6 large carrots, bias-cut thick', 3: '8 large carrots, bias-cut thick' } },
+      { name: 'Avocado oil + non-iodized sea salt' }
+    ]},
+    { group: 'Garlic scapes', items: [
+      { byScale: { 1: 'A few garlic scapes', 2: '5–6 garlic scapes', 3: '8–10 garlic scapes' }, note: 'add to the oven at the 15-min carrot mark — last 8–10 min only' },
+      { name: 'Light drizzle avocado oil + salt' }
+    ]},
+    { group: 'Pan sauce', items: [
+      { byScale: { 1: '⅓ cup bone broth',  2: '½ cup bone broth',   3: '¾ cup bone broth'  } },
+      { byScale: { 1: '2 garlic scapes, minced (or 2 cloves)', 2: '3 garlic scapes, minced (or 3 cloves)', 3: '4 garlic scapes, minced (or 4 cloves)' } },
+      { byScale: { 1: '1 tbsp Bragg\'s ACV', 2: '1½ tbsp Bragg\'s ACV', 3: '2 tbsp Bragg\'s ACV' }, note: 'added after broth reduces — sequence matters' },
+      { byScale: { 1: '1 tbsp blueberry sauce', 2: '2 tbsp blueberry sauce', 3: '3 tbsp blueberry sauce' }, note: 'from the sauce above — the emulsification binder' }
+    ]},
+    { group: 'Jasmine rice', items: [
+      { byScale: { 1: '1 cup jasmine rice, rinsed', 2: '2 cups jasmine rice, rinsed', 3: '3 cups jasmine rice, rinsed' } }
+    ]},
+    { group: 'Green salad', items: [
+      { byScale: { 1: '2 large handfuls arugula', 2: '4 large handfuls arugula', 3: '6 large handfuls arugula' } },
+      { name: 'Cucumber, thinly sliced' },
+      { name: 'Bragg\'s ACV + olive oil, for dressing' }
+    ]}
+  ],
+
+  refs: {
+    'lamb':        { display: 'lamb rib chops',          tips: { 1: '~¾ lb (1 pack)',    2: '~1.5 lbs (2 packs)',  3: '~2.25 lbs (3 packs)'  } },
+    'blueberries': { display: 'blueberries',             tips: { 1: '¾ cup',             2: '1½ cups',             3: '2 cups'                } },
+    'acv-sauce':   { display: 'ACV (sauce)',             tips: { 1: '1½ tbsp',           2: '3 tbsp',              3: '4 tbsp'                } },
+    'broth-sauce': { display: 'bone broth (sauce)',      tips: { 1: '1 tbsp',            2: '2 tbsp',              3: '3 tbsp'                } },
+    'mint':        { display: 'mint',                    tips: { 1: '1 tsp chiffonade',  2: '2 tsp chiffonade',    3: '1 tbsp chiffonade'     } },
+    'carrots':     { display: 'carrots',                 tips: { 1: '3–4 large, bias-cut thick', 2: '5–6 large, bias-cut thick', 3: '8 large, bias-cut thick' } },
+    'scapes':      { display: 'garlic scapes',           tips: { 1: 'a few',             2: '5–6',                 3: '8–10'                  } },
+    'broth-ps':    { display: 'bone broth (pan sauce)',  tips: { 1: '⅓ cup',             2: '½ cup',               3: '¾ cup'                 } },
+    'garlic-ps':   { display: 'garlic scapes or cloves', tips: { 1: '2, minced',         2: '3, minced',           3: '4, minced'             } },
+    'acv-ps':      { display: 'ACV (pan sauce)',         tips: { 1: '1 tbsp',            2: '1½ tbsp',             3: '2 tbsp'                } },
+    'bb-binder':   { display: 'blueberry sauce',         tips: { 1: '1 tbsp',            2: '2 tbsp',              3: '3 tbsp'                } },
+    'rice':        { display: 'jasmine rice',            tips: { 1: '1 cup, rinsed',     2: '2 cups, rinsed',      3: '3 cups, rinsed'        } },
+    'avo-oil':     { display: 'avocado oil',             tips: { 1: 'thin coat',         2: 'thin coat',           3: 'thin coat'             } },
+    'avo-toss':    { display: 'avocado oil',             tips: { 1: 'generous drizzle',  2: 'generous drizzle',    3: 'generous drizzle'      } },
+    'arugula':     { display: 'arugula',                 tips: { 1: '2 large handfuls',  2: '4 large handfuls',    3: '6 large handfuls'      } }
+  },
+
+  timers: {
+    'rice':        { label: 'Rice',          preset: 2100, bell: false },
+    'sauce':       { label: 'Berry sauce',   preset: 720,  bell: false },
+    'carrots':     { label: 'Carrots',       preset: 1500, bell: false },
+    'scapes-wait': { label: 'Add scapes',    preset: 900,  bell: true  },
+    'scapes':      { label: 'Scapes',        preset: 540,  bell: false },
+    'fat-cap':     { label: 'Fat cap',       preset: 150,  bell: false },
+    'l-s1':        { label: 'Side 1',        preset: 150,  bell: false },
+    'l-s2':        { label: 'Side 2',        preset: 120,  bell: false },
+    'rest':        { label: 'Rest lamb',     preset: 300,  bell: true  },
+    'ps-reduce':   { label: 'Pan sauce',     preset: 120,  bell: false }
+  },
+
+  steps: [
+    {
+      label: 'Rice + blueberry sauce',
+      text:  'Start {{rice}} in the Zojirushi. {{blueberries}}, {{acv-sauce}}, {{broth-sauce}}, and rosemary sprig into a small saucepan over medium heat. Smash berries as they soften, reduce until jammy — 10–12 min. Off heat: pull the rosemary, stir in {{mint}}. Keep warm on low.',
+      tip:   'Make this first — it holds for 30–40 min with zero degradation, and you\'ll need 2 tbsp of it later as the pan sauce binder.',
+      timers: ['rice', 'sauce']
+    },
+    {
+      label: 'Carrots into oven',
+      text:  'Toss {{carrots}} in {{avo-toss}} and salt. Sheet pan into the 425°F oven. Bias-cut thick — you want caramelized edges, not steamed. Start both timers now.',
+      tip:   null,
+      timers: ['carrots', 'scapes-wait']
+    },
+    {
+      label: 'Season the lamb',
+      text:  'Pat {{lamb}} completely dry — press hard with paper towels. Season very generously on both sides with salt and black pepper. Set on a plate and rest at room temp while you wait for the scapes timer.',
+      tip:   'If these were cold-water thawed, they hold more surface moisture than fridge-thawed chops. Be aggressive with the drying.',
+      timers: []
+    },
+    {
+      label: 'Garlic scapes into oven',
+      text:  'Toss {{scapes}} with a light drizzle of avocado oil and salt. Add to the carrot sheet pan or a second pan. 8–10 more minutes — tips will char and curl. Pull them with the carrots.',
+      tip:   null,
+      timers: ['scapes']
+    },
+    {
+      label: 'Sear — fat cap first',
+      text:  'Cast iron ripping hot with a thin coat of {{avo-oil}}. Stand chops on their fat edge — lean them against each other or hold with tongs. Render the fat cap 2–3 minutes until the edge is golden and fat has pooled in the pan.',
+      tip:   'This step is the whole difference between rib and loin chops. The rendered fat bastes the sear from here forward. Don\'t skip it.',
+      timers: ['fat-cap']
+    },
+    {
+      label: 'Lay flat — side one and two',
+      text:  'Lay chops flat in the rendered fat. Side one, do not touch them. Flip — second side. Pull at 130–135°F for medium-rare. Rest on a plate, tent loosely.',
+      tip:   'Push past where you think the crust is done. Dark, not just brown.',
+      timers: ['l-s1', 'l-s2', 'rest']
+    },
+    {
+      label: 'Pan sauce — the emulsification fix',
+      text:  'Pour off most of the fat, leave 1–2 tbsp. Medium heat. Add {{garlic-ps}} — 30 seconds. Pour in {{broth-ps}}, scrape up all the fond. Reduce hard until it coats a spoon — this is the critical step. Then and only then: add {{acv-ps}} and {{bb-binder}}. Whisk constantly at moderate heat until glossy.',
+      tip:   'The greasy pan sauce problem comes from liquid meeting liquid. The fix: reduce the broth to almost a glaze first. The blueberry solids act as a binder once it concentrates. Sequence matters more than anything else here.',
+      timers: ['ps-reduce']
+    },
+    {
+      label: 'Salad + plate',
+      text:  'Dress {{arugula}} and cucumber with ACV and olive oil. Pull carrots and scapes. Plate: rice → chops → blueberry sauce over top → pan sauce alongside or poured → carrots and scapes on the side → salad.',
       tip:   null,
       timers: []
     }
