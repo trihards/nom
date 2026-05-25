@@ -2306,6 +2306,156 @@ const RECIPES = [
       timers: []
     }
   ]
+},
+
+{
+  id: 'party-bb',
+  title: 'Party B&B — Vegan Brown Sauce',
+  style: 'One sauce · two dishes · sirloin + flat iron · 450° broccoli',
+  subtitle: 'Seared beef & charred broccoli · jasmine rice',
+  preheat: '450°F',
+  serves: '2–8',
+  tags: ['beef', 'weekend', 'batch', 'phase 1'],
+  prepTime: '20 min',
+  cookTime: '45 min',
+
+  headnote: `<strong>One sauce base, split at the end</strong> — half goes on the charred broccoli (fully vegan, celiac-friendly), half goes on the seared beef. The sauce is vegan throughout; keeping it that way lets the beef flavor stand on its own rather than competing with bone broth. <strong>Flat iron is the more tender cut</strong> and takes the velvet better — slice both cuts the same way and treat them identically.<br><br><em>Sauce tightens fast after the arrowroot goes in. If either dish needs to hold, thin with a splash of water and rewarm gently. No sesame oil (seed oil) — toasted sesame seeds get you the aroma gesture without it.</em>`,
+
+  equipment: [
+    { name: 'Zojirushi rice cooker' },
+    { name: '2–3 sheet pans',                          note: 'for the broccoli — don\'t crowd or it steams instead of chars' },
+    { name: '12-inch cast iron skillet',               note: 'for the beef sear — needs thermal mass for 2+ lbs in batches' },
+    { name: 'Large Le Creuset or Staub everyday pan',  note: 'for building and splitting the sauce' },
+    { name: 'Small bowl',                              note: 'for sauce liquid — mix before cooking' },
+    { name: 'Small cup',                               note: 'for arrowroot slurry — kept separate, added last' },
+    { name: 'Sharp knife',                             note: 'flat iron grain can shift almost 90° mid-cut — stay vigilant' }
+  ],
+
+  mise: [
+    { group: 'Rice', items: [
+      { byScale: { 1: '2 cups jasmine rice, rinsed', 2: '3 cups jasmine rice, rinsed', 3: '3 cups jasmine rice, rinsed' }, note: 'scale 3 is Zojirushi max — make ahead or do two batches for very large parties' }
+    ]},
+    { group: 'Vegan brown sauce aromatics — bloomed in pan', items: [
+      { byScale: { 1: '5 garlic cloves, minced',          2: '6 garlic cloves, minced',          3: '8 garlic cloves, minced'          } },
+      { byScale: { 1: '1-inch fresh ginger, grated',      2: '1½-inch fresh ginger, grated',     3: '2-inch fresh ginger, grated'      } },
+      { name: 'Avocado oil' }
+    ]},
+    { group: 'Vegan brown sauce liquid — mix in a bowl before cooking', items: [
+      { byScale: { 1: '½ cup coconut aminos',             2: '¾ cup coconut aminos',             3: '1 cup coconut aminos'             } },
+      { byScale: { 1: '1¾ cups water',                   2: '2½ cups water',                    3: '3½ cups water'                    } },
+      { byScale: { 1: '1½ tbsp mushroom umami powder',   2: '2 tbsp mushroom umami powder',     3: '2½ tbsp mushroom umami powder'    } },
+      { byScale: { 1: '1 tsp Chinese five spice',        2: '1½ tsp Chinese five spice',        3: '2 tsp Chinese five spice'         }, note: 'potent — do not exceed' },
+      { byScale: { 1: '1 tbsp Bragg\'s ACV',             2: '1½ tbsp Bragg\'s ACV',             3: '2 tbsp Bragg\'s ACV'              } },
+      { byScale: { 1: '½ tsp non-iodized sea salt',      2: '¾ tsp non-iodized sea salt',       3: '1 tsp non-iodized sea salt'       } }
+    ]},
+    { group: 'Arrowroot slurry — keep separate, add at end', items: [
+      { byScale: { 1: '3 tbsp arrowroot + 3 tbsp cold water', 2: '4 tbsp arrowroot + 4 tbsp cold water', 3: '5 tbsp arrowroot + 5 tbsp cold water' }, note: 'whisk smooth — it settles, stir again right before adding' }
+    ]},
+    { group: 'Broccoli', items: [
+      { byScale: { 1: '2 large heads broccoli, large florets', 2: '3 large heads broccoli, large florets', 3: '4 large heads broccoli, large florets' }, note: 'go big on floret size — they shrink and you want presence on the plate' },
+      { name: 'Avocado oil + non-iodized sea salt' }
+    ]},
+    { group: 'Beef & velvet marinade', items: [
+      { byScale: { 1: '1–1.5 lbs mixed top sirloin + flat iron, thinly sliced', 2: 'top sirloin 1.3 lb + flat iron 0.88 lb (~2.2 lbs total), thinly sliced', 3: '3+ lbs mixed cuts, thinly sliced' }, note: '¼ inch, bias cut, against the grain — flat iron grain can shift mid-cut' },
+      { byScale: { 1: '2 tbsp coconut aminos',             2: '3 tbsp coconut aminos',            3: '4 tbsp coconut aminos'            } },
+      { byScale: { 1: '1½ tbsp arrowroot',                2: '2 tbsp arrowroot',                 3: '3 tbsp arrowroot'                 } },
+      { byScale: { 1: '2 garlic cloves, minced',          2: '3 garlic cloves, minced',          3: '4 garlic cloves, minced'          } },
+      { byScale: { 1: '¾ tsp fresh ginger, grated',      2: '1 tsp fresh ginger, grated',       3: '1½ tsp fresh ginger, grated'      } },
+      { name: 'Black pepper' }
+    ]},
+    { group: 'Garnish', items: [
+      { byScale: { 1: '1 tbsp sesame seeds',              2: '2 tbsp sesame seeds',              3: '3 tbsp sesame seeds'              }, note: 'toast dry in a small pan first — set aside' },
+      { byScale: { 1: '2–3 green onions, bias-cut',      2: '3–4 green onions, bias-cut',       3: '5–6 green onions, bias-cut'       } }
+    ]}
+  ],
+
+  refs: {
+    'rice':      { display: 'jasmine rice',     tips: { 1: '2 cups, rinsed',                         2: '3 cups, rinsed',                                              3: '3 cups, rinsed (Zojirushi max)'                    } },
+    'garlic':    { display: 'garlic',           tips: { 1: '5 cloves, minced',                        2: '6 cloves, minced',                                            3: '8 cloves, minced'                                  } },
+    'ginger':    { display: 'fresh ginger',     tips: { 1: '1-inch, grated',                          2: '1½-inch, grated',                                             3: '2-inch, grated'                                    } },
+    'sauce-liq': { display: 'sauce liquid',     tips: { 1: '½ cup aminos · 1¾ cups water · 1½ tbsp umami · 1 tsp five spice · 1 tbsp ACV', 2: '¾ cup aminos · 2½ cups water · 2 tbsp umami · 1½ tsp five spice · 1½ tbsp ACV', 3: '1 cup aminos · 3½ cups water · 2½ tbsp umami · 2 tsp five spice · 2 tbsp ACV' } },
+    'slurry':    { display: 'arrowroot slurry', tips: { 1: '3 tbsp arrowroot + 3 tbsp cold water',    2: '4 tbsp arrowroot + 4 tbsp cold water',                        3: '5 tbsp arrowroot + 5 tbsp cold water'              } },
+    'broccoli':  { display: 'broccoli',         tips: { 1: '2 large heads, large florets',            2: '3 large heads, large florets',                                3: '4 large heads, large florets'                      } },
+    'avo-toss':  { display: 'avocado oil',      tips: { 1: 'generous drizzle',                        2: 'generous drizzle',                                            3: 'generous drizzle'                                  } },
+    'beef':      { display: 'beef',             tips: { 1: '1–1.5 lbs mixed cuts, thinly sliced',     2: 'sirloin 1.3 lb + flat iron 0.88 lb, thinly sliced',           3: '3+ lbs mixed cuts, thinly sliced'                  } },
+    'aminos-m':  { display: 'coconut aminos',   tips: { 1: '2 tbsp (marinade)',                       2: '3 tbsp (marinade)',                                           3: '4 tbsp (marinade)'                                 } },
+    'arrow-m':   { display: 'arrowroot',        tips: { 1: '1½ tbsp (marinade)',                      2: '2 tbsp (marinade)',                                           3: '3 tbsp (marinade)'                                 } },
+    'garlic-m':  { display: 'garlic',           tips: { 1: '2 cloves, minced',                        2: '3 cloves, minced',                                            3: '4 cloves, minced'                                  } },
+    'ginger-m':  { display: 'ginger',           tips: { 1: '¾ tsp grated',                           2: '1 tsp grated',                                                3: '1½ tsp grated'                                     } },
+    'sesame':    { display: 'sesame seeds',     tips: { 1: '1 tbsp, toasted',                         2: '2 tbsp, toasted',                                             3: '3 tbsp, toasted'                                   } },
+    'gon':       { display: 'green onion',      tips: { 1: '2–3 stalks, bias-cut',                   2: '3–4 stalks, bias-cut',                                       3: '5–6 stalks, bias-cut'                              } }
+  },
+
+  timers: {
+    'rice':   { label: 'Rice',            preset: 2100, bell: false },
+    'velvet': { label: 'Velvet rest',     preset: 900,  bell: true  },
+    'broc':   { label: 'Broccoli',        preset: 1080, bell: true  },
+    'bloom':  { label: 'Bloom aromatics', preset: 60,   bell: false },
+    'beef-s': { label: 'Beef per side',   preset: 90,   bell: false }
+  },
+
+  steps: [
+    {
+      label: 'Rice on + oven to 450°F',
+      text:  'Start {{rice}} in the Zojirushi. Oven to 450°F. Both go now — the broccoli can\'t start until the oven is up to temp.',
+      tip:   null,
+      timers: ['rice']
+    },
+    {
+      label: 'Velvet the beef',
+      text:  'Slice {{beef}} thin on the bias against the grain — ¼ inch. Toss with {{aminos-m}}, {{arrow-m}}, {{garlic-m}}, {{ginger-m}}, and black pepper until every piece is coated and looks shiny. Set the velvet timer. Use the 15-minute rest to get the broccoli in the oven and build the sauce.',
+      tip:   'Flat iron grain can shift almost 90° mid-cut. Keep watching as you slice or you\'ll get chewy patches.',
+      timers: ['velvet']
+    },
+    {
+      label: 'Broccoli into oven',
+      text:  'Toss {{broccoli}} in {{avo-toss}} and salt. Spread across 2–3 sheet pans without crowding — crowding is the only real mistake here. Into the 450°F oven. You want dark edges, almost charred tips. The timer is the floor, not the ceiling.',
+      tip:   'If you\'re second-guessing whether it\'s done, it isn\'t.',
+      timers: ['broc']
+    },
+    {
+      label: 'Build the sauce',
+      text:  'Heat avocado oil in the large Le Creuset or Staub over medium. Add {{garlic}} and {{ginger}} — bloom 60 seconds, stirring constantly. Pour in {{sauce-liq}}. Bring to a simmer. Stir the {{slurry}} (it settles) and stream it in while stirring. Simmer 2 minutes until glossy and thick enough to coat a spoon. Taste — adjust ACV or salt. Pull off heat.',
+      tip:   'Don\'t boil hard after the slurry goes in — arrowroot can break at a rolling boil.',
+      timers: ['bloom']
+    },
+    {
+      label: 'Split the sauce',
+      text:  'Divide the sauce into two equal portions by eye. Ladle half into a separate vessel — that half is for the broccoli. The half that stays in the Le Creuset is for the beef.',
+      tip:   null,
+      timers: []
+    },
+    {
+      label: 'Toast sesame seeds',
+      text:  'Dry pan over medium. {{sesame}} in — shake or stir constantly until golden and fragrant, about 2 minutes. Off heat the moment they\'re there. Set aside.',
+      tip:   'They go from perfect to burnt in about 20 seconds once they start moving.',
+      timers: []
+    },
+    {
+      label: 'Sear the beef',
+      text:  'Cast iron ripping hot with avocado oil. {{beef}} in a single layer — batches, don\'t crowd. 2.2 lbs needs 3–4 passes. Don\'t touch it. About 90 seconds per side. The arrowroot in the marinade adds some color to the pan — that\'s expected.',
+      tip:   'Pull each batch just barely cooked through. It finishes in the sauce.',
+      timers: ['beef-s']
+    },
+    {
+      label: 'Beef + sauce',
+      text:  'All seared beef back into the Le Creuset with its sauce portion. Off heat or on low — toss to coat. The arrowroot in the marinade combines with the sauce and helps it cling. If it looks tight, a splash of water loosens it right back.',
+      tip:   null,
+      timers: []
+    },
+    {
+      label: 'Vegan broccoli finish',
+      text:  'Charred {{broccoli}} out of the oven — fold into the reserved sauce portion in whatever vessel you\'re using. Warm briefly if needed. The sauce coats the florets and the char does the rest.',
+      tip:   null,
+      timers: []
+    },
+    {
+      label: 'Plate both dishes',
+      text:  'Rice base for both. Beef with sauce over rice. Vegan broccoli in sauce over rice. {{sesame}} scattered over both dishes. {{gon}} on top.',
+      tip:   'Sauce tightens as it sits. If either dish is holding while the other finishes, thin with a splash of water and a gentle rewarm.',
+      timers: []
+    }
+  ]
 }
 ];
 
