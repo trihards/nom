@@ -2706,6 +2706,109 @@ const RECIPES = [
       timers: []
     }
   ]
+},
+
+{
+  id: 'reverse-sear-grilled-chicken-thighs',
+  title: 'Reverse-Sear Grilled Chicken Thighs',
+  style: 'Two-zone grill · slow render · finish hot',
+  subtitle: 'Five seasoning paths · sides open',
+  preheat: null,
+  serves: '1–3',
+  tags: ['chicken', 'weeknight', 'grill', 'phase 1'],
+  prepTime: '10 min',
+  cookTime: '25 min + 5 min rest',
+  headnote: `<strong>Reverse-sear or you'll burn the skin.</strong> Bone-in thighs hold an enormous amount of fat in the skin and it has to render slowly with no flame underneath, or it drips, flares, and torches the skin before the bone hits temp. Skin-down on the COOL side first, lid closed, 15–18 minutes. Then skin-down on the hot side for 2–3 minutes to crisp the now-mostly-rendered skin. Starting hot is the instinct and it's wrong every time.<br><br><strong>Five seasoning paths, one technique.</strong> Garam masala is the house default (Tracy's pick — warm, sweet-spiced). Fresh thyme + mashed black garlic + cracked pepper goes herbal-funky. Herbes de Provence + sumac leans Provençal-floral. Chinese five spice + ground ginger + onion granules swings east. Crushed fennel + sage + black pepper does Italian-sausage-on-the-bone. The cook is identical across all five — only the rub changes.<br><br><em>Universal prep: pat the thighs bone-dry, thin coat of avocado oil on both sides, then season aggressively. Wet skin steams and won't crisp. Oil the chicken, not the grate.</em>`,
+  equipment: [
+    { name: '3-burner gas grill', note: 'two-zone setup — one side ripping, one side completely off' },
+    { name: 'Instant-read thermometer', note: 'non-negotiable for bone-in — 175°F minimum at the bone' },
+    { name: 'Small bowl', note: 'for mixing the rub before chicken meets oil' },
+    { name: 'Tongs + sheet pan to land on' }
+  ],
+  mise: [
+    { group: 'Chicken (universal across all paths)', items: [
+      { byScale: { 1: '2 bone-in skin-on chicken thighs', 2: '4 bone-in skin-on chicken thighs', 3: '6 bone-in skin-on chicken thighs' }, note: 'pat bone-dry with paper towels — really dry, not damp-dry' },
+      { byScale: { 1: '½ tbsp avocado oil', 2: '1 tbsp avocado oil', 3: '1½ tbsp avocado oil' }, note: 'thin coat on both sides — skin and bone side' },
+      { name: 'Non-iodized sea salt + cracked black pepper, generously on both sides' }
+    ]},
+    { group: 'PATH 1 — Garam masala (house default)', items: [
+      { byScale: { 1: '1 tbsp garam masala', 2: '2 tbsp garam masala', 3: '3 tbsp garam masala' }, note: 'work it into skin and meat side after oil + salt' }
+    ]},
+    { group: 'PATH 2 — Thyme + black garlic', items: [
+      { byScale: { 1: '1 tbsp fresh thyme leaves, stripped', 2: '2 tbsp fresh thyme leaves, stripped', 3: '3 tbsp fresh thyme leaves, stripped' } },
+      { byScale: { 1: '2 cloves black garlic, mashed to paste', 2: '4 cloves black garlic, mashed to paste', 3: '6 cloves black garlic, mashed to paste' }, note: 'mash with the flat of a knife until spreadable' },
+      { name: 'Extra cracked black pepper, heavier than the universal pass' }
+    ]},
+    { group: 'PATH 3 — Herbes de Provence + sumac', items: [
+      { byScale: { 1: '2 tsp herbes de Provence', 2: '1 tbsp + 1 tsp herbes de Provence', 3: '2 tbsp herbes de Provence' } },
+      { byScale: { 1: '½ tsp sumac', 2: '1 tsp sumac', 3: '1½ tsp sumac' }, note: 'sumac is the bright top note in place of citrus — don\'t skip' }
+    ]},
+    { group: 'PATH 4 — Chinese five spice + ginger + onion', items: [
+      { byScale: { 1: '1½ tsp Chinese five spice', 2: '1 tbsp Chinese five spice', 3: '1½ tbsp Chinese five spice' } },
+      { byScale: { 1: '½ tsp ground ginger', 2: '1 tsp ground ginger', 3: '1½ tsp ground ginger' } },
+      { byScale: { 1: '½ tsp onion granules', 2: '1 tsp onion granules', 3: '1½ tsp onion granules' } }
+    ]},
+    { group: 'PATH 5 — Fennel + sage + onion', items: [
+      { byScale: { 1: '1 tsp fennel seeds, lightly crushed', 2: '2 tsp fennel seeds, lightly crushed', 3: '1 tbsp fennel seeds, lightly crushed' }, note: 'crush in a mortar or under a heavy knife — releases the oils' },
+      { byScale: { 1: '1 tsp dried sage', 2: '2 tsp dried sage', 3: '1 tbsp dried sage' } },
+      { byScale: { 1: '½ tsp onion granules', 2: '1 tsp onion granules', 3: '1½ tsp onion granules' } },
+      { name: 'Extra cracked black pepper' }
+    ]}
+  ],
+  refs: {
+    'thighs': { display: 'thighs', tips: { 1: '2 bone-in skin-on thighs', 2: '4 bone-in skin-on thighs', 3: '6 bone-in skin-on thighs' } },
+    'oil':    { display: 'oil',    tips: { 1: '½ tbsp avocado oil',       2: '1 tbsp avocado oil',       3: '1½ tbsp avocado oil'       } }
+  },
+  timers: {
+    'preheat': { label: 'Grill preheat',      preset: 900,  bell: true },
+    'render':  { label: 'Slow render (cool)', preset: 1020, bell: true },
+    'crisp':   { label: 'Crisp skin (hot)',   preset: 180,  bell: true },
+    'rest':    { label: 'Rest',               preset: 300,  bell: true }
+  },
+  steps: [
+    {
+      label: 'Fire the grill, two zones',
+      text:  'Light one side on high, leave the other completely off. Close the lid and let it fully come to temp — hot side should hit 450–500°F. The cool side is your indirect zone. Trust the lid thermometer if you have one, otherwise count 12–15 minutes.',
+      tip:   'Two zones is the whole technique. One zone and you\'ll burn the skin every time.',
+      timers: ['preheat']
+    },
+    {
+      label: 'Prep the chicken',
+      text:  'While the grill heats: pat {{thighs}} bone-dry with paper towels. Rub {{oil}} into skin and bone side. Salt and pepper generously on both sides. Then apply your chosen seasoning path — work it into the skin and the meat side both. Let them sit at room temp while the grill finishes preheating.',
+      tip:   'Dry skin is the only path to crispy skin. Skip the patting and you\'ve sabotaged the cook before it starts.',
+      timers: []
+    },
+    {
+      label: 'Skin-down on the COOL side',
+      text:  'Lay {{thighs}} skin-down on the cool (unlit) side of the grill. Close the lid. Walk away — 15–18 minutes. The fat renders slowly with no flame underneath and the bone climbs toward temp from ambient heat. No peeking before 15 minutes.',
+      tip:   'Flipping early sends the skin back to direct heat and re-introduces flare-up risk. Trust the lid-closed indirect phase.',
+      timers: ['render']
+    },
+    {
+      label: 'Move skin-down to the HOT side',
+      text:  'Open the lid, move {{thighs}} skin-down to the hot side. Lid stays open now — eyes on the skin. 2–3 minutes to mark and crisp. Most of the fat is already rendered out so flare-ups are minimal, but if you see flame licking the skin, slide that piece a few inches toward the cool side immediately. Don\'t wait it out.',
+      tip:   'This is where the slow render pays off — most of the fat is already gone, so the skin can take direct heat without flaring.',
+      timers: ['crisp']
+    },
+    {
+      label: 'Temp check and pull',
+      text:  'Probe the thickest part of a thigh, close to but not touching the bone. You want 175°F minimum. 180°F is fine — bone-in thighs are forgiving and connective tissue keeps rendering. If not there yet, flip skin-up and give them another 2–3 minutes on the hot side with the lid closed. When they hit temp, pull to a sheet pan.',
+      tip:   'The bone is the slowest. Probe near it, not in the lean muscle on the outside.',
+      timers: []
+    },
+    {
+      label: 'Rest',
+      text:  'Five minutes, uncovered. Juices redistribute, skin stays crisp. Covering steams the skin soft — don\'t.',
+      tip:   null,
+      timers: ['rest']
+    },
+    {
+      label: 'Plate',
+      text:  'Whatever sides you have. Charred green onions or shallots off the hot zone, an avo smash with ACV and sumac, a pile of jasmine rice, or just thighs on a board with flaky salt — they hold up alone.',
+      tip:   null,
+      timers: []
+    }
+  ]
 }
 ];
 
