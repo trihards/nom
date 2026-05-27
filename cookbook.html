@@ -2568,6 +2568,144 @@ const RECIPES = [
       timers: []
     }
   ]
+},
+{
+  id: 'grilled-flap-chimichurri',
+  title: 'Grilled Flap with Chimichurri',
+  style: 'Direct grill · hard sear · herb sauce',
+  subtitle: 'Grilled sweet potato planks · charred onion · avo smash',
+  preheat: null,
+  serves: '1–3',
+  tags: ['beef', 'weeknight', 'grill', 'phase 1'],
+  prepTime: '20 min + 2–6 hr marinade',
+  cookTime: '30 min',
+  headnote: `<strong>Flap meat loves a long marinade.</strong> It's a thin cut with open grain — 4–6 hours is ideal, 2 hours is fine, 30 minutes is a waste of time. Get the meat in as soon as you're back from the store and let time do the work.<br><br><strong>Slice against the grain or you'll regret it.</strong> Flap has a very visible grain running diagonally across the cut. Find it before you pick up the knife and cut perpendicular — thin, ¼-inch slices. The difference between tender and chewy is entirely this.<br><br><em>Chimichurri made 1–2 hours ahead is dramatically better than fresh. The herbs soften, the garlic mellows, the ACV rounds out. Make it early and leave it at room temp.</em>`,
+  equipment: [
+    { name: '3-burner gas grill or Solo Stove charcoal grill', note: 'two-zone setup — hot side for meat and onion, medium for sweet potato' },
+    { name: 'Cast iron skillet or grill pan', note: 'optional — if flap is thin enough to fall through grates' },
+    { name: 'Large zip bag or baking dish', note: 'for marinating' },
+    { name: 'Small bowl', note: 'for chimichurri — make this well ahead' },
+    { name: 'Cutting board + sharp knife', note: 'for slicing against the grain' }
+  ],
+  mise: [
+    { group: 'Flap meat', items: [
+      { byScale: { 1: '¾ lb flap meat', 2: '1½ lbs flap meat', 3: '2 lbs flap meat' }, note: 'pull from fridge 1 hour before grilling' }
+    ]},
+    { group: 'Marinade — mix and pour over meat now', items: [
+      { byScale: { 1: '1½ tbsp coconut aminos', 2: '3 tbsp coconut aminos', 3: '4 tbsp coconut aminos' } },
+      { byScale: { 1: '1 tbsp olive oil', 2: '2 tbsp olive oil', 3: '3 tbsp olive oil' } },
+      { byScale: { 1: '½ tbsp Bragg\'s ACV', 2: '1 tbsp Bragg\'s ACV', 3: '1½ tbsp Bragg\'s ACV' } },
+      { byScale: { 1: '2 cloves garlic, grated', 2: '4 cloves garlic, grated', 3: '5 cloves garlic, grated' } },
+      { byScale: { 1: '½ tsp cumin', 2: '1 tsp cumin', 3: '1½ tsp cumin' } },
+      { byScale: { 1: '½ tsp coriander', 2: '1 tsp coriander', 3: '1½ tsp coriander' } },
+      { name: 'Black pepper + non-iodized sea salt' }
+    ]},
+    { group: 'Chimichurri — make 1–2 hrs ahead', items: [
+      { byScale: { 1: '¼ cup parsley, packed', 2: '½ cup parsley, packed', 3: '¾ cup parsley, packed' } },
+      { byScale: { 1: '2 tbsp cilantro, packed', 2: '¼ cup cilantro, packed', 3: '6 tbsp cilantro, packed' } },
+      { byScale: { 1: '1 tbsp fresh mint', 2: '2 tbsp fresh mint', 3: '3 tbsp fresh mint' } },
+      { byScale: { 1: '1½ cloves garlic', 2: '3 cloves garlic', 3: '4 cloves garlic' } },
+      { byScale: { 1: '½ tsp cumin', 2: '1 tsp cumin', 3: '1½ tsp cumin' } },
+      { byScale: { 1: '¼ tsp coriander', 2: '½ tsp coriander', 3: '¾ tsp coriander' } },
+      { byScale: { 1: '1 tbsp Bragg\'s ACV', 2: '2 tbsp Bragg\'s ACV', 3: '3 tbsp Bragg\'s ACV' } },
+      { byScale: { 1: '¼ cup olive oil', 2: '½ cup olive oil', 3: '¾ cup olive oil' } },
+      { name: 'Non-iodized sea salt + black pepper' }
+    ]},
+    { group: 'Sweet potato planks', items: [
+      { byScale: { 1: '1 medium sweet potato, scrubbed', 2: '2 medium sweet potatoes, scrubbed', 3: '3 medium sweet potatoes, scrubbed' }, note: 'slice ½" lengthwise' },
+      { name: 'Avocado oil + non-iodized sea salt' }
+    ]},
+    { group: 'Grilled onion', items: [
+      { byScale: { 1: '½ large red or sweet yellow onion', 2: '1 large red or sweet yellow onion', 3: '2 medium onions' }, note: 'halved through the root, skin on' },
+      { name: 'Avocado oil + non-iodized sea salt' }
+    ]},
+    { group: 'Avo smash', items: [
+      { byScale: { 1: '1 ripe avocado', 2: '2 ripe avocados', 3: '3 ripe avocados' } },
+      { byScale: { 1: '½ tbsp Bragg\'s ACV', 2: '1 tbsp Bragg\'s ACV', 3: '1½ tbsp Bragg\'s ACV' } },
+      { name: 'Sumac — ¼ tsp in + more to finish' },
+      { name: 'Non-iodized sea salt' },
+      { name: 'Black garlic, 1 clove smashed — optional' }
+    ]}
+  ],
+  refs: {
+    'flap':        { display: 'flap meat',     tips: { 1: '¾ lb',                                                          2: '1½ lbs',                                                       3: '2 lbs'                                                          } },
+    'marinade':    { display: 'marinade',       tips: { 1: '1½ tbsp aminos · 1 tbsp oil · ½ tbsp ACV · 2 cloves garlic',   2: '3 tbsp aminos · 2 tbsp oil · 1 tbsp ACV · 4 cloves garlic',    3: '4 tbsp aminos · 3 tbsp oil · 1½ tbsp ACV · 5 cloves garlic'    } },
+    'chimichurri': { display: 'chimichurri',    tips: { 1: '¼ cup parsley · 2 tbsp cilantro · 1 tbsp mint · 1½ cloves garlic · ¼ cup oil · 1 tbsp ACV', 2: '½ cup parsley · ¼ cup cilantro · 2 tbsp mint · 3 cloves garlic · ½ cup oil · 2 tbsp ACV', 3: '¾ cup parsley · 6 tbsp cilantro · 3 tbsp mint · 4 cloves garlic · ¾ cup oil · 3 tbsp ACV' } },
+    'potato':      { display: 'sweet potato',   tips: { 1: '1 medium, ½" planks',                                           2: '2 medium, ½" planks',                                           3: '3 medium, ½" planks'                                            } },
+    'onion':       { display: 'grilled onion',  tips: { 1: '½ large onion, halved through root',                            2: '1 large onion, halved through root',                            3: '2 medium onions, halved through root'                           } },
+    'avo':         { display: 'avocado',        tips: { 1: '1 avocado',                                                     2: '2 avocados',                                                    3: '3 avocados'                                                     } }
+  },
+  timers: {
+    'preheat':  { label: 'Grill preheat',       preset: 900,  bell: true  },
+    'potato1':  { label: 'Sweet potato side 1', preset: 480,  bell: true  },
+    'onion1':   { label: 'Onion cut side down', preset: 540,  bell: true  },
+    'potato2':  { label: 'Sweet potato side 2', preset: 480,  bell: true  },
+    'flap1':    { label: 'Flap first side',     preset: 210,  bell: true  },
+    'flap2':    { label: 'Flap second side',    preset: 210,  bell: true  },
+    'rest':     { label: 'Rest meat',           preset: 300,  bell: true  }
+  },
+  steps: [
+    {
+      label: 'Make the chimichurri',
+      text:  'Roughly chop parsley, cilantro, and mint together on the board. Mince or grate garlic fine. Combine herbs, garlic, cumin, coriander, salt, and pepper in a bowl. Add ACV and stir. Stream in olive oil while stirring — you want it loose and spoonable, not paste. Taste and adjust salt and ACV. Cover and leave at room temp. It needs time to become a sauce rather than a pile of herbs.',
+      tip:   'Don\'t use a food processor — you want texture, not a purée.',
+      timers: []
+    },
+    {
+      label: 'Fire up the grill',
+      text:  'Get one side ripping hot, leave the other side on medium for the sweet potatoes. You need two zones. Close the lid and let it fully preheat — don\'t rush this.',
+      tip:   null,
+      timers: ['preheat']
+    },
+    {
+      label: 'Start sweet potato planks',
+      text:  'Toss {{potato}} planks with avocado oil and salt. They go on the medium side. Lay them flat and do not touch them — you\'re building grill marks and caramelization. 8 minutes before you flip.',
+      tip:   'Resist moving them. The caramelization is the whole point.',
+      timers: ['potato1']
+    },
+    {
+      label: 'Grill the onion',
+      text:  'Oil and salt the cut face of {{onion}}. Cut face down on the hot side. Leave it completely alone — you want it dark, almost alarming. 8–10 minutes on the cut face, then move to the medium side to soften through.',
+      tip:   'The sweetness that comes out of a properly charred onion is incredible. Don\'t be scared of the color.',
+      timers: ['onion1']
+    },
+    {
+      label: 'Flip sweet potatoes, move onion',
+      text:  'Flip the sweet potato planks — they should have real color. If not, give them another 2 minutes before flipping. Move the onion to the medium side if it\'s deeply charred. Sweet potatoes need another 8 minutes on this side until a knife goes through with no resistance.',
+      tip:   null,
+      timers: ['potato2']
+    },
+    {
+      label: 'Grill the flap',
+      text:  'Hot side, directly over the flame. Pat {{flap}} dry if there\'s surface moisture from the marinade. Lay it down and don\'t touch it — 3–4 minutes. You want a hard sear. Listen for it. It releases when it\'s ready.',
+      tip:   'Wet meat steams instead of sears. Pat it dry.',
+      timers: ['flap1']
+    },
+    {
+      label: 'Flip and finish',
+      text:  'Flip the {{flap}}. Another 3–4 minutes. You\'re shooting for medium — pink throughout, not red at the center. Flap goes chewy when overcooked, so err on the side of pulling it early.',
+      tip:   null,
+      timers: ['flap2']
+    },
+    {
+      label: 'Rest the meat',
+      text:  'Off the grill, onto the board. Rest 5 minutes — non-negotiable. While it rests, pull sweet potatoes and onion off and make the avo smash.',
+      tip:   null,
+      timers: ['rest']
+    },
+    {
+      label: 'Make the avo smash',
+      text:  'Halve and scoop {{avo}} into a bowl. Add ACV, sumac, salt, and black garlic if using. Smash with a fork — keep it chunky, not smooth. Taste and adjust. Extra pinch of sumac on top.',
+      tip:   null,
+      timers: []
+    },
+    {
+      label: 'Slice and plate',
+      text:  'Find the grain on the {{flap}} — it runs diagonally across the cut and is clearly visible. Cut perpendicular to it, thin ¼-inch slices. This is the difference between tender and chewy. Spoon {{chimichurri}} directly over the sliced meat so it pools into the cuts.',
+      tip:   'Take a second to orient before you start cutting. Wrong direction and you\'ve undone the whole rest.',
+      timers: []
+    }
+  ]
 }
 ];
 
