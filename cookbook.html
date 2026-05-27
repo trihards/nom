@@ -2456,6 +2456,118 @@ const RECIPES = [
       timers: []
     }
   ]
+},
+
+{
+  id: 'ground-beef-broccoli-stems',
+  title: 'Ground Beef & Broccoli — stems only',
+  style: 'Extra saucy · chunky beef · stems stay crisp',
+  subtitle: 'Jasmine rice · florets saved for roasting',
+  preheat: null,
+  serves: '1–3',
+  tags: ['beef', 'weeknight', 'quick', 'phase 1'],
+  prepTime: '10 min',
+  cookTime: '20 min',
+
+  headnote: `<strong>The stems are the point.</strong> Florets go soft and greasy in a saucy stir fry; stems, peeled and bias-cut, stay crisp under the sauce and take it differently — more snap, more textural contrast with the beef. Save the florets for the oven where they belong.<br><br><strong>Leave the beef in chunks, not fine crumbles.</strong> This isn't picadillo — break it into rough ¾-inch pieces and let them crust before moving them. The crust and the fond both go into the sauce. Fine crumbles turn gray and disappear.<br><br><em>Sauce is intentionally generous — noticeably more liquid than standard beef and broccoli. If it over-thickens before you're done, a splash of broth brings it right back. Better to have extra than to plate it dry.</em>`,
+
+  equipment: [
+    { name: '12-inch cast iron skillet',  note: 'needs to get hot enough to crust the beef, not just brown it' },
+    { name: 'Zojirushi rice cooker' },
+    { name: 'Small bowl',                 note: 'for the sauce — mix before anything hits the stove' },
+    { name: 'Small cup',                  note: 'for the arrowroot slurry — kept separate from the sauce' },
+    { name: 'Vegetable peeler',           note: 'for the broccoli stems — peel the outer layer before cutting' }
+  ],
+
+  mise: [
+    { group: 'Rice', items: [
+      { byScale: { 1: '1 cup jasmine rice, rinsed', 2: '2 cups jasmine rice, rinsed', 3: '3 cups jasmine rice, rinsed' } }
+    ]},
+    { group: 'Broccoli stems', items: [
+      { byScale: { 1: '2–3 broccoli stems, peeled + bias-cut thin', 2: '3–4 broccoli stems, peeled + bias-cut thin', 3: '5–6 broccoli stems, peeled + bias-cut thin' }, note: 'peel the outer layer — the inside is tender and sweet' }
+    ]},
+    { group: 'Ground beef', items: [
+      { byScale: { 1: '½ lb grass-fed ground beef', 2: '1 lb grass-fed ground beef', 3: '1½ lbs grass-fed ground beef' }, note: 'room temp if you can — cold beef steams before it browns' },
+      { name: 'Non-iodized sea salt + white pepper' }
+    ]},
+    { group: 'Sauce — mix in bowl before cooking', items: [
+      { byScale: { 1: '2 tbsp coconut aminos',       2: '¼ cup coconut aminos',        3: '6 tbsp coconut aminos'        } },
+      { byScale: { 1: '6 tbsp bone broth',           2: '¾ cup bone broth',            3: '1 cup + 2 tbsp bone broth'    }, note: 'keep extra warm on the side' },
+      { byScale: { 1: '½ tbsp Bragg\'s ACV',         2: '1 tbsp Bragg\'s ACV',         3: '1½ tbsp Bragg\'s ACV'         } },
+      { byScale: { 1: '¼ tsp black garlic salt',     2: '½ tsp black garlic salt',     3: '¾ tsp black garlic salt'      } },
+      { byScale: { 1: '¼ tsp ground ginger',         2: '½ tsp ground ginger',         3: '¾ tsp ground ginger'          } },
+      { byScale: { 1: '⅛ tsp ground white pepper',   2: '¼ tsp ground white pepper',   3: '⅓ tsp ground white pepper'    } },
+      { name: 'Tiny pinch Chinese five spice',        note: 'ghost note only — do not go higher' }
+    ]},
+    { group: 'Arrowroot slurry — keep separate, add last', items: [
+      { byScale: { 1: '¾ tbsp arrowroot + 1 tbsp cold water', 2: '1½ tbsp arrowroot + 2 tbsp cold water', 3: '2 tbsp arrowroot + 2½ tbsp cold water' }, note: 'whisk smooth — it settles, stir again right before adding' }
+    ]},
+    { group: 'Finish', items: [
+      { byScale: { 1: '2 green onions, bias-cut', 2: '3–4 green onions, bias-cut', 3: '5 green onions, bias-cut' }, note: 'set aside now' },
+      { name: 'Bragg\'s ACV splash, to finish if needed' }
+    ]}
+  ],
+
+  refs: {
+    'rice':   { display: 'jasmine rice',     tips: { 1: '1 cup, rinsed',                                                                       2: '2 cups, rinsed',                                                                        3: '3 cups, rinsed'                                                                        } },
+    'stems':  { display: 'broccoli stems',   tips: { 1: '2–3 stems, peeled + bias-cut thin',                                                   2: '3–4 stems, peeled + bias-cut thin',                                                     3: '5–6 stems, peeled + bias-cut thin'                                                     } },
+    'beef':   { display: 'ground beef',      tips: { 1: '½ lb',                                                                                2: '1 lb',                                                                                  3: '1½ lbs'                                                                                } },
+    'sauce':  { display: 'sauce',            tips: { 1: '2 tbsp aminos · 6 tbsp broth · ½ tbsp ACV · ¼ tsp black garlic salt · ¼ tsp ginger',  2: '¼ cup aminos · ¾ cup broth · 1 tbsp ACV · ½ tsp black garlic salt · ½ tsp ginger',     3: '6 tbsp aminos · 1 cup+ broth · 1½ tbsp ACV · ¾ tsp black garlic salt · ¾ tsp ginger'  } },
+    'slurry': { display: 'arrowroot slurry', tips: { 1: '¾ tbsp + 1 tbsp cold water',                                                         2: '1½ tbsp + 2 tbsp cold water',                                                           3: '2 tbsp + 2½ tbsp cold water'                                                           } },
+    'gonion': { display: 'green onion',      tips: { 1: '2 stalks, bias-cut',                                                                  2: '3–4 stalks, bias-cut',                                                                  3: '5 stalks, bias-cut'                                                                    } }
+  },
+
+  timers: {
+    'rice':  { label: 'Rice',       preset: 2100, bell: false },
+    'stems': { label: 'Stems',      preset: 180,  bell: false },
+    'beef':  { label: 'Brown beef', preset: 180,  bell: false },
+    'sauce': { label: 'Sauce',      preset: 90,   bell: true  }
+  },
+
+  steps: [
+    {
+      label: 'Rice on',
+      text:  'Start {{rice}} in the Zojirushi. Everything else fits inside the cook time.',
+      tip:   null,
+      timers: ['rice']
+    },
+    {
+      label: 'Mix the sauce',
+      text:  'Combine all sauce ingredients in a small bowl and stir until the black garlic salt dissolves. Taste — it should be savory, ginger-forward, and a little salty. In a separate small cup, stir {{slurry}} smooth. Set both right next to the stove.',
+      tip:   'The slurry settles fast. Stir it again right before it goes in.',
+      timers: []
+    },
+    {
+      label: 'Sauté the stems',
+      text:  'Cast iron medium-high with a thin layer of avocado oil. {{stems}} in, season with salt — let them sit before tossing, you want a little color on the edges. 3 minutes, pull to a plate.',
+      tip:   'Stems need a head start. They won\'t soften further once the sauce goes in — give them real heat now.',
+      timers: ['stems']
+    },
+    {
+      label: 'Brown the beef',
+      text:  'Same pan, crank to high. {{beef}} in — season with salt and white pepper. Leave it completely alone for 2 full minutes. You want a real crust on the bottom before anything moves. Then break into rough ¾-inch chunks — not fine crumbles. One more minute to get color on the broken edges.',
+      tip:   'The crust is the flavor. Don\'t touch it for the first 2 minutes or you\'ll steam it gray.',
+      timers: ['beef']
+    },
+    {
+      label: 'Sauce in',
+      text:  'Pour the {{sauce}} directly into the pan — it\'ll sizzle hard and pick up all the fond. Stir and let it reduce slightly, about 60 seconds. Stir the {{slurry}} and stream it in while tossing. Sauce goes glossy and thick in about 30 seconds.',
+      tip:   'Too tight? Splash of bone broth loosens it right back. This is a saucy dish — don\'t let it reduce down to just a coating.',
+      timers: ['sauce']
+    },
+    {
+      label: 'Stems back in + finish',
+      text:  'Fold {{stems}} back in. Toss everything to coat. Taste — add a small splash of ACV if it needs brightness. Off heat. {{gonion}} over the top.',
+      tip:   null,
+      timers: []
+    },
+    {
+      label: 'Plate',
+      text:  'Over rice. Sauce should pool a little at the base — that\'s the goal.',
+      tip:   null,
+      timers: []
+    }
+  ]
 }
 ];
 
