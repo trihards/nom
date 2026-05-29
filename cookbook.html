@@ -2914,6 +2914,132 @@ const RECIPES = [
       timers: ['marry']
     }
   ]
+},
+
+{
+  id: 'spatchcock-roast-chicken-broth',
+  title: 'Spatchcock Roast Chicken with Pan Dripping Broth',
+  style: 'Spatchcock roast · aromatic bed · two-stage oven',
+  subtitle: 'Sweet potato halves, roasted broccoli, pan dripping broth',
+  preheat: '425°F',
+  serves: '1–3',
+  tags: ['chicken', 'weeknight', 'phase 1'],
+  headnote: `<strong>Two jobs, one pan.</strong> The rough-chopped aromatics do double duty — they lift the chicken off the pan so heat circulates underneath, and they pre-roast into your broth base. Don't skip the backbone: it roasts alongside the bird and adds real color and depth to the broth.<br><br><strong>Spatchcocking is faster and more even than whole-bird roasting.</strong> The bird lays flat, the skin gets maximum oven exposure, and the whole thing is done in under an hour. Press hard on the breastbone — it needs to crack flat to cook evenly.<br><br><em>Sweet potatoes go cut-side down — that's where the caramelization happens. Broccoli goes in at the 35-minute mark so it gets color without turning to mush. Debone before serving and add the carcass to the pot with the backbone — deeper broth, cleaner plates.</em>`,
+  equipment: [
+    { name: 'Large sheet pan or roasting pan', note: 'for chicken and aromatic bed' },
+    { name: 'Second sheet pan', note: 'for sweet potatoes — they need their own space' },
+    { name: 'Third sheet pan or space on potato pan', note: 'for broccoli' },
+    { name: 'Kitchen shears', note: 'for spatchcocking' },
+    { name: 'Instant-read thermometer' },
+    { name: 'Large pot', note: 'for broth — use same night' },
+    { name: 'Fine mesh strainer' }
+  ],
+  mise: [
+    { group: 'Aromatic bed', items: [
+      { name: '4 carrots, roughly chopped into 2-inch chunks' },
+      { name: '2 yellow onions, quartered' },
+      { name: '5 celery stalks, roughly chopped' },
+      { name: '3 fresh rosemary sprigs' },
+      { name: '4 fresh thyme sprigs' },
+      { name: '1.5 tbsp olive oil' },
+      { name: 'Pinch of salt' }
+    ]},
+    { group: 'Chicken', items: [
+      { name: '1 whole chicken, 3.5–4.5 lbs' },
+      { name: '2 tbsp olive oil' },
+      { name: '1.5 tsp salt' },
+      { name: '½ tsp black pepper' }
+    ]},
+    { group: 'Sweet potatoes', items: [
+      { byScale: { 1: '1 sweet potato, peeled and halved lengthwise', 2: '2 sweet potatoes, peeled and halved lengthwise', 3: '3 sweet potatoes, peeled and halved lengthwise' } },
+      { name: '1 tbsp olive oil' },
+      { name: 'Pinch of salt' }
+    ]},
+    { group: 'Broccoli', items: [
+      { byScale: { 1: '½ head broccoli, cut into florets', 2: '1 head broccoli, cut into florets', 3: '1½ heads broccoli, cut into florets' } },
+      { name: '2 tbsp olive oil' },
+      { name: 'Pinch of salt' }
+    ]},
+    { group: 'Broth (after dinner)', items: [
+      { name: 'Backbone + all pan drippings and roasted veg' },
+      { name: '4 garlic cloves, smashed' },
+      { name: '2 bay leaves' },
+      { name: '8 cups water' }
+    ]}
+  ],
+  refs: {
+    'chicken':  { display: 'whole chicken',    tips: { 1: '1 chicken', 2: '1 chicken', 3: '1 chicken' } },
+    'sweetpot': { display: 'sweet potatoes',   tips: { 1: '1 halved', 2: '2 halved', 3: '3 halved' } },
+    'broccoli': { display: 'broccoli',         tips: { 1: '½ head', 2: '1 head', 3: '1½ heads' } }
+  },
+  timers: {
+    'first-roast':  { label: 'First roast — add broccoli at buzzer', preset: 2100, bell: true },
+    'broccoli':     { label: 'Broccoli + final roast',               preset: 1200, bell: true },
+    'rest':         { label: 'Rest chicken',                          preset: 600,  bell: true },
+    'broth':        { label: 'Broth simmer',                          preset: 5400, bell: true }
+  },
+  steps: [
+    {
+      label: 'Build the aromatic bed',
+      text:  'Toss the carrots, onions, and celery with 1.5 tbsp olive oil and a pinch of salt directly on the sheet pan. Spread them out — they\'re your roasting rack, so no piling. Lay the rosemary and thyme sprigs on top.',
+      tip:   'Spread matters here. A crowded bed steams instead of roasting and won\'t lift the chicken properly.',
+      timers: []
+    },
+    {
+      label: 'Spatchcock the chicken',
+      text:  'Flip the chicken breast-side down. Cut along both sides of the backbone with kitchen shears and remove it entirely — set it aside for broth. Flip the bird, open it up, and press hard on the breastbone with the heel of your hand until it cracks flat.',
+      tip:   'It needs to lay nearly level. If it\'s still doming up in the center, press harder or make a small score through the cartilage.',
+      timers: []
+    },
+    {
+      label: 'Season and place',
+      text:  'Pat the chicken completely dry — dry skin is crispy skin. Rub 2 tbsp olive oil all over the skin, then season all over with 1.5 tsp salt and ½ tsp black pepper. Place breast-side up on the vegetable bed. Rub the backbone with a little oil and salt and tuck it onto the pan.',
+      tip:   null,
+      timers: []
+    },
+    {
+      label: 'Sweet potatoes in',
+      text:  'Toss {sweetpot} with 1 tbsp olive oil and a pinch of salt. Place cut-side down on a second sheet pan. Into the oven alongside the chicken.',
+      tip:   'Cut side down is non-negotiable — that\'s where the caramelization happens.',
+      timers: ['first-roast']
+    },
+    {
+      label: 'Add broccoli at 35 minutes',
+      text:  'At the buzzer, check the sweet potatoes — a knife should slide in with just slight resistance. Toss {broccoli} with 2 tbsp olive oil and a good pinch of salt. Crowd onto the sweet potato pan if there\'s room, or use a third pan. Back in the oven.',
+      tip:   'If sweet potatoes need more time, pull the broccoli pan early rather than overcooking the potatoes.',
+      timers: ['broccoli']
+    },
+    {
+      label: 'Pull and check',
+      text:  'At the buzzer, the chicken should be deep golden brown with taut, crackling skin. Thighs should read 165°F. Total roast time is roughly 50–55 minutes. The backbone can stay in or come out — your call.',
+      tip:   null,
+      timers: []
+    },
+    {
+      label: 'Rest the chicken',
+      text:  'Pull the chicken to a cutting board. Do not cut it yet.',
+      tip:   null,
+      timers: ['rest']
+    },
+    {
+      label: 'Debone and plate',
+      text:  'Pull all the meat off the bones — legs, thighs, breast. Keep the pieces large if you want, or pull into chunks. Save every bone and the carcass for the broth pot. Sweet potatoes cut-side up, broccoli alongside. Drizzle any pan drippings over the top.',
+      tip:   'The chicken will still be hot — use a fork to hold it steady if needed. Don\'t rinse that pan.',
+      timers: []
+    },
+    {
+      label: 'Make the broth (after dinner)',
+      text:  'Scrape everything from the pan into a large pot — drippings, roasted veg, herb stems, backbone, and the deboned carcass. Add 4 smashed garlic cloves, 2 bay leaves, and 8 cups water. Bring to a boil, reduce to a low simmer, cook uncovered 1.5–2 hours.',
+      tip:   'A pinch of salt and a splash of ACV at the end brightens it if you\'re sipping it straight.',
+      timers: ['broth']
+    },
+    {
+      label: 'Strain and store',
+      text:  'Pour through a fine mesh strainer into a large bowl, pressing the solids hard. Discard the solids. Cool, refrigerate up to 5 days or freeze in 1–2 cup portions. The solid fat on top is chicken schmaltz - it is so delicious to cook things in instead of oil.',
+      tip:   null,
+      timers: []
+    }
+  ]
 }
 ];
 
