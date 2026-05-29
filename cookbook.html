@@ -471,7 +471,7 @@ const RECIPES = [
       { byScale: { 1: '¾ tsp vadouvan',                     2: '1½ tsp vadouvan',                      3: '2¼ tsp vadouvan'                      } },
       { byScale: { 1: '½ tsp garlic granules',              2: '1 tsp garlic granules',                3: '1½ tsp garlic granules'               } },
       { byScale: { 1: '¼ tsp black pepper',                 2: '½ tsp black pepper',                   3: '¾ tsp black pepper'                   } },
-      { name: 'Non-iodized sea salt, generous' },
+      { name: 'Salt, generous' },
       { name: 'Avocado oil' }
     ]},
     { group: 'Pan gravy', items: [
@@ -483,11 +483,11 @@ const RECIPES = [
     ]},
     { group: 'Broccoli', items: [
       { byScale: { 1: '½ large head broccoli, florets',     2: '1 large head broccoli, florets',       3: '1–2 heads broccoli, florets'          } },
-      { name: 'Avocado oil + non-iodized sea salt' }
+      { name: 'Avocado oil + salt' }
     ]},
     { group: 'Sweet potato mash', items: [
       { byScale: { 1: '1 medium sweet potato, 1-inch cubes', 2: '2 medium sweet potatoes, 1-inch cubes', 3: '3 medium sweet potatoes, 1-inch cubes' } },
-      { name: 'Olive oil + non-iodized sea salt' }
+      { name: 'Olive oil + salt' }
     ]},
     { group: 'Rice', items: [
       { byScale: { 1: '1 cup haiga rice, rinsed',           2: '2 cups haiga rice, rinsed',            3: '3 cups haiga rice, rinsed'            } }
@@ -611,7 +611,7 @@ const RECIPES = [
   mise: [
     { group: 'Lamb', items: [
       { byScale: { 1: '2 lamb loin chops', 2: '4 lamb loin chops', 3: '6 lamb loin chops' }, note: '~1 inch thick, pat dry' },
-      { name: 'Non-iodized sea salt, generous' },
+      { name: 'Salt, generous' },
       { name: 'Black pepper' },
       { name: 'Avocado oil' }
     ]},
@@ -625,7 +625,7 @@ const RECIPES = [
     ]},
     { group: 'Roasted carrots', items: [
       { byScale: { 1: '2–3 large carrots, bias-cut thick', 2: '4–6 large carrots', 3: '6–8 large carrots' } },
-      { name: 'Avocado oil + non-iodized sea salt' }
+      { name: 'Avocado oil + salt' }
     ]},
     { group: 'Arugula salad', items: [
       { byScale: { 1: '1 handful arugula', 2: '2 large handfuls arugula', 3: '3 large handfuls arugula' } },
@@ -718,14 +718,14 @@ const RECIPES = [
       { byScale: { 1: '½ tbsp bone broth',             2: '1 tbsp bone broth',             3: '1½ tbsp bone broth'             } },
       { name: '1 sprig fresh rosemary' },
       { byScale: { 1: '1 tsp fresh mint, chiffonade', 2: '2 tsp fresh mint, chiffonade', 3: '1 tbsp fresh mint, chiffonade' } },
-      { name: 'Non-iodized sea salt' }
+      { name: 'Salt' }
     ]},
     { group: 'Strawberry-blueberry variant (swap for above)', items: [
       { byScale: { 1: '⅓ cup blueberries + ¼ cup macerated strawberries + their liquid', 2: '⅔ cup blueberries + ½ cup macerated strawberries + liquid', 3: '1 cup blueberries + ¾ cup macerated strawberries + liquid' } },
       { byScale: { 1: '1½ tbsp Bragg\'s ACV',          2: '2½ tbsp Bragg\'s ACV',          3: '3½ tbsp Bragg\'s ACV'           }, note: 'start here — sweeter berries need more acid' },
       { name: '1 sprig fresh rosemary' },
       { byScale: { 1: '1 tsp fresh mint, chiffonade', 2: '2 tsp fresh mint, chiffonade', 3: '1 tbsp fresh mint, chiffonade' } },
-      { name: 'Non-iodized sea salt' }
+      { name: 'Salt' }
     ]},
     { group: 'Pure strawberry variant (swap for above)', items: [
       { byScale: { 1: '½ cup macerated strawberries + their liquid', 2: '1 cup macerated strawberries + liquid', 3: '1½ cups macerated strawberries + liquid' } },
@@ -733,7 +733,7 @@ const RECIPES = [
       { byScale: { 1: '1 tsp arrowroot + 1 tbsp cold water', 2: '1½ tsp arrowroot + 1½ tbsp cold water', 3: '2 tsp arrowroot + 2 tbsp cold water' }, note: 'mix now, only use if sauce is too thin at the end' },
       { name: '1 sprig fresh rosemary' },
       { byScale: { 1: '1 tsp fresh mint, chiffonade', 2: '2 tsp fresh mint, chiffonade', 3: '1 tbsp fresh mint, chiffonade' } },
-      { name: 'Non-iodized sea salt' }
+      { name: 'Salt' }
     ]}
   ],
 
@@ -799,14 +799,14 @@ const RECIPES = [
       { byScale: { 1: '¼ small red onion, thinly sliced',      2: '½ red onion, thinly sliced',           3: '¾ red onion, thinly sliced'             }, note: 'half goes in the pickle, half stays fresh for topping' },
       { byScale: { 1: '1 tbsp Bragg\'s ACV',                   2: '2 tbsp Bragg\'s ACV',                  3: '3 tbsp Bragg\'s ACV'                    } },
       { byScale: { 1: '¼ tsp raw sugar',                       2: '½ tsp raw sugar',                      3: '¾ tsp raw sugar'                        } },
-      { name: 'Non-iodized sea salt, for scrunching' }
+      { byScale: { 1: '¾ tsp salt', 2: '1¼ tsp salt', 3: '1¾ tsp salt' }, note: 'Diamond Crystal kosher — salt is doing osmosis work here, not just seasoning; don\'t eyeball it' }
     ]},
     { group: 'Coconut yogurt crema', items: [
       { byScale: { 1: '3 tbsp plain coconut yogurt',           2: '6 tbsp plain coconut yogurt',          3: '½ cup plain coconut yogurt'             } },
       { byScale: { 1: '½ tsp Bragg\'s ACV',                    2: '1 tsp Bragg\'s ACV',                   3: '1½ tsp Bragg\'s ACV'                    } },
       { name: 'Pinch garlic granules' },
       { name: 'Pinch cumin' },
-      { name: 'Non-iodized sea salt' }
+      { name: 'Salt' }
     ]},
     { group: 'Seasoned ground beef', items: [
       { byScale: { 1: '½ lb ground beef',                      2: '1 lb ground beef',                     3: '1½ lbs ground beef'                     } },
@@ -816,7 +816,7 @@ const RECIPES = [
       { byScale: { 1: '½ tsp garlic granules',                 2: '1 tsp garlic granules',                3: '1½ tsp garlic granules'                 } },
       { byScale: { 1: '¼ tsp Mexican oregano',                 2: '½ tsp Mexican oregano',                3: '¾ tsp Mexican oregano'                  } },
       { name: 'Small pinch mushroom umami powder' },
-      { name: 'Black pepper + non-iodized sea salt' },
+      { name: 'Black pepper + salt' },
       { name: 'Avocado oil' },
       { name: 'Splash coconut aminos' },
       { name: 'Small splash Bragg\'s ACV', note: 'finish only' }
@@ -905,7 +905,7 @@ const RECIPES = [
       { byScale: { 1: '½ tsp coriander',      2: '1 tsp coriander',      3: '1½ tsp coriander'      } },
       { byScale: { 1: '½ tsp sumac',          2: '1 tsp sumac',          3: '1½ tsp sumac'          } },
       { byScale: { 1: '½ tsp garlic granules',2: '1 tsp garlic granules',3: '1½ tsp garlic granules'} },
-      { name: 'Non-iodized sea salt, generous' },
+      { name: 'Salt, generous' },
       { name: 'Olive oil' }
     ]},
     { group: 'Rough guac', items: [
@@ -913,7 +913,7 @@ const RECIPES = [
       { byScale: { 1: '¼ white or yellow onion, diced fine',   2: '½ onion, diced fine',              3: '¾ onion, diced fine'              } },
       { byScale: { 1: 'Small handful cilantro, rough chop',    2: 'Medium handful cilantro',          3: 'Large handful cilantro'           } },
       { byScale: { 1: '1 tsp Bragg\'s ACV',                    2: '2 tsp Bragg\'s ACV',               3: '1 tbsp Bragg\'s ACV'              } },
-      { name: 'Non-iodized sea salt' }
+      { name: 'Salt' }
     ]},
     { group: 'Spinach + finish', items: [
       { byScale: { 1: '2 large handfuls spinach',              2: '4 large handfuls spinach',         3: '6 large handfuls spinach'         } },
@@ -1246,7 +1246,7 @@ const RECIPES = [
   mise: [
     { group: 'Beef', items: [
       { byScale: { 1: '2 lbs chuck roast, 2-inch chunks', 2: '3 lbs chuck roast, 2-inch chunks', 3: '4 lbs chuck roast, 2-inch chunks' }, note: 'pat completely dry — critical for a good sear' },
-      { name: 'Non-iodized sea salt, generous' },
+      { name: 'Salt, generous' },
       { name: 'Black pepper' },
       { name: 'Beef tallow, 2–3 tbsp' }
     ]},
@@ -1271,7 +1271,7 @@ const RECIPES = [
     { group: 'Mashed rutabaga', items: [
       { name: '1 medium rutabaga (~1.5 lbs), peeled and cubed' },
       { name: 'Olive oil, 2–3 tbsp' },
-      { name: 'Non-iodized sea salt + white pepper' },
+      { name: 'Salt + white pepper' },
       { name: 'Pinch garlic granules (optional)' }
     ]}
   ],
@@ -1390,7 +1390,7 @@ const RECIPES = [
       { name: '1 tsp cumin' },
       { name: '½ tsp coriander' },
       { name: '¼ tsp cinnamon', note: 'background warmth — don\'t skip it' },
-      { name: 'Non-iodized salt + black pepper' }
+      { name: 'Salt + black pepper' }
     ]},
     { group: 'Rice', items: [
       { byScale: { 1: '1 cup jasmine rice, rinsed', 2: '1.5 cups jasmine rice, rinsed', 3: '2 cups jasmine rice, rinsed' } }
@@ -1504,7 +1504,7 @@ const RECIPES = [
       { byScale: { 1: '½ tsp onion granules',    2: '¾ tsp onion granules',    3: '1 tsp onion granules'    } },
       { byScale: { 1: '½ tsp dried thyme',       2: '¾ tsp dried thyme',       3: '1 tsp dried thyme'       }, note: 'or herbes de Provence' },
       { byScale: { 1: '¼ tsp black pepper',      2: '½ tsp black pepper',      3: '½ tsp black pepper'      } },
-      { name: 'Non-iodized sea salt, generous' },
+      { name: 'Salt, generous' },
       { name: 'Avocado oil, for searing' }
     ]},
     { group: 'Schmaltzy shiitake green beans', items: [
@@ -1513,14 +1513,14 @@ const RECIPES = [
       { byScale: { 1: '1 tbsp schmaltz',          2: '1½ tbsp schmaltz',         3: '2 tbsp schmaltz'         }, note: 'olive oil if schmaltz unavailable' },
       { byScale: { 1: '1½ tsp coconut aminos',    2: '2 tsp coconut aminos',     3: '1 tbsp coconut aminos'   } },
       { name: '¼ tsp garlic granules' },
-      { name: 'Non-iodized sea salt, black pepper' },
+      { name: 'Salt, black pepper' },
       { name: 'Splash Bragg\'s ACV, finish only' }
     ]},
     { group: 'Roasted mashed sweet potato', items: [
       { byScale: { 1: '1 medium orange sweet potato', 2: '2 medium orange sweet potatoes', 3: '3 medium orange sweet potatoes' }, note: 'halved lengthwise, cut side down' },
       { byScale: { 1: '1 tbsp olive oil',              2: '2 tbsp olive oil',               3: '3 tbsp olive oil'               }, note: 'or coconut milk for richer mash' },
       { name: '¼ tsp garlic granules' },
-      { name: 'Non-iodized sea salt' },
+      { name: 'Salt' },
       { name: 'Splash Bragg\'s ACV, optional finish' }
     ]}
   ],
@@ -1626,7 +1626,7 @@ const RECIPES = [
       { byScale: { 1: '½ cup blackberries or mixed berries', 2: '¾ cup berries', 3: '1 cup berries' }, note: 'blackberries, raspberries, strawberries, or any mix' },
       { byScale: { 1: '1 tsp raw honey',                     2: '1½ tsp raw honey',                 3: '2 tsp raw honey'                 } },
       { byScale: { 1: '1 tsp chia seeds',                    2: '1½ tsp chia seeds',                3: '2 tsp chia seeds'                }, note: 'stir in off heat — thickens as it cools' },
-      { name: 'Pinch non-iodized sea salt' },
+      { name: 'Pinch salt' },
       { name: 'Optional: tiny splash Bragg\'s ACV if it tastes too sweet' }
     ]}
   ],
@@ -1768,7 +1768,7 @@ const RECIPES = [
     ]},
     { group: 'Sirloin', items: [
       { byScale: { 1: '8 oz sirloin, sliced thin crosswise', 2: '1 lb sirloin, sliced thin crosswise', 3: '1½ lbs sirloin, sliced thin crosswise' } },
-      { name: 'Non-iodized sea salt + white pepper' },
+      { name: 'Salt + white pepper' },
       { name: 'Avocado oil' }
     ]},
     { group: 'Sauce — mix in a bowl before cooking', items: [
@@ -1776,14 +1776,14 @@ const RECIPES = [
       { byScale: { 1: '6 tbsp bone broth',            2: '¾ cup bone broth',             3: '1 cup bone broth'             }, note: 'keep extra warm on the side' },
       { byScale: { 1: '½ tsp mushroom umami powder',  2: '1 tsp mushroom umami powder',  3: '1½ tsp mushroom umami powder' } },
       { byScale: { 1: '¼ tsp ground white pepper',    2: '½ tsp ground white pepper',    3: '¾ tsp ground white pepper'   } },
-      { name: 'Non-iodized sea salt to taste' }
+      { name: 'Salt to taste' }
     ]},
     { group: 'Arrowroot slurry — keep separate, add last', items: [
       { byScale: { 1: '1 tsp arrowroot + 1 tbsp cold water', 2: '2 tsp arrowroot + 2 tbsp cold water', 3: '1 tbsp arrowroot + 3 tbsp cold water' }, note: 'whisk until smooth — it settles, stir again before adding' }
     ]},
     { group: 'Broccoli', items: [
       { byScale: { 1: '½ head broccoli — florets separated, stems peeled + thick matchsticks', 2: '1 head broccoli — florets separated, stems peeled + thick matchsticks', 3: '1½ heads broccoli — florets separated, stems peeled + thick matchsticks' } },
-      { name: 'Avocado oil + non-iodized sea salt (florets only)' }
+      { name: 'Avocado oil + salt (florets only)' }
     ]},
     { group: 'Stir fry veg & aromatics', items: [
       { byScale: { 1: '1½ cups green cabbage, thick ribbons', 2: '2–3 cups green cabbage, thick ribbons', 3: '4 cups green cabbage, thick ribbons' } },
@@ -1905,7 +1905,7 @@ const RECIPES = [
       { byScale: { 1: '1½ tsp arrowroot starch',                        2: '2 tsp arrowroot starch',                           3: '1 tbsp arrowroot starch'                         } },
       { byScale: { 1: '1 tbsp avocado oil',                             2: '1½ tbsp avocado oil',                              3: '2 tbsp avocado oil'                              } },
       { byScale: { 1: '1 tsp coconut aminos',                           2: '1½ tsp coconut aminos',                            3: '2 tsp coconut aminos'                            } },
-      { byScale: { 1: '½ tsp non-iodized sea salt',                     2: '¾ tsp non-iodized sea salt',                       3: '1 tsp non-iodized sea salt'                      } }
+      { byScale: { 1: '½ tsp salt',                     2: '¾ tsp salt',                       3: '1 tsp salt'                      }, note: 'Diamond Crystal kosher — calibrated for DC; this seasons the protein from within during the velvet rest, don\'t sub Morton\'s at the same volume' }
     ]},
     { group: 'Brown sauce — mix in a bowl before cooking', items: [
       { byScale: { 1: '4 tbsp coconut aminos',                          2: '6 tbsp coconut aminos',                            3: '½ cup coconut aminos'                            } },
@@ -2055,7 +2055,7 @@ const RECIPES = [
       { byScale: { 1: '½ tsp black pepper',  2: '1 tsp black pepper',   3: '1½ tsp black pepper'  } },
       { byScale: { 1: '¼ tsp cinnamon',      2: '½ tsp cinnamon',       3: '¾ tsp cinnamon'       } },
       { byScale: { 1: '¼ cup fresh parsley, roughly chopped', 2: '½ cup fresh parsley', 3: '¾ cup fresh parsley' } },
-      { byScale: { 1: '1 tsp non-iodized sea salt', 2: '2 tsp non-iodized sea salt', 3: '1 tbsp non-iodized sea salt' } },
+      { byScale: { 1: '1 tsp salt', 2: '2 tsp salt', 3: '1 tbsp salt' } },
       { name: 'Sumac, for finishing — generous' }
     ]},
     { group: 'ACV chimichurri', items: [
@@ -2064,11 +2064,11 @@ const RECIPES = [
       { byScale: { 1: '1 clove garlic',      2: '2 cloves garlic',      3: '3 cloves garlic'      } },
       { byScale: { 1: '1 tbsp Bragg\'s ACV', 2: '2 tbsp Bragg\'s ACV',  3: '3 tbsp Bragg\'s ACV'  }, note: 'start here — taste and adjust' },
       { byScale: { 1: '3 tbsp olive oil',    2: '5 tbsp olive oil',     3: '½ cup olive oil'      } },
-      { name: 'Non-iodized sea salt to taste' }
+      { name: 'Salt to taste' }
     ]},
     { group: 'Charred cabbage', items: [
       { byScale: { 1: '¼ head green cabbage', 2: '½ head green cabbage', 3: '1 head green cabbage' }, note: 'cut into wedges through the core so they hold together' },
-      { name: 'Olive oil + non-iodized sea salt' },
+      { name: 'Olive oil + salt' },
       { name: 'Bragg\'s ACV, to finish' }
     ]},
     { group: 'Rice', items: [
@@ -2086,7 +2086,7 @@ const RECIPES = [
     'pepper':     { display: 'black pepper',   tips: { 1: '½ tsp',                  2: '1 tsp',                  3: '1½ tsp'                  } },
     'cinnamon':   { display: 'cinnamon',       tips: { 1: '¼ tsp',                  2: '½ tsp',                  3: '¾ tsp'                   } },
     'parsley-k':  { display: 'parsley',        tips: { 1: '¼ cup, roughly chopped', 2: '½ cup, roughly chopped', 3: '¾ cup, roughly chopped'  } },
-    'salt-k':     { display: 'sea salt',       tips: { 1: '1 tsp',                  2: '2 tsp',                  3: '1 tbsp'                  } },
+    'salt-k':     { display: 'salt',       tips: { 1: '1 tsp',                  2: '2 tsp',                  3: '1 tbsp'                  } },
     'parsley-s':  { display: 'parsley',        tips: { 1: '½ cup packed',           2: '1 cup packed',           3: '1½ cups packed'          } },
     'mint-s':     { display: 'mint',           tips: { 1: '2 tbsp',                 2: '¼ cup',                  3: '6 tbsp'                  } },
     'garlic-s':   { display: 'garlic',         tips: { 1: '1 clove',                2: '2 cloves',               3: '3 cloves'                } },
@@ -2189,7 +2189,7 @@ const RECIPES = [
   mise: [
     { group: 'Lamb rib chops', items: [
       { byScale: { 1: '~¾ lb lamb rib chops (1 pack)', 2: '~1.5 lbs lamb rib chops (2 packs)', 3: '~2.25 lbs lamb rib chops (3 packs)' }, note: 'pat aggressively dry — cold-water-thawed chops hold extra surface moisture; press hard with paper towels' },
-      { name: 'Non-iodized sea salt, very generous' },
+      { name: 'Salt, very generous' },
       { name: 'Black pepper' },
       { name: 'Avocado oil' }
     ]},
@@ -2203,7 +2203,7 @@ const RECIPES = [
     ]},
     { group: 'Roasted carrots', items: [
       { byScale: { 1: '3–4 large carrots, bias-cut thick', 2: '5–6 large carrots, bias-cut thick', 3: '8 large carrots, bias-cut thick' } },
-      { name: 'Avocado oil + non-iodized sea salt' }
+      { name: 'Avocado oil + salt' }
     ]},
     { group: 'Garlic scapes', items: [
       { byScale: { 1: 'A few garlic scapes', 2: '5–6 garlic scapes', 3: '8–10 garlic scapes' }, note: 'add to the oven at the 15-min carrot mark — last 8–10 min only' },
@@ -2346,14 +2346,14 @@ const RECIPES = [
       { byScale: { 1: '1½ tbsp mushroom umami powder',   2: '2 tbsp mushroom umami powder',     3: '2½ tbsp mushroom umami powder'    } },
       { byScale: { 1: '1 tsp Chinese five spice',        2: '1½ tsp Chinese five spice',        3: '2 tsp Chinese five spice'         }, note: 'potent — do not exceed' },
       { byScale: { 1: '1 tbsp Bragg\'s ACV',             2: '1½ tbsp Bragg\'s ACV',             3: '2 tbsp Bragg\'s ACV'              } },
-      { byScale: { 1: '½ tsp non-iodized sea salt',      2: '¾ tsp non-iodized sea salt',       3: '1 tsp non-iodized sea salt'       } }
+      { byScale: { 1: '½ tsp salt',      2: '¾ tsp salt',       3: '1 tsp salt'       } }
     ]},
     { group: 'Arrowroot slurry — keep separate, add at end', items: [
       { byScale: { 1: '3 tbsp arrowroot + 3 tbsp cold water', 2: '4 tbsp arrowroot + 4 tbsp cold water', 3: '5 tbsp arrowroot + 5 tbsp cold water' }, note: 'whisk smooth — it settles, stir again right before adding' }
     ]},
     { group: 'Broccoli', items: [
       { byScale: { 1: '2 large heads broccoli, large florets', 2: '3 large heads broccoli, large florets', 3: '4 large heads broccoli, large florets' }, note: 'go big on floret size — they shrink and you want presence on the plate' },
-      { name: 'Avocado oil + non-iodized sea salt' }
+      { name: 'Avocado oil + salt' }
     ]},
     { group: 'Beef & velvet marinade', items: [
       { byScale: { 1: '1–1.5 lbs mixed top sirloin + flat iron, thinly sliced', 2: 'top sirloin 1.3 lb + flat iron 0.88 lb (~2.2 lbs total), thinly sliced', 3: '3+ lbs mixed cuts, thinly sliced' }, note: '¼ inch, bias cut, against the grain — flat iron grain can shift mid-cut' },
@@ -2488,7 +2488,7 @@ const RECIPES = [
     ]},
     { group: 'Ground beef', items: [
       { byScale: { 1: '½ lb grass-fed ground beef', 2: '1 lb grass-fed ground beef', 3: '1½ lbs grass-fed ground beef' }, note: 'room temp if you can — cold beef steams before it browns' },
-      { name: 'Non-iodized sea salt + white pepper' }
+      { name: 'Salt + white pepper' }
     ]},
     { group: 'Sauce — mix in bowl before cooking', items: [
       { byScale: { 1: '2 tbsp coconut aminos',       2: '¼ cup coconut aminos',        3: '6 tbsp coconut aminos'        } },
@@ -2598,7 +2598,7 @@ const RECIPES = [
       { byScale: { 1: '2 cloves garlic, grated', 2: '4 cloves garlic, grated', 3: '5 cloves garlic, grated' } },
       { byScale: { 1: '½ tsp cumin', 2: '1 tsp cumin', 3: '1½ tsp cumin' } },
       { byScale: { 1: '½ tsp coriander', 2: '1 tsp coriander', 3: '1½ tsp coriander' } },
-      { name: 'Black pepper + non-iodized sea salt' }
+      { name: 'Black pepper + salt' }
     ]},
     { group: 'Chimichurri — make 1–2 hrs ahead', items: [
       { byScale: { 1: '¼ cup parsley, packed', 2: '½ cup parsley, packed', 3: '¾ cup parsley, packed' } },
@@ -2609,21 +2609,21 @@ const RECIPES = [
       { byScale: { 1: '¼ tsp coriander', 2: '½ tsp coriander', 3: '¾ tsp coriander' } },
       { byScale: { 1: '1 tbsp homemade RWV', 2: '2 tbsp homemade RWV', 3: '3 tbsp homemade RWV' }, note: 'preferred — better depth in raw herb sauce; Bragg\'s ACV works as fallback, same quantity' },
       { byScale: { 1: '¼ cup olive oil', 2: '½ cup olive oil', 3: '¾ cup olive oil' } },
-      { name: 'Non-iodized sea salt + black pepper' }
+      { name: 'Salt + black pepper' }
     ]},
     { group: 'Sweet potato planks', items: [
       { byScale: { 1: '1 medium sweet potato, scrubbed', 2: '2 medium sweet potatoes, scrubbed', 3: '3 medium sweet potatoes, scrubbed' }, note: 'slice ½" lengthwise' },
-      { name: 'Avocado oil + non-iodized sea salt' }
+      { name: 'Avocado oil + salt' }
     ]},
     { group: 'Grilled onion', items: [
       { byScale: { 1: '½ large red or sweet yellow onion', 2: '1 large red or sweet yellow onion', 3: '2 medium onions' }, note: 'halved through the root, skin on' },
-      { name: 'Avocado oil + non-iodized sea salt' }
+      { name: 'Avocado oil + salt' }
     ]},
     { group: 'Avo smash', items: [
       { byScale: { 1: '1 ripe avocado', 2: '2 ripe avocados', 3: '3 ripe avocados' } },
       { byScale: { 1: '½ tbsp Bragg\'s ACV', 2: '1 tbsp Bragg\'s ACV', 3: '1½ tbsp Bragg\'s ACV' } },
       { name: 'Sumac — ¼ tsp in + more to finish' },
-      { name: 'Non-iodized sea salt' },
+      { name: 'Salt' },
       { name: 'Black garlic, 1 clove smashed — optional' }
     ]}
   ],
@@ -2729,7 +2729,7 @@ const RECIPES = [
     { group: 'Chicken (universal across all paths)', items: [
       { byScale: { 1: '2 bone-in skin-on chicken thighs', 2: '4 bone-in skin-on chicken thighs', 3: '6 bone-in skin-on chicken thighs' }, note: 'pat bone-dry with paper towels — really dry, not damp-dry' },
       { byScale: { 1: '½ tbsp avocado oil', 2: '1 tbsp avocado oil', 3: '1½ tbsp avocado oil' }, note: 'thin coat on both sides — skin and bone side' },
-      { name: 'Non-iodized sea salt + cracked black pepper, generously on both sides' }
+      { name: 'Salt + cracked black pepper, generously on both sides' }
     ]},
     { group: 'PATH 1 — Garam masala (house default)', items: [
       { byScale: { 1: '1 tbsp garam masala', 2: '2 tbsp garam masala', 3: '3 tbsp garam masala' }, note: 'work it into skin and meat side after oil + salt' }
@@ -2807,6 +2807,111 @@ const RECIPES = [
       text:  'Whatever sides you have. Charred green onions or shallots off the hot zone, an avo smash with ACV and sumac, a pile of jasmine rice, or just thighs on a board with flaky salt — they hold up alone.',
       tip:   null,
       timers: []
+    }
+  ]
+},
+
+{
+  id: 'wagyu-blueberry-bowl',
+  title: 'Wagyu Beef & Blueberry Pan Sauce Bowl',
+  style: 'Carbon steel sear · blueberry-ACV pan sauce · fennel & thyme',
+  subtitle: 'Jasmine rice · charred broccoli',
+  preheat: '425°F',
+  serves: '1–3',
+  tags: ['beef', 'weeknight', 'phase 1'],
+  prepTime: '10 min',
+  cookTime: '30 min',
+  headnote: `<strong>Bloom whole fennel seeds first, dry pan.</strong> This is the flavor foundation — don't skip it or rush it. The seeds should pop and smell like anise before any fat goes in.<br><br><strong>Pull the beef before the sauce.</strong> Building the sauce separately in the same pan lets the fond release cleanly and the blueberries break down into something jammy and glossy, not muddy.<br><br><em>Note for next time: add a second vegetable — edamame when cleared would be ideal here.</em>`,
+  equipment: [
+    { name: '10" carbon steel skillet', note: 'essential for fond development' },
+    { name: 'Half sheet pan', note: 'broccoli — don\'t crowd it' },
+    { name: 'Zojirushi rice cooker' }
+  ],
+  mise: [
+    { group: 'Rice', items: [
+      { byScale: { 1: '¾ cup jasmine rice, rinsed', 2: '1½ cups jasmine rice, rinsed', 3: '2¼ cups jasmine rice, rinsed' } }
+    ]},
+    { group: 'Beef', items: [
+      { byScale: { 1: '½ lb wagyu ground beef', 2: '1 lb wagyu ground beef', 3: '1½ lbs wagyu ground beef' } },
+      { name: 'Salt + black pepper' }
+    ]},
+    { group: 'Aromatics', items: [
+      { byScale: { 1: '½ medium yellow onion, small dice', 2: '1 medium yellow onion, small dice', 3: '1½ yellow onions, small dice' } },
+      { byScale: { 1: '2 cloves garlic, crushed', 2: '4 cloves garlic, crushed', 3: '6 cloves garlic, crushed' } },
+      { byScale: { 1: '1–2 cloves black garlic, smashed', 2: '2–3 cloves black garlic, smashed', 3: '3–4 cloves black garlic, smashed' } },
+      { byScale: { 1: '½ tsp fennel seed', 2: '1 tsp fennel seed', 3: '1½ tsp fennel seed' }, note: 'whole — do not crush' },
+      { byScale: { 1: '2–3 sprigs fresh thyme', 2: '4–5 sprigs fresh thyme', 3: '6–7 sprigs fresh thyme' } }
+    ]},
+    { group: 'Sauce — mix before cooking', items: [
+      { byScale: { 1: '½ cup blueberries', 2: '1 cup blueberries', 3: '1½ cups blueberries' } },
+      { byScale: { 1: '¼ cup bone broth', 2: '½ cup bone broth', 3: '¾ cup bone broth' } },
+      { byScale: { 1: '1 tbsp Bragg\'s ACV', 2: '2 tbsp Bragg\'s ACV', 3: '3 tbsp Bragg\'s ACV' } },
+      { byScale: { 1: '1 tbsp coconut aminos', 2: '2 tbsp coconut aminos', 3: '3 tbsp coconut aminos' } }
+    ]},
+    { group: 'Broccoli', items: [
+      { byScale: { 1: '½ head broccoli, florets + stems bias-sliced', 2: '1 large head broccoli, florets + stems bias-sliced', 3: '2 heads broccoli, florets + stems bias-sliced' } },
+      { name: 'Avocado oil + salt' }
+    ]},
+    { group: 'Finish', items: [
+      { byScale: { 1: '2 green onions, bias-cut', 2: '3–4 green onions, bias-cut', 3: '5 green onions, bias-cut' } }
+    ]}
+  ],
+  refs: {
+    'fennel':   { display: 'fennel seed',     tips: { 1: '½ tsp whole', 2: '1 tsp whole', 3: '1½ tsp whole' } },
+    'beef':     { display: 'wagyu beef',      tips: { 1: '½ lb', 2: '1 lb', 3: '1½ lbs' } },
+    'sauce':    { display: 'sauce',           tips: { 1: '½ cup berries · ¼ cup broth · 1 tbsp ACV · 1 tbsp aminos', 2: '1 cup berries · ½ cup broth · 2 tbsp ACV · 2 tbsp aminos', 3: '1½ cups berries · ¾ cup broth · 3 tbsp ACV · 3 tbsp aminos' } },
+    'broccoli': { display: 'broccoli',        tips: { 1: '½ head', 2: '1 large head', 3: '2 heads' } }
+  },
+  timers: {
+    'broccoli': { label: 'Charred broccoli', preset: 1620, bell: true },
+    'onion':    { label: 'Onion base',       preset: 480,  bell: false },
+    'beef':     { label: 'Sear beef',        preset: 420,  bell: false },
+    'berries':  { label: 'Burst berries',    preset: 120,  bell: false },
+    'sauce':    { label: 'Reduce sauce',     preset: 420,  bell: true },
+    'marry':    { label: 'Marry beef + sauce', preset: 120, bell: true }
+  },
+  steps: [
+    {
+      label: 'Broccoli in',
+      text: 'Toss {{broccoli}} with a generous pour of avocado oil and salt — more than you think. Single layer on a half sheet pan, don\'t crowd it. 425°F, top rack. You want real char on the floret tips, not just browning. Don\'t touch it until the last 5 minutes.',
+      tip: 'Bias-cut stems roast faster than florets — spread them toward the edges of the pan where it\'s hotter.',
+      timers: ['broccoli']
+    },
+    {
+      label: 'Bloom the fennel',
+      text: 'Carbon steel skillet, medium-high, completely dry. Add {{fennel}} and let them toast until fragrant and just starting to pop — 60 to 90 seconds. That smell is the foundation. Then add a two-count of avocado oil.',
+      tip: 'Whole seeds only — crushed fennel goes bitter fast in a hot dry pan.',
+      timers: []
+    },
+    {
+      label: 'Build the aromatic base',
+      text: 'Onion in, salt it immediately. Cook stirring occasionally until soft and going golden. Add crushed garlic and thyme. Two more minutes — garlic should smell sweet, not sharp.',
+      tip: null,
+      timers: ['onion']
+    },
+    {
+      label: 'Sear the beef',
+      text: 'Push aromatics to the edges, crank to high. {{beef}} in — break into large chunks and leave it alone. Let it sear and develop color before breaking it up further. You want dark fond on the bottom of the pan. Season aggressively with salt and black pepper.',
+      tip: 'Wagyu fat will render fast. Don\'t be alarmed by how much fat is in the pan — it\'s all going to work for you.',
+      timers: ['beef']
+    },
+    {
+      label: 'Pull beef, start sauce',
+      text: 'Spoon beef and aromatics into a bowl, leaving the fat and fond in the pan. Reduce to medium. Blueberries from {{sauce}} in — they\'ll start bursting almost immediately, about 2 minutes. Then add the broth, ACV, coconut aminos, and smashed black garlic. Scrape every bit of fond off the bottom — that\'s the flavor, get it all up.',
+      tip: null,
+      timers: ['berries']
+    },
+    {
+      label: 'Reduce the sauce',
+      text: 'Steady simmer, stirring occasionally, until blueberries are fully broken down and jammy and the sauce coats a spoon — glossy, not watery. Taste: it wants to be savory-forward with berry depth behind it, not sweet. ACV is your lever if it needs more acid.',
+      tip: null,
+      timers: ['sauce']
+    },
+    {
+      label: 'Marry it',
+      text: 'Beef and aromatics back in. Fold together and cook 2 more minutes so the meat absorbs the sauce. The whole thing should be glossy and cohesive, not swimming.',
+      tip: null,
+      timers: ['marry']
     }
   ]
 }
