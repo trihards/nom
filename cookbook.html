@@ -90,6 +90,34 @@ button { font-family: inherit; cursor: pointer; }
 .card-style { font-size: 12px; color: var(--muted); font-style: italic; line-height: 1.4; margin-top: 2px; }
 .card-sub { font-size: 12px; color: var(--dim); line-height: 1.4; margin-top: 2px; }
 .card-soon { font-size: 12px; color: var(--dim); margin-top: auto; }
+
+/* Filter bar */
+.filter-bar {
+  display: flex; flex-wrap: wrap; align-items: center;
+  gap: 8px; margin-bottom: 28px;
+}
+.filter-search {
+  flex: 1; min-width: 180px; max-width: 300px;
+  font-size: 13px; color: var(--text);
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 8px; padding: 7px 12px;
+  outline: none; transition: border-color .15s;
+}
+.filter-search::placeholder { color: var(--dim); }
+.filter-search:focus { border-color: var(--accent-dim); }
+.filter-btn {
+  font-size: 12px; font-weight: 600; letter-spacing: 0.2px;
+  color: var(--muted); background: var(--surface);
+  border: 1px solid var(--border); border-radius: 20px;
+  padding: 5px 13px; cursor: pointer; transition: all .15s;
+}
+.filter-btn:hover { border-color: var(--accent-dim); color: var(--text); }
+.filter-btn.active {
+  background: var(--accent-bg); border-color: var(--warn-bdr);
+  color: var(--accent);
+}
+.filter-count { font-size: 12px; color: var(--dim); margin-left: auto; }
+
 .card-time {
   display: flex; gap: 12px; flex-wrap: wrap;
   font-size: 12px; color: var(--muted); margin-top: 2px;
@@ -397,6 +425,18 @@ button { font-family: inherit; cursor: pointer; }
   <div class="lib-hdr">
     <h1>EL <span>YES!</span> cookbook</h1>
   </div>
+  <div class="filter-bar" id="filter-bar">
+    <input class="filter-search" id="filter-search" type="search" placeholder="Search recipes…" oninput="renderLibrary()" autocomplete="off">
+    <button class="filter-btn" data-tag="chicken" onclick="toggleFilter('chicken')">chicken</button>
+    <button class="filter-btn" data-tag="beef" onclick="toggleFilter('beef')">beef</button>
+    <button class="filter-btn" data-tag="lamb" onclick="toggleFilter('lamb')">lamb</button>
+    <button class="filter-btn" data-tag="weeknight" onclick="toggleFilter('weeknight')">weeknight</button>
+    <button class="filter-btn" data-tag="weekend" onclick="toggleFilter('weekend')">weekend</button>
+    <button class="filter-btn" data-tag="grill" onclick="toggleFilter('grill')">grill</button>
+    <button class="filter-btn" data-tag="batch" onclick="toggleFilter('batch')">batch</button>
+    <button class="filter-btn" data-tag="dessert" onclick="toggleFilter('dessert')">dessert</button>
+    <span class="filter-count" id="filter-count"></span>
+  </div>
   <div class="recipe-grid" id="recipe-grid"></div>
 </div>
 
@@ -453,7 +493,7 @@ const RECIPES = [
   subtitle: 'Haiga rice · charred broccoli · sweet potato mash',
   preheat: '425°F',
   serves: '1–3',
-  tags: ['chicken', 'weeknight', 'phase 1'],
+  tags: ['chicken', 'weeknight'],
   prepTime: '15 min',
   cookTime: '45 min',
 
@@ -596,7 +636,7 @@ const RECIPES = [
   ],
   preheat: '425°F',
   serves: '1–3',
-  tags: ['lamb', 'weekend', 'phase 1'],
+  tags: ['lamb', 'weekend'],
   prepTime: '15 min',
   cookTime: '30 min',
 
@@ -699,7 +739,7 @@ const RECIPES = [
   subtitle: 'Blueberry-mint · strawberry-herb · mixed berry · pairs with lamb or chicken',
   preheat: null,
   serves: '1–3',
-  tags: ['sauce', 'make-ahead', 'phase 1'],
+  tags: ['sauce', 'make-ahead'],
   prepTime: '5 min',
   cookTime: '15 min',
 
@@ -783,7 +823,7 @@ const RECIPES = [
   subtitle: 'Arugula · guac · coconut yogurt crema · plantain chips',
   preheat: null,
   serves: '1–3',
-  tags: ['beef', 'weeknight', 'phase 1'],
+  tags: ['beef', 'weeknight'],
   prepTime: '15 min',
   cookTime: '15 min',
 
@@ -799,7 +839,7 @@ const RECIPES = [
       { byScale: { 1: '¼ small red onion, thinly sliced',      2: '½ red onion, thinly sliced',           3: '¾ red onion, thinly sliced'             }, note: 'half goes in the pickle, half stays fresh for topping' },
       { byScale: { 1: '1 tbsp Bragg\'s ACV',                   2: '2 tbsp Bragg\'s ACV',                  3: '3 tbsp Bragg\'s ACV'                    } },
       { byScale: { 1: '¼ tsp raw sugar',                       2: '½ tsp raw sugar',                      3: '¾ tsp raw sugar'                        } },
-      { byScale: { 1: '¾ tsp salt', 2: '1¼ tsp salt', 3: '1¾ tsp salt' }, note: 'Diamond Crystal kosher — salt is doing osmosis work here, not just seasoning; don\'t eyeball it' }
+      { byScale: { 1: '¾ tsp salt', 2: '1¼ tsp salt', 3: '1¾ tsp salt' } }
     ]},
     { group: 'Coconut yogurt crema', items: [
       { byScale: { 1: '3 tbsp plain coconut yogurt',           2: '6 tbsp plain coconut yogurt',          3: '½ cup plain coconut yogurt'             } },
@@ -888,7 +928,7 @@ const RECIPES = [
   subtitle: 'Wilted spinach · rough guac · plantain chips',
   preheat: null,
   serves: '1–3',
-  tags: ['chicken', 'quick', 'phase 1'],
+  tags: ['chicken', 'quick'],
   prepTime: '10 min',
   cookTime: '20 min',
 
@@ -988,12 +1028,12 @@ const RECIPES = [
   subtitle: 'Gai lan in garlic oil · jasmine rice',
   preheat: null,
   serves: '1–3',
-  tags: ['chicken', 'weeknight', 'phase 1'],
+  tags: ['chicken', 'weeknight'],
   prepTime: '20 min',
   cookTime: '30 min',
 
   equipment: [
-    { name: '12-inch cast iron or carbon steel skillet', note: 'does everything — garlic fry, chicken sear, gai lan finish, all in sequence' },
+    { name: 'Le Creuset 30cm everyday pan', note: 'does everything — garlic fry, chicken sear, gai lan finish, all in sequence; big enough that you\'re not batching' },
     { name: 'Zojirushi rice cooker' },
     { name: 'Small bowl',                               note: 'for the sauce — mix before the stove turns on' },
     { name: 'Slotted spoon',                            note: 'for pulling the garlic — have it ready before garlic goes in' },
@@ -1119,7 +1159,7 @@ const RECIPES = [
   subtitle: 'Jasmine rice',
   preheat: null,
   serves: '1–3',
-  tags: ['beef', 'weeknight', 'phase 1'],
+  tags: ['beef', 'weeknight'],
   prepTime: '15 min',
   cookTime: '30 min',
 
@@ -1232,7 +1272,7 @@ const RECIPES = [
   subtitle: 'Mashed rutabaga',
   preheat: '325°F',
   serves: '2+',
-  tags: ['beef', 'weekend', 'phase 1'],
+  tags: ['beef', 'weekend'],
   prepTime: '20 min',
   cookTime: '3 hrs',
 
@@ -1364,7 +1404,7 @@ const RECIPES = [
   subtitle: 'Jasmine rice · green olives · heavy cilantro',
   preheat: null,
   serves: '1–3',
-  tags: ['beef', 'weeknight', 'phase 1'],
+  tags: ['beef', 'weeknight'],
 
   equipment: [
     { name: 'Large skillet or everyday pan',  note: 'carbon steel, cast iron, or the Staub — needs to get hot enough to brown mushrooms' },
@@ -1483,7 +1523,7 @@ const RECIPES = [
   subtitle: 'Roasted mashed orange sweet potato',
   preheat: '400°F',
   serves: '1–3',
-  tags: ['chicken', 'weeknight', 'phase 1'],
+  tags: ['chicken', 'weeknight'],
   prepTime: '10 min',
   cookTime: '50 min',
 
@@ -1604,7 +1644,7 @@ const RECIPES = [
   subtitle: 'Dessert · no dairy · no coconut · ten minutes of work',
   preheat: '375°F',
   serves: '1–3',
-  tags: ['dessert', 'fruit', 'phase 1'],
+  tags: ['dessert', 'fruit'],
   prepTime: '5 min',
   cookTime: '40 min',
 
@@ -1682,7 +1722,7 @@ const RECIPES = [
   subtitle: 'Freeze bananas 2+ hours ahead · blends in 60 seconds',
   preheat: null,
   serves: '1–3',
-  tags: ['dessert', 'fruit', 'phase 1'],
+  tags: ['dessert', 'fruit'],
   prepTime: '5 min + 2 hr freeze',
   cookTime: '0 min',
 
@@ -1748,14 +1788,14 @@ const RECIPES = [
   subtitle: 'Charred florets · stem matchsticks · cabbage · mushrooms · jasmine rice',
   preheat: '425°F',
   serves: '1–3',
-  tags: ['beef', 'weeknight', 'phase 1'],
+  tags: ['beef', 'weeknight'],
   prepTime: '15 min',
   cookTime: '35 min',
 
   headnote: `<strong>Broccoli works two ways here</strong> — florets go into the oven early and come out charred and intense; stems get peeled and cut into thick matchsticks for the stir fry base where they stay crisp and take the sauce differently. The sirloin is thin-sliced, which is an asset: quick sear in batches, set aside, back in at the end.<br><br><em>Sauce is intentionally generous. Keep extra warm broth on the side — if the slurry tightens things too much, a splash brings it back.</em>`,
 
   equipment: [
-    { name: '12-inch cast iron or Le Creuset everyday pan', note: 'needs to stay screaming hot throughout — don\'t let it cool between steps' },
+    { name: 'Le Creuset 30cm everyday pan', note: 'use this over cast iron — the volume matters; needs to stay screaming hot throughout' },
     { name: 'Sheet pan',                                    note: 'for the florets at 425°F' },
     { name: 'Zojirushi rice cooker' },
     { name: 'Small bowl',                                   note: 'for the sauce — mix before anything hits the stove' },
@@ -1883,14 +1923,14 @@ const RECIPES = [
   style: 'Velveted chicken breast · shiitakes · Chinese-American brown sauce',
   subtitle: 'Loads of celery · carrots · toasted sesame · jasmine rice',
   serves: '1–3',
-  tags: ['chicken', 'weeknight', 'phase 1'],
+  tags: ['chicken', 'weeknight'],
   prepTime: '25 min',
   cookTime: '20 min',
 
   headnote: `<strong>Cashew chicken without the cashews</strong> — or more precisely, cashew chicken where the shiitakes do more interesting work than cashews ever did. The velveting step (arrowroot + oil marinade on the raw chicken) is what gives you that silky-restaurant texture; don't skip it. Celery is the star, not a supporting player — bias-cut, added last, pulled while it still has snap.<br><br><em>Five spice is the structural move: it's what gives Chinese-American brown sauce its depth without reaching for anything off-protocol. Keep it at ¼ tsp per pound of chicken — it gets loud fast. Sauce volume is intentionally generous. If it tightens too much after the slurry, a splash of extra broth brings it right back.</em>`,
 
   equipment: [
-    { name: '12-inch cast iron or carbon steel skillet', note: 'needs to stay hot throughout — don\'t let it cool between batches' },
+    { name: 'Le Creuset 30cm everyday pan', note: 'volume is the move here — too many ingredients for a 12-inch skillet without batching everything to death' },
     { name: 'Zojirushi rice cooker' },
     { name: 'Small bowl',                                note: 'for the sauce — mix before anything hits the stove' },
     { name: 'Small cup',                                 note: 'for the arrowroot slurry — kept separate from the sauce' }
@@ -1905,7 +1945,7 @@ const RECIPES = [
       { byScale: { 1: '1½ tsp arrowroot starch',                        2: '2 tsp arrowroot starch',                           3: '1 tbsp arrowroot starch'                         } },
       { byScale: { 1: '1 tbsp avocado oil',                             2: '1½ tbsp avocado oil',                              3: '2 tbsp avocado oil'                              } },
       { byScale: { 1: '1 tsp coconut aminos',                           2: '1½ tsp coconut aminos',                            3: '2 tsp coconut aminos'                            } },
-      { byScale: { 1: '½ tsp salt',                     2: '¾ tsp salt',                       3: '1 tsp salt'                      }, note: 'Diamond Crystal kosher — calibrated for DC; this seasons the protein from within during the velvet rest, don\'t sub Morton\'s at the same volume' }
+      { byScale: { 1: '½ tsp salt',                     2: '¾ tsp salt',                       3: '1 tsp salt'                      } }
     ]},
     { group: 'Brown sauce — mix in a bowl before cooking', items: [
       { byScale: { 1: '4 tbsp coconut aminos',                          2: '6 tbsp coconut aminos',                            3: '½ cup coconut aminos'                            } },
@@ -2030,7 +2070,7 @@ const RECIPES = [
   subtitle: 'Jasmine rice in bone broth · charred cabbage wedges',
   preheat: null,
   serves: '1–3',
-  tags: ['beef', 'weeknight', 'grill', 'phase 1'],
+  tags: ['beef', 'weeknight', 'grill'],
   prepTime: '15 min',
   cookTime: '25 min',
 
@@ -2171,7 +2211,7 @@ const RECIPES = [
   ],
   preheat: '425°F',
   serves: '2–6',
-  tags: ['lamb', 'weekend', 'phase 1', 'family'],
+  tags: ['lamb', 'weekend', 'family'],
   prepTime: '20 min',
   cookTime: '45 min',
 
@@ -2315,7 +2355,7 @@ const RECIPES = [
   subtitle: 'Seared beef & charred broccoli · jasmine rice',
   preheat: '450°F',
   serves: '2–8',
-  tags: ['beef', 'weekend', 'batch', 'phase 1'],
+  tags: ['beef', 'weekend', 'batch'],
   prepTime: '20 min',
   cookTime: '45 min',
 
@@ -2465,7 +2505,7 @@ const RECIPES = [
   subtitle: 'Jasmine rice · florets saved for roasting',
   preheat: null,
   serves: '1–3',
-  tags: ['beef', 'weeknight', 'quick', 'phase 1'],
+  tags: ['beef', 'weeknight', 'quick'],
   prepTime: '10 min',
   cookTime: '20 min',
 
@@ -2576,7 +2616,7 @@ const RECIPES = [
   subtitle: 'Grilled sweet potato planks · charred onion · avo smash',
   preheat: null,
   serves: '1–3',
-  tags: ['beef', 'weeknight', 'grill', 'phase 1'],
+  tags: ['beef', 'weeknight', 'grill'],
   prepTime: '20 min + 2–6 hr marinade',
   cookTime: '30 min',
   headnote: `<strong>Flap meat loves a long marinade.</strong> It's a thin cut with open grain — 4–6 hours is ideal, 2 hours is fine, 30 minutes is a waste of time. Get the meat in as soon as you're back from the store and let time do the work.<br><br><strong>Slice against the grain or you'll regret it.</strong> Flap has a very visible grain running diagonally across the cut. Find it before you pick up the knife and cut perpendicular — thin, ¼-inch slices. The difference between tender and chewy is entirely this.<br><br><em>Chimichurri made 1–2 hours ahead is dramatically better than fresh. The herbs soften, the garlic mellows, the ACV rounds out. Make it early and leave it at room temp.</em>`,
@@ -2715,7 +2755,7 @@ const RECIPES = [
   subtitle: 'Five seasoning paths · sides open',
   preheat: null,
   serves: '1–3',
-  tags: ['chicken', 'weeknight', 'grill', 'phase 1'],
+  tags: ['chicken', 'weeknight', 'grill'],
   prepTime: '10 min',
   cookTime: '25 min + 5 min rest',
   headnote: `<strong>Reverse-sear or you'll burn the skin.</strong> Bone-in thighs hold an enormous amount of fat in the skin and it has to render slowly with no flame underneath, or it drips, flares, and torches the skin before the bone hits temp. Skin-down on the COOL side first, lid closed, 15–18 minutes. Then skin-down on the hot side for 2–3 minutes to crisp the now-mostly-rendered skin. Starting hot is the instinct and it's wrong every time.<br><br><strong>Five seasoning paths, one technique.</strong> Garam masala is the house default (Tracy's pick — warm, sweet-spiced). Fresh thyme + mashed black garlic + cracked pepper goes herbal-funky. Herbes de Provence + sumac leans Provençal-floral. Chinese five spice + ground ginger + onion granules swings east. Crushed fennel + sage + black pepper does Italian-sausage-on-the-bone. The cook is identical across all five — only the rub changes.<br><br><em>Universal prep: pat the thighs bone-dry, thin coat of avocado oil on both sides, then season aggressively. Wet skin steams and won't crisp. Oil the chicken, not the grate.</em>`,
@@ -2818,7 +2858,7 @@ const RECIPES = [
   subtitle: 'Jasmine rice · charred broccoli',
   preheat: '425°F',
   serves: '1–3',
-  tags: ['beef', 'weeknight', 'phase 1'],
+  tags: ['beef', 'weeknight'],
   prepTime: '10 min',
   cookTime: '30 min',
   headnote: `<strong>Bloom whole fennel seeds first, dry pan.</strong> This is the flavor foundation — don't skip it or rush it. The seeds should pop and smell like anise before any fat goes in.<br><br><strong>Pull the beef before the sauce.</strong> Building the sauce separately in the same pan lets the fond release cleanly and the blueberries break down into something jammy and glossy, not muddy.<br><br><em>Note for next time: add a second vegetable — edamame when cleared would be ideal here.</em>`,
@@ -2923,7 +2963,7 @@ const RECIPES = [
   subtitle: 'Sweet potato halves, roasted broccoli, pan dripping broth',
   preheat: '425°F',
   serves: '1–3',
-  tags: ['chicken', 'weeknight', 'phase 1'],
+  tags: ['chicken', 'weeknight'],
   headnote: `<strong>Two jobs, one pan.</strong> The rough-chopped aromatics do double duty — they lift the chicken off the pan so heat circulates underneath, and they pre-roast into your broth base. Don't skip the backbone: it roasts alongside the bird and adds real color and depth to the broth.<br><br><strong>Spatchcocking is faster and more even than whole-bird roasting.</strong> The bird lays flat, the skin gets maximum oven exposure, and the whole thing is done in under an hour. Press hard on the breastbone — it needs to crack flat to cook evenly.<br><br><em>Sweet potatoes go cut-side down — that's where the caramelization happens. Broccoli goes in at the 35-minute mark so it gets color without turning to mush. Debone before serving and add the carcass to the pot with the backbone — deeper broth, cleaner plates.</em>`,
   equipment: [
     { name: 'Large sheet pan or roasting pan', note: 'for chicken and aromatic bed' },
@@ -3040,6 +3080,318 @@ const RECIPES = [
       timers: []
     }
   ]
+},
+// ─── ENTRY 1: BLUEBERRY REDUCTION — SAVORY + DESSERT ───────────────────────
+{
+  id: 'blueberry-reduction-two-yields',
+  title: 'Blueberry reduction — two yields',
+  style: 'Stovetop reduction · split mid-cook · savory drizzle + dessert compote',
+  subtitle: 'Pairs with grilled beef, shrimp, or lamb · compote for fruit and pudding',
+  preheat: null,
+  serves: '1–3',
+  tags: ['sauce', 'make-ahead', 'phase 2'],
+  prepTime: '5 min',
+  cookTime: '25 min',
+  headnote: `<strong>One pan, two yields.</strong> Start the reduction together, then split it halfway through: pull half as a loose savory drizzle for proteins and salads, keep reducing the rest into a thick jammy compote for dessert. The Ridge red wine vinegar and coconut aminos make this savory-forward in a way the berry-herb reduction isn't — richer, more complex, better suited to beef and shrimp.<br><br><strong>Make it first.</strong> Both yields hold warm easily and improve as they sit. The savory sauce loosens on reheating with a splash of broth; the compote needs nothing.<br><br><em>The two-yield split is the whole point — don't reduce it all the way down for the savory application or it gets too jammy for drizzling.</em>`,
+  equipment: [
+    { name: 'Small saucepan' },
+    { name: 'Wooden spoon or silicone spatula' },
+    { name: 'Small bowl', note: 'for the savory portion once pulled' },
+    { name: 'Small jar', note: 'if making ahead' }
+  ],
+  mise: [
+    { group: 'Everything into the pan together', items: [
+      { byScale: { 1: '1 cup fresh blueberries', 2: '2 cups fresh blueberries', 3: '3 cups fresh blueberries' } },
+      { byScale: { 1: '1 tbsp Bragg\'s ACV',     2: '2 tbsp Bragg\'s ACV',     3: '3 tbsp Bragg\'s ACV'     } },
+      { byScale: { 1: '¾ tbsp Ridge red wine vinegar', 2: '1½ tbsp Ridge red wine vinegar', 3: '2 tbsp Ridge red wine vinegar' } },
+      { byScale: { 1: '¾ tbsp coconut aminos',   2: '1½ tbsp coconut aminos',  3: '2 tbsp coconut aminos'   } },
+      { byScale: { 1: '¾ tbsp honey',            2: '1½ tbsp honey',           3: '2 tbsp honey'            } },
+      { name: 'Pinch salt + pinch black pepper' },
+      { name: '1 sprig fresh rosemary' }
+    ]},
+    { group: 'For the dessert compote (added to second half only)', items: [
+      { byScale: { 1: '½ tbsp honey',            2: '1 tbsp honey',            3: '1½ tbsp honey'           }, note: 'extra sweetener for the dessert reduction' },
+      { name: 'Small handful fresh mint, torn — add off heat' }
+    ]}
+  ],
+  refs: {
+    'blueberries': { display: 'blueberries',         tips: { 1: '1 cup',              2: '2 cups',             3: '3 cups'              } },
+    'acv':         { display: 'Bragg\'s ACV',         tips: { 1: '1 tbsp',             2: '2 tbsp',             3: '3 tbsp'              } },
+    'ridge':       { display: 'Ridge red wine vinegar', tips: { 1: '¾ tbsp',           2: '1½ tbsp',            3: '2 tbsp'              } },
+    'aminos':      { display: 'coconut aminos',       tips: { 1: '¾ tbsp',             2: '1½ tbsp',            3: '2 tbsp'              } },
+    'honey':       { display: 'honey',                tips: { 1: '¾ tbsp + ½ tbsp',   2: '1½ tbsp + 1 tbsp',   3: '2 tbsp + 1½ tbsp'   } },
+    'mint':        { display: 'fresh mint',           tips: { 1: 'small handful, torn', 2: 'small handful, torn', 3: 'generous handful, torn' } }
+  },
+  timers: {
+    'simmer':  { label: 'To simmer',         preset: 300,  bell: false },
+    'savory':  { label: 'Savory reduction',  preset: 600,  bell: true  },
+    'compote': { label: 'Compote reduction', preset: 480,  bell: true  }
+  },
+  steps: [
+    {
+      label: 'Start the pan',
+      text:  'Combine {{blueberries}}, {{acv}}, {{ridge}}, {{aminos}}, {{honey}}, salt, pepper, and rosemary sprig in a small saucepan over medium heat. Bring to a simmer — the berries will start popping and releasing juice. That color bloom and the sound of it bubbling is exactly right.',
+      tip:   null,
+      timers: ['simmer']
+    },
+    {
+      label: 'Reduce — pull savory portion',
+      text:  'Drop to medium-low. Stir occasionally and let it thicken until the sauce coats a spoon but still pours freely. Fish out the rosemary. Pull about half the sauce into a small bowl — that\'s your savory drizzle for proteins and salad. Loose, glossy, barely sweet. Set aside and keep warm.',
+      tip:   'Resist reducing it further at this stage. The savory sauce should still be pourable — you\'re spooning it over food, not spreading it.',
+      timers: ['savory']
+    },
+    {
+      label: 'Finish the compote',
+      text:  'Leave the remaining half in the pan. Add the extra {{honey}}. Keep reducing over medium-low until thick and jammy — it should hold its shape briefly on a spoon before slowly falling. Tear in the {{mint}} off the heat. Done.',
+      tip:   'The compote thickens further as it cools. If it goes too far, a tiny splash of water loosens it back on gentle heat.',
+      timers: ['compote']
+    }
+  ]
+},
+// ─── ENTRY 2: BONE-IN RIBEYE — SOLO STOVE CHARCOAL ─────────────────────────
+{
+  id: 'bone-in-ribeye-solo-stove',
+  title: 'Bone-in ribeye — Solo Stove charcoal',
+  style: 'Charcoal grill · direct high heat · fat cap rendered',
+  subtitle: 'Blueberry reduction drizzle · flaky salt finish',
+  preheat: null,
+  serves: '1–3',
+  tags: ['beef', 'weekend', 'phase 1'],
+  prepTime: '10 min',
+  cookTime: '15 min',
+  headnote: `<strong>Charcoal does what gas can't.</strong> The Solo Stove runs hotter and drier than a gas grill, and bone-in ribeye is the right cut for it — thick enough to get a real crust without overcooking through, fatty enough to stay rich under that heat. The bone conducts heat from the inside while the grates work the outside.<br><br><strong>Season aggressively 45 minutes out or right before the grill — nothing in between.</strong> Salt draws moisture out after a few minutes; if you season and then let it sit 10–30 minutes before cooking, you'll have a wet surface and a poor sear. Either go early (45+ min, let it reabsorb) or go right before it hits the grates.<br><br><em>Pull at 125–128°F. It carries to 130–132 on the rest. The fat cap render is not optional — it's where half the flavor is.</em>`,
+  equipment: [
+    { name: 'Solo Stove charcoal grill', note: 'full coal bed, 30 min preheat — no shortcuts' },
+    { name: 'Instant-read thermometer', note: 'for internal temp — don\'t guess on a steak this thick' },
+    { name: 'Tongs', note: 'for fat cap render — you\'ll be balancing the steak on edge' },
+    { name: 'Wire rack or cutting board', note: 'for resting — not a flat plate, it steams the crust' }
+  ],
+  mise: [
+    { group: 'Protein', items: [
+      { byScale: { 1: '1 bone-in ribeye (~1.5 lb)', 2: '2 bone-in ribeyes (~1.5 lb each)', 3: '3 bone-in ribeyes (~1.5 lb each)' }, note: 'pulled from fridge 45 min before cook' },
+      { name: 'Salt — aggressive on both sides and fat cap' },
+      { name: 'Black pepper — right before the grill, not before resting' },
+      { name: 'Avocado oil — light coat on the grate' }
+    ]},
+    { group: 'Finish', items: [
+      { name: 'Good olive oil — finishing drizzle after rest' },
+      { name: 'Flaky sea salt — after rest, before slicing' }
+    ]}
+  ],
+  refs: {
+    'ribeye': { display: 'bone-in ribeye', tips: { 1: '~1.5 lb, 45 min from fridge', 2: '~1.5 lb each, 45 min from fridge', 3: '~1.5 lb each, 45 min from fridge' } }
+  },
+  timers: {
+    'preheat':  { label: 'Solo Stove preheat', preset: 1800, bell: true  },
+    'side-1':   { label: 'Sear side one',      preset: 240,  bell: true  },
+    'side-2':   { label: 'Sear side two',      preset: 240,  bell: true  },
+    'fat-cap':  { label: 'Fat cap render',     preset: 90,   bell: true  },
+    'rest':     { label: 'Rest',               preset: 300,  bell: true  }
+  },
+  steps: [
+    {
+      label: 'Build the coal bed',
+      text:  'Full load of charcoal in the Solo Stove. Light it and walk away for 30 minutes. You want a deep, even orange coal bed with no active flames. Hand test 6 inches above the grate: 1–2 seconds max before you pull away. That\'s your temp. If you can hold it longer, wait.',
+      tip:   'Rushing the preheat is the most common charcoal mistake. An underpowered coal bed gives you grill marks, not a crust.',
+      timers: ['preheat']
+    },
+    {
+      label: 'Season and prep',
+      text:  'While the coals build: pull {{ribeye}} from the fridge. Season aggressively with salt on both sides and the fat cap — this steak is thick and needs it. Pepper goes on right before it hits the grates, not now.',
+      tip:   null,
+      timers: []
+    },
+    {
+      label: 'Sear side one',
+      text:  'Light coat of avocado oil on the grate. Pepper the steaks right before they go down. Lay them down and don\'t touch them. You\'ll hear a hard aggressive sear — that\'s exactly right. Watch for the crust forming up the sides. Don\'t flip until it\'s ready.',
+      tip:   'If it\'s sticking when you try to lift it, it\'s not ready. A properly seared steak releases cleanly.',
+      timers: ['side-1']
+    },
+    {
+      label: 'Flip and sear side two',
+      text:  'Flip once. Don\'t press. Same heat, same patience. Pull at 125–128°F internal — it carries to 130–132 on the rest. Always pull before it feels done.',
+      tip:   null,
+      timers: ['side-2']
+    },
+    {
+      label: 'Render the fat cap',
+      text:  'Stand the steak on its fat cap edge using tongs. Hold it there. You want the fat golden and visibly rendered — crispy, not just warm. This step usually gets skipped. Don\'t skip it.',
+      tip:   null,
+      timers: ['fat-cap']
+    },
+    {
+      label: 'Rest',
+      text:  'Off the grill onto a wire rack or cutting board — not a flat plate, it steams the crust underneath. Tent loosely with foil if you need to hold it. Do not cut into it yet.',
+      tip:   'The steak is still cooking during the rest. Cutting early isn\'t just impatient — it\'s actually undercooking the center.',
+      timers: ['rest']
+    },
+    {
+      label: 'Finish, slice, and plate',
+      text:  'Drizzle with good olive oil. Hit with flaky salt. Slice against the grain, off the bone. Arrange on the plate — the bone alongside as a centerpiece. Spoon blueberry reduction over.',
+      tip:   null,
+      timers: []
+    }
+  ]
+},
+// ─── ENTRY 3: GRILLED ARGENTINE RED SHRIMP ──────────────────────────────────
+{
+  id: 'grilled-argentine-red-shrimp',
+  title: 'Grilled Argentine red shrimp',
+  style: 'Gas grill · perforated tray · cumin-coriander rub',
+  subtitle: 'Blueberry reduction drizzle',
+  preheat: null,
+  serves: '1–3',
+  tags: ['seafood', 'weeknight', 'phase 2'],
+  prepTime: '15 min',
+  cookTime: '6 min',
+  headnote: `<strong>Dry is everything.</strong> Argentine reds are larger and sweeter than standard shrimp, which makes them ideal for the grill — but they carry more moisture than smaller varieties. Pat them completely dry before the rub goes on or they'll steam in the tray instead of searing. Every paper towel pass counts.<br><br><strong>Preheat the tray with the grill.</strong> A cold tray means the shrimp hit a surface that can't immediately sear them — they stick, they steam, the rub comes off. A hot tray gets instant contact and color.<br><br><em>Argentine reds are done at a loose C curl — fully opaque, not tight. A tight O means overcooked. They carry over fast off the heat, so pull at the first sign of done.</em>`,
+  equipment: [
+    { name: 'Gas grill', note: 'high heat, 15 min preheat with tray on the grates' },
+    { name: 'Yukon Glory perforated grill tray', note: 'preheated with the grill — non-negotiable' },
+    { name: 'Yukon Glory solid tray', note: 'for serving directly off the grill' },
+    { name: 'Tongs or spatula', note: 'for flipping individual shrimp' },
+    { name: 'Colander', note: 'for thawing under cold water' }
+  ],
+  mise: [
+    { group: 'Shrimp', items: [
+      { byScale: { 1: '¾ lb Argentine red shrimp, tail-off', 2: '1½ lb Argentine red shrimp, tail-off', 3: '2 lb bag Argentine red shrimp, tail-off' }, note: 'thawed under cold running water, completely dry' },
+      { byScale: { 1: '¾ tbsp avocado oil', 2: '1½ tbsp avocado oil', 3: '2 tbsp avocado oil' } }
+    ]},
+    { group: 'Rub — mix before thawing', items: [
+      { byScale: { 1: '⅓ tsp cumin',        2: '⅔ tsp cumin',        3: '1 tsp cumin'        } },
+      { byScale: { 1: '⅓ tsp coriander',    2: '⅔ tsp coriander',    3: '1 tsp coriander'    } },
+      { byScale: { 1: '⅙ tsp garam masala', 2: '⅓ tsp garam masala', 3: '½ tsp garam masala' } },
+      { byScale: { 1: '⅙ tsp black pepper', 2: '⅓ tsp black pepper', 3: '½ tsp black pepper' } },
+      { byScale: { 1: '⅓ tsp salt',         2: '⅔ tsp salt',         3: '1 tsp salt'         } }
+    ]}
+  ],
+  refs: {
+    'shrimp': { display: 'shrimp',       tips: { 1: '¾ lb, completely dry',  2: '1½ lb, completely dry', 3: '2 lb, completely dry'  } },
+    'oil':    { display: 'avocado oil',  tips: { 1: '¾ tbsp',                2: '1½ tbsp',               3: '2 tbsp'                } },
+    'rub':    { display: 'rub',          tips: { 1: '⅓ tsp each cumin + coriander · ⅙ tsp garam masala + pepper · ⅓ tsp salt', 2: '⅔ tsp each cumin + coriander · ⅓ tsp garam masala + pepper · ⅔ tsp salt', 3: '1 tsp each cumin + coriander · ½ tsp garam masala + pepper · 1 tsp salt' } }
+  },
+  timers: {
+    'thaw':    { label: 'Cold water thaw', preset: 600,  bell: true  },
+    'side-1':  { label: 'Shrimp side one', preset: 180,  bell: true  },
+    'side-2':  { label: 'Shrimp side two', preset: 150,  bell: true  }
+  },
+  steps: [
+    {
+      label: 'Thaw and dry',
+      text:  'Colander in the sink, {{shrimp}} under cold running water. Toss occasionally. Drain well, then pat completely dry with paper towels — press into them, don\'t just blot. Wet shrimp steam. Every drop of moisture is the enemy of char.',
+      tip:   'If they feel even slightly damp when you toss them with the rub, dry them again.',
+      timers: ['thaw']
+    },
+    {
+      label: 'Preheat tray and toss with rub',
+      text:  'Put the Yukon Glory perforated tray on the grill during preheat — it needs to be screaming hot before the shrimp go on. While it heats: combine {{shrimp}}, {{oil}}, and the full {{rub}} in a bowl. Toss until every shrimp is evenly coated. Let sit at room temperature until the grill is ready.',
+      tip:   'You should see a wisp of smoke off the perforated tray before the shrimp go on. That\'s your visual cue.',
+      timers: []
+    },
+    {
+      label: 'Grill side one',
+      text:  'Spread shrimp in a single layer on the hot tray — don\'t crowd, work in batches if needed. Don\'t touch them. You\'re looking for the bottom half of each shrimp to turn opaque before you flip.',
+      tip:   null,
+      timers: ['side-1']
+    },
+    {
+      label: 'Flip and finish',
+      text:  'Flip each shrimp. Done when fully opaque and in a loose C curl. A tight O is overcooked — pull before you get there. They carry over fast.',
+      tip:   'Argentine reds look done before they are because of their natural pink-red color raw. Go by the curl and the opacity, not the color.',
+      timers: ['side-2']
+    },
+    {
+      label: 'Sauce and serve',
+      text:  'Off the perforated tray and onto the solid Yukon tray. Spoon blueberry reduction over immediately while they\'re hot — it\'ll sizzle into the shrimp. Serve fast. Shrimp don\'t hold.',
+      tip:   null,
+      timers: []
+    }
+  ]
+},
+// ─── ENTRY 4: PEARLS BEFORE SWINE ───────────────────────────────────────────
+{
+  id: 'pearls-before-swine',
+  title: 'Pearls Before Swine',
+  style: 'Stovetop tapioca · coconut milk base · no eggs required',
+  subtitle: 'Warm blueberry-mint compote · fresh raspberries · cotton candy grapes',
+  preheat: null,
+  serves: '1–3',
+  tags: ['dessert', 'make-ahead', 'phase 2'],
+  prepTime: '5 min',
+  cookTime: '20 min',
+  headnote: `<strong>Bob's Red Mill small pearl tapioca — soak them first, no exceptions.</strong> Skip the soak and you get gritty, chalky centers no matter how long you cook them. 30 minutes minimum, an hour if you have it. The pearls should look swollen and slightly translucent before they go in the pot.<br><br><strong>Use canned full-fat coconut milk.</strong> Not coconut cream (too thick, needs cutting), not refrigerated coconut milk (too thin, too many additives). Full-fat canned is the move — rich enough to set properly, neutral enough to let the blueberry compote lead.<br><br><strong>Egg upgrade (when eggs are cleared):</strong> whisk 2 egg yolks with a few tablespoons of the hot pudding to temper, then stir back into the pan off the heat before adding vanilla. Makes it custardy and genuinely luxurious. The no-egg version is still very good — just lighter.<br><br><em>The pudding thickens further as it cools. If it sets too stiff in the fridge, loosen with a splash of coconut milk stirred in gently. Serve cold with the compote warm — the temperature contrast is the whole point.</em>`,
+  equipment: [
+    { name: 'Medium saucepan', note: 'heavy-bottomed if you have it — tapioca scorches' },
+    { name: 'Wooden spoon or silicone spatula', note: 'you\'ll be stirring a lot' },
+    { name: 'Small bowl', note: 'for soaking the pearls' },
+    { name: 'Individual serving bowls', note: 'set and serve in the same vessel' }
+  ],
+  mise: [
+    { group: 'Pudding', items: [
+      { byScale: { 1: '3 tbsp small tapioca pearls (Bob\'s Red Mill)', 2: '⅓ cup small tapioca pearls', 3: '½ cup small tapioca pearls' }, note: 'soak in cold water 30–60 min before cooking' },
+      { byScale: { 1: '¾ cup canned full-fat coconut milk',           2: '1½ cups canned full-fat coconut milk', 3: '2 cups canned full-fat coconut milk' } },
+      { byScale: { 1: '⅓ cup water',                                  2: '⅔ cup water',                3: '1 cup water'                } },
+      { byScale: { 1: '1 tbsp honey',                                 2: '2 tbsp honey',               3: '3 tbsp honey'               } },
+      { byScale: { 1: 'pinch salt',                                   2: '⅛ tsp salt',                 3: '¼ tsp salt'                 } },
+      { byScale: { 1: '⅓ tsp vanilla extract',                       2: '⅔ tsp vanilla extract',      3: '1 tsp vanilla extract'      } }
+    ]},
+    { group: 'To serve', items: [
+      { name: 'Warm blueberry-mint compote (from Blueberry reduction — two yields)' },
+      { name: 'Fresh raspberries' },
+      { name: 'Cotton candy grapes, halved' },
+      { name: 'Crushed freeze-dried strawberries — optional, highly recommended' }
+    ]}
+  ],
+  refs: {
+    'pearls':  { display: 'tapioca pearls', tips: { 1: '3 tbsp, soaked',          2: '⅓ cup, soaked',           3: '½ cup, soaked'            } },
+    'milk':    { display: 'coconut milk',   tips: { 1: '¾ cup canned full-fat',   2: '1½ cups canned full-fat', 3: '2 cups canned full-fat'   } },
+    'water':   { display: 'water',          tips: { 1: '⅓ cup',                   2: '⅔ cup',                   3: '1 cup'                    } },
+    'honey':   { display: 'honey',          tips: { 1: '1 tbsp',                  2: '2 tbsp',                  3: '3 tbsp'                   } },
+    'vanilla': { display: 'vanilla',        tips: { 1: '⅓ tsp',                   2: '⅔ tsp',                   3: '1 tsp'                    } }
+  },
+  timers: {
+    'soak':  { label: 'Soak pearls',  preset: 1800, bell: true  },
+    'cook':  { label: 'Cook pudding', preset: 900,  bell: false },
+    'chill': { label: 'Chill',        preset: 3600, bell: true  }
+  },
+  steps: [
+    {
+      label: 'Soak the pearls',
+      text:  'Cover {{pearls}} with cold water in a small bowl. Leave them alone. They\'ll swell and go slightly translucent — that\'s right. Don\'t shortcut this.',
+      tip:   'An hour is better than 30 minutes if you have it. The more hydrated they are going in, the more evenly they cook through.',
+      timers: ['soak']
+    },
+    {
+      label: 'Cook the pudding',
+      text:  'Drain the soaked pearls. Into the saucepan: drained pearls, {{milk}}, and {{water}}. Medium heat. Bring to a gentle simmer, stirring frequently — not constantly, but don\'t walk away. The liquid will slowly thicken and the pearls will turn fully translucent. That\'s when you\'re close.',
+      tip:   'Tapioca scorches on the bottom if you stop stirring for too long. Keep the heat gentle and keep moving it.',
+      timers: ['cook']
+    },
+    {
+      label: 'Check for done',
+      text:  'Done when every pearl is fully translucent and the pudding drops slowly off the spoon — not runs, not holds solid. Lift a pearl and look at it: no white center. If you see white, keep going.',
+      tip:   null,
+      timers: []
+    },
+    {
+      label: 'Sweeten and finish',
+      text:  'Off the heat. Stir in {{honey}}, salt, and {{vanilla}}. Taste it — coconut milk is rich and subtly sweet already, so the honey should balance it, not dominate. Adjust.',
+      tip:   'This is where the egg upgrade goes if you\'re doing it: temper 2 yolks with a few spoonfuls of hot pudding first, then stir back in before adding vanilla.',
+      timers: []
+    },
+    {
+      label: 'Set in the fridge',
+      text:  'Pour into individual bowls. Press plastic wrap directly onto the surface of each — this prevents a skin from forming. Into the fridge.',
+      tip:   'If it sets too thick, stir in a small splash of coconut milk to loosen before serving. A little thick is fine; it\'s pudding.',
+      timers: ['chill']
+    },
+    {
+      label: 'Serve',
+      text:  'Pull bowls from the fridge. Warm the blueberry-mint compote gently on the stove — two minutes over low. Spoon generously over the cold pudding. Scatter raspberries and cotton candy grapes on top. Finish with crushed freeze-dried strawberries if you have them — they add crunch and a hit of concentrated flavor that makes it feel like someone actually thought about dessert.',
+      tip:   null,
+      timers: []
+    }
+  ]
 }
 ];
 
@@ -3056,15 +3408,43 @@ let currentScale   = 2;     // default: cooking for 2
 let T              = {};
 let audioCtx       = null;
 let tipTimeout     = null;
+let activeFilters  = new Set();
 
 // =====================================================================
 // LIBRARY
 // =====================================================================
 
+function toggleFilter(tag) {
+  if (activeFilters.has(tag)) activeFilters.delete(tag);
+  else activeFilters.add(tag);
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.classList.toggle('active', activeFilters.has(btn.dataset.tag));
+  });
+  renderLibrary();
+}
+
 function renderLibrary() {
   const grid = document.getElementById('recipe-grid');
+  const query = (document.getElementById('filter-search')?.value || '').toLowerCase().trim();
   grid.innerHTML = '';
-  RECIPES.forEach(r => {
+
+  const visible = RECIPES.filter(r => {
+    const matchTag = activeFilters.size === 0 || [...activeFilters].every(f => r.tags.includes(f));
+    const matchSearch = !query ||
+      r.title.toLowerCase().includes(query) ||
+      r.subtitle.toLowerCase().includes(query) ||
+      r.tags.some(t => t.toLowerCase().includes(query));
+    return matchTag && matchSearch;
+  });
+
+  const countEl = document.getElementById('filter-count');
+  if (countEl) {
+    countEl.textContent = (activeFilters.size > 0 || query)
+      ? `${visible.length} of ${RECIPES.length}`
+      : '';
+  }
+
+  visible.forEach(r => {
     const card = document.createElement('div');
     card.className = 'recipe-card';
     card.onclick = () => loadRecipe(r.id);
@@ -3082,17 +3462,20 @@ function renderLibrary() {
     `;
     grid.appendChild(card);
   });
-  PLACEHOLDERS.forEach(p => {
-    const card = document.createElement('div');
-    card.className = 'recipe-card placeholder';
-    card.innerHTML = `
-      <div class="card-tags">${p.tags.map(t => `<span class="card-tag">${t}</span>`).join('')}</div>
-      <div class="card-title">${p.title}</div>
-      <div class="card-sub">${p.subtitle}</div>
-      <div class="card-soon">coming soon</div>
-    `;
-    grid.appendChild(card);
-  });
+
+  if (!activeFilters.size && !query) {
+    PLACEHOLDERS.forEach(p => {
+      const card = document.createElement('div');
+      card.className = 'recipe-card placeholder';
+      card.innerHTML = `
+        <div class="card-tags">${p.tags.map(t => `<span class="card-tag">${t}</span>`).join('')}</div>
+        <div class="card-title">${p.title}</div>
+        <div class="card-sub">${p.subtitle}</div>
+        <div class="card-soon">coming soon</div>
+      `;
+      grid.appendChild(card);
+    });
+  }
 }
 
 function goLib() {
