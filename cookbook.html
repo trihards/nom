@@ -438,9 +438,13 @@ button { font-family: inherit; cursor: pointer; }
     <button class="filter-btn" data-tag="chicken" onclick="toggleFilter('chicken')">chicken</button>
     <button class="filter-btn" data-tag="beef" onclick="toggleFilter('beef')">beef</button>
     <button class="filter-btn" data-tag="lamb" onclick="toggleFilter('lamb')">lamb</button>
-    <button class="filter-btn" data-tag="weeknight" onclick="toggleFilter('weeknight')">weeknight</button>
-    <button class="filter-btn" data-tag="weekend" onclick="toggleFilter('weekend')">weekend</button>
+    <button class="filter-btn" data-tag="seafood" onclick="toggleFilter('seafood')">seafood</button>
+    <button class="filter-btn" data-tag="30 or less" onclick="toggleFilter('30 or less')">30 or less</button>
+    <button class="filter-btn" data-tag="under 1 hr" onclick="toggleFilter('under 1 hr')">under 1 hr</button>
+    <button class="filter-btn" data-tag="slow roll" onclick="toggleFilter('slow roll')">slow roll</button>
     <button class="filter-btn" data-tag="grill" onclick="toggleFilter('grill')">grill</button>
+    <button class="filter-btn" data-tag="sauce" onclick="toggleFilter('sauce')">sauce</button>
+    <button class="filter-btn" data-tag="make-ahead" onclick="toggleFilter('make-ahead')">make-ahead</button>
     <button class="filter-btn" data-tag="batch" onclick="toggleFilter('batch')">batch</button>
     <button class="filter-btn" data-tag="dessert" onclick="toggleFilter('dessert')">dessert</button>
     <span class="filter-count" id="filter-count"></span>
@@ -496,12 +500,12 @@ button { font-family: inherit; cursor: pointer; }
 const RECIPES = [
 {
   id: 'vadouvan-chicken',
-  title: 'Vadouvan chicken thighs with pan gravy',
-  style: 'Spiced dry rub · cast iron sear · arrowroot pan gravy',
+  title: 'The Spice Must Flow',
+  style: 'Dry rub · cast iron sear · arrowroot pan gravy',
   subtitle: 'Haiga rice · charred broccoli · sweet potato mash',
   preheat: '425°F',
   serves: '1–3',
-  tags: ['chicken', 'weeknight'],
+  tags: ['chicken', 'under 1 hr'],
   prepTime: '15 min',
   cookTime: '45 min',
 
@@ -633,7 +637,7 @@ const RECIPES = [
 
 {
   id: 'lamb-blueberry',
-  title: 'Lamb loin chops with blueberry-mint sauce',
+  title: 'Purple Rain Chops',
   style: 'Cast iron sear · blueberry-mint-rosemary reduction · pan drippings',
   subtitle: 'Roasted carrots · arugula & blackberry salad',
   variants: [
@@ -644,7 +648,7 @@ const RECIPES = [
   ],
   preheat: '425°F',
   serves: '1–3',
-  tags: ['lamb', 'weekend'],
+  tags: ['lamb', 'under 1 hr'],
   prepTime: '15 min',
   cookTime: '30 min',
 
@@ -742,12 +746,12 @@ const RECIPES = [
 
 {
   id: 'berry-herb-sauce',
-  title: 'Berry-herb reduction sauce',
+  title: 'The Mothersauce',
   style: 'Stovetop reduction · three variants · 15 minutes',
   subtitle: 'Blueberry-mint · strawberry-herb · mixed berry · pairs with lamb or chicken',
   preheat: null,
   serves: '1–3',
-  tags: ['sauce', 'make-ahead'],
+  tags: ['sauce', '30 or less', 'make-ahead'],
   prepTime: '5 min',
   cookTime: '15 min',
 
@@ -831,7 +835,7 @@ const RECIPES = [
   subtitle: 'Arugula · guac · coconut yogurt crema · plantain chips',
   preheat: null,
   serves: '1–3',
-  tags: ['beef', 'weeknight'],
+  tags: ['beef', '30 or less'],
   prepTime: '15 min',
   cookTime: '15 min',
 
@@ -931,12 +935,12 @@ const RECIPES = [
 
 {
   id: 'latin-avo-smash',
-  title: 'Latin avo smash with chicken',
-  style: 'Quick sauté · Latin-spiced · 20 minutes',
-  subtitle: 'Wilted spinach · rough guac · plantain chips',
+  title: 'Smash and Grab',
+  style: 'Quick sauté · Latin-spiced · rough guac',
+  subtitle: 'Wilted spinach · plantain chips',
   preheat: null,
   serves: '1–3',
-  tags: ['chicken', 'quick'],
+  tags: ['chicken', '30 or less'],
   prepTime: '10 min',
   cookTime: '20 min',
 
@@ -1031,12 +1035,12 @@ const RECIPES = [
 
 {
   id: 'black-pepper-garlic-chicken',
-  title: 'Black Pepper Garlic Chicken',
+  title: 'No Notes Chicken',
   style: 'Wok-style · aggressive black pepper · garlic-forward',
   subtitle: 'Gai lan in garlic oil · jasmine rice',
   preheat: null,
   serves: '1–3',
-  tags: ['chicken', 'weeknight'],
+  tags: ['chicken', '30 or less'],
   prepTime: '20 min',
   cookTime: '30 min',
 
@@ -1162,12 +1166,12 @@ const RECIPES = [
 
 {
   id: 'bavette-beef-broccoli',
-  title: 'Bavette Beef & Broccoli',
+  title: 'Five Spice Vice',
   style: 'High-heat carbon steel · five spice marinade · takeout energy',
   subtitle: 'Jasmine rice',
   preheat: null,
   serves: '1–3',
-  tags: ['beef', 'weeknight'],
+  tags: ['beef', 'under 1 hr'],
   prepTime: '15 min',
   cookTime: '30 min',
 
@@ -1275,12 +1279,12 @@ const RECIPES = [
 
 {
   id: 'beef-chuck-stew',
-  title: 'Beef chuck stew',
-  style: 'Dutch oven braise · cassava flour roux · 3 hours',
+  title: 'Long Con Stew',
+  style: 'Dutch oven braise · cassava flour roux · low and slow',
   subtitle: 'Mashed rutabaga',
   preheat: '325°F',
   serves: '2+',
-  tags: ['beef', 'weekend'],
+  tags: ['beef', 'slow roll', 'braise'],
   prepTime: '20 min',
   cookTime: '3 hrs',
 
@@ -1412,7 +1416,7 @@ const RECIPES = [
   subtitle: 'Jasmine rice · green olives · heavy cilantro',
   preheat: null,
   serves: '1–3',
-  tags: ['beef', 'weeknight'],
+  tags: ['beef', '30 or less'],
 
   equipment: [
     { name: 'Large skillet or everyday pan',  note: 'carbon steel, cast iron, or the Staub — needs to get hot enough to brown mushrooms' },
@@ -1526,12 +1530,12 @@ const RECIPES = [
 
 {
   id: 'herby-chicken-shiitake-beans',
-  title: 'Herby Roasted Chicken w/ Schmaltzy Shiitake Beans',
-  style: 'Cast iron sear · oven finish · schmaltz-fried beans',
+  title: 'Schmaltz and Circumstance',
+  style: 'Cast iron sear · oven finish · schmaltz-fried shiitake beans',
   subtitle: 'Roasted mashed orange sweet potato',
   preheat: '400°F',
   serves: '1–3',
-  tags: ['chicken', 'weeknight'],
+  tags: ['chicken', 'under 1 hr'],
   prepTime: '10 min',
   cookTime: '50 min',
 
@@ -1647,12 +1651,12 @@ const RECIPES = [
 
 {
   id: 'baked-cosmic-crisp',
-  title: 'Honey-Baked Cosmic Crisp Apples',
-  style: 'Oven-roasted · honey-cinnamon · warm berry chia compote',
-  subtitle: 'Dessert · no dairy · no coconut · ten minutes of work',
+  title: 'Cosmic Relief',
+  style: 'Oven-roasted · honey-cinnamon · warm berry compote',
+  subtitle: 'No dairy · no coconut · ten minutes of work',
   preheat: '375°F',
   serves: '1–3',
-  tags: ['dessert', 'fruit'],
+  tags: ['dessert', '30 or less'],
   prepTime: '5 min',
   cookTime: '40 min',
 
@@ -1725,12 +1729,12 @@ const RECIPES = [
 
 {
   id: 'bananaberry-faux-cream',
-  title: 'Bananaberry Faux Cream',
-  style: 'Frozen banana blended · no dairy · no coconut · 3 ingredients',
-  subtitle: 'Freeze bananas 2+ hours ahead · blends in 60 seconds',
+  title: 'The Grift',
+  style: 'Frozen banana blended · three ingredients · not actually ice cream',
+  subtitle: 'Freeze bananas 2+ hours ahead · ready in 60 seconds',
   preheat: null,
   serves: '1–3',
-  tags: ['dessert', 'fruit'],
+  tags: ['dessert', '30 or less'],
   prepTime: '5 min + 2 hr freeze',
   cookTime: '0 min',
 
@@ -1791,12 +1795,12 @@ const RECIPES = [
 
 {
   id: 'ginger-garlic-sirloin-stirfry',
-  title: 'Ginger-Garlic Sirloin Stir Fry',
+  title: 'Hot Mess Express',
   style: 'High-heat cast iron · broccoli two ways · white pepper + sumac',
   subtitle: 'Charred florets · stem matchsticks · cabbage · mushrooms · jasmine rice',
   preheat: '425°F',
   serves: '1–3',
-  tags: ['beef', 'weeknight'],
+  tags: ['beef', '30 or less'],
   prepTime: '15 min',
   cookTime: '35 min',
 
@@ -1927,11 +1931,11 @@ const RECIPES = [
 
 {
   id: 'celery-chicken-brown-sauce',
-  title: 'Celery chicken in brown sauce',
+  title: 'The Sleeper',
   style: 'Velveted chicken breast · shiitakes · Chinese-American brown sauce',
   subtitle: 'Loads of celery · carrots · toasted sesame · jasmine rice',
   serves: '1–3',
-  tags: ['chicken', 'weeknight'],
+  tags: ['chicken', 'under 1 hr'],
   prepTime: '25 min',
   cookTime: '20 min',
 
@@ -2073,12 +2077,12 @@ const RECIPES = [
 
 {
   id: 'charcoal-kofta',
-  title: 'Charcoal-grilled beef kofta',
+  title: 'Fire Starter',
   style: 'Solo Stove charcoal · sumac-finished · ACV chimichurri',
   subtitle: 'Jasmine rice in bone broth · charred cabbage wedges',
   preheat: null,
   serves: '1–3',
-  tags: ['beef', 'weeknight', 'grill'],
+  tags: ['beef', 'under 1 hr', 'grill'],
   prepTime: '15 min',
   cookTime: '25 min',
 
@@ -2208,9 +2212,9 @@ const RECIPES = [
 
 {
   id: 'lamb-rib-family-feast',
-  title: 'Lamb rib chops — family feast',
-  style: 'Fat cap rendering · cast iron sear · improved pan sauce',
-  subtitle: 'Blueberry-mint-rosemary sauce · roasted carrots + charred garlic scapes · jasmine rice',
+  title: 'The Good Stuff',
+  style: 'Cast iron sear · fat cap render · blueberry-mint-rosemary pan sauce',
+  subtitle: 'Roasted carrots · charred garlic scapes · jasmine rice',
   variants: [
     {
       name: 'Grill version',
@@ -2219,7 +2223,7 @@ const RECIPES = [
   ],
   preheat: '425°F',
   serves: '2–6',
-  tags: ['lamb', 'weekend', 'family'],
+  tags: ['lamb', 'under 1 hr'],
   prepTime: '20 min',
   cookTime: '45 min',
 
@@ -2358,12 +2362,12 @@ const RECIPES = [
 
 {
   id: 'party-bb',
-  title: 'Party B&B — Vegan Brown Sauce',
-  style: 'One sauce · two dishes · sirloin + flat iron · 450° broccoli',
-  subtitle: 'Seared beef & charred broccoli · jasmine rice',
+  title: 'Brown Magic',
+  style: 'One sauce · two cuts · sirloin + flat iron · 450° broccoli',
+  subtitle: 'Seared beef · charred broccoli · jasmine rice',
   preheat: '450°F',
   serves: '2–8',
-  tags: ['beef', 'weekend', 'batch'],
+  tags: ['beef', 'under 1 hr', 'batch'],
   prepTime: '20 min',
   cookTime: '45 min',
 
@@ -2508,12 +2512,12 @@ const RECIPES = [
 
 {
   id: 'ground-beef-broccoli-stems',
-  title: 'Ground Beef & Broccoli — stems only',
-  style: 'Extra saucy · chunky beef · stems stay crisp',
+  title: 'Waste Not Want Not',
+  style: 'Extra saucy · chunky ground beef · stems stay crisp',
   subtitle: 'Jasmine rice · florets saved for roasting',
   preheat: null,
   serves: '1–3',
-  tags: ['beef', 'weeknight', 'quick'],
+  tags: ['beef', '30 or less'],
   prepTime: '10 min',
   cookTime: '20 min',
 
@@ -2619,12 +2623,12 @@ const RECIPES = [
 },
 {
   id: 'grilled-flap-chimichurri',
-  title: 'Grilled Flap with Chimichurri',
+  title: 'Flap Happy',
   style: 'Direct grill · hard sear · herb sauce',
   subtitle: 'Grilled sweet potato planks · charred onion · avo smash',
   preheat: null,
   serves: '1–3',
-  tags: ['beef', 'weeknight', 'grill'],
+  tags: ['beef', 'under 1 hr', 'grill'],
   prepTime: '20 min + 2–6 hr marinade',
   cookTime: '30 min',
   headnote: `<strong>Flap meat loves a long marinade.</strong> It's a thin cut with open grain — 4–6 hours is ideal, 2 hours is fine, 30 minutes is a waste of time. Get the meat in as soon as you're back from the store and let time do the work.<br><br><strong>Slice against the grain or you'll regret it.</strong> Flap has a very visible grain running diagonally across the cut. Find it before you pick up the knife and cut perpendicular — thin, ¼-inch slices. The difference between tender and chewy is entirely this.<br><br><em>Chimichurri made 1–2 hours ahead is dramatically better than fresh. The herbs soften, the garlic mellows, the ACV rounds out. Make it early and leave it at room temp.</em>`,
@@ -2758,12 +2762,12 @@ const RECIPES = [
 
 {
   id: 'reverse-sear-grilled-chicken-thighs',
-  title: 'Reverse-Sear Grilled Chicken Thighs',
+  title: 'Low and Slow and Then Oh Wow',
   style: 'Two-zone grill · slow render · finish hot',
   subtitle: 'Five seasoning paths · sides open',
   preheat: null,
   serves: '1–3',
-  tags: ['chicken', 'weeknight', 'grill'],
+  tags: ['chicken', 'under 1 hr', 'grill'],
   prepTime: '10 min',
   cookTime: '25 min + 5 min rest',
   headnote: `<strong>Reverse-sear or you'll burn the skin.</strong> Bone-in thighs hold an enormous amount of fat in the skin and it has to render slowly with no flame underneath, or it drips, flares, and torches the skin before the bone hits temp. Skin-down on the COOL side first, lid closed, 15–18 minutes. Then skin-down on the hot side for 2–3 minutes to crisp the now-mostly-rendered skin. Starting hot is the instinct and it's wrong every time.<br><br><strong>Five seasoning paths, one technique.</strong> Garam masala is the house default (Tracy's pick — warm, sweet-spiced). Fresh thyme + mashed black garlic + cracked pepper goes herbal-funky. Herbes de Provence + sumac leans Provençal-floral. Chinese five spice + ground ginger + onion granules swings east. Crushed fennel + sage + black pepper does Italian-sausage-on-the-bone. The cook is identical across all five — only the rub changes.<br><br><em>Universal prep: pat the thighs bone-dry, thin coat of avocado oil on both sides, then season aggressively. Wet skin steams and won't crisp. Oil the chicken, not the grate.</em>`,
@@ -2861,12 +2865,12 @@ const RECIPES = [
 
 {
   id: 'wagyu-blueberry-bowl',
-  title: 'Wagyu Beef & Blueberry Pan Sauce Bowl',
+  title: 'When We Were Rich',
   style: 'Carbon steel sear · blueberry-ACV pan sauce · fennel & thyme',
   subtitle: 'Jasmine rice · charred broccoli',
   preheat: '425°F',
   serves: '1–3',
-  tags: ['beef', 'weeknight'],
+  tags: ['beef', '30 or less'],
   prepTime: '10 min',
   cookTime: '30 min',
   headnote: `<strong>Bloom whole fennel seeds first, dry pan.</strong> This is the flavor foundation — don't skip it or rush it. The seeds should pop and smell like anise before any fat goes in.<br><br><strong>Pull the beef before the sauce.</strong> Building the sauce separately in the same pan lets the fond release cleanly and the blueberries break down into something jammy and glossy, not muddy.<br><br><em>Note for next time: add a second vegetable — edamame when cleared would be ideal here.</em>`,
@@ -2966,12 +2970,12 @@ const RECIPES = [
 
 {
   id: 'spatchcock-roast-chicken-broth',
-  title: 'Spatchcock Roast Chicken with Pan Dripping Broth',
-  style: 'Spatchcock roast · aromatic bed · two-stage oven',
-  subtitle: 'Sweet potato halves, roasted broccoli, pan dripping broth',
+  title: 'The Flat Chicken',
+  style: 'Spatchcock roast · aromatic bed · two-stage oven · pan dripping broth',
+  subtitle: 'Sweet potato halves · roasted broccoli',
   preheat: '425°F',
   serves: '1–3',
-  tags: ['chicken', 'weeknight'],
+  tags: ['chicken', 'under 1 hr'],
   headnote: `<strong>Two jobs, one pan.</strong> The rough-chopped aromatics do double duty — they lift the chicken off the pan so heat circulates underneath, and they pre-roast into your broth base. Don't skip the backbone: it roasts alongside the bird and adds real color and depth to the broth.<br><br><strong>Spatchcocking is faster and more even than whole-bird roasting.</strong> The bird lays flat, the skin gets maximum oven exposure, and the whole thing is done in under an hour. Press hard on the breastbone — it needs to crack flat to cook evenly.<br><br><em>Sweet potatoes go cut-side down — that's where the caramelization happens. Broccoli goes in at the 35-minute mark so it gets color without turning to mush. Debone before serving and add the carcass to the pot with the backbone — deeper broth, cleaner plates.</em>`,
   equipment: [
     { name: 'Large sheet pan or roasting pan', note: 'for chicken and aromatic bed' },
@@ -3092,12 +3096,12 @@ const RECIPES = [
 // ─── ENTRY 1: BLUEBERRY REDUCTION — SAVORY + DESSERT ───────────────────────
 {
   id: 'blueberry-reduction-two-yields',
-  title: 'Blueberry reduction — two yields',
+  title: 'Two Birds One Sauce',
   style: 'Stovetop reduction · split mid-cook · savory drizzle + dessert compote',
   subtitle: 'Pairs with grilled beef, shrimp, or lamb · compote for fruit and pudding',
   preheat: null,
   serves: '1–3',
-  tags: ['sauce', 'make-ahead', 'phase 2'],
+  tags: ['sauce', '30 or less', 'make-ahead'],
   prepTime: '5 min',
   cookTime: '25 min',
   headnote: `<strong>One pan, two yields.</strong> Start the reduction together, then split it halfway through: pull half as a loose savory drizzle for proteins and salads, keep reducing the rest into a thick jammy compote for dessert. The Ridge red wine vinegar and coconut aminos make this savory-forward in a way the berry-herb reduction isn't — richer, more complex, better suited to beef and shrimp.<br><br><strong>Make it first.</strong> Both yields hold warm easily and improve as they sit. The savory sauce loosens on reheating with a splash of broth; the compote needs nothing.<br><br><em>The two-yield split is the whole point — don't reduce it all the way down for the savory application or it gets too jammy for drizzling.</em>`,
@@ -3159,12 +3163,12 @@ const RECIPES = [
 // ─── ENTRY 2: BONE-IN RIBEYE — SOLO STOVE CHARCOAL ─────────────────────────
 {
   id: 'bone-in-ribeye-solo-stove',
-  title: 'Bone-in ribeye — Solo Stove charcoal',
-  style: 'Charcoal grill · direct high heat · fat cap rendered',
+  title: 'The Bone Zone',
+  style: 'Solo Stove charcoal · direct high heat · fat cap rendered',
   subtitle: 'Blueberry reduction drizzle · flaky salt finish',
   preheat: null,
   serves: '1–3',
-  tags: ['beef', 'weekend', 'phase 1'],
+  tags: ['beef', 'under 1 hr', 'grill'],
   prepTime: '10 min',
   cookTime: '15 min',
   headnote: `<strong>Charcoal does what gas can't.</strong> The Solo Stove runs hotter and drier than a gas grill, and bone-in ribeye is the right cut for it — thick enough to get a real crust without overcooking through, fatty enough to stay rich under that heat. The bone conducts heat from the inside while the grates work the outside.<br><br><strong>Season aggressively 45 minutes out or right before the grill — nothing in between.</strong> Salt draws moisture out after a few minutes; if you season and then let it sit 10–30 minutes before cooking, you'll have a wet surface and a poor sear. Either go early (45+ min, let it reabsorb) or go right before it hits the grates.<br><br><em>Pull at 125–128°F. It carries to 130–132 on the rest. The fat cap render is not optional — it's where half the flavor is.</em>`,
@@ -3244,12 +3248,12 @@ const RECIPES = [
 // ─── ENTRY 3: GRILLED ARGENTINE RED SHRIMP ──────────────────────────────────
 {
   id: 'grilled-argentine-red-shrimp',
-  title: 'Grilled Argentine red shrimp',
+  title: 'Big Pink Energy',
   style: 'Gas grill · perforated tray · cumin-coriander rub',
   subtitle: 'Blueberry reduction drizzle',
   preheat: null,
   serves: '1–3',
-  tags: ['seafood', 'weeknight', 'phase 2'],
+  tags: ['seafood', '30 or less', 'grill'],
   prepTime: '15 min',
   cookTime: '6 min',
   headnote: `<strong>Dry is everything.</strong> Argentine reds are larger and sweeter than standard shrimp, which makes them ideal for the grill — but they carry more moisture than smaller varieties. Pat them completely dry before the rub goes on or they'll steam in the tray instead of searing. Every paper towel pass counts.<br><br><strong>Preheat the tray with the grill.</strong> A cold tray means the shrimp hit a surface that can't immediately sear them — they stick, they steam, the rub comes off. A hot tray gets instant contact and color.<br><br><em>Argentine reds are done at a loose C curl — fully opaque, not tight. A tight O means overcooked. They carry over fast off the heat, so pull at the first sign of done.</em>`,
@@ -3324,7 +3328,7 @@ const RECIPES = [
   subtitle: 'Warm blueberry-mint compote · fresh raspberries · cotton candy grapes',
   preheat: null,
   serves: '1–3',
-  tags: ['dessert', 'make-ahead', 'phase 2'],
+  tags: ['dessert', 'make-ahead'],
   prepTime: '5 min',
   cookTime: '20 min',
   headnote: `<strong>Bob's Red Mill small pearl tapioca — soak them first, no exceptions.</strong> Skip the soak and you get gritty, chalky centers no matter how long you cook them. 30 minutes minimum, an hour if you have it. The pearls should look swollen and slightly translucent before they go in the pot.<br><br><strong>Use canned full-fat coconut milk.</strong> Not coconut cream (too thick, needs cutting), not refrigerated coconut milk (too thin, too many additives). Full-fat canned is the move — rich enough to set properly, neutral enough to let the blueberry compote lead.<br><br><strong>Egg upgrade (when eggs are cleared):</strong> whisk 2 egg yolks with a few tablespoons of the hot pudding to temper, then stir back into the pan off the heat before adding vanilla. Makes it custardy and genuinely luxurious. The no-egg version is still very good — just lighter.<br><br><em>The pudding thickens further as it cools. If it sets too stiff in the fridge, loosen with a splash of coconut milk stirred in gently. Serve cold with the compote warm — the temperature contrast is the whole point.</em>`,
