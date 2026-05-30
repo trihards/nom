@@ -3093,6 +3093,135 @@ const RECIPES = [
     }
   ]
 },
+// ─── ENTRY 0: REEF, BEEF & LEAF ─────────────────────────────────────────────
+{
+  id: 'reef-beef-and-leaf',
+  title: 'Reef, Beef & Leaf',
+  style: 'Reverse sear tomahawk · Solo Stove finish · Argentine red shrimp on gas',
+  subtitle: 'Blueberry reduction two ways · composed spring greens salad · named by Sam',
+  preheat: '250°F',
+  serves: '1–3',
+  tags: ['beef', 'seafood', 'slow roll', 'grill'],
+  prepTime: '15 min',
+  cookTime: '2 hr',
+  headnote: `<strong>The reverse sear is the only right answer for a tomahawk this thick.</strong> Direct high heat alone can't cook a 3.5+ lb steak evenly — you get a perfect crust and a raw center, or a cooked center and an incinerated exterior. Low oven first brings the whole steak up slowly and evenly to just below target temp, then the screaming Solo Stove does nothing but crust. Two minutes of chaos at the end, not fifteen.<br><br><strong>Salt early, dry uncovered in the fridge.</strong> Salt the steak aggressively and leave it on a rack in the fridge uncovered for at least 2 hours before the oven — ideally longer. The surface dries out completely, which means better crust and less steam when it hits the coals.<br><br><strong>The shrimp go on the gas grill while the tomahawk rests.</strong> The rest isn't optional on a steak this size — it needs 10 minutes minimum. That's your shrimp window. Everything hits the table at the same time.<br><br><em>Pull the tomahawk at 120°F internal. It carries to 130–132 on the sear and rest. A thermometer is not optional here — don't guess on a $58 steak.</em>`,
+  equipment: [
+    { name: 'Wire rack + half sheet pan', note: 'for fridge dry brine and oven cook' },
+    { name: 'Instant-read thermometer', note: 'non-negotiable — this steak is too thick to guess' },
+    { name: 'Solo Stove charcoal grill', note: 'full coal bed, screaming hot — light 30 min before sear' },
+    { name: 'Gas grill + Yukon Glory perforated tray', note: 'for the shrimp while the tomahawk rests' },
+    { name: 'Tongs', note: 'long ones — this bone is a handle but it gets hot' },
+    { name: 'Cutting board', note: 'large — this steak needs room to rest and slice' }
+  ],
+  mise: [
+    { group: 'Tomahawk', items: [
+      { byScale: { 1: '1.2 lb tomahawk section (sliced to serve)', 2: '2.4 lb tomahawk section (sliced to serve)', 3: '1 whole tomahawk ~3.5 lb, sliced to serve' }, note: 'on a rack, uncovered in fridge 2+ hrs after salting' },
+      { name: 'Salt — aggressive on all sides, fat cap, and bone side' },
+      { name: 'Black pepper — right before the sear, not before the oven' },
+      { name: 'Avocado oil — light coat on the coal grate before sear' }
+    ]},
+    { group: 'Finish', items: [
+      { name: 'Good olive oil — finishing drizzle after final rest' },
+      { name: 'Flaky sea salt — after final rest, before slicing' }
+    ]},
+    { group: 'Shrimp — see Big Pink Energy for full mise', items: [
+      { byScale: { 1: '¾ lb Argentine red shrimp, tail-off, dry', 2: '1½ lb Argentine red shrimp, tail-off, dry', 3: '2 lb Argentine red shrimp, tail-off, dry' } },
+      { name: 'Cumin-coriander rub + avocado oil — tossed and ready to go' }
+    ]},
+    { group: 'Blueberry sauce — make ahead', items: [
+      { name: 'Full batch of Two Birds One Sauce — both yields ready before the grills light' }
+    ]}
+  ],
+  refs: {
+    'tomahawk': { display: 'tomahawk', tips: { 1: '~1.2 lb portion', 2: '~2.4 lb portion', 3: '~3.5 lb whole steak' } },
+    'shrimp':   { display: 'shrimp',   tips: { 1: '¾ lb, dry, rubbed', 2: '1½ lb, dry, rubbed', 3: '2 lb, dry, rubbed' } }
+  },
+  timers: {
+    'dry-brine':    { label: 'Dry brine in fridge',  preset: 7200, bell: true  },
+    'oven':         { label: 'Oven — low and slow',   preset: 5400, bell: false },
+    'coal-preheat': { label: 'Solo Stove preheat',    preset: 1800, bell: true  },
+    'sear-1':       { label: 'Sear side one',         preset: 150,  bell: true  },
+    'sear-2':       { label: 'Sear side two',         preset: 150,  bell: true  },
+    'fat-cap':      { label: 'Fat cap render',        preset: 90,   bell: true  },
+    'final-rest':   { label: 'Final rest',            preset: 600,  bell: true  },
+    'shrimp-1':     { label: 'Shrimp side one',       preset: 180,  bell: true  },
+    'shrimp-2':     { label: 'Shrimp side two',       preset: 150,  bell: true  }
+  },
+  steps: [
+    {
+      label: 'Salt and dry brine',
+      text:  'Season {{tomahawk}} aggressively on all sides — both faces, the fat cap edge, and the bone side. Don\'t be shy, this is a thick steak and it needs it. Place on a wire rack over a sheet pan and put it in the fridge uncovered. Leave it alone. The surface will dry out and look almost papery — that\'s exactly right.',
+      tip:   '2 hours minimum. Longer is better. If you salted this morning, you\'re ahead of the game.',
+      timers: ['dry-brine']
+    },
+    {
+      label: 'Pull from fridge and preheat oven',
+      text:  'Pull the steak from the fridge and let it sit at room temperature. Set the oven to 250°F. Leave the steak on the rack and sheet pan — it goes into the oven on that setup.',
+      tip:   null,
+      timers: []
+    },
+    {
+      label: 'Low oven — bring it up slowly',
+      text:  'Steak on the rack into the 250°F oven. Thermometer probe in the thickest part of the eye, not touching bone. This is a patience exercise — you\'re not cooking it, you\'re evening it out. Check temp at 45 minutes. Pull at 120°F internal. Depending on thickness this takes 60–90 minutes.',
+      tip:   'Don\'t open the oven every 10 minutes. Let it work. Check at 45 min, then every 15 after that.',
+      timers: ['oven']
+    },
+    {
+      label: 'Light the Solo Stove',
+      text:  'About 30 minutes before you expect the steak to hit 120°F, light the Solo Stove. Full coal load. You want a deep orange coal bed with zero active flames by the time the steak comes out of the oven. This timing matters — the steak can rest a few minutes waiting for coals, but you don\'t want to wait 30 minutes for coals while the steak overcooks.',
+      tip:   null,
+      timers: ['coal-preheat']
+    },
+    {
+      label: 'Rest before the sear',
+      text:  'Pull the steak at 120°F. Let it rest on the rack for 5 minutes while you confirm the coals are ready. Pepper it now — both sides, the fat cap. This short rest lets the surface dry back out a little before it hits the grates.',
+      tip:   null,
+      timers: []
+    },
+    {
+      label: 'Sear side one',
+      text:  'Light coat of avocado oil on the grate. Tomahawk down. Use the bone as a handle — it\'s long enough to keep your hands away from the heat. Don\'t touch it. You\'re building crust, not cooking — the interior is already done. Listen for the hard aggressive sear.',
+      tip:   'This is fast and violent. You\'re not trying to cook anything — just crust. Don\'t let it go longer than 2–3 minutes per side or you\'ll overshoot.',
+      timers: ['sear-1']
+    },
+    {
+      label: 'Flip and sear side two',
+      text:  'Flip. Same heat. Watch the crust — deep mahogany, not black. Pull when both sides are done. Target internal should now be 128–130°F.',
+      tip:   null,
+      timers: ['sear-2']
+    },
+    {
+      label: 'Render the fat cap',
+      text:  'Stand the tomahawk on its fat cap edge. Tongs on the bone for control. Golden and rendered — you\'ll hear the fat sizzling and spitting. This is the part everyone skips. Don\'t.',
+      tip:   null,
+      timers: ['fat-cap']
+    },
+    {
+      label: 'Final rest — start the shrimp',
+      text:  'Tomahawk off the grill onto a large cutting board. Tent loosely with foil. This rest is longer than a normal steak — give it a full 10 minutes. The second it comes off the grill, get the shrimp on the gas grill. They\'ll be done right as the tomahawk is ready to slice. Everything lands together.',
+      tip:   'Don\'t skip the rest to serve it faster. A rested tomahawk slices clean. An unrested one bleeds out on the board.',
+      timers: ['final-rest']
+    },
+    {
+      label: 'Grill the shrimp',
+      text:  'Yukon Glory perforated tray should already be hot from preheating with the gas grill. {{shrimp}} in a single layer, don\'t crowd. Side one until bottom half is opaque.',
+      tip:   null,
+      timers: ['shrimp-1']
+    },
+    {
+      label: 'Flip shrimp and finish',
+      text:  'Flip each shrimp. Done at a loose C curl — fully opaque, not tight. Pull immediately onto the solid Yukon tray. Spoon savory blueberry sauce over while hot.',
+      tip:   null,
+      timers: ['shrimp-2']
+    },
+    {
+      label: 'Slice and plate',
+      text:  'Drizzle the tomahawk with good olive oil. Flaky salt. Slice against the grain, off the bone — long, deliberate strokes. Fan the slices on a board or platter with the tomahawk bone standing up alongside. Spoon blueberry sauce over the beef. Bring the whole board to the table. Let Sam see it before you start serving.',
+      tip:   'The bone is the centerpiece. Don\'t hide it on the side — stand it up or prop it. This is the moment.',
+      timers: []
+    }
+  ]
+},
 // ─── ENTRY 1: BLUEBERRY REDUCTION — SAVORY + DESSERT ───────────────────────
 {
   id: 'blueberry-reduction-two-yields',
