@@ -177,8 +177,8 @@ button { font-family: inherit; cursor: pointer; }
 
 /* Fixed timer bar */
 #timer-bar {
-  position: fixed; top: 54px; left: 0; right: 0; z-index: 299;
-  background: var(--surface2); border-bottom: 1px solid var(--border);
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 299;
+  background: var(--surface2); border-top: 1px solid var(--border);
   max-height: 0; overflow: hidden;
   transition: max-height .25s ease, padding .25s ease;
   padding: 0 18px;
@@ -186,7 +186,7 @@ button { font-family: inherit; cursor: pointer; }
 #timer-bar.vis { max-height: 70px; padding: 10px 18px; }
 .t-pills { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
 .t-pill {
-  display: inline-flex; align-items: center; gap: 8px;
+  display: inline-flex; align-items: center; gap: 6px;
   background: var(--surface); border: 1px solid var(--border);
   border-radius: 20px; padding: 5px 13px; flex-shrink: 0;
 }
@@ -206,15 +206,23 @@ button { font-family: inherit; cursor: pointer; }
 }
 .t-name  { font-size: 12px; color: var(--muted); }
 .t-count { font-size: 15px; font-weight: 600; font-variant-numeric: tabular-nums; min-width: 40px; color: var(--text); }
+.t-pill-src {
+  font-size: 10px; color: var(--muted); background: var(--surface2);
+  border: 1px solid var(--border); border-radius: 10px;
+  padding: 1px 7px; cursor: pointer; white-space: nowrap;
+  max-width: 120px; overflow: hidden; text-overflow: ellipsis;
+}
+.t-pill-src:hover { color: var(--text); border-color: var(--accent); }
 
 /* Cook body */
 #cook-body {
   padding-top: 70px;
   padding-left: 20px; padding-right: 20px; padding-bottom: 80px;
   max-width: 760px; margin: 0 auto;
-  transition: padding-top .25s ease;
+  transition: padding-bottom .25s ease;
 }
-#cook-body.bar-vis { padding-top: 130px; }
+#cook-body.bar-vis { padding-bottom: 140px; }
+#lib-view.bar-vis  { padding-bottom: 140px; }
 
 /* Tabs */
 .cook-tabs {
@@ -441,6 +449,10 @@ button { font-family: inherit; cursor: pointer; }
 </div>
 
 <!-- ===== COOK VIEW ===== -->
+<div id="timer-bar">
+  <div class="t-pills" id="t-pills"></div>
+</div>
+
 <div id="cook-view">
 
   <div id="cook-hdr">
@@ -453,10 +465,6 @@ button { font-family: inherit; cursor: pointer; }
       <button class="scale-btn"    id="scale-2" onclick="setScale(2)">2×</button>
       <button class="scale-btn"    id="scale-3" onclick="setScale(3)">3×</button>
     </div>
-  </div>
-
-  <div id="timer-bar">
-    <div class="t-pills" id="t-pills"></div>
   </div>
 
   <div id="cook-body">
@@ -3479,15 +3487,13 @@ function renderLibrary() {
 }
 
 function goLib() {
-  Object.values(T).forEach(t => { if (t.iv) clearInterval(t.iv); });
-  T = {};
+  currentRecipe = null;
   document.getElementById('lib-view').style.display = '';
   document.getElementById('cook-view').classList.remove('active');
-  document.getElementById('timer-bar').classList.remove('vis');
-  document.getElementById('cook-body').classList.remove('bar-vis');
   document.title = 'EL YES! Cookbook';
   history.pushState(null, '', location.pathname);
   window.scrollTo(0, 0);
+  renderBar();
 }
 
 // =====================================================================
@@ -3503,9 +3509,14 @@ function loadRecipe(id) {
     document.getElementById('scale-' + n).classList.toggle('on', n === currentScale);
   });
 
-  T = {};
+  // init timers for this recipe only if not already in T (preserve running state across nav)
   Object.entries(currentRecipe.timers).forEach(([tid, td]) => {
-    T[tid] = { label: td.label, preset: td.preset, rem: td.preset, bell: td.bell, running: false, alerted: false, iv: null };
+    const key = currentRecipe.id + '__' + tid;
+    if (!T[key]) {
+      T[key] = { recipeId: currentRecipe.id, recipeTitle: currentRecipe.title,
+                 label: td.label, preset: td.preset, rem: td.preset,
+                 bell: td.bell, running: false, alerted: false, iv: null };
+    }
   });
 
   document.getElementById('hdr-title').textContent = currentRecipe.title;
@@ -3516,6 +3527,7 @@ function loadRecipe(id) {
   renderMise();
   renderVariants();
   renderSteps();
+  syncTimerUI();
 
   document.querySelectorAll('.cook-pane').forEach(p => p.classList.remove('on'));
   document.querySelectorAll('.cook-tab').forEach(b => b.classList.remove('on'));
@@ -3624,15 +3636,16 @@ function renderSteps() {
 
     let timerHtml = '';
     step.timers.forEach(tid => {
-      if (!T[tid]) return;
-      const icon = T[tid].bell ? '🔔' : '⏱';
+      const key = currentRecipe.id + '__' + tid;
+      if (!T[key]) return;
+      const icon = T[key].bell ? '🔔' : '⏱';
       timerHtml += `
         <div class="t-set">
-          <button class="t-adj" onclick="adjTimer('${tid}',-60)">−</button>
-          <button class="t-btn" id="tbtn-${tid}" onclick="toggleTimer('${tid}',this)">
-            ${icon} <span id="tlbl-${tid}">${T[tid].label} · ${fmt(T[tid].preset)}</span>
+          <button class="t-adj" onclick="adjTimer('${key}',-60)">−</button>
+          <button class="t-btn" id="tbtn-${key}" onclick="toggleTimer('${key}',this)">
+            ${icon} <span id="tlbl-${key}">${T[key].label} · ${fmt(T[key].preset)}</span>
           </button>
-          <button class="t-adj" onclick="adjTimer('${tid}',60)">+</button>
+          <button class="t-adj" onclick="adjTimer('${key}',60)">+</button>
         </div>
       `;
     });
@@ -3710,20 +3723,51 @@ function updateBtnLabel(id) {
 }
 
 function renderBar() {
-  const bar    = document.getElementById('timer-bar');
-  const pills  = document.getElementById('t-pills');
-  const body   = document.getElementById('cook-body');
-  const active = Object.entries(T).filter(([, t]) => t.running || t.alerted);
+  const bar      = document.getElementById('timer-bar');
+  const pills    = document.getElementById('t-pills');
+  const cookBody = document.getElementById('cook-body');
+  const libView  = document.getElementById('lib-view');
+  const active   = Object.entries(T).filter(([, t]) => t.running || t.alerted);
 
   if (!active.length) {
-    bar.classList.remove('vis'); body.classList.remove('bar-vis'); pills.innerHTML = ''; return;
+    bar.classList.remove('vis');
+    cookBody.classList.remove('bar-vis');
+    libView.classList.remove('bar-vis');
+    pills.innerHTML = '';
+    return;
   }
-  bar.classList.add('vis'); body.classList.add('bar-vis');
+  bar.classList.add('vis');
+  cookBody.classList.add('bar-vis');
+  libView.classList.add('bar-vis');
+
   pills.innerHTML = active.map(([id, t]) => {
-    if (t.alerted) return `<span class="t-pill alerted" onclick="dismissAlert('${id}')" title="tap to dismiss"><span class="t-name">${t.label}</span><span class="t-count">done ✕</span></span>`;
+    const isOther = t.recipeId !== currentRecipe?.id;
+    const srcTag  = isOther
+      ? `<span class="t-pill-src" onclick="event.stopPropagation();loadRecipe('${t.recipeId}')" title="${t.recipeTitle}">↗ ${t.recipeTitle}</span>`
+      : '';
+    if (t.alerted) {
+      return `<span class="t-pill alerted" onclick="dismissAlert('${id}')" title="tap to dismiss">${srcTag}<span class="t-name">${t.label}</span><span class="t-count">done ✕</span></span>`;
+    }
     const urg = t.rem <= 60 ? ' urg' : '';
-    return `<span class="t-pill${urg}"><span class="t-name">${t.label}</span><span class="t-count">${fmt(t.rem)}</span></span>`;
+    return `<span class="t-pill${urg}">${srcTag}<span class="t-name">${t.label}</span><span class="t-count">${fmt(t.rem)}</span></span>`;
   }).join('');
+}
+
+function syncTimerUI() {
+  if (!currentRecipe) return;
+  Object.entries(currentRecipe.timers).forEach(([tid]) => {
+    const key = currentRecipe.id + '__' + tid;
+    const t   = T[key];
+    if (!t) return;
+    const btn = document.getElementById('tbtn-' + key);
+    if (!btn) return;
+    btn.classList.remove('running', 'fin', 'warn30');
+    if (t.running) btn.classList.add('running');
+    else if (t.alerted) btn.classList.add('fin');
+    else if (t.rem <= 30 && t.rem < t.preset) btn.classList.add('warn30');
+    updateBtnLabel(key);
+  });
+  renderBar();
 }
 
 function dismissAlert(id) {
