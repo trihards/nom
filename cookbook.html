@@ -3533,6 +3533,173 @@ const RECIPES = [
       timers: []
     }
   ]
+},
+{
+  id: 'avocado-oil-mayo',
+  title: 'Avocado Oil Mayo',
+  style: 'Immersion blender · cold emulsion · neutral base',
+  subtitle: 'Slaw, chicken salad, tuna salad, everything',
+  preheat: null,
+  serves: '1–3',
+  tags: ['condiment', 'quick', 'phase 2'],
+  prepTime: '5 min',
+  cookTime: '0 min',
+  headnote: `<strong>The immersion blender is non-negotiable.</strong> Don't attempt this by hand — the blender creates the emulsion almost instantly and you'll feel unreasonably accomplished.<br><br><strong>Don't move the blender for the first few seconds.</strong> Place it at the bottom of the jar, turn it on, and wait until you see white mayo climbing up the sides before you slowly pull up. That's the whole trick.<br><br><em>Keeps refrigerated for 7–10 days. Use a clean spoon every time — contamination is the enemy of shelf life. Scale 1 = ~¾ cup · Scale 2 = ~1½ cups · Scale 3 = ~2¼ cups.</em>`,
+  equipment: [
+    { name: 'Immersion blender', note: 'mandatory — not optional here' },
+    { name: 'Tall narrow jar or blender cup', note: 'the jar that came with your immersion blender is ideal' },
+    { name: 'Airtight jar for storage' }
+  ],
+  mise: [
+    { group: 'Emulsion', items: [
+      { byScale: { 1: '1 egg yolk, room temperature', 2: '2 egg yolks, room temperature', 3: '3 egg yolks, room temperature' } },
+      { byScale: { 1: '¾ cup avocado oil', 2: '1½ cups avocado oil', 3: '2¼ cups avocado oil' } },
+      { byScale: { 1: '1 tsp Colman\'s mustard', 2: '2 tsp Colman\'s mustard', 3: '1 tbsp Colman\'s mustard' } },
+      { byScale: { 1: '1 tsp Bragg\'s ACV', 2: '2 tsp Bragg\'s ACV', 3: '1 tbsp Bragg\'s ACV' } },
+      { byScale: { 1: '¼ tsp non-iodized sea salt', 2: '½ tsp non-iodized sea salt', 3: '¾ tsp non-iodized sea salt' } }
+    ]}
+  ],
+  refs: {
+    'oil':     { display: 'avocado oil',      tips: { 1: '¾ cup', 2: '1½ cups', 3: '2¼ cups' } },
+    'yolks':   { display: 'egg yolks',        tips: { 1: '1 yolk', 2: '2 yolks', 3: '3 yolks' } },
+    'mustard': { display: 'Colman\'s mustard', tips: { 1: '1 tsp', 2: '2 tsp', 3: '1 tbsp' } },
+    'acv':     { display: 'Bragg\'s ACV',      tips: { 1: '1 tsp', 2: '2 tsp', 3: '1 tbsp' } }
+  },
+  timers: {},
+  steps: [
+    {
+      label: 'Bring yolks to room temperature',
+      text: 'Cold yolks resist emulsification. Pull your eggs out 20–30 minutes before you start. Room temp is the difference between mayo that sets in 10 seconds and mayo that breaks.',
+      tip: 'If you forgot, run the uncracked eggs under warm water for 5 minutes.',
+      timers: []
+    },
+    {
+      label: 'Load the jar',
+      text: 'Add the yolks, mustard, ACV, and salt to the tall narrow jar. Pour the oil on top. Don\'t stir, don\'t mix — just let it sit there in layers.',
+      tip: null,
+      timers: []
+    },
+    {
+      label: 'Emulsify',
+      text: 'Place the immersion blender all the way at the bottom of the jar, pressing it against the base. Turn it on and do not move it. Watch for white mayo to start climbing up the sides — that takes about 10 seconds. Once you see it climbing, slowly drag the blender upward through the oil in one continuous pull. Done.',
+      tip: 'If it breaks (looks greasy and separated), start fresh with a new yolk in a clean jar, then slowly drizzle the broken mayo into it while blending — it usually rescues.',
+      timers: []
+    },
+    {
+      label: 'Taste and adjust',
+      text: 'Taste it. It should be rich, tangy, and lightly mustardy. Add a touch more ACV if it needs brightness, more salt if it\'s flat. It will firm up slightly in the fridge.',
+      tip: null,
+      timers: []
+    },
+    {
+      label: 'Store',
+      text: 'Transfer to an airtight jar and refrigerate immediately. Good for 7–10 days. Use a clean spoon every time.',
+      tip: null,
+      timers: []
+    }
+  ]
+},
+{
+  id: 'vadouvan-lamb-loin-chops',
+  title: 'The French Curry Connection',
+  style: 'Cast iron sear · spice crust · pan sauce',
+  subtitle: 'Roasted sweet potato · sautéed green beans · spring greens with berries',
+  preheat: '425°F',
+  serves: '1–3',
+  tags: ['lamb', 'weeknight', 'phase 1'],
+  prepTime: '10 min',
+  cookTime: '45 min',
+  headnote: `<strong>Vadouvan blooms in the sear.</strong> No need to toast it separately — pressing it firmly into dry chops and dropping them into a screaming hot cast iron does all the work. The lamb fat carries it.<br><br><strong>Shiitakes go straight into the drippings.</strong> Don't wipe the pan. Let them get dark and a little crispy before you add liquid — that's where the sauce gets its backbone. They stay in the sauce, they don't disappear into it.<br><br><em>Sweet potatoes need a 45-minute head start. Get them in the oven first, everything else times around them.</em>`,
+  equipment: [
+    { name: '12" cast iron skillet', note: 'for lamb and pan sauce' },
+    { name: 'Half sheet pan', note: 'for sweet potatoes — no parchment, direct contact' },
+    { name: '10" carbon steel or second skillet', note: 'for green beans' }
+  ],
+  mise: [
+    { group: 'Sweet Potato', items: [
+      { byScale: { 1: '1 sweet potato, halved lengthwise', 2: '2 sweet potatoes, halved lengthwise', 3: '3 sweet potatoes, halved lengthwise' } },
+      { name: 'Avocado oil + salt' }
+    ]},
+    { group: 'Lamb', items: [
+      { byScale: { 1: '2 lamb loin chops, pat dry', 2: '4 lamb loin chops, pat dry', 3: '6 lamb loin chops, pat dry' } },
+      { byScale: { 1: '1 tsp vadouvan', 2: '2 tsp vadouvan', 3: '1 tbsp vadouvan' } },
+      { name: 'Salt + black pepper' }
+    ]},
+    { group: 'Shiitake Pan Sauce', items: [
+      { byScale: { 1: '3 oz shiitake caps, sliced ¼"', 2: '6 oz shiitake caps, sliced ¼"', 3: '9 oz shiitake caps, sliced ¼"' } },
+      { byScale: { 1: '2 garlic cloves, minced', 2: '4 garlic cloves, minced', 3: '6 garlic cloves, minced' } },
+      { byScale: { 1: '¼ cup bone broth', 2: '½ cup bone broth', 3: '¾ cup bone broth' } },
+      { byScale: { 1: '½ tbsp Bragg\'s ACV', 2: '1 tbsp Bragg\'s ACV', 3: '1½ tbsp Bragg\'s ACV' } }
+    ]},
+    { group: 'Green Beans', items: [
+      { byScale: { 1: '¼ lb green beans, trimmed', 2: '½ lb green beans, trimmed', 3: '¾ lb green beans, trimmed' } },
+      { byScale: { 1: '1 garlic clove, sliced thin', 2: '2 garlic cloves, sliced thin', 3: '3 garlic cloves, sliced thin' } },
+      { name: 'Avocado oil · Bragg\'s ACV · salt' }
+    ]},
+    { group: 'Salad', items: [
+      { byScale: { 1: '2 handfuls spring greens', 2: '4 handfuls spring greens', 3: '6 handfuls spring greens' } },
+      { byScale: { 1: '¼ cup raspberries + blackberries', 2: '½ cup raspberries + blackberries', 3: '¾ cup raspberries + blackberries' } },
+      { name: 'Olive oil · Bragg\'s ACV · sumac · salt' }
+    ]}
+  ],
+  refs: {
+    'lamb':     { display: 'lamb chops',    tips: { 1: '2 chops', 2: '4 chops', 3: '6 chops' } },
+    'vadouvan': { display: 'vadouvan',      tips: { 1: '1 tsp', 2: '2 tsp', 3: '1 tbsp' } },
+    'shiitake': { display: 'shiitakes',     tips: { 1: '3 oz', 2: '6 oz', 3: '9 oz' } },
+    'broth':    { display: 'bone broth',    tips: { 1: '¼ cup', 2: '½ cup', 3: '¾ cup' } },
+    'acv':      { display: 'Bragg\'s ACV',  tips: { 1: '½ tbsp', 2: '1 tbsp', 3: '1½ tbsp' } }
+  },
+  timers: {
+    'sweet-potato': { label: 'Sweet potatoes', preset: 2700, bell: true },
+    'sear-side-1':  { label: 'Sear side 1',    preset: 180,  bell: true },
+    'sear-side-2':  { label: 'Sear side 2',    preset: 180,  bell: true },
+    'sauce':        { label: 'Pan sauce',       preset: 240,  bell: true },
+    'green-beans':  { label: 'Green beans',     preset: 180,  bell: true }
+  },
+  steps: [
+    {
+      label: 'Sweet potatoes in the oven',
+      text: 'Rub cut sides of sweet potatoes with avocado oil, season with salt. Place cut side down directly on the sheet pan — no parchment, you want direct contact for caramelization. Into the 425°F oven.',
+      tip: 'Everything else times around these. Start them first, full stop.',
+      timers: ['sweet-potato']
+    },
+    {
+      label: 'Season the lamb',
+      text: 'Pat chops completely dry. Press vadouvan firmly into both sides along with salt and pepper. Let them sit out while you prep everything else — room temp meat sears better and you want that crust to set fast.',
+      tip: null,
+      timers: []
+    },
+    {
+      label: 'Sear the lamb',
+      text: 'Cast iron screaming hot — smoking. Thin film of avocado oil. Lay chops away from you. Hard aggressive sizzle the whole time — if it quiets down the pan cooled off. Don\'t touch them.',
+      tip: 'That\'s the sound you want. Leave it alone.',
+      timers: ['sear-side-1']
+    },
+    {
+      label: 'Flip and finish',
+      text: 'Flip. Crust should be deep brown, vadouvan fragrant and bloomed. Another 3 minutes for medium-rare — press the meat, some give but firming up. Pull to a plate, tent loosely.',
+      tip: null,
+      timers: ['sear-side-2']
+    },
+    {
+      label: 'Shiitake pan sauce',
+      text: 'Don\'t wipe the pan. Shiitakes straight into the lamb fat — they\'ll sizzle hard. Leave them alone until dark and crispy at the edges. Add garlic, 30 seconds. Add broth and ACV, scrape up every bit of fond. Reduce by a third until it coats a spoon. Taste and adjust salt. Shiitakes stay in.',
+      tip: 'The fond is the flavor — get it all up.',
+      timers: ['sauce']
+    },
+    {
+      label: 'Green beans',
+      text: 'Separate pan, avocado oil over high heat until shimmering. Green beans and sliced garlic, toss to coat. Let them sit and get color — don\'t fuss with them. Hit with ACV and salt at the end, one final toss.',
+      tip: null,
+      timers: ['green-beans']
+    },
+    {
+      label: 'Salad',
+      text: 'Whisk olive oil, ACV, a pinch of sumac, and salt in the bottom of your salad bowl. Add spring greens and berries, toss right before you plate.',
+      tip: null,
+      timers: []
+    }
+  ]
 }
 ];
 
