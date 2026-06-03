@@ -3700,6 +3700,125 @@ const RECIPES = [
       timers: []
     }
   ]
+},
+{
+  id: 'cast-iron-argentine-red-shrimp',
+  title: 'Cast Iron Argentine Red Shrimp',
+  style: 'Cast iron sear · cumin-coriander-garam masala rub · no grill required',
+  subtitle: 'Wild rice in bone broth · cast iron asparagus with English peas',
+  preheat: null,
+  serves: '1–3',
+  tags: ['seafood', 'weeknight', 'phase 1'],
+  prepTime: '15 min',
+  cookTime: '25 min',
+  headnote: `<strong>2 in the pink.</strong> Cast iron does what the grill tray does — screaming hot surface, fast sear, instant char — without leaving the house. The cumin-coriander-garam masala rub blooms in the fat on contact and you're done in under 3 minutes a side.<br><br><strong>Wild rice is not jasmine.</strong> Don't put it in the Zojirushi on the white rice setting. Stovetop only: 1 cup rice to 3 cups bone broth, simmer covered 45 minutes until the grains split open. Start it first — everything else times around it.<br><br><em>Argentine reds are done at a loose C curl — fully opaque, not tight. A tight O means overcooked. They carry over fast, pull at the first sign of done. If komatsuna isn't available, bok choy is the closest substitute — same technique, same timing. Spinach works too but wilts faster.</em>`,
+  equipment: [
+    { name: '12" cast iron skillet', note: 'for shrimp — komatsuna goes in this pan after' },
+    { name: '10" carbon steel or second cast iron', note: 'for asparagus and peas — runs simultaneously' },
+    { name: 'Medium saucepan with lid', note: 'for wild rice — heavy bottomed if you have it' },
+    { name: 'Colander', note: 'for thawing shrimp under cold water' }
+  ],
+  mise: [
+    { group: 'Wild Rice — start first', items: [
+      { byScale: { 1: '⅓ cup wild rice (Lundberg)', 2: '⅔ cup wild rice (Lundberg)', 3: '1 cup wild rice (Lundberg)' } },
+      { byScale: { 1: '1 cup bone broth', 2: '2 cups bone broth', 3: '3 cups bone broth' } },
+      { name: 'Salt' }
+    ]},
+    { group: 'Shrimp', items: [
+      { byScale: { 1: '¾ lb Argentine red shrimp, tail-off', 2: '1½ lb Argentine red shrimp, tail-off', 3: '2 lb Argentine red shrimp, tail-off' }, note: 'thawed under cold running water, completely dry' },
+      { byScale: { 1: '¾ tbsp avocado oil', 2: '1½ tbsp avocado oil', 3: '2 tbsp avocado oil' } }
+    ]},
+    { group: 'Rub — mix before thawing', items: [
+      { byScale: { 1: '⅓ tsp cumin', 2: '⅔ tsp cumin', 3: '1 tsp cumin' } },
+      { byScale: { 1: '⅓ tsp coriander', 2: '⅔ tsp coriander', 3: '1 tsp coriander' } },
+      { byScale: { 1: '⅙ tsp garam masala', 2: '⅓ tsp garam masala', 3: '½ tsp garam masala' } },
+      { byScale: { 1: '⅙ tsp black pepper', 2: '⅓ tsp black pepper', 3: '½ tsp black pepper' } },
+      { byScale: { 1: '⅓ tsp salt', 2: '⅔ tsp salt', 3: '1 tsp salt' } }
+    ]},
+    { group: 'Asparagus + Peas — second pan', items: [
+      { byScale: { 1: '½ bunch asparagus, woody ends snapped', 2: '1 bunch asparagus, woody ends snapped', 3: '1½ bunches asparagus, woody ends snapped' } },
+      { byScale: { 1: '¼ cup English peas, shelled', 2: '½ cup English peas, shelled', 3: '¾ cup English peas, shelled' } },
+      { name: 'Avocado oil · salt · black pepper' }
+    ]},
+    { group: 'Komatsuna — shrimp pan after', items: [
+      { byScale: { 1: '1 small bunch komatsuna, rough torn', 2: '1 large bunch komatsuna, rough torn', 3: '2 bunches komatsuna, rough torn' }, note: 'bok choy or spinach if unavailable' },
+      { byScale: { 1: '1 garlic clove, sliced thin', 2: '2 garlic cloves, sliced thin', 3: '3 garlic cloves, sliced thin' } },
+      { byScale: { 1: '½ tsp Bragg\'s ACV', 2: '1 tsp Bragg\'s ACV', 3: '1½ tsp Bragg\'s ACV' } }
+    ]}
+  ],
+  refs: {
+    'rice':      { display: 'wild rice',    tips: { 1: '⅓ cup',        2: '⅔ cup',        3: '1 cup'         } },
+    'broth':     { display: 'bone broth',   tips: { 1: '1 cup',        2: '2 cups',        3: '3 cups'        } },
+    'shrimp':    { display: 'shrimp',       tips: { 1: '¾ lb',         2: '1½ lb',         3: '2 lb'          } },
+    'rub':       { display: 'rub',          tips: { 1: '⅓ tsp each cumin + coriander · ⅙ tsp garam masala + pepper · ⅓ tsp salt', 2: '⅔ tsp each cumin + coriander · ⅓ tsp garam masala + pepper · ⅔ tsp salt', 3: '1 tsp each cumin + coriander · ½ tsp garam masala + pepper · 1 tsp salt' } },
+    'asparagus': { display: 'asparagus',    tips: { 1: '½ bunch',      2: '1 bunch',       3: '1½ bunches'    } },
+    'peas':      { display: 'English peas', tips: { 1: '¼ cup',        2: '½ cup',         3: '¾ cup'         } },
+    'komatsuna': { display: 'komatsuna',    tips: { 1: '1 small bunch', 2: '1 large bunch', 3: '2 bunches'     } },
+    'acv':       { display: 'Bragg\'s ACV', tips: { 1: '½ tsp',        2: '1 tsp',         3: '1½ tsp'        } }
+  },
+  timers: {
+    'rice':      { label: 'Wild rice',     preset: 2700, bell: true },
+    'thaw':      { label: 'Thaw shrimp',   preset: 600,  bell: true },
+    'shrimp-1':  { label: 'Shrimp side 1', preset: 150,  bell: true },
+    'shrimp-2':  { label: 'Shrimp side 2', preset: 120,  bell: true },
+    'asparagus': { label: 'Asparagus',     preset: 240,  bell: true }
+  },
+  steps: [
+    {
+      label: 'Wild rice first',
+      text: 'Combine {{rice}} and {{broth}} in a medium saucepan, pinch of salt. Bring to a boil, reduce to a low simmer, cover tight. Leave it alone. Done when the grains have split open and the liquid is absorbed — that\'s your visual cue, not the timer.',
+      tip: 'Don\'t lift the lid before 40 minutes. Every peek drops the temp and adds time.',
+      timers: ['rice']
+    },
+    {
+      label: 'Thaw and dry the shrimp',
+      text: 'Colander in the sink, {{shrimp}} under cold running water. Toss occasionally until thawed. Drain, then pat completely dry — press into them, don\'t just blot. Wet shrimp steam instead of sear.',
+      tip: 'If they feel even slightly damp when the rub goes on, dry them again.',
+      timers: ['thaw']
+    },
+    {
+      label: 'Toss with rub',
+      text: 'Combine dried shrimp, avocado oil, and the full {{rub}} in a bowl. Toss until every shrimp is evenly coated. Let sit at room temperature until the pan is ready.',
+      tip: null,
+      timers: []
+    },
+    {
+      label: 'Get both pans hot',
+      text: 'Large cast iron for the shrimp over high heat. Second pan — carbon steel or cast iron — over high heat for the asparagus. Both need to be smoking before anything goes in. Run them simultaneously.',
+      tip: 'Two burners, both screaming. Don\'t stagger them or one pan will cool while you wait.',
+      timers: []
+    },
+    {
+      label: 'Asparagus in the second pan',
+      text: 'Thin film of avocado oil in the second pan. {{asparagus}} in a single layer — leave them alone until blistered and charred in spots. Add {{peas}} in the last 90 seconds, toss once. Season with salt and pepper. Pull while peas are still bright.',
+      tip: 'Purple asparagus will go green — cook fast to preserve as much color as possible.',
+      timers: ['asparagus']
+    },
+    {
+      label: 'Sear the shrimp',
+      text: 'No additional oil in the shrimp pan — the rub has it. Shrimp in a single layer, don\'t crowd, work in batches if needed. Hard sizzle on contact. Don\'t touch them.',
+      tip: 'That\'s the sound you want. Leave it alone.',
+      timers: ['shrimp-1']
+    },
+    {
+      label: 'Flip and finish',
+      text: 'Flip each shrimp. Done when fully opaque and in a loose C curl — a tight O is overcooked, pull before you get there. Off the heat immediately onto a plate.',
+      tip: 'Argentine reds look done before they are because of their natural color raw. Go by the curl and opacity, not the color.',
+      timers: ['shrimp-2']
+    },
+    {
+      label: 'Komatsuna in the shrimp pan',
+      text: 'Don\'t wipe the pan. Add a little avocado oil and the sliced garlic — 30 seconds until fragrant. Komatsuna in, toss to coat in the residual spiced fat. Wilts in about 2 minutes. Hit with {{acv}} at the end, toss once more, off the heat.',
+      tip: 'You want it wilted but still with some structure — not collapsed. Pull it early if anything.',
+      timers: []
+    },
+    {
+      label: 'Plate',
+      text: 'Wild rice as the base, shrimp on top, asparagus and peas alongside, komatsuna tucked in. Everything picked up the same spice profile — it\'ll taste like it belongs together.',
+      tip: null,
+      timers: []
+    }
+  ]
 }
 ];
 
