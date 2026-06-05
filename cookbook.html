@@ -3819,6 +3819,134 @@ const RECIPES = [
       timers: []
     }
   ]
+},
+{
+  id: 'loco-moco',
+  title: 'Loco Moco',
+  style: 'Cast iron sear · wagyu patties · umami brown gravy',
+  subtitle: 'Jasmine rice · komatsuna or other quick greens',
+  preheat: null,
+  serves: '1–3',
+  tags: ['beef', 'weeknight', 'phase 1'],
+  prepTime: '10 min',
+  cookTime: '30 min',
+  headnote: `<strong>Two-pan discipline is the whole game.</strong> Pan 1 is for the patties and gravy — nothing else goes in there. Pan 2 handles the mushrooms and onions separately so they stay distinct when they fold into the finished sauce. Don't combine until the end.<br><br><strong>Wagyu needs a light hand inside and a hot pan outside.</strong> Salt, pepper, and mushroom powder only in the mix — garlic and onion granules go on the crust, not inside. They'll char slightly in the pan and feed the fond directly. The fat in wagyu carries flavor differently than regular ground beef; seasoning the interior competes with it.<br><br><em>Form the patties thick and dimple the center — wagyu will dome as the fat renders. Don't move them until they release on their own. Rest them briefly before plating; the crust firms back up and holds better under the gravy.</em>`,
+  equipment: [
+    { name: '12-inch cast iron skillet', note: 'Pan 1 — patties and gravy only' },
+    { name: 'Carbon steel or cast iron, 10-inch', note: 'Pan 2 — mushrooms and onions' },
+    { name: 'Small pan or cleared Pan 2', note: 'for the greens, last' },
+    { name: 'Zojirushi rice cooker' },
+    { name: 'Small bowl', note: 'arrowroot slurry — mix before anything hits the stove' },
+    { name: 'Rack or plate', note: 'for resting patties' }
+  ],
+  mise: [
+    { group: 'Rice', items: [
+      { byScale: { 1: '1 cup jasmine rice, rinsed', 2: '2 cups jasmine rice, rinsed', 3: '3 cups jasmine rice, rinsed' } }
+    ]},
+    { group: 'Patties', items: [
+      { byScale: { 1: '½ lb wagyu ground beef', 2: '1 lb wagyu ground beef', 3: '1½ lbs wagyu ground beef' }, note: 'handle minimally — fat melts fast' },
+      { byScale: { 1: '¼ tsp salt', 2: '½ tsp salt', 3: '¾ tsp salt' } },
+      { byScale: { 1: '⅛ tsp black pepper', 2: '¼ tsp black pepper', 3: '⅜ tsp black pepper' } },
+      { byScale: { 1: '¼ tsp mushroom umami powder', 2: '½ tsp mushroom umami powder', 3: '¾ tsp mushroom umami powder' } },
+      { name: 'Garlic granules + onion granules — for the crust, kept separate' }
+    ]},
+    { group: 'Veg pan', items: [
+      { byScale: { 1: '3 oz shiitake mushrooms, stems off, caps sliced thick', 2: '6 oz shiitake mushrooms, stems off, caps sliced thick', 3: '9 oz shiitake mushrooms, stems off, caps sliced thick' } },
+      { byScale: { 1: '½ medium yellow onion, halved and sliced thin', 2: '1 medium yellow onion, halved and sliced thin', 3: '1½ yellow onions, halved and sliced thin' } },
+      { name: 'Avocado oil + salt' }
+    ]},
+    { group: 'Gravy — mix broth and aminos before cooking', items: [
+      { byScale: { 1: '¾ cup bone broth', 2: '1½ cups bone broth', 3: '2¼ cups bone broth' } },
+      { byScale: { 1: '1 tbsp coconut aminos', 2: '2 tbsp coconut aminos', 3: '3 tbsp coconut aminos' } },
+      { byScale: { 1: '½ tsp mushroom umami powder', 2: '1 tsp mushroom umami powder', 3: '1½ tsp mushroom umami powder' } },
+      { byScale: { 1: '¼ tsp Ajinomoto (MSG)', 2: '½ tsp Ajinomoto (MSG)', 3: '¾ tsp Ajinomoto (MSG)' } },
+      { byScale: { 1: '1 tsp arrowroot + 2 tsp cold water', 2: '2 tsp arrowroot + 4 tsp cold water', 3: '1 tbsp arrowroot + 2 tbsp cold water' }, note: 'slurried, set aside separately' },
+      { byScale: { 1: '1 tsp Bragg\'s ACV', 2: '2 tsp Bragg\'s ACV', 3: '1 tbsp Bragg\'s ACV' }, note: 'finish only — set aside' }
+    ]},
+    { group: 'Greens', items: [
+      { byScale: { 1: '2 oz komatsuna, rough chop', 2: '4 oz komatsuna, rough chop', 3: '6 oz komatsuna, rough chop' } },
+      { name: 'Avocado oil + salt' }
+    ]}
+  ],
+  refs: {
+    'rice':      { display: 'rice',               tips: { 1: '1 cup jasmine, rinsed',          2: '2 cups jasmine, rinsed',          3: '3 cups jasmine, rinsed'          } },
+    'patties':   { display: 'wagyu patties',       tips: { 1: '½ lb, formed into 2 patties',    2: '1 lb, formed into 4 patties',     3: '1½ lbs, formed into 6 patties'   } },
+    'crust':     { display: 'crust seasoning',     tips: { 1: 'garlic + onion granules, pressed into both faces', 2: 'garlic + onion granules, pressed into both faces', 3: 'garlic + onion granules, pressed into both faces' } },
+    'shiitake':  { display: 'shiitakes',           tips: { 1: '3 oz, sliced thick',             2: '6 oz, sliced thick',              3: '9 oz, sliced thick'              } },
+    'onion':     { display: 'onion',               tips: { 1: '½ medium, thin sliced',          2: '1 medium, thin sliced',           3: '1½, thin sliced'                 } },
+    'broth':     { display: 'bone broth',          tips: { 1: '¾ cup',                          2: '1½ cups',                         3: '2¼ cups'                         } },
+    'aminos':    { display: 'coconut aminos',      tips: { 1: '1 tbsp',                         2: '2 tbsp',                          3: '3 tbsp'                          } },
+    'msg':       { display: 'Ajinomoto',           tips: { 1: '¼ tsp',                          2: '½ tsp',                           3: '¾ tsp'                           } },
+    'umami':     { display: 'mushroom umami powder', tips: { 1: '½ tsp in gravy',               2: '1 tsp in gravy',                  3: '1½ tsp in gravy'                 } },
+    'slurry':    { display: 'arrowroot slurry',    tips: { 1: '1 tsp arrowroot + 2 tsp water',  2: '2 tsp arrowroot + 4 tsp water',   3: '1 tbsp arrowroot + 2 tbsp water' } },
+    'acv':       { display: 'ACV',                 tips: { 1: '1 tsp, finish only',             2: '2 tsp, finish only',              3: '1 tbsp, finish only'             } },
+    'greens':    { display: 'komatsuna',           tips: { 1: '2 oz, rough chop',               2: '4 oz, rough chop',                3: '6 oz, rough chop'                } }
+  },
+  timers: {
+    'rice':      { label: 'Rice',              preset: 2700, bell: false },
+    'shiitake':  { label: 'Dry sear shiitake', preset: 210,  bell: true  },
+    'onion':     { label: 'Onions jammy',      preset: 900,  bell: true  },
+    'sear1':     { label: 'Patty side 1',      preset: 180,  bell: true  },
+    'sear2':     { label: 'Patty side 2',      preset: 180,  bell: true  },
+    'gravy':     { label: 'Gravy reduce',      preset: 300,  bell: false },
+    'greens':    { label: 'Greens',            preset: 90,   bell: true  }
+  },
+  steps: [
+    {
+      label: 'Start rice',
+      text:  'Start {{rice}} in the Zojirushi now. Everything else times around it.',
+      tip:   null,
+      timers: ['rice']
+    },
+    {
+      label: 'Dry sear shiitakes',
+      text:  'Pan 2 over high heat, no fat. {{shiitake}} in a single layer — don\'t crowd, work in batches if needed. Don\'t touch them. You want dark, almost aggressive color and a slightly chewy texture. That\'s flavor, not burning.',
+      tip:   'No fat on purpose — water needs to drive off first. If you add oil now they\'ll steam instead of sear.',
+      timers: ['shiitake']
+    },
+    {
+      label: 'Sweat the onions',
+      text:  'Push shiitakes aside or remove to a bowl. Add a splash of avocado oil and {{onion}} with a pinch of salt. Drop heat to medium. Low and slow — you want sweet and jammy, not browned. Stir occasionally.',
+      tip:   null,
+      timers: ['onion']
+    },
+    {
+      label: 'Form the patties',
+      text:  'Mix {{patties}} minimally — salt, pepper, mushroom powder, fold just until combined. Move fast, the fat melts from your hands. Divide into equal patties, thicker than you think. Press a dimple in the center of each. Press {{crust}} firmly onto both flat faces.',
+      tip:   'The dimple corrects for the doming that happens as wagyu fat renders. Without it the patty puffs and cooks unevenly.',
+      timers: []
+    },
+    {
+      label: 'Sear the patties',
+      text:  'Pan 1 (cast iron) over high heat until smoking. No fat. Patties in, crust-side down. Hard sizzle the whole time — if it quiets down, the pan cooled. Don\'t move them. They\'ll release when the crust is ready.',
+      tip:   null,
+      timers: ['sear1']
+    },
+    {
+      label: 'Flip and finish',
+      text:  'Flip once. Same on the other side — medium means the fat has fully rendered into the meat. Pull patties to a rack to rest. Leave everything in the pan.',
+      tip:   'Mid-rare leaves wagyu fat slightly waxy. Medium is the right call here — you\'re trading blood for rendered fat and that\'s the better trade.',
+      timers: ['sear2']
+    },
+    {
+      label: 'Build the gravy',
+      text:  'Pan 1 still on medium-high. Pour off excess wagyu fat until about 2 tablespoons remain — save the rest, it\'s valuable. Deglaze with a splash of {{broth}}, scraping every bit of fond off the bottom. That fond is the whole flavor base. Add remaining broth, {{aminos}}, {{umami}}, and {{msg}}. Bring to a simmer and reduce slightly.',
+      tip:   'The aminos are there for background sweetness and color only — {{msg}} and mushroom powder carry the savory depth. Don\'t push the aminos or it slides into teriyaki.',
+      timers: ['gravy']
+    },
+    {
+      label: 'Thicken and finish',
+      text:  'Give {{slurry}} a stir, pull the pan off heat, pour it in while stirring. Return to bare simmer just until it thickens — about 30 seconds. Add {{acv}}, stir, taste. Fold in the mushrooms and onions.',
+      tip:   'Don\'t boil after the arrowroot goes in or it\'ll break. Bare simmer only.',
+      timers: []
+    },
+    {
+      label: 'Greens',
+      text:  'Small pan or cleared Pan 2 over high heat. Avocado oil in, {{greens}} in, pinch of salt. Toss constantly — komatsuna wilts fast. Pull the moment it\'s just wilted and bright green. It keeps cooking off heat.',
+      tip:   null,
+      timers: ['greens']
+    }
+  ]
 }
 ];
 
