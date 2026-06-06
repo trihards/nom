@@ -3947,6 +3947,203 @@ const RECIPES = [
       timers: ['greens']
     }
   ]
+},
+{
+  id: 'choc-espresso-pot-de-creme',
+  title: 'Chocolate Espresso Pot de Crème',
+  style: 'Water bath · coconut custard · egg yolk set',
+  subtitle: 'Fresh raspberries',
+  preheat: '325°F',
+  serves: '1–3',
+  tags: ['dessert', 'make-ahead', 'phase 2'],
+  prepTime: '15 min',
+  cookTime: '35 min + 3 hr chill',
+  headnote: `<strong>Call it what it is.</strong> This is a coconut milk custard, not a dairy pot de crème — but it sets clean, goes silky in the fridge, and the chocolate-espresso combination is serious. Don't undersell it by comparing it to the dairy version.<br><br><strong>Temper slowly or scramble the eggs.</strong> The chocolate mixture needs to cool 5 minutes before the yolks go in, and the yolks need to go in as a thin stream with constant whisking. Rush this step and you have chocolate scrambled eggs.<br><br><em>Make these the night before. They need at least 3 hours to set and they're better after 8. Day-of is fine but overnight is noticeably better.</em>`,
+  equipment: [
+    { name: 'Small saucepan', note: 'for warming the coconut cream and melting chocolate' },
+    { name: 'Whisk + medium bowl', note: 'for tempering the yolks' },
+    { name: 'Fine mesh strainer', note: 'pour through this into a measuring cup for clean, easy pour' },
+    { name: 'Roasting pan', note: 'water bath — must be deep enough for water to come halfway up ramekins' },
+    { name: '3 ramekins (6 oz)', note: 'or small oven-safe bowls' }
+  ],
+  mise: [
+    { group: 'Custard base', items: [
+      { byScale: { 1: '1 can (13.5 oz) coconut whipping cream', 2: '1 can (13.5 oz) coconut whipping cream', 3: '2 cans (13.5 oz) coconut whipping cream' }, note: 'Nature\'s Charm or full-fat canned coconut cream' },
+      { byScale: { 1: '1 oz dark chocolate, finely chopped', 2: '2 oz dark chocolate, finely chopped', 3: '3 oz dark chocolate, finely chopped' }, note: 'Hu Kitchen or Theo — check for soy lecithin' },
+      { byScale: { 1: '¾ tbsp maple syrup', 2: '1½ tbsp maple syrup', 3: '2 tbsp maple syrup' } },
+      { byScale: { 1: '⅓ tsp instant cappuccino powder', 2: '⅔ tsp instant cappuccino powder', 3: '1 tsp instant cappuccino powder' } },
+      { name: 'Pinch of salt' }
+    ]},
+    { group: 'Yolks', items: [
+      { byScale: { 1: '1 egg yolk', 2: '2 egg yolks', 3: '3 egg yolks' } }
+    ]},
+    { group: 'Finish', items: [
+      { byScale: { 1: 'small handful fresh raspberries', 2: '2 small handfuls fresh raspberries', 3: '3 small handfuls fresh raspberries' } }
+    ]}
+  ],
+  refs: {
+    'cream':    { display: 'coconut whipping cream', tips: { 1: '1 can (13.5 oz)', 2: '1 can (13.5 oz)', 3: '2 cans (13.5 oz)' } },
+    'choc':     { display: 'dark chocolate',         tips: { 1: '1 oz, finely chopped', 2: '2 oz, finely chopped', 3: '3 oz, finely chopped' } },
+    'maple':    { display: 'maple syrup',             tips: { 1: '¾ tbsp', 2: '1½ tbsp', 3: '2 tbsp' } },
+    'espresso': { display: 'cappuccino powder',       tips: { 1: '⅓ tsp', 2: '⅔ tsp', 3: '1 tsp' } },
+    'yolks':    { display: 'egg yolks',               tips: { 1: '1 yolk', 2: '2 yolks', 3: '3 yolks' } }
+  },
+  timers: {
+    'melt':  { label: 'Melt chocolate',    preset: 300,   bell: false },
+    'cool':  { label: 'Cool before yolks', preset: 300,   bell: true  },
+    'bake':  { label: 'Water bath bake',   preset: 2100,  bell: true  },
+    'chill': { label: 'Chill time',        preset: 10800, bell: true  }
+  },
+  steps: [
+    {
+      label: 'Preheat + boil water',
+      text:  'Oven to 325°F. Put a kettle on — you\'ll need hot water for the bath.',
+      tip:   null,
+      timers: []
+    },
+    {
+      label: 'Melt the chocolate base',
+      text:  'Warm {{cream}} in a small saucepan over medium-low until just steaming — you\'ll see wisps rising from the surface. Do not boil. Add {{choc}}, {{espresso}}, {{maple}}, and a pinch of salt. Whisk until completely smooth and glossy. Pull off heat.',
+      tip:   'Finely chopped chocolate melts fast and evenly. Chunks don\'t. Take the 30 seconds to chop it fine.',
+      timers: ['melt']
+    },
+    {
+      label: 'Cool the base',
+      text:  'Let the chocolate mixture sit off heat for 5 minutes. It needs to come down from scalding before the yolks go in or they\'ll cook on contact.',
+      tip:   null,
+      timers: ['cool']
+    },
+    {
+      label: 'Temper the yolks',
+      text:  'Whisk {{yolks}} in a medium bowl. With one hand whisking constantly, pour the warm chocolate mixture in a very thin, slow stream — start with just a tablespoon, then keep going. Take your time. The mixture should look silky and unified, not streaky or grainy.',
+      tip:   'If you see any cooked egg bits, it went in too fast or too hot. Strain them out — the custard will still work.',
+      timers: []
+    },
+    {
+      label: 'Strain and fill',
+      text:  'Pour the custard through a fine mesh strainer into a measuring cup — this catches any cooked bits and makes pouring clean. Divide evenly among 3 ramekins.',
+      tip:   null,
+      timers: []
+    },
+    {
+      label: 'Water bath and bake',
+      text:  'Set ramekins in the roasting pan. Pour hot water from the kettle into the pan until it reaches halfway up the sides of the ramekins — not higher. Carefully slide into the oven. They\'re done when the edges are fully set and the center has a slow, lazy jiggle — not sloshy, not stiff.',
+      tip:   'Cover the roasting pan loosely with foil if you want an even set on top. Not required but helps.',
+      timers: ['bake']
+    },
+    {
+      label: 'Chill',
+      text:  'Lift ramekins out of the bath carefully — they\'re hot and the water is hot. Cool to room temp on the counter, then refrigerate uncovered for at least 3 hours. Overnight is better. The jiggle firms up completely.',
+      tip:   null,
+      timers: ['chill']
+    }
+  ]
+},
+{
+  id: 'strawberry-rhubarb-crumble',
+  title: 'Strawberry Rhubarb Crumble',
+  style: 'High-heat bake · cassava-coconut crumble · coconut caramel',
+  subtitle: 'Seared banana · coconut caramel drizzle',
+  preheat: '375°F',
+  serves: '1–3',
+  tags: ['dessert', 'weekend', 'phase 2'],
+  prepTime: '20 min',
+  cookTime: '35 min',
+  headnote: `<strong>Rhubarb needs company and heat.</strong> Raw rhubarb is aggressively tart and unfamiliar — baked into strawberries with maple and vanilla, it softens and melds into something that reads as "deep jammy strawberry." This is the correct introduction for rhubarb skeptics.<br><br><strong>The seared banana is optional but worth it when you have a spotted one.</strong> Thick slices seared dry until deeply caramelized go on top of the fruit before the crumble — they hold their shape, go jammy, and add a visual layer that reads as intentional. Use a genuinely spotted banana or skip it entirely; there's no middle ground.<br><br><em>The caramel is the move. Reduce the evaporated coconut milk low and slow — it needs 20+ minutes and occasional attention. Drizzle tableside. It smells incredible and the theater is worth it.</em>`,
+  equipment: [
+    { name: '8x8 baking dish or equivalent', note: 'ceramic or cast iron both work' },
+    { name: 'Small saucepan', note: 'for the coconut caramel — needs 20+ min of patient reduction' },
+    { name: '8" carbon steel or cast iron', note: 'for searing the banana — needs to be genuinely hot and dry' },
+    { name: 'Medium bowl', note: 'for the crumble — work the fat in by hand' }
+  ],
+  mise: [
+    { group: 'Filling', items: [
+      { byScale: { 1: '¾ cup strawberries, hulled and halved', 2: '1½ cups strawberries, hulled and halved', 3: '2 cups strawberries, hulled and halved' } },
+      { byScale: { 1: '½ cup rhubarb, sliced ½" thick', 2: '1 cup rhubarb, sliced ½" thick', 3: '1½ cups rhubarb, sliced ½" thick' } },
+      { byScale: { 1: '1 tbsp maple syrup', 2: '2 tbsp maple syrup', 3: '3 tbsp maple syrup' } },
+      { byScale: { 1: '¼ tsp vanilla bean paste', 2: '½ tsp vanilla bean paste', 3: '¾ tsp vanilla bean paste' } },
+      { byScale: { 1: '¼ tsp Bragg\'s ACV', 2: '½ tsp Bragg\'s ACV', 3: '¾ tsp Bragg\'s ACV' } },
+      { name: 'Pinch of salt' }
+    ]},
+    { group: 'Seared banana (optional)', items: [
+      { name: '¼–½ spotted banana, sliced ½" thick', note: 'optional — must be heavily spotted or skip it; under-ripe won\'t caramelize' }
+    ]},
+    { group: 'Crumble', items: [
+      { byScale: { 1: '3 tbsp cassava flour', 2: '⅓ cup cassava flour', 3: '½ cup cassava flour' } },
+      { byScale: { 1: '1 tbsp unsweetened shredded coconut', 2: '2 tbsp unsweetened shredded coconut', 3: '3 tbsp unsweetened shredded coconut' } },
+      { byScale: { 1: '1 tbsp pepitas, toasted', 2: '2 tbsp pepitas, toasted', 3: '3 tbsp pepitas, toasted' } },
+      { byScale: { 1: '¾ tbsp maple syrup', 2: '1½ tbsp maple syrup', 3: '2 tbsp maple syrup' } },
+      { byScale: { 1: '¾ tbsp coconut oil, solid', 2: '1½ tbsp coconut oil, solid', 3: '2 tbsp coconut oil, solid' } },
+      { byScale: { 1: '¼ tsp ground cinnamon', 2: '½ tsp ground cinnamon', 3: '¾ tsp ground cinnamon' } },
+      { byScale: { 1: '⅛ tsp ground ginger', 2: '¼ tsp ground ginger', 3: '⅓ tsp ground ginger' } },
+      { name: 'Pinch of salt' }
+    ]},
+    { group: 'Coconut caramel', items: [
+      { byScale: { 1: '½ can evaporated coconut milk', 2: '½ can evaporated coconut milk', 3: '1 can evaporated coconut milk' }, note: 'Nature\'s Charm evaporated coconut milk' },
+      { byScale: { 1: '1 tbsp maple syrup', 2: '1 tbsp maple syrup', 3: '2 tbsp maple syrup' } },
+      { name: 'Pinch of salt' }
+    ]},
+    { group: 'Finish', items: [
+      { name: 'Fresh mint from the garden' }
+    ]}
+  ],
+  refs: {
+    'filling':  { display: 'filling',                  tips: { 1: '¾ cup strawberries · ½ cup rhubarb · 1 tbsp maple · ¼ tsp vanilla', 2: '1½ cups strawberries · 1 cup rhubarb · 2 tbsp maple · ½ tsp vanilla', 3: '2 cups strawberries · 1½ cups rhubarb · 3 tbsp maple · ¾ tsp vanilla' } },
+    'banana':   { display: 'spotted banana (optional)', tips: { 1: '¼ banana, ½" slices', 2: '½ banana, ½" slices', 3: '½ banana, ½" slices' } },
+    'crumble':  { display: 'crumble',                  tips: { 1: '3 tbsp cassava · 1 tbsp coconut · 1 tbsp pepitas · ¾ tbsp each maple + oil', 2: '⅓ cup cassava · 2 tbsp coconut · 2 tbsp pepitas · 1½ tbsp each maple + oil', 3: '½ cup cassava · 3 tbsp coconut · 3 tbsp pepitas · 2 tbsp each maple + oil' } },
+    'caramel':  { display: 'coconut caramel',          tips: { 1: '½ can evap coconut milk + 1 tbsp maple', 2: '½ can evap coconut milk + 1 tbsp maple', 3: '1 can evap coconut milk + 2 tbsp maple' } }
+  },
+  timers: {
+    'macerate': { label: 'Macerate fruit',  preset: 600,  bell: true  },
+    'pepitas':  { label: 'Toast pepitas',   preset: 180,  bell: true  },
+    'banana':   { label: 'Sear banana',     preset: 120,  bell: true  },
+    'bake':     { label: 'Bake crumble',    preset: 2100, bell: true  },
+    'caramel':  { label: 'Reduce caramel',  preset: 1200, bell: false }
+  },
+  steps: [
+    {
+      label: 'Macerate the fruit',
+      text:  'Combine strawberries, rhubarb, maple syrup, vanilla bean paste, ACV, and salt in the baking dish. Toss to coat. Leave it alone for 10 minutes — the fruit will start releasing liquid and the rhubarb will soften slightly at the edges. That liquid is the base of your filling sauce.',
+      tip:   'Don\'t skip the maceration. Rhubarb going in dry and cold stays too sharp.',
+      timers: ['macerate']
+    },
+    {
+      label: 'Toast the pepitas',
+      text:  'Dry pan over medium heat. Add pepitas, no oil. Shake or stir constantly until they start to pop and go golden, about 2–3 minutes. Pull immediately to a bowl. They go from toasted to burnt fast.',
+      tip:   null,
+      timers: ['pepitas']
+    },
+    {
+      label: 'Start the caramel',
+      text:  'Pour {{caramel}} into a small saucepan over medium-low. Stir in maple syrup and salt. Let it go — it needs 20+ minutes to reduce by half and turn a shade darker. Stir occasionally. Don\'t rush with high heat or it\'ll scorch. Start this now so it\'s ready when the crumble comes out.',
+      tip:   'It\'s done when it coats the back of a spoon and smells caramel-sweet rather than just coconutty. It will thicken more as it cools.',
+      timers: ['caramel']
+    },
+    {
+      label: 'Make the crumble',
+      text:  'Combine cassava flour, shredded coconut, toasted pepitas, cinnamon, ginger, maple syrup, and salt in a bowl. Drop in the solid coconut oil and work it in with your fingers — squeeze and press until you get rough pea-sized clumps. Uneven is correct. Fine and uniform means it\'ll bake into a sheet instead of a crumble.',
+      tip:   null,
+      timers: []
+    },
+    {
+      label: 'Sear the banana',
+      text:  'Crank a dry cast iron or carbon steel pan to high — let it get genuinely hot, no oil. Lay {{banana}} slices in flat. Don\'t touch them for 60 seconds. Flip when deeply caramelized and mahogany on the bottom. 30–60 seconds on the second side. Pull off heat.',
+      tip:   'No oil — the banana\'s own sugar is the caramel. Oil just makes it steam.',
+      timers: ['banana']
+    },
+    {
+      label: 'Assemble',
+      text:  'Lay the seared banana slices over the macerated fruit in the baking dish. Scatter the crumble evenly over the top — cover the fruit completely but don\'t pack it down.',
+      tip:   null,
+      timers: []
+    },
+    {
+      label: 'Bake',
+      text:  'Into the 375°F oven. It\'s done when the crumble is golden and the fruit is bubbling aggressively at the edges — you should hear it and see it. If the crumble is browning too fast, tent loosely with foil.',
+      tip:   null,
+      timers: ['bake']
+    }
+  ]
 }
 ];
 
