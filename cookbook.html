@@ -4144,6 +4144,220 @@ const RECIPES = [
       timers: ['bake']
     }
   ]
+},
+{
+  id: 'braised-shoyu-chicken',
+  title: 'Braised Shoyu Chicken Thighs',
+  style: 'Stovetop braise · boneless thighs · soy-style reduction',
+  subtitle: 'Jasmine rice · quick-pickled cucumber',
+  preheat: null,
+  serves: '1–3',
+  tags: ['chicken', 'weeknight', 'phase 1'],
+  prepTime: '10 min',
+  cookTime: '30 min',
+  headnote: `<strong>Coconut aminos alone won't get you there.</strong> The natural sweetness in aminos wants to pull everything toward teriyaki — dial them back and let mushroom umami powder and MSG carry the savory depth instead. Mix the braise liquid and taste it before it hits the pan; it should read salty and complex with a hint of sweetness underneath.<br><br><strong>Boneless skinless thighs actually braise better here than bone-in.</strong> They soak up the sauce aggressively, cook in 18 minutes flat, and the reduced liquid becomes a lacquered glaze that goes straight back over the top. Ginger sliced into coins rather than grated — they soften and sweeten in the braise without going muddy; pull them out before plating or leave them in.<br><br><em>The cucumber pickle goes in first — it needs at least 20 minutes to become something. Start it before the rice.</em>`,
+  equipment: [
+    { name: 'Le Creuset everyday pan (30cm) or 12" cast iron', note: 'wide base for searing thighs without crowding' },
+    { name: 'Zojirushi rice cooker' },
+    { name: 'Small bowl', note: 'for braise liquid — mix before anything hits the stove' },
+    { name: 'Medium bowl', note: 'for cucumber pickle — needs 20 min to sit' }
+  ],
+  mise: [
+    { group: 'Cucumber quick-pickle — do this first', items: [
+      { byScale: { 1: '½ cucumber, sliced thin', 2: '1 cucumber, sliced thin', 3: '1½ cucumbers, sliced thin' } },
+      { byScale: { 1: '1 tbsp Bragg\'s ACV', 2: '2 tbsp Bragg\'s ACV', 3: '3 tbsp Bragg\'s ACV' } },
+      { byScale: { 1: '¼ tsp agave', 2: '½ tsp agave', 3: '¾ tsp agave' } },
+      { name: 'Salt + sesame seeds' }
+    ]},
+    { group: 'Rice', items: [
+      { byScale: { 1: '1 cup jasmine rice, rinsed', 2: '2 cups jasmine rice, rinsed', 3: '3 cups jasmine rice, rinsed' } }
+    ]},
+    { group: 'Chicken', items: [
+      { byScale: { 1: '2 boneless skinless thighs (~½ lb)', 2: '4–5 boneless skinless thighs (~1 lb)', 3: '6–7 boneless skinless thighs (~1½ lbs)' }, note: 'pat very dry — moisture kills the sear' },
+      { name: 'Salt + black pepper' }
+    ]},
+    { group: 'Aromatics', items: [
+      { byScale: { 1: '3–4 garlic cloves, sliced thin', 2: '5–6 garlic cloves, sliced thin', 3: '8 garlic cloves, sliced thin' } },
+      { byScale: { 1: '1-inch fresh ginger, sliced into coins', 2: '1½-inch fresh ginger, sliced into coins', 3: '2-inch fresh ginger, sliced into coins' } }
+    ]},
+    { group: 'Braise liquid — mix in bowl before cooking', items: [
+      { byScale: { 1: '2 tbsp coconut aminos', 2: '¼ cup coconut aminos', 3: '6 tbsp coconut aminos' } },
+      { byScale: { 1: '½ cup bone broth', 2: '1 cup bone broth', 3: '1½ cups bone broth' } },
+      { byScale: { 1: '1 tsp agave', 2: '2 tsp agave', 3: '1 tbsp agave' } },
+      { byScale: { 1: '1 tbsp Bragg\'s ACV', 2: '2 tbsp Bragg\'s ACV', 3: '3 tbsp Bragg\'s ACV' } },
+      { byScale: { 1: '¼ tsp mushroom umami powder', 2: '½ tsp mushroom umami powder', 3: '¾ tsp mushroom umami powder' } },
+      { name: 'Tiny pinch MSG (Ajinomoto)' },
+      { name: 'Tiny pinch Chinese five spice' },
+      { name: 'Black pepper' }
+    ]},
+    { group: 'Finish', items: [
+      { byScale: { 1: '2 green onions, bias-cut', 2: '3–4 green onions, bias-cut', 3: '5 green onions, bias-cut' } },
+      { name: 'Sesame seeds' }
+    ]}
+  ],
+  refs: {
+    'rice':      { display: 'jasmine rice',    tips: { 1: '1 cup, rinsed',                                                                                  2: '2 cups, rinsed',                                                                                  3: '3 cups, rinsed'                                                                                   } },
+    'pickle':    { display: 'cucumber pickle', tips: { 1: '½ cucumber · 1 tbsp ACV · ¼ tsp agave',                                                          2: '1 cucumber · 2 tbsp ACV · ½ tsp agave',                                                          3: '1½ cucumbers · 3 tbsp ACV · ¾ tsp agave'                                                         } },
+    'chicken':   { display: 'chicken thighs',  tips: { 1: '2 thighs (~½ lb)',                                                                               2: '4–5 thighs (~1 lb)',                                                                              3: '6–7 thighs (~1½ lbs)'                                                                             } },
+    'aromatics': { display: 'garlic + ginger', tips: { 1: '3–4 cloves garlic sliced · 1-inch ginger coins',                                                 2: '5–6 cloves garlic sliced · 1½-inch ginger coins',                                                3: '8 cloves garlic sliced · 2-inch ginger coins'                                                     } },
+    'braise':    { display: 'braise liquid',   tips: { 1: '2 tbsp aminos · ½ cup broth · 1 tsp agave · 1 tbsp ACV · ¼ tsp umami powder + MSG + five spice', 2: '¼ cup aminos · 1 cup broth · 2 tsp agave · 2 tbsp ACV · ½ tsp umami powder + MSG + five spice', 3: '6 tbsp aminos · 1½ cups broth · 1 tbsp agave · 3 tbsp ACV · ¾ tsp umami powder + MSG + five spice' } },
+    'gonion':    { display: 'green onion',     tips: { 1: '2 stalks, bias-cut',                                                                              2: '3–4 stalks, bias-cut',                                                                            3: '5 stalks, bias-cut'                                                                               } }
+  },
+  timers: {
+    'rice':   { label: 'Rice',          preset: 2100, bell: false },
+    'sear':   { label: 'Sear chicken',  preset: 240,  bell: true  },
+    'braise': { label: 'Braise',        preset: 1080, bell: true  },
+    'reduce': { label: 'Reduce sauce',  preset: 180,  bell: true  }
+  },
+  steps: [
+    {
+      label: 'Pickle first, then rice on',
+      text:  'Toss {{pickle}} in a medium bowl with a pinch of salt and sesame seeds. Cover and set aside — it needs 20 minutes minimum to soften and become a sauce rather than just dressed cucumber. Then start {{rice}} in the Zojirushi.',
+      tip:   'This is the mac salad stand-in for the plate. Don\'t skip the rest time.',
+      timers: ['rice']
+    },
+    {
+      label: 'Mix the braise liquid',
+      text:  'Combine all {{braise}} ingredients in a small bowl. Stir until the umami powder dissolves. Taste — it should read savory and complex with a hint of sweetness underneath. If it tips sweet, a few more drops of ACV pulls it back. Set it right next to the stove.',
+      tip:   'This is where the dish gets built. Adjust now, not in the pan.',
+      timers: []
+    },
+    {
+      label: 'Sear the chicken',
+      text:  'Pat {{chicken}} very dry — moisture is the enemy of the sear. Season both sides with salt and black pepper. Avocado oil in the pan over high heat until smoking. Thighs in presentation-side down, don\'t touch them. 2 minutes — you want deep golden color and the meat releasing from the pan on its own. Flip, 2 more minutes. Remove to a plate.',
+      tip:   'The fond left in the pan is the backbone of the sauce. Get it dark, not just beige.',
+      timers: ['sear']
+    },
+    {
+      label: 'Toast the aromatics',
+      text:  'Drop heat to medium. Add {{aromatics}} directly into the drippings — no additional oil needed. Stir and cook 60–90 seconds until the garlic just starts to turn golden at the edges and the ginger is fragrant. Don\'t let the garlic burn.',
+      tip:   'Garlic goes from golden to bitter in under 30 seconds at this stage. Stay close.',
+      timers: []
+    },
+    {
+      label: 'Braise',
+      text:  'Pour in the {{braise}} — it will sizzle hard and lift all the fond from the pan. Nestle {{chicken}} back in fully submerged, presentation-side up. Partially cover and reduce heat to medium-low. 18 minutes — the thighs will be cooked through and the liquid reduced by about a third.',
+      tip:   'Keep it at a gentle simmer, not a rolling boil. Aggressive heat makes the braise liquid murky and the meat tough.',
+      timers: ['braise']
+    },
+    {
+      label: 'Reduce the sauce',
+      text:  'Pull {{chicken}} to a plate. Crank heat to high — reduce the braising liquid 3 minutes until glossy and it coats the back of a spoon. Return {{chicken}}, toss to coat, off heat.',
+      tip:   'You want a pourable glaze, not a paste. Watch it — it goes fast at the end.',
+      timers: ['reduce']
+    },
+    {
+      label: 'Plate',
+      text:  'Rice in the bowl. Chicken over the top — spoon the glaze over generously. {{gonion}} and sesame seeds. Cucumber pickle alongside.',
+      tip:   null,
+      timers: []
+    }
+  ]
+},
+{
+  id: 'protocol-shrimp-scampi',
+  title: 'Protocol Shrimp Scampi',
+  style: 'Fast sauté · caper-brine pan sauce · olive oil mount',
+  subtitle: 'Jasmine rice · charred broccoli',
+  preheat: '450°F',
+  serves: '1–3',
+  tags: ['seafood', 'weeknight', 'phase 1', '30 or less'],
+  prepTime: '10 min',
+  cookTime: '20 min',
+  headnote: `<strong>This is not scampi.</strong> Butter is next in the reintroduction queue, lemon is after that, and wine doesn't exist on this protocol. What this is: garlic-forward shrimp in a caper-brine pan sauce that does the same emotional job. Capers carry the brine and acid; ACV brightens it off heat; a second pour of olive oil mounted in at the end gives the sauce the unctuous quality butter would have.<br><br><strong>Pull the shrimp before you think they're done.</strong> Medium shrimp cook in under 90 seconds a side and they finish in the warm sauce. Rubbery shrimp is a timing error, not a technique error — get them out of the pan fast.<br><br><em>Garlic sliced thin, not minced — it toasts and holds shape in the oil rather than dissolving into the sauce. You want to see it on the plate.</em>`,
+  equipment: [
+    { name: '12" cast iron or 10" carbon steel', note: 'needs to be ripping hot for the shrimp sear; same pan builds the sauce' },
+    { name: 'Half sheet pan', note: 'for broccoli — goes in first, cooks while shrimp comes together' },
+    { name: 'Zojirushi rice cooker' }
+  ],
+  mise: [
+    { group: 'Rice', items: [
+      { byScale: { 1: '1 cup jasmine rice, rinsed', 2: '2 cups jasmine rice, rinsed', 3: '3 cups jasmine rice, rinsed' } }
+    ]},
+    { group: 'Broccoli', items: [
+      { byScale: { 1: '1 small head broccoli, large florets', 2: '1 large head broccoli, large florets', 3: '2 heads broccoli, large florets' }, note: 'keep florets big — they char better than small ones' },
+      { name: 'Avocado oil + salt' }
+    ]},
+    { group: 'Shrimp', items: [
+      { byScale: { 1: '½ lb medium shrimp, peeled + deveined', 2: '1 lb medium shrimp, peeled + deveined', 3: '1½ lbs medium shrimp, peeled + deveined' }, note: 'pat very dry before seasoning' },
+      { name: 'Salt + white pepper' }
+    ]},
+    { group: 'Pan sauce — measure everything before shrimp hits the pan', items: [
+      { byScale: { 1: '3 tbsp olive oil', 2: '4 tbsp olive oil', 3: '6 tbsp olive oil' }, note: 'cooking fat for the garlic stage' },
+      { byScale: { 1: '4 garlic cloves, sliced thin', 2: '6–7 garlic cloves, sliced thin', 3: '9–10 garlic cloves, sliced thin' } },
+      { byScale: { 1: '2 tbsp capers, whole', 2: '3 tbsp capers, whole', 3: '¼ cup capers, whole' } },
+      { byScale: { 1: '¼ cup bone broth', 2: '½ cup bone broth', 3: '¾ cup bone broth' } }
+    ]},
+    { group: 'Finish — have these measured and right next to the stove', items: [
+      { byScale: { 1: '½ tbsp Bragg\'s ACV', 2: '1 tbsp Bragg\'s ACV', 3: '1½ tbsp Bragg\'s ACV' } },
+      { byScale: { 1: '1 tbsp olive oil (finishing)', 2: '2 tbsp olive oil (finishing)', 3: '3 tbsp olive oil (finishing)' } },
+      { byScale: { 1: '2 tbsp fresh flat-leaf parsley, chopped', 2: '¼ cup fresh flat-leaf parsley, chopped', 3: '6 tbsp fresh flat-leaf parsley, chopped' } }
+    ]}
+  ],
+  refs: {
+    'rice':        { display: 'jasmine rice',         tips: { 1: '1 cup, rinsed',                            2: '2 cups, rinsed',                             3: '3 cups, rinsed'                              } },
+    'broccoli':    { display: 'broccoli florets',     tips: { 1: '1 small head, large florets',               2: '1 large head, large florets',                3: '2 heads, large florets'                      } },
+    'shrimp':      { display: 'shrimp',               tips: { 1: '½ lb medium, peeled + deveined',            2: '1 lb medium, peeled + deveined',             3: '1½ lbs medium, peeled + deveined'             } },
+    'cookingoil':  { display: 'cooking olive oil',    tips: { 1: '3 tbsp',                                    2: '4 tbsp',                                     3: '6 tbsp'                                      } },
+    'garlic':      { display: 'sliced garlic',        tips: { 1: '4 cloves, sliced thin',                     2: '6–7 cloves, sliced thin',                    3: '9–10 cloves, sliced thin'                    } },
+    'capers':      { display: 'capers',               tips: { 1: '2 tbsp whole',                              2: '3 tbsp whole',                               3: '¼ cup whole'                                 } },
+    'broth':       { display: 'bone broth',           tips: { 1: '¼ cup',                                     2: '½ cup',                                      3: '¾ cup'                                       } },
+    'acv':         { display: 'Bragg\'s ACV',         tips: { 1: '½ tbsp',                                    2: '1 tbsp',                                     3: '1½ tbsp'                                     } },
+    'finishoil':   { display: 'finishing olive oil',  tips: { 1: '1 tbsp',                                    2: '2 tbsp',                                     3: '3 tbsp'                                      } },
+    'parsley':     { display: 'fresh parsley',        tips: { 1: '2 tbsp, chopped',                           2: '¼ cup, chopped',                             3: '6 tbsp, chopped'                             } }
+  },
+  timers: {
+    'rice':     { label: 'Rice',             preset: 2100, bell: false },
+    'broccoli': { label: 'Charred broccoli', preset: 900,  bell: true  },
+    'shrimp':   { label: 'Sear shrimp',      preset: 180,  bell: true  },
+    'garlic':   { label: 'Toast garlic',     preset: 120,  bell: true  },
+    'capers':   { label: 'Bloom capers',     preset: 60,   bell: true  },
+    'broth':    { label: 'Reduce broth',     preset: 60,   bell: true  }
+  },
+  steps: [
+    {
+      label: 'Preheat + rice on',
+      text:  'Oven to 450°F. Start {{rice}} in the Zojirushi. Both run while everything else comes together.',
+      tip:   null,
+      timers: ['rice']
+    },
+    {
+      label: 'Broccoli in',
+      text:  'Toss {{broccoli}} on the sheet pan with a generous pour of avocado oil and salt — coated, not swimming. Spread in a single layer with real space between florets. Into the 450°F oven. 15 minutes for char at the tips and edges; go longer if they need it. You want them dark.',
+      tip:   'Crowded florets steam instead of char. Give them room.',
+      timers: ['broccoli']
+    },
+    {
+      label: 'Sear the shrimp',
+      text:  'Pat {{shrimp}} very dry — moisture prevents the sear. Season with salt and white pepper. Cast iron or carbon steel ripping hot with a thin film of avocado oil until just smoking. Shrimp in a single layer — don\'t crowd them. 75–90 seconds per side max. The edges turn pink and opaque before the center does — that\'s your flip cue. Pull to a plate when they\'re just shy of cooked through. They finish in the sauce.',
+      tip:   'Don\'t touch them until they release. They\'ll stick if they\'re not ready.',
+      timers: ['shrimp']
+    },
+    {
+      label: 'Build the sauce — garlic',
+      text:  'Same pan, drop to medium. Add {{cookingoil}} and {{garlic}}. 2 minutes, stirring occasionally — you want the slices turning golden at the edges, fragrant and lightly toasted. Not browned. Not burned.',
+      tip:   'Garlic goes from golden to bitter in under 30 seconds. Stay close and pull the heat if it\'s moving fast.',
+      timers: ['garlic']
+    },
+    {
+      label: 'Bloom the capers',
+      text:  'Add {{capers}} to the oil. They\'ll spit and sizzle — let them go 60 seconds until they open slightly and the edges start to crisp.',
+      tip:   null,
+      timers: ['capers']
+    },
+    {
+      label: 'Deglaze and mount',
+      text:  'Pour in {{broth}} — it lifts whatever fond is in the pan. Let it bubble and reduce 60 seconds. Off heat: add {{acv}}, then stream in {{finishoil}} while swirling the pan. The sauce will go glossy and slightly emulsified.',
+      tip:   'The finishing oil goes in off heat — this is what gives the sauce body without butter. Don\'t skip the swirl.',
+      timers: ['broth']
+    },
+    {
+      label: 'Finish and plate',
+      text:  'Return {{shrimp}} to the pan, toss to coat — 30 seconds max, residual heat finishes them. {{parsley}} over the top. Over rice, broccoli alongside. Spoon any extra sauce from the pan over everything.',
+      tip:   null,
+      timers: []
+    }
+  ]
 }
 ];
 
