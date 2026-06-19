@@ -4358,6 +4358,209 @@ const RECIPES = [
       timers: []
     }
   ]
+},
+
+{
+  id: 'stovetop-coconut-cream-pudding',
+  title: 'Stovetop Coconut Cream Pudding',
+  style: 'Stovetop custard · tempered egg yolks · arrowroot set',
+  subtitle: 'Mixed berry compote, fresh mint',
+  preheat: null,
+  serves: '1–3',
+  tags: ['dessert', 'weeknight', 'phase 2'],
+  prepTime: '5 min',
+  cookTime: '15 min',
+  headnote: `<strong>Coconut cream, not coconut milk.</strong> The Native Forest small cans (5.4 fl oz each) are the move — two cans for two people lands you somewhere between pudding and pot de crème, without a single baking dish or water bath.<br><br><strong>Temper slowly, pull early.</strong> Arrowroot thickens beautifully but breaks under a hard boil — the moment it coats the spoon, it's done. Residual heat carries it the rest of the way.<br><br><em>Berry compote runs alongside: strawberries and blueberries cooked down with a splash of maple syrup. Start the compote first — it'll be ready when the custard is.</em>`,
+  equipment: [
+    { name: 'Small saucepan', note: 'for the custard' },
+    { name: 'Medium bowl', note: 'for tempering' },
+    { name: 'Whisk' },
+    { name: 'Silicone spatula', note: 'constant stirring during the set' }
+  ],
+  mise: [
+    { group: 'Custard', items: [
+      { byScale: { 1: '1 can (5.4 fl oz) Native Forest coconut cream', 2: '2 cans (10.8 fl oz) Native Forest coconut cream', 3: '3 cans (16.2 fl oz) Native Forest coconut cream' }, note: 'splash of Califia coconut milk to thin if very thick' },
+      { byScale: { 1: '2 egg yolks', 2: '3 egg yolks', 3: '4 egg yolks' } },
+      { byScale: { 1: '1 tbsp maple syrup', 2: '2 tbsp maple syrup', 3: '3 tbsp maple syrup' } },
+      { byScale: { 1: '½ tbsp arrowroot', 2: '1 tbsp arrowroot', 3: '1½ tbsp arrowroot' } },
+      { byScale: { 1: '½ tsp vanilla bean paste', 2: '1 tsp vanilla bean paste', 3: '1½ tsp vanilla bean paste' } },
+      { name: 'Pinch of salt' }
+    ]},
+    { group: 'Berry Compote', items: [
+      { byScale: { 1: '½ cup mixed berries (strawberries + blueberries)', 2: '1 cup mixed berries', 3: '1½ cups mixed berries' } },
+      { byScale: { 1: '1 tsp maple syrup', 2: '1 tbsp maple syrup', 3: '2 tbsp maple syrup' } }
+    ]},
+    { group: 'Finish', items: [
+      { name: 'Fresh mint leaves (optional)' }
+    ]}
+  ],
+  refs: {
+    'cream':    { display: 'coconut cream',      tips: { 1: '1 can', 2: '2 cans', 3: '3 cans' } },
+    'yolks':    { display: 'egg yolks',          tips: { 1: '2 yolks', 2: '3 yolks', 3: '4 yolks' } },
+    'sweetener':{ display: 'maple syrup',        tips: { 1: '1 tbsp', 2: '2 tbsp', 3: '3 tbsp' } },
+    'starch':   { display: 'arrowroot',          tips: { 1: '½ tbsp', 2: '1 tbsp', 3: '1½ tbsp' } },
+    'vanilla':  { display: 'vanilla bean paste', tips: { 1: '½ tsp', 2: '1 tsp', 3: '1½ tsp' } }
+  },
+  timers: {
+    'warm-cream':   { label: 'Warm cream',   preset: 180, bell: false },
+    'cook-custard': { label: 'Cook to set',  preset: 240, bell: true  }
+  },
+  steps: [
+    {
+      label: 'Whisk the base',
+      text:  'In a bowl, whisk {{yolks}}, {{starch}}, and {{sweetener}} until smooth and pale. No lumps — arrowroot has to be fully dissolved before it hits heat or it\'ll clump.',
+      tip:   null,
+      timers: []
+    },
+    {
+      label: 'Warm the cream',
+      text:  'Pour {{cream}} into the saucepan over medium-low. Heat until steaming and just starting to move at the edges — not boiling. If it\'s very thick straight from the can, add a small splash of Califia now.',
+      tip:   null,
+      timers: ['warm-cream']
+    },
+    {
+      label: 'Temper',
+      text:  'Ladle about ¼ cup of hot cream into the yolk bowl in a slow stream, whisking constantly. Add a second ladle. Then pour the whole bowl back into the saucepan, still whisking. Slow and steady — you\'re raising the yolk temperature without cooking it.',
+      tip:   'If you see any cooked egg bits, strain through a fine mesh sieve before returning to the pan.',
+      timers: []
+    },
+    {
+      label: 'Cook to set',
+      text:  'Medium-low heat. Stir constantly with a spatula, scraping the bottom. Done when it coats the back of a spoon and holds a clean line when you drag your finger through — about 3–4 minutes. Pull it before it bubbles hard. {{starch}} breaks under a full boil and goes thin again.',
+      tip:   'It continues to thicken as it cools. Pull slightly early if you\'re not sure.',
+      timers: ['cook-custard']
+    },
+    {
+      label: 'Finish and serve',
+      text:  'Off heat immediately. Stir in {{vanilla}} and a pinch of salt. Spoon into bowls. Berry compote over the top, mint if you have it.',
+      tip:   null,
+      timers: []
+    }
+  ]
+},
+
+{
+  id: 'royal-corona-bacon-ends',
+  title: 'The Royal Treatment',
+  style: 'Clay pot braise · bacon fat poach · cold oven start',
+  subtitle: 'Pickled spring onions · charred purple baby broccoli',
+  preheat: null,
+  serves: '1–3',
+  tags: ['legumes', 'weekend', 'phase 2', 'reintroduction'],
+  prepTime: '20 min',
+  cookTime: '3.5–4 hrs',
+  headnote: `<strong>Cold oven start, no exceptions.</strong> The Bram goes into a cold oven before you turn it on. Clay cracks under thermal shock — learn this once, never forget it. Set to 275°F and let everything come up to temperature together.<br><br><strong>Royal Coronas need the overnight soak.</strong> These are the largest beans Rancho Gordo makes. Skip it and the outside softens before the center is done. Soak tonight, cook tomorrow.<br><br><em>Salt goes in the last 30–45 minutes only. Early salt tightens bean skins and fights absorption. Everything else is patience.</em>`,
+  equipment: [
+    { name: '5qt Bram round covered casserole', note: 'cold oven start — never preheat with this vessel' },
+    { name: 'Carbon steel skillet', note: 'bacon render and broccoli finish' },
+    { name: 'Small jar with lid', note: 'quick-pickled spring red onions — make the night before' }
+  ],
+  mise: [
+    { group: 'Overnight — do tonight', items: [
+      { byScale: { 1: '8 oz Royal Corona beans', 2: '1 lb Royal Corona beans', 3: '1½ lbs Royal Corona beans' }, note: 'rinse well, soak in cold water covered by 4 inches, room temp overnight' },
+      { name: 'Spring red onions — slice thin, pack in jar, cover with Bragg\'s ACV + pinch of Diamond Crystal, refrigerate' }
+    ]},
+    { group: 'Beans', items: [
+      { byScale: { 1: '8 oz Royal Coronas, soaked overnight, drained and rinsed', 2: '1 lb Royal Coronas, soaked overnight, drained and rinsed', 3: '1½ lbs Royal Coronas, soaked overnight, drained and rinsed' } },
+      { byScale: { 1: '4 oz bacon ends', 2: '6 oz bacon ends', 3: '8 oz bacon ends' }, note: 'Stemple Creek or clean-label equivalent' }
+    ]},
+    { group: 'Aromatics', items: [
+      { byScale: { 1: '1 medium yellow onion, rough chop', 2: '1 large yellow onion, rough chop', 3: '2 medium yellow onions, rough chop' } },
+      { byScale: { 1: '4 colossal garlic cloves, smashed', 2: '6 colossal garlic cloves, smashed', 3: '8 colossal garlic cloves, smashed' } },
+      { name: '3 bay leaves' },
+      { byScale: { 1: '2 fresh thyme sprigs', 2: '3 fresh thyme sprigs', 3: '4 fresh thyme sprigs' } }
+    ]},
+    { group: 'Liquid', items: [
+      { byScale: { 1: '½ cup bone broth', 2: '1 cup bone broth', 3: '1½ cups bone broth' } },
+      { name: 'Water to cover beans by 2 inches' },
+      { name: 'Diamond Crystal kosher salt — held until last 30–45 min' }
+    ]},
+    { group: 'Finish', items: [
+      { name: 'Graza Drizzle' },
+      { name: 'Quick-pickled spring red onions (made tonight)' }
+    ]},
+    { group: 'Purple Baby Broccoli', items: [
+      { byScale: { 1: '½ bunch purple baby broccoli', 2: '1 bunch purple baby broccoli', 3: '1½ bunches purple baby broccoli' } },
+      { name: 'Reserved bacon fat from render' },
+      { name: 'Diamond Crystal kosher salt' }
+    ]}
+  ],
+  refs: {
+    'beans':    { display: 'Royal Coronas',        tips: { 1: '8 oz',     2: '1 lb',    3: '1½ lbs'   } },
+    'bacon':    { display: 'bacon ends',           tips: { 1: '4 oz',     2: '6 oz',    3: '8 oz'     } },
+    'broth':    { display: 'bone broth',           tips: { 1: '½ cup',    2: '1 cup',   3: '1½ cups'  } },
+    'onion':    { display: 'onion',                tips: { 1: '1 medium', 2: '1 large', 3: '2 medium' } },
+    'garlic':   { display: 'garlic',               tips: { 1: '4 cloves', 2: '6 cloves',3: '8 cloves' } },
+    'broccoli': { display: 'purple baby broccoli', tips: { 1: '½ bunch',  2: '1 bunch', 3: '1½ bunches' } }
+  },
+  timers: {
+    'render':      { label: 'Render bacon ends', preset: 1200,  bell: false },
+    'braise':      { label: 'Bean braise',       preset: 10800, bell: true  },
+    'salt-window': { label: 'Salt window',       preset: 2700,  bell: true  },
+    'broccoli':    { label: 'Char broccoli',     preset: 300,   bell: true  }
+  },
+  steps: [
+    {
+      label: 'Tonight — soak and pickle',
+      text:  'Rinse {{beans}} and submerge in a large bowl of cold water covered by at least 4 inches — they\'ll drink a lot overnight. Leave on the counter at room temp. Slice spring red onions thin, pack into a jar, cover completely with Bragg\'s ACV and a pinch of salt. Lid on, into the fridge.',
+      tip:   null,
+      timers: []
+    },
+    {
+      label: 'Drain and rinse',
+      text:  'Drain the soaked beans and rinse well. Discard the soak water. They\'ll have swelled dramatically.',
+      tip:   null,
+      timers: []
+    },
+    {
+      label: 'Render the bacon',
+      text:  'Add {{bacon}} to a cold carbon steel skillet, no oil. Low to medium-low heat, 15–20 minutes — slow render to coax out maximum fat without burning the meat. Stir occasionally. You want golden-brown pieces and a pan full of glistening fat. Pull the bacon and set aside. Spoon off a tablespoon of fat into a small dish and reserve it for the broccoli.',
+      tip:   'Cold pan start prevents burning. If it\'s sizzling hard immediately, your heat is too high.',
+      timers: ['render']
+    },
+    {
+      label: 'Sweat aromatics',
+      text:  'In the bacon fat still in the pan, add {{onion}}. Medium-low, 8 minutes, until soft and sweet — not browned. Add {{garlic}} (smashed), bay leaves, and thyme sprigs. Two more minutes. The kitchen should smell like somewhere you want to be.',
+      tip:   null,
+      timers: []
+    },
+    {
+      label: 'Load the Bram',
+      text:  'Transfer everything into the Bram: drained beans, bacon pieces, aromatics, all the fat from the pan. Add {{broth}} and enough water to cover beans by 2 inches. No salt yet. Lid on.',
+      tip:   null,
+      timers: []
+    },
+    {
+      label: 'Cold oven start',
+      text:  'Place the lidded Bram in a cold oven — do not preheat. Set the oven to 275°F. The clay and its contents come up to temperature with the oven, slowly and evenly. Set the braise timer and walk away.',
+      tip:   'This isn\'t optional. Clay into a hot oven risks cracking it.',
+      timers: ['braise']
+    },
+    {
+      label: 'Check and top up',
+      text:  'At 3 hours, open the Bram. Beans should be mostly tender with a little resistance still at the center. Check the liquid — beans should still be submerged, add water if needed. If they\'re nearly there, set the salt window timer now.',
+      tip:   'Not quite tender yet? Lid back on, another 30 minutes before salting.',
+      timers: ['salt-window']
+    },
+    {
+      label: 'Season with salt',
+      text:  'Add a generous hit of Diamond Crystal and stir very gently — Royal Coronas are big and will break under rough handling. Taste the broth. It should be deeply savory and porky. Adjust. Back in the oven, covered, until the timer goes off. Taste one more time before pulling.',
+      tip:   null,
+      timers: []
+    },
+    {
+      label: 'Char the broccoli',
+      text:  'Get the carbon steel screaming hot. Add the reserved bacon fat — it should smoke immediately. Add {{broccoli}} cut side down and don\'t touch it. You want serious char, not a sauté. 2 minutes, flip, another 2. Season with salt.',
+      tip:   'Crowded pan = steam = no char. Work in batches if needed.',
+      timers: ['broccoli']
+    },
+    {
+      label: 'Plate',
+      text:  'Ladle beans into a deep bowl, broth and all. Pile pickled spring onions on top — generously, the acid is the whole point. Finish with Graza Drizzle. Charred broccoli alongside.',
+      tip:   null,
+      timers: []
+    }
+  ]
 }
 ];
 
