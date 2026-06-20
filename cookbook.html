@@ -680,6 +680,7 @@ button { font-family: inherit; cursor: pointer; }
       <button class="filter-btn" data-tag="chicken" onclick="toggleFilter('chicken')">chicken</button>
       <button class="filter-btn" data-tag="beef" onclick="toggleFilter('beef')">beef</button>
       <button class="filter-btn" data-tag="lamb" onclick="toggleFilter('lamb')">lamb</button>
+      <button class="filter-btn" data-tag="pork" onclick="toggleFilter('pork')">pork</button>
       <button class="filter-btn" data-tag="seafood" onclick="toggleFilter('seafood')">seafood</button>
       <button class="filter-btn" data-tag="sauce" onclick="toggleFilter('sauce')">sauce</button>
       <button class="filter-btn" data-tag="condiment" onclick="toggleFilter('condiment')">condiment</button>
@@ -4833,6 +4834,188 @@ const RECIPES = [
     {
       label: 'Plate',
       text:  'Ladle beans into a deep bowl, broth and all. Pile pickled spring onions on top — generously, the acid is the whole point. Finish with Graza Drizzle. Charred broccoli alongside.',
+      tip:   null,
+      timers: []
+    }
+  ]
+},
+{
+  id: 'white-bean-tuna-fennel',
+  title: 'No Reservations',
+  style: 'No-cook assembly · sumac-ACV acid · dressed separately',
+  subtitle: 'Fresh fennel · capers · parsley',
+  preheat: null,
+  serves: '1–3',
+  tags: ['seafood', 'legumes'],
+  prepTime: '15 min',
+  cookTime: null,
+  headnote: `<strong>Water-packed tuna needs help.</strong> Oil-packed does half the work for you. Compensate with a very generous hand on the Drizzle — dress the tuna separately before combining so it absorbs.<br><br><strong>Royal Coronas make this chunky and rustic.</strong> The classic Italian version uses small cannellini. These beans are enormous and the salad eats more like a composed plate than a tossed salad. That's a feature.<br><br><em>Tracy gets lemon in place of sumac + ACV. Same recipe, same amounts, straight swap.</em>`,
+  equipment: [
+    { name: 'Large mixing bowl' },
+    { name: 'Sharp knife or mandoline', note: 'for shaving the fennel thin' }
+  ],
+  mise: [
+    { group: 'Base', items: [
+      { byScale: { 1: '1 can (5 oz) tuna in water, drained well', 2: '2 cans (5 oz each) tuna in water, drained well', 3: '3 cans (5 oz each) tuna in water, drained well' }, note: 'no additives — check label' },
+      { byScale: { 1: '½ cup cooked Royal Corona beans', 2: '1 cup cooked Royal Corona beans', 3: '1½ cups cooked Royal Corona beans' }, note: 'room temp, not cold from the fridge' }
+    ]},
+    { group: 'Produce', items: [
+      { byScale: { 1: '½ small fennel bulb, shaved thin', 2: '1 fennel bulb, shaved thin', 3: '1½ fennel bulbs, shaved thin' }, note: 'reserve fronds for garnish' },
+      { byScale: { 1: '2 tbsp red onion or 1 shallot, thin sliced', 2: '¼ red onion or 2 shallots, thin sliced', 3: '½ red onion or 3 shallots, thin sliced' } },
+      { byScale: { 1: 'small handful flat-leaf parsley, roughly chopped', 2: 'good handful flat-leaf parsley, roughly chopped', 3: 'large handful flat-leaf parsley, roughly chopped' } }
+    ]},
+    { group: 'Pantry', items: [
+      { byScale: { 1: '1 tbsp capers, drained', 2: '2 tbsp capers, drained', 3: '3 tbsp capers, drained' } },
+      { byScale: { 1: '½ tsp sumac', 2: '1 tsp sumac', 3: '1½ tsp sumac' } },
+      { byScale: { 1: '1 tsp Bragg\'s ACV', 2: '2 tsp Bragg\'s ACV', 3: '1 tbsp Bragg\'s ACV' } },
+      { byScale: { 1: '2 tbsp Graza Drizzle', 2: '3–4 tbsp Graza Drizzle', 3: '5–6 tbsp Graza Drizzle' }, note: 'be generous — this is the fat the tuna needs' },
+      { name: 'Diamond Crystal kosher salt + black pepper' }
+    ]}
+  ],
+  refs: {
+    'tuna':    { display: 'tuna',          tips: { 1: '1 can',        2: '2 cans',        3: '3 cans'         } },
+    'beans':   { display: 'Royal Coronas', tips: { 1: '½ cup',        2: '1 cup',         3: '1½ cups'        } },
+    'fennel':  { display: 'fennel',        tips: { 1: '½ small bulb', 2: '1 bulb',        3: '1½ bulbs'       } },
+    'drizzle': { display: 'Graza Drizzle', tips: { 1: '2 tbsp',       2: '3–4 tbsp',      3: '5–6 tbsp'       } },
+    'acid':    { display: 'sumac + ACV',   tips: { 1: '½ tsp + 1 tsp', 2: '1 tsp + 2 tsp', 3: '1½ tsp + 1 tbsp' } }
+  },
+  timers: {},
+  steps: [
+    {
+      label: 'Prep fennel and onion',
+      text:  'Shave {{fennel}} as thin as you can — mandoline if you have it, sharp knife if not. Slice red onion or shallot thin. Combine in a bowl with a pinch of salt and toss. The salt softens them slightly while you work.',
+      tip:   'Reserve the fennel fronds — they\'re the garnish.',
+      timers: []
+    },
+    {
+      label: 'Dress the tuna',
+      text:  'Drain {{tuna}} well, press it in the strainer. Break into large chunks in the bowl — not shreds. Add {{drizzle}}, a pinch of salt, and black pepper. Toss gently. This compensates for the water-pack; don\'t skip it.',
+      tip:   null,
+      timers: []
+    },
+    {
+      label: 'Combine and dress',
+      text:  'Add {{beans}} at room temp, the fennel and onion, capers, and parsley to the tuna. Add {{acid}} and toss gently — you don\'t want to break the beans. Taste. Adjust salt, acid, and Drizzle.',
+      tip:   'Tracy\'s portion: lemon juice in place of sumac + ACV, same amounts.',
+      timers: []
+    },
+    {
+      label: 'Rest and plate',
+      text:  'Let it sit 10 minutes before serving — the beans absorb the dressing and everything comes together. Plate and finish with fennel fronds and a final drizzle of Graza Drizzle.',
+      tip:   null,
+      timers: []
+    }
+  ]
+},
+{
+  id: 'swedish-meatballs',
+  title: 'Flat Pack',
+  style: 'Pan-seared · savory bone broth gravy · rice binder',
+  subtitle: 'Long grain rice · garlicky green beans',
+  preheat: null,
+  serves: '1–3',
+  tags: ['beef', 'pork'],
+  prepTime: '20 min',
+  cookTime: '40 min',
+  headnote: `<strong>The crust is not optional.</strong> Rice binder makes these more delicate than a panko version. The sear holds them together and gives you something to chew against the gravy. Don't skip it.<br><br><strong>The gravy is savory, not sweet.</strong> Golden-translucent onions, not jammy. The depth comes from meatball fond, coconut aminos, mushroom umami powder, and MSG — not caramelization time.<br><br><em>Arrowroot goes in last, off heat. It thickens on contact and breaks under a boil. Add it, stir, done.</em>`,
+  equipment: [
+    { name: 'Carbon steel skillet', note: 'meatball sear, onion gravy, green beans — one pan throughout' },
+    { name: 'Zojirushi rice cooker' },
+    { name: 'Box grater', note: 'for onion in the meatball mix' },
+    { name: 'Large mixing bowl' }
+  ],
+  mise: [
+    { group: 'Rice — start first', items: [
+      { byScale: { 1: '¾ cup long grain rice, rinsed', 2: '1½ cups long grain rice, rinsed', 3: '2 cups long grain rice, rinsed' } }
+    ]},
+    { group: 'Meatball mix', items: [
+      { byScale: { 1: '½ lb ground beef + ½ lb ground pork', 2: '1 lb ground beef + 1 lb ground pork', 3: '1½ lb ground beef + 1½ lb ground pork' } },
+      { byScale: { 1: '3 tbsp cooked long grain rice', 2: '¼ cup cooked long grain rice', 3: '6 tbsp cooked long grain rice' }, note: 'day-old or cooled' },
+      { byScale: { 1: '1 egg', 2: '2 eggs', 3: '2 eggs' } },
+      { byScale: { 1: '¼ small yellow onion, grated', 2: '½ medium yellow onion, grated', 3: '¾ medium yellow onion, grated' } },
+      { byScale: { 1: '½ tsp ground white pepper', 2: '1 tsp ground white pepper', 3: '1½ tsp ground white pepper' }, note: 'heavy hand — this is the defining flavor' },
+      { byScale: { 1: '¼ tsp ground ginger', 2: '½ tsp ground ginger', 3: '¾ tsp ground ginger' } },
+      { byScale: { 1: '½ tsp dill weed', 2: '1 tsp dill weed', 3: '1½ tsp dill weed' } },
+      { name: 'Diamond Crystal kosher salt' }
+    ]},
+    { group: 'Gravy', items: [
+      { byScale: { 1: '1 medium yellow onion, thin sliced', 2: '2 medium yellow onions, thin sliced', 3: '3 medium yellow onions, thin sliced' } },
+      { byScale: { 1: '1 cup bone broth', 2: '2 cups bone broth', 3: '3 cups bone broth' } },
+      { byScale: { 1: '1 tbsp coconut aminos', 2: '2 tbsp coconut aminos', 3: '3 tbsp coconut aminos' } },
+      { byScale: { 1: '½ tsp mushroom umami powder', 2: '1 tsp mushroom umami powder', 3: '1½ tsp mushroom umami powder' } },
+      { byScale: { 1: 'small pinch MSG', 2: '¼ tsp MSG', 3: '½ tsp MSG' } },
+      { byScale: { 1: '1 tsp arrowroot + 1 tbsp cold water', 2: '2 tsp arrowroot + 2 tbsp cold water', 3: '1 tbsp arrowroot + 3 tbsp cold water' }, note: 'mix into slurry before adding' },
+      { name: 'Graza Sizzle' },
+      { name: 'Bragg\'s ACV — small hit at the end' }
+    ]},
+    { group: 'Green beans', items: [
+      { byScale: { 1: '¼ lb green beans, trimmed', 2: '½ lb green beans, trimmed', 3: '¾ lb green beans, trimmed' } },
+      { byScale: { 1: '2 garlic cloves, thin sliced', 2: '3 garlic cloves, thin sliced', 3: '4 garlic cloves, thin sliced' } },
+      { name: 'Diamond Crystal kosher salt' }
+    ]}
+  ],
+  refs: {
+    'meat':        { display: 'beef + pork',          tips: { 1: '½ lb each',  2: '1 lb each',   3: '1½ lb each'  } },
+    'rice-mix':    { display: 'cooked rice (mix)',     tips: { 1: '3 tbsp',     2: '¼ cup',       3: '6 tbsp'      } },
+    'onion-gravy': { display: 'onions for gravy',      tips: { 1: '1 medium',   2: '2 medium',    3: '3 medium'    } },
+    'broth':       { display: 'bone broth',            tips: { 1: '1 cup',      2: '2 cups',      3: '3 cups'      } },
+    'aminos':      { display: 'coconut aminos',        tips: { 1: '1 tbsp',     2: '2 tbsp',      3: '3 tbsp'      } },
+    'arrowroot':   { display: 'arrowroot slurry',      tips: { 1: '1 tsp + 1 tbsp water', 2: '2 tsp + 2 tbsp water', 3: '1 tbsp + 3 tbsp water' } },
+    'beans':       { display: 'green beans',           tips: { 1: '¼ lb',       2: '½ lb',        3: '¾ lb'        } },
+    'garlic':      { display: 'garlic',                tips: { 1: '2 cloves',   2: '3 cloves',    3: '4 cloves'    } }
+  },
+  timers: {
+    'sear':   { label: 'Sear per batch',  preset: 180,  bell: false },
+    'onions': { label: 'Golden onions',   preset: 1200, bell: true  },
+    'gravy':  { label: 'Gravy simmer',    preset: 300,  bell: true  },
+    'beans':  { label: 'Green beans',     preset: 300,  bell: true  }
+  },
+  steps: [
+    {
+      label: 'Start the rice',
+      text:  'Get the Zojirushi running first. Everything else finishes around the same time the rice does.',
+      tip:   null,
+      timers: []
+    },
+    {
+      label: 'Mix and chill',
+      text:  'Combine {{meat}}, {{rice-mix}}, eggs, grated onion, white pepper, ginger, dill weed, and a generous pinch of salt in a large bowl. Mix with your hands until just combined — don\'t overwork it or they\'ll be dense. Refrigerate 15 minutes. Cold mix rolls cleaner and holds better in the pan.',
+      tip:   'Wet your hands before rolling. Cleaner balls, nothing sticks.',
+      timers: []
+    },
+    {
+      label: 'Roll and sear',
+      text:  'Roll into 1-inch balls. Heat Sizzle in the carbon steel over medium-high until shimmering. Sear in batches with enough room for each meatball to brown — about 3 minutes per batch, turning once or twice. Don\'t crowd the pan. Set aside as you go.',
+      tip:   'They\'ll release when they\'re ready. If they stick, wait.',
+      timers: ['sear']
+    },
+    {
+      label: 'Golden onions',
+      text:  'In the same pan with all that fond, add a splash more Sizzle if needed and add {{onion-gravy}}. Medium-low heat, 15–20 minutes, until soft and golden — not jammy, not dark. Stir occasionally. The fond incorporates as they cook.',
+      tip:   'Fond threatening to burn before the onions are soft? Splash of water and scrape it up.',
+      timers: ['onions']
+    },
+    {
+      label: 'Build the gravy',
+      text:  'Add {{broth}}, {{aminos}}, mushroom umami powder, and MSG. Scrape up any remaining fond. Simmer 5 minutes — it should smell deeply savory and reduce slightly.',
+      tip:   null,
+      timers: ['gravy']
+    },
+    {
+      label: 'Thicken and finish',
+      text:  'Pull the pan off heat. Stir in {{arrowroot}} — thickens immediately on contact. Don\'t return to a boil or it breaks. Add a small splash of ACV, taste, adjust salt. Nestle meatballs back into the gravy, low heat, 3–4 minutes to warm through.',
+      tip:   'Too thick, splash of broth. Too thin, another small arrowroot slurry off heat.',
+      timers: []
+    },
+    {
+      label: 'Green beans',
+      text:  'Move the meatball pan to low to keep warm. In the same carbon steel, Sizzle over medium. Add {{garlic}} and cook until golden, about 90 seconds — watch it, slivers burn fast. Add {{beans}}, toss to coat, 3–4 minutes until bright green with a little color. Season with salt.',
+      tip:   null,
+      timers: ['beans']
+    },
+    {
+      label: 'Plate',
+      text:  'Rice base, meatballs and gravy over the top — don\'t be shy with the gravy. Green beans alongside. Blueberry compote on the table if you made it.',
       tip:   null,
       timers: []
     }
