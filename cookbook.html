@@ -4,38 +4,82 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>EL YES! Cookbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Corben:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 
 /* === RESET & BASE === */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --bg:         #f5f0e8;
+  /* Shared, theme-independent tokens. Color palettes live in the
+     [data-theme] blocks below; default (no attribute) = Slate & Gold. */
+  --font-display: 'Corben', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+
+  /* ===== Slate & Gold (default) =====
+     coolors 646e78 · 8d98a7 · dcccbb · eab464 · a7754d.
+     Derived: deep slate text + burnt-gold accent for contrast safety. */
+  --bg:         #ece6dd;   /* warm light sand-gray — page (no yellow) */
   --surface:    #ffffff;
-  --surface2:   #faf7f3;
-  --surface3:   #f0ebe2;
-  --accent:     #b8700e;
-  --accent-dim: #7a4a06;
-  --accent-hi:  #d4870a;
-  --accent-bg:  #fdf4e4;
-  --text:       #1c1208;
-  --muted:      #7a6a58;
-  --dim:        #b8a898;
-  --border:     #e2d8c8;
-  --border-mid: #c8b89e;
-  --green:      #2a7038;
-  --green-bg:   #eef7f1;
-  --green-bdr:  #a0d0ae;
-  --red:        #b83030;
-  --red-bg:     #fdf0f0;
-  --warn:       #b8700e;
-  --warn-bg:    #fdf4e4;
-  --warn-bdr:   #e8b870;
+  --surface2:   #e5dccd;   /* tan — fixed header / timer bar */
+  --surface3:   #dbe0e5;   /* cool pale blue-gray — step numbers / insets */
+  --accent:     #8f5b29;   /* burnt gold-brown — contrast-safe accent text */
+  --accent-dim: #6f461f;
+  --accent-hi:  #eab464;   /* the gold — fills / highlights */
+  --accent-bg:  #f7ecd6;
+  --text:       #20242b;   /* near-black slate — primary reading text */
+  --muted:      #525c66;   /* darker slate — legible secondary text */
+  --dim:        #8d98a7;   /* blue-gray — hints / borders only */
+  --on-accent:  #ffffff;   /* text on accent fills (buttons, active tabs) */
+  --border:     #ddd4c7;
+  --border-mid: #a7754d;   /* clay */
+  --green:      #3f7a5f;   /* slate-teal — "safe / done" (palette has none) */
+  --green-bg:   #e3ece3;
+  --green-bdr:  #aac4b3;
+  --red:        #a8492a;   /* warm brick — alerts */
+  --red-bg:     #f6e2d8;
+  --warn:       #9c6630;
+  --warn-bg:    #f7ecd6;
+  --warn-bdr:   #eab464;
+}
+
+html[data-theme="slate"] {
+  --bg:#ece6dd; --surface:#ffffff; --surface2:#e5dccd; --surface3:#dbe0e5;
+  --accent:#8f5b29; --accent-dim:#6f461f; --accent-hi:#eab464; --accent-bg:#f7ecd6;
+  --text:#20242b; --muted:#525c66; --dim:#8d98a7; --on-accent:#ffffff;
+  --border:#ddd4c7; --border-mid:#a7754d;
+  --green:#3f7a5f; --green-bg:#e3ece3; --green-bdr:#aac4b3;
+  --red:#a8492a; --red-bg:#f6e2d8;
+  --warn:#8f5b29; --warn-bg:#f7ecd6; --warn-bdr:#eab464;
+}
+
+html[data-theme="cream"] {
+  /* Original: Corben + coolors ccd5ae · e9edc9 · fefae0 · faedcd · d4a373 */
+  --bg:#fefae0; --surface:#ffffff; --surface2:#faedcd; --surface3:#e9edc9;
+  --accent:#9a531f; --accent-dim:#73400f; --accent-hi:#d4a373; --accent-bg:#faedcd;
+  --text:#241a0e; --muted:#6b5a40; --dim:#b0a081; --on-accent:#ffffff;
+  --border:#e8dcc2; --border-mid:#d4a373;
+  --green:#4e6b2f; --green-bg:#e9edc9; --green-bdr:#ccd5ae;
+  --red:#a83a1e; --red-bg:#f6e2d6;
+  --warn:#9a531f; --warn-bg:#faedcd; --warn-bdr:#d4a373;
+}
+
+html[data-theme="dark"] {
+  /* Midnight: coolors 1a1423 · 3d314a · 684756 · 96705b · ab8476 + sand text */
+  --bg:#1a1423; --surface:#241d30; --surface2:#3d314a; --surface3:#2f2640;
+  --accent:#c89c83; --accent-dim:#ab8476; --accent-hi:#96705b; --accent-bg:#322840;
+  --text:#e7d8c3; --muted:#b6a791; --dim:#8a7d8c; --on-accent:#1a1423;
+  --border:#3a3047; --border-mid:#684756;
+  --green:#8bb39a; --green-bg:#26312c; --green-bdr:#4e6b58;
+  --red:#d98a6a; --red-bg:#3a2620;
+  --warn:#c89c83; --warn-bg:#322840; --warn-bdr:#684756;
 }
 html { font-size: 15px; -webkit-text-size-adjust: 100%; }
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  font-family: var(--font-sans);
   line-height: 1.5;
   min-height: 100vh;
 }
@@ -47,9 +91,10 @@ button { font-family: inherit; cursor: pointer; }
 /* === LIBRARY === */
 #lib-view { max-width: 960px; margin: 0 auto; padding: 48px 24px 80px; }
 
-.lib-hdr { margin-bottom: 40px; }
+.lib-hdr { margin-bottom: 40px; display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
 .lib-hdr h1 {
-  font-size: 28px; font-weight: 700; letter-spacing: -0.6px;
+  font-family: var(--font-display);
+  font-size: 30px; font-weight: 700; letter-spacing: -0.3px;
   color: var(--text); margin-bottom: 4px;
 }
 .lib-hdr h1 span { color: var(--accent); }
@@ -86,15 +131,26 @@ button { font-family: inherit; cursor: pointer; }
   color: var(--accent); background: var(--accent-bg);
   border: 1px solid var(--warn-bdr); border-radius: 4px; padding: 2px 7px;
 }
-.card-title { font-size: 16px; font-weight: 600; color: var(--text); line-height: 1.35; }
-.card-style { font-size: 12px; color: var(--muted); font-style: italic; line-height: 1.4; margin-top: 2px; }
-.card-sub { font-size: 12px; color: var(--dim); line-height: 1.4; margin-top: 2px; }
+.card-title { font-family: var(--font-display); font-size: 16px; font-weight: 700; color: var(--text); line-height: 1.4; }
+.card-style { font-size: 12px; color: var(--muted); font-style: italic; line-height: 1.45; margin-top: 2px; }
+.card-sub { font-size: 13px; color: var(--muted); line-height: 1.45; margin-top: 3px; }
 .card-soon { font-size: 12px; color: var(--dim); margin-top: auto; }
 
 /* Filter bar */
 .filter-bar {
   display: flex; flex-wrap: wrap; align-items: center;
-  gap: 8px; margin-bottom: 28px;
+  gap: 8px; margin-bottom: 14px;
+}
+.filter-lanes {
+  display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px;
+}
+.filter-lane {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+}
+.lane-label {
+  font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.6px; color: var(--dim);
+  width: 42px; flex-shrink: 0;
 }
 .filter-search {
   flex: 1; min-width: 180px; max-width: 300px;
@@ -119,12 +175,21 @@ button { font-family: inherit; cursor: pointer; }
 .filter-count { font-size: 12px; color: var(--dim); margin-left: auto; }
 
 .card-time {
-  display: flex; gap: 12px; flex-wrap: wrap;
-  font-size: 12px; color: var(--muted); margin-top: 2px;
+  display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
+  font-size: 12px; color: var(--muted);
+  margin-top: auto; padding-top: 11px;
+  border-top: 1px solid var(--border);
+}
+.card-time-bucket {
+  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px;
+  color: var(--muted); background: var(--surface2);
+  border: 1px solid var(--border); border-radius: 4px; padding: 2px 7px;
 }
 .card-time-item { display: flex; align-items: center; gap: 4px; }
 .card-time-lbl { font-weight: 600; color: var(--dim); text-transform: uppercase; letter-spacing: 0.5px; font-size: 10px; }
 .card-time-val { color: var(--text); font-weight: 500; }
+.card-time-val.flagged { color: var(--accent); font-weight: 700; }
+.card-time-passive { font-size: 11px; color: var(--accent); font-style: italic; }
 
 /* === COOK VIEW === */
 #cook-view { display: none; }
@@ -146,7 +211,8 @@ button { font-family: inherit; cursor: pointer; }
 }
 .back-btn:hover { color: var(--text); border-color: var(--border-mid); }
 #hdr-title {
-  font-size: 14px; font-weight: 600; color: var(--text); flex: 1;
+  font-family: var(--font-display);
+  font-size: 14px; font-weight: 700; color: var(--text); flex: 1;
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
 .preheat-badge {
@@ -172,7 +238,7 @@ button { font-family: inherit; cursor: pointer; }
   transition: all .15s; letter-spacing: 0.2px;
 }
 .scale-btn + .scale-btn { border-left: 1px solid var(--border); }
-.scale-btn.on { background: var(--accent); color: #fff; }
+.scale-btn.on { background: var(--accent); color: var(--on-accent); }
 .scale-btn:not(.on):hover { background: var(--surface2); color: var(--text); }
 
 /* Fixed timer bar */
@@ -190,6 +256,10 @@ button { font-family: inherit; cursor: pointer; }
   background: var(--surface); border: 1px solid var(--border);
   border-radius: 20px; padding: 5px 13px; flex-shrink: 0;
 }
+.t-pill.clk { cursor: pointer; transition: border-color .15s, box-shadow .15s; }
+.t-pill.clk:hover { border-color: var(--accent); box-shadow: 0 1px 8px rgba(168,95,44,0.18); }
+.t-pill.alerted .t-name { cursor: pointer; }
+.t-pill.alerted .t-name:hover { color: var(--accent); }
 .t-pill.urg { border-color: var(--red); background: var(--red-bg); }
 .t-pill.urg .t-count { color: var(--red); }
 .t-pill.alerted {
@@ -235,13 +305,119 @@ button { font-family: inherit; cursor: pointer; }
   font-size: 12px; font-weight: 700; padding: 10px;
   letter-spacing: 1px; transition: all .15s;
 }
-.cook-tab.on { background: var(--accent); color: #fff; }
+.cook-tab.on { background: var(--accent); color: var(--on-accent); }
 .cook-tab:not(.on):hover { background: var(--surface2); color: var(--text); }
 .cook-tab + .cook-tab { border-left: 1px solid var(--border); }
 
 /* Panes */
 .cook-pane { display: none; }
 .cook-pane.on { display: block; }
+
+/* Wide screens: drop the tab toggle and show mise + cook side by side,
+   with mise stuck in view while you scroll the steps. Phones keep tabs. */
+@media (min-width: 1000px) {
+  #cook-body { max-width: 1160px; }
+  .cook-tabs { display: none; }
+  .cook-panes {
+    display: grid;
+    grid-template-columns: minmax(280px, 360px) 1fr;
+    gap: 34px; align-items: start;
+  }
+  .cook-pane { display: block; }            /* both visible, ignore .on toggle */
+  #pane-mise {
+    position: sticky; top: 70px;
+    max-height: calc(100vh - 92px); overflow-y: auto;
+    padding-right: 4px;
+  }
+  .cook-pane::before {
+    display: block;
+    font-size: 12px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--accent);
+    padding-bottom: 10px; margin-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  #pane-mise::before { content: "Mise en place"; }
+  #pane-cook::before { content: "Cook"; }
+}
+
+/* ===== Inline grab-lists: ingredients a step needs, shown on the step ===== */
+.step-grab {
+  display: flex; flex-wrap: wrap; gap: 5px; align-items: center;
+  margin-top: 9px; padding-top: 9px;
+  border-top: 1px dashed var(--border-mid);
+}
+.step-grab-lbl {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.8px;
+  text-transform: uppercase; color: var(--muted); margin-right: 2px;
+}
+.grab-chip {
+  font-size: 12px; color: var(--accent);
+  background: var(--accent-bg); border: 1px solid var(--warn-bdr);
+  border-radius: 5px; padding: 2px 7px;
+}
+
+/* ===== Ribbon header (sticky-ribbon layout only) + bottom-sheet FAB ===== */
+.ribbon-hd { display: none; }   /* shown only in ribbon layout on narrow screens */
+.mise-fab  { display: none; }   /* shown only in bottom-sheet layout on narrow screens */
+
+/* ===== Phone cook layouts (narrow screens only; wide = two-column above) ===== */
+@media (max-width: 999px) {
+  /* Merged + ribbon: no tabs, mise and steps share one scroll */
+  #cook-view[data-layout="merged"] .cook-tabs,
+  #cook-view[data-layout="ribbon"] .cook-tabs { display: none; }
+  #cook-view[data-layout="merged"] .cook-pane,
+  #cook-view[data-layout="ribbon"] .cook-pane { display: block; }
+  #cook-view[data-layout="merged"] #pane-mise { margin-bottom: 26px; }
+
+  /* Ribbon: collapse the whole mise to a tappable bar above the steps */
+  #cook-view[data-layout="ribbon"] #pane-mise {
+    border: 1px solid var(--border-mid); border-radius: 10px;
+    background: var(--surface); margin-bottom: 16px; overflow: hidden;
+    max-height: 46vh; overflow-y: auto;
+  }
+  #cook-view[data-layout="ribbon"] #pane-mise .ribbon-hd {
+    display: flex; align-items: center; gap: 8px;
+    position: sticky; top: 0; z-index: 2;
+    padding: 11px 13px; cursor: pointer; user-select: none;
+    background: var(--surface2); border-bottom: 1px solid var(--border);
+  }
+  #cook-view[data-layout="ribbon"] .ribbon-ttl {
+    flex: 1; font-size: 12px; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase; color: var(--accent);
+  }
+  #cook-view[data-layout="ribbon"] .ribbon-chev { color: var(--muted); transition: transform .2s; }
+  #cook-view[data-layout="ribbon"] #pane-mise.mise-collapsed { max-height: none; }
+  #cook-view[data-layout="ribbon"] #pane-mise.mise-collapsed > *:not(.ribbon-hd) { display: none; }
+  #cook-view[data-layout="ribbon"] #pane-mise.mise-collapsed .ribbon-chev { transform: rotate(-90deg); }
+  /* keep the checklist off the container border */
+  #cook-view[data-layout="ribbon"] #pane-mise > .mise-section { padding: 0 14px; }
+  #cook-view[data-layout="ribbon"] #pane-mise > .mise-section:last-child { padding-bottom: 12px; }
+
+  /* Bottom-sheet: steps own the screen, mise slides up on demand */
+  #cook-view[data-layout="sheet"] .cook-tabs { display: none; }
+  #cook-view[data-layout="sheet"] #pane-cook { display: block; }
+  #cook-view[data-layout="sheet"] #pane-mise {
+    display: block;
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 320;
+    max-height: 72vh; overflow-y: auto;
+    background: var(--surface);
+    border-top: 1px solid var(--border-mid);
+    border-radius: 16px 16px 0 0;
+    padding: 16px 18px 24px;
+    transform: translateY(102%); transition: transform .26s ease;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.12);
+  }
+  #cook-view[data-layout="sheet"] #pane-mise.sheet-open { transform: translateY(0); }
+  #cook-view[data-layout="sheet"] .mise-fab {
+    display: flex; align-items: center; gap: 6px;
+    position: fixed; left: 50%; transform: translateX(-50%);
+    bottom: 18px; z-index: 321;
+    background: var(--accent); color: var(--on-accent);
+    font-size: 13px; font-weight: 700; letter-spacing: 0.3px;
+    border: none; border-radius: 22px; padding: 9px 20px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+  }
+}
 
 /* Section label */
 .sec-lbl {
@@ -304,6 +480,13 @@ button { font-family: inherit; cursor: pointer; }
   border-radius: 12px; margin-bottom: 10px; transition: opacity .15s;
 }
 .step-card.done { opacity: .32; }
+.step-card.flash {
+  animation: stepflash 1.6s ease-out;
+}
+@keyframes stepflash {
+  0%   { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-bg); background: var(--accent-bg); }
+  100% { border-color: var(--border); box-shadow: 0 0 0 0 transparent; background: var(--surface); }
+}
 .step-hdr { display: flex; align-items: flex-start; gap: 13px; padding: 16px 18px; }
 .step-num {
   width: 28px; height: 28px; border-radius: 50%;
@@ -386,6 +569,59 @@ button { font-family: inherit; cursor: pointer; }
   cursor: default; white-space: nowrap;
 }
 
+/* Settings */
+.settings-btn {
+  background: var(--surface); border: 1px solid var(--border);
+  color: var(--muted); font-size: 12px; font-weight: 600;
+  padding: 6px 12px; border-radius: 8px; transition: all .15s; flex-shrink: 0;
+}
+.settings-btn:hover { color: var(--accent); border-color: var(--accent); }
+.settings-overlay {
+  display: none; position: fixed; inset: 0; z-index: 500;
+  background: rgba(0,0,0,0.35);
+  align-items: center; justify-content: center; padding: 20px;
+}
+.settings-overlay.open { display: flex; }
+.settings-panel {
+  background: var(--surface); border: 1px solid var(--border-mid);
+  border-radius: 14px; width: 100%; max-width: 380px;
+  padding: 20px 22px 24px; box-shadow: 0 8px 40px rgba(0,0,0,0.22);
+  max-height: 86vh; overflow-y: auto;
+}
+.settings-hdr {
+  display: flex; align-items: center; justify-content: space-between;
+  font-family: var(--font-display); font-size: 18px; font-weight: 700;
+  color: var(--text); margin-bottom: 16px;
+}
+.settings-x {
+  background: none; border: none; color: var(--muted);
+  font-size: 16px; padding: 4px 8px; border-radius: 6px;
+}
+.settings-x:hover { color: var(--text); background: var(--surface2); }
+.settings-sec { margin-bottom: 18px; }
+.settings-sec:last-child { margin-bottom: 0; }
+.settings-lbl {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.8px;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 9px;
+}
+.settings-hint { font-weight: 400; letter-spacing: 0; text-transform: none; color: var(--dim); }
+.opt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.opt-list { display: flex; flex-direction: column; gap: 8px; }
+.opt-btn {
+  text-align: left; background: var(--surface); cursor: pointer;
+  border: 1px solid var(--border); border-radius: 9px;
+  padding: 10px 12px; transition: all .15s; color: var(--text);
+}
+.opt-btn:hover { border-color: var(--accent-hi); }
+.opt-btn.on { border-color: var(--accent); background: var(--accent-bg); }
+.opt-btn .opt-name { font-size: 13px; font-weight: 700; }
+.opt-btn .opt-desc { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.opt-btn.on .opt-name { color: var(--accent); }
+.opt-sw {
+  display: flex; gap: 7px; align-items: center; margin-top: 7px;
+}
+.opt-sw-dot { width: 14px; height: 14px; border-radius: 4px; border: 1px solid rgba(0,0,0,0.12); }
+
 /* Tooltip */
 #tooltip {
   position: fixed; display: none; z-index: 999;
@@ -432,22 +668,35 @@ button { font-family: inherit; cursor: pointer; }
 <div id="lib-view">
   <div class="lib-hdr">
     <h1>EL <span>YES!</span> cookbook</h1>
+    <button class="settings-btn" onclick="openSettings()" aria-label="Settings">⚙ display</button>
   </div>
   <div class="filter-bar" id="filter-bar">
-    <input class="filter-search" id="filter-search" type="search" placeholder="Search recipes…" oninput="renderLibrary()" autocomplete="off">
-    <button class="filter-btn" data-tag="chicken" onclick="toggleFilter('chicken')">chicken</button>
-    <button class="filter-btn" data-tag="beef" onclick="toggleFilter('beef')">beef</button>
-    <button class="filter-btn" data-tag="lamb" onclick="toggleFilter('lamb')">lamb</button>
-    <button class="filter-btn" data-tag="seafood" onclick="toggleFilter('seafood')">seafood</button>
-    <button class="filter-btn" data-tag="30 or less" onclick="toggleFilter('30 or less')">30 or less</button>
-    <button class="filter-btn" data-tag="under 1 hr" onclick="toggleFilter('under 1 hr')">under 1 hr</button>
-    <button class="filter-btn" data-tag="slow roll" onclick="toggleFilter('slow roll')">slow roll</button>
-    <button class="filter-btn" data-tag="grill" onclick="toggleFilter('grill')">grill</button>
-    <button class="filter-btn" data-tag="sauce" onclick="toggleFilter('sauce')">sauce</button>
-    <button class="filter-btn" data-tag="make-ahead" onclick="toggleFilter('make-ahead')">make-ahead</button>
-    <button class="filter-btn" data-tag="batch" onclick="toggleFilter('batch')">batch</button>
-    <button class="filter-btn" data-tag="dessert" onclick="toggleFilter('dessert')">dessert</button>
+    <input class="filter-search" id="filter-search" type="search" placeholder="Search any ingredient or recipe…" oninput="renderLibrary()" autocomplete="off">
     <span class="filter-count" id="filter-count"></span>
+  </div>
+  <div class="filter-lanes">
+    <div class="filter-lane">
+      <span class="lane-label">Type</span>
+      <button class="filter-btn" data-tag="chicken" onclick="toggleFilter('chicken')">chicken</button>
+      <button class="filter-btn" data-tag="beef" onclick="toggleFilter('beef')">beef</button>
+      <button class="filter-btn" data-tag="lamb" onclick="toggleFilter('lamb')">lamb</button>
+      <button class="filter-btn" data-tag="seafood" onclick="toggleFilter('seafood')">seafood</button>
+      <button class="filter-btn" data-tag="sauce" onclick="toggleFilter('sauce')">sauce</button>
+      <button class="filter-btn" data-tag="condiment" onclick="toggleFilter('condiment')">condiment</button>
+      <button class="filter-btn" data-tag="dessert" onclick="toggleFilter('dessert')">dessert</button>
+      <button class="filter-btn" data-tag="legumes" onclick="toggleFilter('legumes')">legumes</button>
+      <button class="filter-btn" data-tag="grill" onclick="toggleFilter('grill')">grill</button>
+      <button class="filter-btn" data-tag="braise" onclick="toggleFilter('braise')">braise</button>
+      <button class="filter-btn" data-tag="make-ahead" onclick="toggleFilter('make-ahead')">make-ahead</button>
+      <button class="filter-btn" data-tag="batch" onclick="toggleFilter('batch')">batch</button>
+    </div>
+    <div class="filter-lane">
+      <span class="lane-label">Time</span>
+      <button class="filter-btn" data-time="30 or less" onclick="toggleTime('30 or less')">30 or less</button>
+      <button class="filter-btn" data-time="under 1 hr" onclick="toggleTime('under 1 hr')">under 1 hr</button>
+      <button class="filter-btn" data-time="1–2 hr" onclick="toggleTime('1–2 hr')">1–2 hr</button>
+      <button class="filter-btn" data-time="slow roll" onclick="toggleTime('slow roll')">slow roll</button>
+    </div>
   </div>
   <div class="recipe-grid" id="recipe-grid"></div>
 </div>
@@ -463,6 +712,7 @@ button { font-family: inherit; cursor: pointer; }
     <button class="back-btn" onclick="goLib()">← recipes</button>
     <div id="hdr-title"></div>
     <div class="preheat-badge" id="preheat-badge" style="display:none"></div>
+    <button class="back-btn" onclick="openSettings()" aria-label="Settings" title="Display settings">⚙</button>
     <button class="share-btn" id="share-btn" onclick="copyLink()">copy link</button>
     <div class="scale-toggle">
       <button class="scale-btn on" id="scale-1" onclick="setScale(1)">1×</button>
@@ -472,20 +722,42 @@ button { font-family: inherit; cursor: pointer; }
   </div>
 
   <div id="cook-body">
+    <div id="headnote-container"></div>
     <div class="cook-tabs">
       <button class="cook-tab on" id="tab-mise" onclick="swTab('mise',this)">MISE EN PLACE</button>
       <button class="cook-tab"    id="tab-cook" onclick="swTab('cook',this)">COOK</button>
     </div>
-    <div class="cook-pane on" id="pane-mise"></div>
-    <div class="cook-pane"    id="pane-cook">
-      <div id="variants-container"></div>
-      <div id="steps-container"></div>
+    <div class="cook-panes">
+      <div class="cook-pane on" id="pane-mise"></div>
+      <div class="cook-pane"    id="pane-cook">
+        <div id="variants-container"></div>
+        <div id="steps-container"></div>
+      </div>
     </div>
   </div>
+
+  <button class="mise-fab" id="mise-fab" onclick="toggleMiseSheet()">▤ Mise</button>
 
 </div>
 
 <div id="tooltip"></div>
+
+<div class="settings-overlay" id="settings-overlay" onclick="closeSettings(event)">
+  <div class="settings-panel" onclick="event.stopPropagation()">
+    <div class="settings-hdr">
+      <span>Display</span>
+      <button class="settings-x" onclick="closeSettings()" aria-label="Close">✕</button>
+    </div>
+    <div class="settings-sec">
+      <div class="settings-lbl">Palette</div>
+      <div class="opt-grid" id="opt-theme"></div>
+    </div>
+    <div class="settings-sec">
+      <div class="settings-lbl">Cooking layout <span class="settings-hint">— phone / narrow screens; laptops get two columns</span></div>
+      <div class="opt-list" id="opt-layout"></div>
+    </div>
+  </div>
+</div>
 
 <script>
 
@@ -505,7 +777,7 @@ const RECIPES = [
   subtitle: 'Haiga rice · charred broccoli · sweet potato mash',
   preheat: '425°F',
   serves: '1–3',
-  tags: ['chicken', 'under 1 hr'],
+  tags: ['chicken'],
   prepTime: '15 min',
   cookTime: '45 min',
 
@@ -648,7 +920,7 @@ const RECIPES = [
   ],
   preheat: '425°F',
   serves: '1–3',
-  tags: ['lamb', 'under 1 hr'],
+  tags: ['lamb'],
   prepTime: '15 min',
   cookTime: '30 min',
 
@@ -751,7 +1023,7 @@ const RECIPES = [
   subtitle: 'Blueberry-mint · strawberry-herb · mixed berry · pairs with lamb or chicken',
   preheat: null,
   serves: '1–3',
-  tags: ['sauce', '30 or less', 'make-ahead'],
+  tags: ['sauce', 'make-ahead'],
   prepTime: '5 min',
   cookTime: '15 min',
 
@@ -835,7 +1107,7 @@ const RECIPES = [
   subtitle: 'Arugula · guac · coconut yogurt crema · plantain chips',
   preheat: null,
   serves: '1–3',
-  tags: ['beef', '30 or less'],
+  tags: ['beef'],
   prepTime: '15 min',
   cookTime: '15 min',
 
@@ -940,7 +1212,7 @@ const RECIPES = [
   subtitle: 'Wilted spinach · plantain chips',
   preheat: null,
   serves: '1–3',
-  tags: ['chicken', '30 or less'],
+  tags: ['chicken'],
   prepTime: '10 min',
   cookTime: '20 min',
 
@@ -1040,7 +1312,7 @@ const RECIPES = [
   subtitle: 'Gai lan in garlic oil · jasmine rice',
   preheat: null,
   serves: '1–3',
-  tags: ['chicken', '30 or less'],
+  tags: ['chicken'],
   prepTime: '20 min',
   cookTime: '30 min',
 
@@ -1171,7 +1443,7 @@ const RECIPES = [
   subtitle: 'Jasmine rice',
   preheat: null,
   serves: '1–3',
-  tags: ['beef', 'under 1 hr'],
+  tags: ['beef'],
   prepTime: '15 min',
   cookTime: '30 min',
 
@@ -1284,7 +1556,7 @@ const RECIPES = [
   subtitle: 'Mashed rutabaga',
   preheat: '325°F',
   serves: '2+',
-  tags: ['beef', 'slow roll', 'braise'],
+  tags: ['beef', 'braise'],
   prepTime: '20 min',
   cookTime: '3 hrs',
 
@@ -1416,7 +1688,9 @@ const RECIPES = [
   subtitle: 'Jasmine rice · green olives · heavy cilantro',
   preheat: null,
   serves: '1–3',
-  tags: ['beef', '30 or less'],
+  tags: ['beef'],
+  prepTime: '10 min',
+  cookTime: '20 min',
 
   equipment: [
     { name: 'Large skillet or everyday pan',  note: 'carbon steel, cast iron, or the Staub — needs to get hot enough to brown mushrooms' },
@@ -1535,7 +1809,7 @@ const RECIPES = [
   subtitle: 'Roasted mashed orange sweet potato',
   preheat: '400°F',
   serves: '1–3',
-  tags: ['chicken', 'under 1 hr'],
+  tags: ['chicken'],
   prepTime: '10 min',
   cookTime: '50 min',
 
@@ -1656,7 +1930,7 @@ const RECIPES = [
   subtitle: 'No dairy · no coconut · ten minutes of work',
   preheat: '375°F',
   serves: '1–3',
-  tags: ['dessert', '30 or less'],
+  tags: ['dessert'],
   prepTime: '5 min',
   cookTime: '40 min',
 
@@ -1734,7 +2008,7 @@ const RECIPES = [
   subtitle: 'Freeze bananas 2+ hours ahead · ready in 60 seconds',
   preheat: null,
   serves: '1–3',
-  tags: ['dessert', '30 or less'],
+  tags: ['dessert'],
   prepTime: '5 min + 2 hr freeze',
   cookTime: '0 min',
 
@@ -1800,7 +2074,7 @@ const RECIPES = [
   subtitle: 'Charred florets · stem matchsticks · cabbage · mushrooms · jasmine rice',
   preheat: '425°F',
   serves: '1–3',
-  tags: ['beef', '30 or less'],
+  tags: ['beef'],
   prepTime: '15 min',
   cookTime: '35 min',
 
@@ -1935,7 +2209,7 @@ const RECIPES = [
   style: 'Velveted chicken breast · shiitakes · Chinese-American brown sauce',
   subtitle: 'Loads of celery · carrots · toasted sesame · jasmine rice',
   serves: '1–3',
-  tags: ['chicken', 'under 1 hr'],
+  tags: ['chicken'],
   prepTime: '25 min',
   cookTime: '20 min',
 
@@ -2082,7 +2356,7 @@ const RECIPES = [
   subtitle: 'Jasmine rice in bone broth · charred cabbage wedges',
   preheat: null,
   serves: '1–3',
-  tags: ['beef', 'under 1 hr', 'grill'],
+  tags: ['beef', 'grill'],
   prepTime: '15 min',
   cookTime: '25 min',
 
@@ -2223,7 +2497,7 @@ const RECIPES = [
   ],
   preheat: '425°F',
   serves: '2–6',
-  tags: ['lamb', 'under 1 hr'],
+  tags: ['lamb'],
   prepTime: '20 min',
   cookTime: '45 min',
 
@@ -2367,7 +2641,7 @@ const RECIPES = [
   subtitle: 'Seared beef · charred broccoli · jasmine rice',
   preheat: '450°F',
   serves: '2–8',
-  tags: ['beef', 'under 1 hr', 'batch'],
+  tags: ['beef', 'batch'],
   prepTime: '20 min',
   cookTime: '45 min',
 
@@ -2517,7 +2791,7 @@ const RECIPES = [
   subtitle: 'Jasmine rice · florets saved for roasting',
   preheat: null,
   serves: '1–3',
-  tags: ['beef', '30 or less'],
+  tags: ['beef'],
   prepTime: '10 min',
   cookTime: '20 min',
 
@@ -2628,7 +2902,7 @@ const RECIPES = [
   subtitle: 'Grilled sweet potato planks · charred onion · avo smash',
   preheat: null,
   serves: '1–3',
-  tags: ['beef', 'under 1 hr', 'grill'],
+  tags: ['beef', 'grill'],
   prepTime: '20 min + 2–6 hr marinade',
   cookTime: '30 min',
   headnote: `<strong>Flap meat loves a long marinade.</strong> It's a thin cut with open grain — 4–6 hours is ideal, 2 hours is fine, 30 minutes is a waste of time. Get the meat in as soon as you're back from the store and let time do the work.<br><br><strong>Slice against the grain or you'll regret it.</strong> Flap has a very visible grain running diagonally across the cut. Find it before you pick up the knife and cut perpendicular — thin, ¼-inch slices. The difference between tender and chewy is entirely this.<br><br><em>Chimichurri made 1–2 hours ahead is dramatically better than fresh. The herbs soften, the garlic mellows, the ACV rounds out. Make it early and leave it at room temp.</em>`,
@@ -2767,7 +3041,7 @@ const RECIPES = [
   subtitle: 'Five seasoning paths · sides open',
   preheat: null,
   serves: '1–3',
-  tags: ['chicken', 'under 1 hr', 'grill'],
+  tags: ['chicken', 'grill'],
   prepTime: '10 min',
   cookTime: '25 min + 5 min rest',
   headnote: `<strong>Reverse-sear or you'll burn the skin.</strong> Bone-in thighs hold an enormous amount of fat in the skin and it has to render slowly with no flame underneath, or it drips, flares, and torches the skin before the bone hits temp. Skin-down on the COOL side first, lid closed, 15–18 minutes. Then skin-down on the hot side for 2–3 minutes to crisp the now-mostly-rendered skin. Starting hot is the instinct and it's wrong every time.<br><br><strong>Five seasoning paths, one technique.</strong> Garam masala is the house default (Tracy's pick — warm, sweet-spiced). Fresh thyme + mashed black garlic + cracked pepper goes herbal-funky. Herbes de Provence + sumac leans Provençal-floral. Chinese five spice + ground ginger + onion granules swings east. Crushed fennel + sage + black pepper does Italian-sausage-on-the-bone. The cook is identical across all five — only the rub changes.<br><br><em>Universal prep: pat the thighs bone-dry, thin coat of avocado oil on both sides, then season aggressively. Wet skin steams and won't crisp. Oil the chicken, not the grate.</em>`,
@@ -2870,7 +3144,7 @@ const RECIPES = [
   subtitle: 'Jasmine rice · charred broccoli',
   preheat: '425°F',
   serves: '1–3',
-  tags: ['beef', '30 or less'],
+  tags: ['beef'],
   prepTime: '10 min',
   cookTime: '30 min',
   headnote: `<strong>Bloom whole fennel seeds first, dry pan.</strong> This is the flavor foundation — don't skip it or rush it. The seeds should pop and smell like anise before any fat goes in.<br><br><strong>Pull the beef before the sauce.</strong> Building the sauce separately in the same pan lets the fond release cleanly and the blueberries break down into something jammy and glossy, not muddy.<br><br><em>Note for next time: add a second vegetable — edamame when cleared would be ideal here.</em>`,
@@ -2975,7 +3249,9 @@ const RECIPES = [
   subtitle: 'Sweet potato halves · roasted broccoli',
   preheat: '425°F',
   serves: '1–3',
-  tags: ['chicken', 'under 1 hr'],
+  tags: ['chicken'],
+  prepTime: '15 min',
+  cookTime: '45 min',
   headnote: `<strong>Two jobs, one pan.</strong> The rough-chopped aromatics do double duty — they lift the chicken off the pan so heat circulates underneath, and they pre-roast into your broth base. Don't skip the backbone: it roasts alongside the bird and adds real color and depth to the broth.<br><br><strong>Spatchcocking is faster and more even than whole-bird roasting.</strong> The bird lays flat, the skin gets maximum oven exposure, and the whole thing is done in under an hour. Press hard on the breastbone — it needs to crack flat to cook evenly.<br><br><em>Sweet potatoes go cut-side down — that's where the caramelization happens. Broccoli goes in at the 35-minute mark so it gets color without turning to mush. Debone before serving and add the carcass to the pot with the backbone — deeper broth, cleaner plates.</em>`,
   equipment: [
     { name: 'Large sheet pan or roasting pan', note: 'for chicken and aromatic bed' },
@@ -3101,7 +3377,7 @@ const RECIPES = [
   subtitle: 'Blueberry reduction two ways · composed spring greens salad · named by Sam',
   preheat: '250°F',
   serves: '1–3',
-  tags: ['beef', 'seafood', 'slow roll', 'grill'],
+  tags: ['beef', 'seafood', 'grill'],
   prepTime: '15 min',
   cookTime: '2 hr',
   headnote: `<strong>The reverse sear is the only right answer for a tomahawk this thick.</strong> Direct high heat alone can't cook a 3.5+ lb steak evenly — you get a perfect crust and a raw center, or a cooked center and an incinerated exterior. Low oven first brings the whole steak up slowly and evenly to just below target temp, then the screaming Solo Stove does nothing but crust. Two minutes of chaos at the end, not fifteen.<br><br><strong>Salt early, dry uncovered in the fridge.</strong> Salt the steak aggressively and leave it on a rack in the fridge uncovered for at least 2 hours before the oven — ideally longer. The surface dries out completely, which means better crust and less steam when it hits the coals.<br><br><strong>The shrimp go on the gas grill while the tomahawk rests.</strong> The rest isn't optional on a steak this size — it needs 10 minutes minimum. That's your shrimp window. Everything hits the table at the same time.<br><br><em>Pull the tomahawk at 120°F internal. It carries to 130–132 on the sear and rest. A thermometer is not optional here — don't guess on a $58 steak.</em>`,
@@ -3230,7 +3506,7 @@ const RECIPES = [
   subtitle: 'Pairs with grilled beef, shrimp, or lamb · compote for fruit and pudding',
   preheat: null,
   serves: '1–3',
-  tags: ['sauce', '30 or less', 'make-ahead'],
+  tags: ['sauce', 'make-ahead'],
   prepTime: '5 min',
   cookTime: '25 min',
   headnote: `<strong>One pan, two yields.</strong> Start the reduction together, then split it halfway through: pull half as a loose savory drizzle for proteins and salads, keep reducing the rest into a thick jammy compote for dessert. The Ridge red wine vinegar and coconut aminos make this savory-forward in a way the berry-herb reduction isn't — richer, more complex, better suited to beef and shrimp.<br><br><strong>Make it first.</strong> Both yields hold warm easily and improve as they sit. The savory sauce loosens on reheating with a splash of broth; the compote needs nothing.<br><br><em>The two-yield split is the whole point — don't reduce it all the way down for the savory application or it gets too jammy for drizzling.</em>`,
@@ -3297,7 +3573,7 @@ const RECIPES = [
   subtitle: 'Blueberry reduction drizzle · flaky salt finish',
   preheat: null,
   serves: '1–3',
-  tags: ['beef', 'under 1 hr', 'grill'],
+  tags: ['beef', 'grill'],
   prepTime: '10 min',
   cookTime: '15 min',
   headnote: `<strong>Charcoal does what gas can't.</strong> The Solo Stove runs hotter and drier than a gas grill, and bone-in ribeye is the right cut for it — thick enough to get a real crust without overcooking through, fatty enough to stay rich under that heat. The bone conducts heat from the inside while the grates work the outside.<br><br><strong>Season aggressively 45 minutes out or right before the grill — nothing in between.</strong> Salt draws moisture out after a few minutes; if you season and then let it sit 10–30 minutes before cooking, you'll have a wet surface and a poor sear. Either go early (45+ min, let it reabsorb) or go right before it hits the grates.<br><br><em>Pull at 125–128°F. It carries to 130–132 on the rest. The fat cap render is not optional — it's where half the flavor is.</em>`,
@@ -3382,7 +3658,7 @@ const RECIPES = [
   subtitle: 'Blueberry reduction drizzle',
   preheat: null,
   serves: '1–3',
-  tags: ['seafood', '30 or less', 'grill'],
+  tags: ['seafood', 'grill'],
   prepTime: '15 min',
   cookTime: '6 min',
   headnote: `<strong>Dry is everything.</strong> Argentine reds are larger and sweeter than standard shrimp, which makes them ideal for the grill — but they carry more moisture than smaller varieties. Pat them completely dry before the rub goes on or they'll steam in the tray instead of searing. Every paper towel pass counts.<br><br><strong>Preheat the tray with the grill.</strong> A cold tray means the shrimp hit a surface that can't immediately sear them — they stick, they steam, the rub comes off. A hot tray gets instant contact and color.<br><br><em>Argentine reds are done at a loose C curl — fully opaque, not tight. A tight O means overcooked. They carry over fast off the heat, so pull at the first sign of done.</em>`,
@@ -3541,7 +3817,7 @@ const RECIPES = [
   subtitle: 'Slaw, chicken salad, tuna salad, everything',
   preheat: null,
   serves: '1–3',
-  tags: ['condiment', 'quick', 'phase 2'],
+  tags: ['condiment'],
   prepTime: '5 min',
   cookTime: '0 min',
   headnote: `<strong>The immersion blender is non-negotiable.</strong> Don't attempt this by hand — the blender creates the emulsion almost instantly and you'll feel unreasonably accomplished.<br><br><strong>Don't move the blender for the first few seconds.</strong> Place it at the bottom of the jar, turn it on, and wait until you see white mayo climbing up the sides before you slowly pull up. That's the whole trick.<br><br><em>Keeps refrigerated for 7–10 days. Use a clean spoon every time — contamination is the enemy of shelf life. Scale 1 = ~¾ cup · Scale 2 = ~1½ cups · Scale 3 = ~2¼ cups.</em>`,
@@ -3606,7 +3882,7 @@ const RECIPES = [
   subtitle: 'Roasted sweet potato · sautéed green beans · spring greens with berries',
   preheat: '425°F',
   serves: '1–3',
-  tags: ['lamb', 'weeknight', 'phase 1'],
+  tags: ['lamb'],
   prepTime: '10 min',
   cookTime: '45 min',
   headnote: `<strong>Vadouvan blooms in the sear.</strong> No need to toast it separately — pressing it firmly into dry chops and dropping them into a screaming hot cast iron does all the work. The lamb fat carries it.<br><br><strong>Shiitakes go straight into the drippings.</strong> Don't wipe the pan. Let them get dark and a little crispy before you add liquid — that's where the sauce gets its backbone. They stay in the sauce, they don't disappear into it.<br><br><em>Sweet potatoes need a 45-minute head start. Get them in the oven first, everything else times around them.</em>`,
@@ -3708,7 +3984,7 @@ const RECIPES = [
   subtitle: 'Wild rice in bone broth · cast iron asparagus with English peas',
   preheat: null,
   serves: '1–3',
-  tags: ['seafood', 'weeknight', 'phase 1'],
+  tags: ['seafood'],
   prepTime: '15 min',
   cookTime: '25 min',
   headnote: `<strong>2 in the pink.</strong> Cast iron does what the grill tray does — screaming hot surface, fast sear, instant char — without leaving the house. The cumin-coriander-garam masala rub blooms in the fat on contact and you're done in under 3 minutes a side.<br><br><strong>Wild rice is not jasmine.</strong> Don't put it in the Zojirushi on the white rice setting. Stovetop only: 1 cup rice to 3 cups bone broth, simmer covered 45 minutes until the grains split open. Start it first — everything else times around it.<br><br><em>Argentine reds are done at a loose C curl — fully opaque, not tight. A tight O means overcooked. They carry over fast, pull at the first sign of done. If komatsuna isn't available, bok choy is the closest substitute — same technique, same timing. Spinach works too but wilts faster.</em>`,
@@ -3827,7 +4103,7 @@ const RECIPES = [
   subtitle: 'Jasmine rice · komatsuna or other quick greens',
   preheat: null,
   serves: '1–3',
-  tags: ['beef', 'weeknight', 'phase 1'],
+  tags: ['beef'],
   prepTime: '10 min',
   cookTime: '30 min',
   headnote: `<strong>Two-pan discipline is the whole game.</strong> Pan 1 is for the patties and gravy — nothing else goes in there. Pan 2 handles the mushrooms and onions separately so they stay distinct when they fold into the finished sauce. Don't combine until the end.<br><br><strong>Wagyu needs a light hand inside and a hot pan outside.</strong> Salt, pepper, and mushroom powder only in the mix — garlic and onion granules go on the crust, not inside. They'll char slightly in the pan and feed the fond directly. The fat in wagyu carries flavor differently than regular ground beef; seasoning the interior competes with it.<br><br><em>Form the patties thick and dimple the center — wagyu will dome as the fat renders. Don't move them until they release on their own. Rest them briefly before plating; the crust firms back up and holds better under the gravy.</em>`,
@@ -3955,7 +4231,7 @@ const RECIPES = [
   subtitle: 'Fresh raspberries',
   preheat: '325°F',
   serves: '1–3',
-  tags: ['dessert', 'make-ahead', 'phase 2'],
+  tags: ['dessert', 'make-ahead'],
   prepTime: '15 min',
   cookTime: '35 min + 3 hr chill',
   headnote: `<strong>Call it what it is.</strong> This is a coconut milk custard, not a dairy pot de crème — but it sets clean, goes silky in the fridge, and the chocolate-espresso combination is serious. Don't undersell it by comparing it to the dairy version.<br><br><strong>Temper slowly or scramble the eggs.</strong> The chocolate mixture needs to cool 5 minutes before the yolks go in, and the yolks need to go in as a thin stream with constant whisking. Rush this step and you have chocolate scrambled eggs.<br><br><em>Make these the night before. They need at least 3 hours to set and they're better after 8. Day-of is fine but overnight is noticeably better.</em>`,
@@ -4046,7 +4322,7 @@ const RECIPES = [
   subtitle: 'Seared banana · coconut caramel drizzle',
   preheat: '375°F',
   serves: '1–3',
-  tags: ['dessert', 'weekend', 'phase 2'],
+  tags: ['dessert'],
   prepTime: '20 min',
   cookTime: '35 min',
   headnote: `<strong>Rhubarb needs company and heat.</strong> Raw rhubarb is aggressively tart and unfamiliar — baked into strawberries with maple and vanilla, it softens and melds into something that reads as "deep jammy strawberry." This is the correct introduction for rhubarb skeptics.<br><br><strong>The seared banana is optional but worth it when you have a spotted one.</strong> Thick slices seared dry until deeply caramelized go on top of the fruit before the crumble — they hold their shape, go jammy, and add a visual layer that reads as intentional. Use a genuinely spotted banana or skip it entirely; there's no middle ground.<br><br><em>The caramel is the move. Reduce the evaporated coconut milk low and slow — it needs 20+ minutes and occasional attention. Drizzle tableside. It smells incredible and the theater is worth it.</em>`,
@@ -4152,7 +4428,7 @@ const RECIPES = [
   subtitle: 'Jasmine rice · quick-pickled cucumber',
   preheat: null,
   serves: '1–3',
-  tags: ['chicken', 'weeknight', 'phase 1'],
+  tags: ['chicken'],
   prepTime: '10 min',
   cookTime: '30 min',
   headnote: `<strong>Coconut aminos alone won't get you there.</strong> The natural sweetness in aminos wants to pull everything toward teriyaki — dial them back and let mushroom umami powder and MSG carry the savory depth instead. Mix the braise liquid and taste it before it hits the pan; it should read salty and complex with a hint of sweetness underneath.<br><br><strong>Boneless skinless thighs actually braise better here than bone-in.</strong> They soak up the sauce aggressively, cook in 18 minutes flat, and the reduced liquid becomes a lacquered glaze that goes straight back over the top. Ginger sliced into coins rather than grated — they soften and sweeten in the braise without going muddy; pull them out before plating or leave them in.<br><br><em>The cucumber pickle goes in first — it needs at least 20 minutes to become something. Start it before the rice.</em>`,
@@ -4261,7 +4537,7 @@ const RECIPES = [
   subtitle: 'Jasmine rice · charred broccoli',
   preheat: '450°F',
   serves: '1–3',
-  tags: ['seafood', 'weeknight', 'phase 1', '30 or less'],
+  tags: ['seafood'],
   prepTime: '10 min',
   cookTime: '20 min',
   headnote: `<strong>This is not scampi.</strong> Butter is next in the reintroduction queue, lemon is after that, and wine doesn't exist on this protocol. What this is: garlic-forward shrimp in a caper-brine pan sauce that does the same emotional job. Capers carry the brine and acid; ACV brightens it off heat; a second pour of olive oil mounted in at the end gives the sauce the unctuous quality butter would have.<br><br><strong>Pull the shrimp before you think they're done.</strong> Medium shrimp cook in under 90 seconds a side and they finish in the warm sauce. Rubbery shrimp is a timing error, not a technique error — get them out of the pan fast.<br><br><em>Garlic sliced thin, not minced — it toasts and holds shape in the oil rather than dissolving into the sauce. You want to see it on the plate.</em>`,
@@ -4367,7 +4643,7 @@ const RECIPES = [
   subtitle: 'Mixed berry compote, fresh mint',
   preheat: null,
   serves: '1–3',
-  tags: ['dessert', 'weeknight', 'phase 2'],
+  tags: ['dessert'],
   prepTime: '5 min',
   cookTime: '15 min',
   headnote: `<strong>Coconut cream, not coconut milk.</strong> The Native Forest small cans (5.4 fl oz each) are the move — two cans for two people lands you somewhere between pudding and pot de crème, without a single baking dish or water bath.<br><br><strong>Temper slowly, pull early.</strong> Arrowroot thickens beautifully but breaks under a hard boil — the moment it coats the spoon, it's done. Residual heat carries it the rest of the way.<br><br><em>Berry compote runs alongside: strawberries and blueberries cooked down with a splash of maple syrup. Start the compote first — it'll be ready when the custard is.</em>`,
@@ -4446,7 +4722,7 @@ const RECIPES = [
   subtitle: 'Pickled spring onions · charred purple baby broccoli',
   preheat: null,
   serves: '1–3',
-  tags: ['legumes', 'weekend', 'phase 2', 'reintroduction'],
+  tags: ['legumes'],
   prepTime: '20 min',
   cookTime: '3.5–4 hrs',
   headnote: `<strong>Cold oven start, no exceptions.</strong> The Bram goes into a cold oven before you turn it on. Clay cracks under thermal shock — learn this once, never forget it. Set to 275°F and let everything come up to temperature together.<br><br><strong>Royal Coronas need the overnight soak.</strong> These are the largest beans Rancho Gordo makes. Skip it and the outside softens before the center is done. Soak tonight, cook tomorrow.<br><br><em>Salt goes in the last 30–45 minutes only. Early salt tightens bean skins and fights absorption. Everything else is patience.</em>`,
@@ -4565,7 +4841,7 @@ const RECIPES = [
 ];
 
 const PLACEHOLDERS = [
-  { title: 'Salmon with crispy skin', subtitle: 'Wild rice · broccolini', tags: ['fish', 'weeknight'] }
+  { title: 'Salmon with crispy skin', subtitle: 'Wild rice · broccolini', tags: ['seafood'] }
 ];
 
 // =====================================================================
@@ -4577,7 +4853,76 @@ let currentScale   = 2;     // default: cooking for 2
 let T              = {};
 let audioCtx       = null;
 let tipTimeout     = null;
-let activeFilters  = new Set();
+let activeFilters  = new Set();   // TYPE lane (protein / dish / method)
+let activeTimes    = new Set();   // TIME lane (derived buckets)
+
+// User preferences (palette + phone cook layout), persisted across sessions.
+const THEMES  = [
+  { id: 'slate', name: 'Slate & Gold' },
+  { id: 'cream', name: 'Warm Cream' },
+  { id: 'dark',  name: 'Midnight' }
+];
+const LAYOUTS = [
+  { id: 'inline', name: 'Inline grab-lists', desc: 'Each step shows what to grab' },
+  { id: 'ribbon', name: 'Sticky mise ribbon', desc: 'Collapsible mise above steps' },
+  { id: 'sheet',  name: 'Bottom-sheet mise',  desc: 'Mise slides up on demand' },
+  { id: 'merged', name: 'Merged scroll',      desc: 'Mise then steps, one scroll' }
+];
+let PREFS = { theme: 'slate', cookLayout: 'inline' };
+
+function loadPrefs() {
+  try {
+    const raw = localStorage.getItem('elyes-prefs');
+    if (raw) PREFS = Object.assign(PREFS, JSON.parse(raw));
+  } catch (e) { /* file:// or private mode — fall back to defaults */ }
+}
+function savePrefs() {
+  try { localStorage.setItem('elyes-prefs', JSON.stringify(PREFS)); } catch (e) {}
+}
+function applyTheme() {
+  document.documentElement.setAttribute('data-theme', PREFS.theme);
+}
+function applyCookLayout() {
+  const cv = document.getElementById('cook-view');
+  if (cv) {
+    cv.setAttribute('data-layout', PREFS.cookLayout);
+    cv.classList.remove('sheet-was-open');
+  }
+  const pm = document.getElementById('pane-mise');
+  if (pm) { pm.classList.remove('sheet-open', 'mise-collapsed'); }
+  // grab-lists depend on layout, so re-render the open recipe's steps/mise
+  if (currentRecipe) { renderHeadnote(); renderMise(); renderVariants(); renderSteps(); syncTimerUI(); }
+}
+function toggleMiseSheet() {
+  const pm = document.getElementById('pane-mise');
+  if (pm) pm.classList.toggle('sheet-open');
+}
+
+const THEME_SWATCHES = {
+  slate: ['#646e78', '#eab464', '#a7754d'],
+  cream: ['#ccd5ae', '#d4a373', '#a85f2c'],
+  dark:  ['#1a1423', '#684756', '#c89c83']
+};
+function buildSettings() {
+  const tg = document.getElementById('opt-theme');
+  tg.innerHTML = THEMES.map(t => {
+    const dots = (THEME_SWATCHES[t.id] || []).map(c =>
+      `<span class="opt-sw-dot" style="background:${c}"></span>`).join('');
+    return `<button class="opt-btn${PREFS.theme === t.id ? ' on' : ''}" onclick="setTheme('${t.id}')">
+      <div class="opt-name">${t.name}</div><div class="opt-sw">${dots}</div></button>`;
+  }).join('');
+  const lg = document.getElementById('opt-layout');
+  lg.innerHTML = LAYOUTS.map(l =>
+    `<button class="opt-btn${PREFS.cookLayout === l.id ? ' on' : ''}" onclick="setLayout('${l.id}')">
+      <div class="opt-name">${l.name}</div><div class="opt-desc">${l.desc}</div></button>`).join('');
+}
+function setTheme(id) { PREFS.theme = id; applyTheme(); savePrefs(); buildSettings(); }
+function setLayout(id) { PREFS.cookLayout = id; applyCookLayout(); savePrefs(); buildSettings(); }
+function openSettings() { buildSettings(); document.getElementById('settings-overlay').classList.add('open'); }
+function closeSettings(e) {
+  if (e && e.target !== document.getElementById('settings-overlay')) return;
+  document.getElementById('settings-overlay').classList.remove('open');
+}
 
 // =====================================================================
 // LIBRARY
@@ -4586,10 +4931,89 @@ let activeFilters  = new Set();
 function toggleFilter(tag) {
   if (activeFilters.has(tag)) activeFilters.delete(tag);
   else activeFilters.add(tag);
-  document.querySelectorAll('.filter-btn').forEach(btn => {
+  syncFilterButtons();
+  renderLibrary();
+}
+
+function toggleTime(bucket) {
+  if (activeTimes.has(bucket)) activeTimes.delete(bucket);
+  else activeTimes.add(bucket);
+  syncFilterButtons();
+  renderLibrary();
+}
+
+function syncFilterButtons() {
+  document.querySelectorAll('.filter-btn[data-tag]').forEach(btn => {
     btn.classList.toggle('active', activeFilters.has(btn.dataset.tag));
   });
-  renderLibrary();
+  document.querySelectorAll('.filter-btn[data-time]').forEach(btn => {
+    btn.classList.toggle('active', activeTimes.has(btn.dataset.time));
+  });
+}
+
+// Full-text search index: collects every string value in a recipe
+// (title, style, subtitle, tags, headnote, equipment, mise ingredients,
+//  refs, step text, tips) so any ingredient in any recipe is searchable.
+function recipeSearchText(r) {
+  if (r._search) return r._search;
+  const parts = [];
+  (function walk(v) {
+    if (v == null) return;
+    if (typeof v === 'string') { parts.push(v); return; }
+    if (typeof v === 'number' || typeof v === 'boolean') return;
+    if (Array.isArray(v)) { v.forEach(walk); return; }
+    if (typeof v === 'object') { Object.values(v).forEach(walk); return; }
+  })(r);
+  r._search = parts.join(' ').toLowerCase();
+  return r._search;
+}
+
+// =====================================================================
+// TIME LANE — two clocks, single source of truth = prepTime + cookTime
+//   READY IN  = wall-clock, start-to-fork (active + every passive wait).
+//               This drives the bucket + filter — the "when can I eat it"
+//               answer, so nothing short-looking can masquerade as quick.
+//   HANDS-ON  = the active front-load (prep). The gap between the two is
+//               the tell: "5 min prep, ready in 2 hr" gets flagged loudly.
+// Passive waits = freeze / marinade / chill / rest / soak (anything after "+").
+// =====================================================================
+
+// Active portion of a time string is everything before a "+ ..." passive add-on.
+function activeTime(str) {
+  if (!str) return '';
+  return str.split('+')[0].trim();
+}
+// Passive add-on, e.g. "2 hr freeze" from "5 min + 2 hr freeze".
+function passiveTime(str) {
+  if (!str || str.indexOf('+') === -1) return '';
+  return str.split('+').slice(1).join('+').trim();
+}
+// First number + unit in a fragment → minutes. Ranges ("3.5–4 hrs", "2–6 hr")
+// take the LOW end — the earliest you could possibly be eating.
+function durationToMin(s) {
+  if (!s) return 0;
+  const m = s.match(/[\d.]+/);
+  if (!m) return 0;
+  const n = parseFloat(m[0]);
+  return /hr|hour/i.test(s) ? Math.round(n * 60) : Math.round(n);
+}
+function prepMinutes(r)    { return durationToMin(activeTime(r.prepTime)); }
+function activeMinutes(r)  { return durationToMin(activeTime(r.prepTime)) + durationToMin(activeTime(r.cookTime)); }
+function passiveMinutes(r) { return durationToMin(passiveTime(r.prepTime)) + durationToMin(passiveTime(r.cookTime)); }
+function readyMinutes(r)   { return activeMinutes(r) + passiveMinutes(r); }   // wall clock, start → fork
+function fmtMinutes(mins) {
+  if (!mins) return '0 min';
+  if (mins < 60) return mins + ' min';
+  const h = Math.floor(mins / 60), m = mins % 60;
+  return m ? `${h} hr ${m} min` : `${h} hr`;
+}
+const TIME_BUCKETS = ['30 or less', 'under 1 hr', '1–2 hr', 'slow roll'];
+function timeBucket(r) {
+  const t = readyMinutes(r);              // bucket by time-to-eat, not effort
+  if (t <= 30)  return '30 or less';
+  if (t <= 60)  return 'under 1 hr';
+  if (t <= 120) return '1–2 hr';
+  return 'slow roll';
 }
 
 function renderLibrary() {
@@ -4598,30 +5022,44 @@ function renderLibrary() {
   grid.innerHTML = '';
 
   const visible = RECIPES.filter(r => {
-    const matchTag = activeFilters.size === 0 || [...activeFilters].every(f => r.tags.includes(f));
-    const matchSearch = !query ||
-      r.title.toLowerCase().includes(query) ||
-      r.subtitle.toLowerCase().includes(query) ||
-      r.tags.some(t => t.toLowerCase().includes(query));
-    return matchTag && matchSearch;
+    const matchType = activeFilters.size === 0 || [...activeFilters].every(f => r.tags.includes(f));
+    const matchTime = activeTimes.size === 0 || activeTimes.has(timeBucket(r));
+    const matchSearch = !query || recipeSearchText(r).includes(query);
+    return matchType && matchTime && matchSearch;
   });
 
+  const anyFilter = activeFilters.size > 0 || activeTimes.size > 0 || query;
   const countEl = document.getElementById('filter-count');
   if (countEl) {
-    countEl.textContent = (activeFilters.size > 0 || query)
-      ? `${visible.length} of ${RECIPES.length}`
-      : '';
+    countEl.textContent = anyFilter ? `${visible.length} of ${RECIPES.length}` : '';
   }
 
   visible.forEach(r => {
     const card = document.createElement('div');
     card.className = 'recipe-card';
     card.onclick = () => loadRecipe(r.id);
-    const timeHtml = (r.prepTime || r.cookTime) ? `
+
+    // TIME lane — two clocks, always present, consistent across every card.
+    // READY IN leads (when can I eat); prep/cook show the work; a wait gap
+    // is flagged so a 5-min-prep / 2-hr-payoff dish can't read as "quick."
+    const prep = activeTime(r.prepTime);
+    const cook = activeTime(r.cookTime);
+    const cookMins = durationToMin(activeTime(r.cookTime));
+    const ready = fmtMinutes(readyMinutes(r));
+    const hasWait = passiveMinutes(r) > 0;
+    const passive = [passiveTime(r.prepTime), passiveTime(r.cookTime)].filter(Boolean).join(' · ');
+    const items = [
+      `<span class="card-time-item"><span class="card-time-lbl">ready in</span> <span class="card-time-val${hasWait ? ' flagged' : ''}">${ready}</span></span>`,
+      prep ? `<span class="card-time-item"><span class="card-time-lbl">prep</span> <span class="card-time-val">${prep}</span></span>` : '',
+      `<span class="card-time-item"><span class="card-time-lbl">cook</span> <span class="card-time-val">${cookMins ? cook : 'no cook'}</span></span>`
+    ].join('');
+    const timeHtml = `
       <div class="card-time">
-        ${r.prepTime ? `<span class="card-time-item"><span class="card-time-lbl">prep</span> <span class="card-time-val">${r.prepTime}</span></span>` : ''}
-        ${r.cookTime ? `<span class="card-time-item"><span class="card-time-lbl">cook</span> <span class="card-time-val">${r.cookTime}</span></span>` : ''}
-      </div>` : '';
+        <span class="card-time-bucket">${timeBucket(r)}</span>
+        ${items}
+        ${passive ? `<span class="card-time-passive">⏳ + ${passive}</span>` : ''}
+      </div>`;
+
     card.innerHTML = `
       <div class="card-tags">${r.tags.map(t => `<span class="card-tag">${t}</span>`).join('')}</div>
       <div class="card-title">${r.title}</div>
@@ -4632,7 +5070,7 @@ function renderLibrary() {
     grid.appendChild(card);
   });
 
-  if (!activeFilters.size && !query) {
+  if (!activeFilters.size && !activeTimes.size && !query) {
     PLACEHOLDERS.forEach(p => {
       const card = document.createElement('div');
       card.className = 'recipe-card placeholder';
@@ -4674,7 +5112,7 @@ function loadRecipe(id) {
   Object.entries(currentRecipe.timers).forEach(([tid, td]) => {
     const key = currentRecipe.id + '__' + tid;
     if (!T[key]) {
-      T[key] = { recipeId: currentRecipe.id, recipeTitle: currentRecipe.title,
+      T[key] = { recipeId: currentRecipe.id, recipeTitle: currentRecipe.title, tid: tid,
                  label: td.label, preset: td.preset, rem: td.preset,
                  bell: td.bell, running: false, alerted: false, iv: null };
     }
@@ -4685,6 +5123,7 @@ function loadRecipe(id) {
   if (currentRecipe.preheat) { pb.textContent = '🔥 ' + currentRecipe.preheat; pb.style.display = ''; }
   else pb.style.display = 'none';
 
+  renderHeadnote();
   renderMise();
   renderVariants();
   renderSteps();
@@ -4695,8 +5134,12 @@ function loadRecipe(id) {
   document.getElementById('pane-mise').classList.add('on');
   document.getElementById('tab-mise').classList.add('on');
 
+  const cv = document.getElementById('cook-view');
+  cv.setAttribute('data-layout', PREFS.cookLayout);
+  document.getElementById('pane-mise').classList.remove('sheet-open', 'mise-collapsed');
+
   document.getElementById('lib-view').style.display = 'none';
-  document.getElementById('cook-view').classList.add('active');
+  cv.classList.add('active');
   document.title = currentRecipe.title + ' — EL YES!';
   history.pushState({ recipeId: id }, '', '#' + id);
   window.scrollTo(0, 0);
@@ -4722,15 +5165,28 @@ function swTab(id, btn) {
 // MISE (equipment + ingredients)
 // =====================================================================
 
+// Headnote (the preamble) lives at the top of the directions, not inside mise —
+// so it's readable even when mise is collapsed or tucked in a bottom sheet.
+function renderHeadnote() {
+  const c = document.getElementById('headnote-container');
+  if (!c) return;
+  c.innerHTML = currentRecipe.headnote
+    ? `<div class="recipe-headnote">${currentRecipe.headnote}</div>`
+    : '';
+}
+
 function renderMise() {
   const pane = document.getElementById('pane-mise');
   pane.innerHTML = '';
-  if (currentRecipe.headnote) {
-    const hn = document.createElement('div');
-    hn.className = 'recipe-headnote';
-    hn.innerHTML = currentRecipe.headnote;
-    pane.appendChild(hn);
-  }
+
+  // Ribbon header — only visible in the sticky-ribbon phone layout (CSS-gated).
+  // Tapping it collapses the whole mise to a thin bar above the steps.
+  const rh = document.createElement('div');
+  rh.className = 'ribbon-hd';
+  rh.innerHTML = `<span class="ribbon-ttl">Mise en place</span><span class="ribbon-chev">▾</span>`;
+  rh.onclick = () => pane.classList.toggle('mise-collapsed');
+  pane.appendChild(rh);
+
   let sIdx = 0;
 
   function makeSection(title, items) {
@@ -4786,14 +5242,37 @@ function parseText(text) {
   });
 }
 
+// "Grab list" for a step — the ingredients it references inline ({{refs}}),
+// with the scaled quantity. Powers the inline-grab-lists cook layout so you
+// can mise just-in-time instead of staging everything up front.
+function stepGrabChips(step) {
+  const ids = (step.text.match(/\{\{([\w-]+)\}\}/g) || []).map(s => s.slice(2, -2));
+  const seen = new Set();
+  const chips = [];
+  ids.forEach(id => {
+    if (seen.has(id)) return;
+    seen.add(id);
+    const ref = currentRecipe.refs[id];
+    if (!ref) return;
+    const qty = (ref.tips && (ref.tips[currentScale] || ref.tips[2])) || '';
+    chips.push(`<span class="grab-chip">${ref.display}${qty ? ` · ${qty}` : ''}</span>`);
+  });
+  return chips;
+}
+
 function renderSteps() {
   const container = document.getElementById('steps-container');
   container.innerHTML = '';
+  const showGrab = (PREFS.cookLayout === 'inline');
 
   currentRecipe.steps.forEach((step, i) => {
     const card = document.createElement('div');
     card.className = 'step-card';
     card.id = 'step-' + i;
+    const grab = showGrab ? stepGrabChips(step) : [];
+    const grabHtml = grab.length
+      ? `<div class="step-grab"><span class="step-grab-lbl">grab</span>${grab.join('')}</div>`
+      : '';
 
     let timerHtml = '';
     step.timers.forEach(tid => {
@@ -4821,6 +5300,7 @@ function renderSteps() {
           </div>
           <div class="step-detail">
             <div class="step-txt">${parseText(step.text)}</div>
+            ${grabHtml}
             ${step.tip ? `<div class="step-tip">${step.tip}</div>` : ''}
           </div>
         </div>
@@ -4904,13 +5384,14 @@ function renderBar() {
   pills.innerHTML = active.map(([id, t]) => {
     const isOther = t.recipeId !== currentRecipe?.id;
     const srcTag  = isOther
-      ? `<span class="t-pill-src" onclick="event.stopPropagation();loadRecipe('${t.recipeId}')" title="${t.recipeTitle}">↗ ${t.recipeTitle}</span>`
+      ? `<span class="t-pill-src" title="${t.recipeTitle}">↗ ${t.recipeTitle}</span>`
       : '';
     if (t.alerted) {
-      return `<span class="t-pill alerted" onclick="dismissAlert('${id}')" title="tap to dismiss">${srcTag}<span class="t-name">${t.label}</span><span class="t-count">done ✕</span></span>`;
+      // Alerted: a clean tap acknowledges (dismiss); the ↗ jumps to the step.
+      return `<span class="t-pill alerted" onclick="dismissAlert('${id}')" title="tap to dismiss · ↗ jumps to step">${srcTag}<span class="t-name" onclick="event.stopPropagation();jumpToTimerStep('${id}')">${t.label}</span><span class="t-count">done ✕</span></span>`;
     }
     const urg = t.rem <= 60 ? ' urg' : '';
-    return `<span class="t-pill${urg}">${srcTag}<span class="t-name">${t.label}</span><span class="t-count">${fmt(t.rem)}</span></span>`;
+    return `<span class="t-pill clk${urg}" onclick="jumpToTimerStep('${id}')" title="jump to this step">${srcTag}<span class="t-name">${t.label}</span><span class="t-count">${fmt(t.rem)}</span></span>`;
   }).join('');
 }
 
@@ -4929,6 +5410,34 @@ function syncTimerUI() {
     updateBtnLabel(key);
   });
   renderBar();
+}
+
+// Click a timer pill → jump to the step that owns it. Loads the timer's
+// recipe first if it belongs to a different one (multi-recipe tracking),
+// switches to the COOK tab, scrolls the step into view and flashes it.
+function jumpToTimerStep(id) {
+  const t = T[id];
+  if (!t) return;
+  if (t.recipeId !== currentRecipe?.id) loadRecipe(t.recipeId);
+
+  const recipe = RECIPES.find(r => r.id === t.recipeId);
+  const stepIdx = recipe ? recipe.steps.findIndex(s => (s.timers || []).includes(t.tid)) : -1;
+
+  // Make sure the COOK pane is showing.
+  const cookTab = document.getElementById('tab-cook');
+  if (cookTab) swTab('cook', cookTab);
+
+  if (stepIdx < 0) return;
+  // Defer so the freshly-rendered cook pane is in the DOM before we scroll.
+  requestAnimationFrame(() => {
+    const el = document.getElementById('step-' + stepIdx);
+    if (!el) return;
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    el.classList.remove('flash');
+    void el.offsetWidth;            // restart the animation if re-clicked
+    el.classList.add('flash');
+    setTimeout(() => el.classList.remove('flash'), 1600);
+  });
 }
 
 function dismissAlert(id) {
@@ -5043,6 +5552,9 @@ window.addEventListener('popstate', e => {
 // =====================================================================
 // INIT
 // =====================================================================
+loadPrefs();
+applyTheme();
+buildSettings();
 renderLibrary();
 const _initHash = location.hash.slice(1);
 if (_initHash && RECIPES.find(r => r.id === _initHash)) loadRecipe(_initHash);
