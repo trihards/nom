@@ -5021,6 +5021,116 @@ const RECIPES = [
     }
   ]
 }
+  {
+  id: 'crispy-thigh-thyme-pepper-pan-sauce',
+  title: 'Skin in the Game',
+  style: 'Crispy-skin thighs · savory thyme-pepper pan sauce · off-heat schmaltz mount',
+  subtitle: 'Jasmine rice · charred cabbage or broccoli',
+  preheat: '400°F',
+  serves: '1–3',
+  tags: ['chicken'],
+  prepTime: '10 min (+ dry-brine ahead)',
+  cookTime: '30 min',
+
+  headnote: `<strong>The sauce that finally emulsifies.</strong> A savory pan sauce lives or dies on two things: a concentrated base and a light, cold, off-heat mount. Stainless gives you both — no seasoning to protect means you reduce hard and hit it with ACV without babying anything, so the base gets more intense than cast iron ever let it. Kill the heat, let the bubbling stop, then swirl in cold fat piece by piece. Boiling fat back in is what breaks it to grease.<br><br><strong>Crispy skin is a texture you can lose at the plate.</strong> Skin-down in a ripping pan, don\'t move it until it releases on its own, then keep it skin-up from that point on — don\'t sauce over it, don\'t cover it, don\'t stack the thighs. Sauce goes under and around, never on top.<br><br><em>Thyme is a woody herb — it goes in early and simmers so the oil pulls the flavor out, opposite of a finishing herb like tarragon or mint. Pull the stems before you mount. And the pan handle comes out of a 400° oven screaming hot — dry towel on it the whole back half of the cook or you will grab it bare-handed once. Everyone does.</em>`,
+
+  equipment: [
+    { name: '10-inch All-Clad D3 stainless', note: 'the point of the dish — oven-safe, builds clean fond, shrugs off the ACV' },
+    { name: 'Zojirushi rice cooker' },
+    { name: 'Probe thermometer',             note: 'thighs are forgiving but you want 175°F, not guesswork' },
+    { name: 'Sheet pan',                     note: 'for the charred side, roasting alongside' },
+    { name: 'Plate',                         note: 'rest thighs skin-up — never stacked, never covered tight' }
+  ],
+
+  mise: [
+    { group: 'Rice', items: [
+      { byScale: { 1: '1 cup jasmine rice, rinsed', 2: '2 cups jasmine rice, rinsed', 3: '3 cups jasmine rice, rinsed' } }
+    ]},
+    { group: 'Thighs — dry-brined ahead', items: [
+      { byScale: { 1: '2 bone-in skin-on chicken thighs', 2: '4 bone-in skin-on chicken thighs', 3: '6 bone-in skin-on chicken thighs' }, note: 'salted on the skin and racked uncovered in the fridge — skin must be bone-dry to crisp' },
+      { name: 'Black pepper' },
+      { byScale: { 1: '1 tsp avocado oil', 2: '2 tsp avocado oil', 3: '1 tbsp avocado oil' }, note: 'thin film only — the skin renders its own fat once it goes down' }
+    ]},
+    { group: 'Charred side', items: [
+      { byScale: { 1: '¼ head cabbage in wedges, or ½ crown broccoli', 2: '½ head cabbage in wedges, or 1 crown broccoli', 3: '¾ head cabbage in wedges, or 1½ crowns broccoli' }, note: 'tossed in avocado oil + salt — you want it burnt at the edges, not steamed' }
+    ]},
+    { group: 'Pan sauce', items: [
+      { byScale: { 1: '1 small shallot, minced', 2: '1 large shallot, minced', 3: '2 large shallots, minced' } },
+      { byScale: { 1: '½ tsp coarse-cracked black pepper', 2: '1 tsp coarse-cracked black pepper', 3: '1½ tsp coarse-cracked black pepper' }, note: 'this is a pepper-forward sauce — crack it coarse, add more at the end to taste' },
+      { byScale: { 1: '5 sprigs fresh thyme', 2: '8–10 sprigs fresh thyme', 3: '12–15 sprigs fresh thyme' }, note: 'on the stem — goes in early, pulled before the mount' },
+      { byScale: { 1: '½ cup bone broth', 2: '1 cup bone broth', 3: '1½ cups bone broth' }, note: 'you are reducing this down hard before the fat goes in' },
+      { byScale: { 1: '1 tsp Bragg\'s ACV', 2: '2 tsp Bragg\'s ACV', 3: '1 tbsp Bragg\'s ACV' }, note: 'plus a small splash at the very end to finish' }
+    ]},
+    { group: 'The mount — cold, off heat', items: [
+      { byScale: { 1: '1 tbsp cold schmaltz or tallow, in pieces', 2: '1½ tbsp cold schmaltz or tallow, in pieces', 3: '2 tbsp cold schmaltz or tallow, in pieces' }, note: 'cold and cut small — one piece at a time, off the heat. More is not more; past this it goes greasy' }
+    ]}
+  ],
+
+  refs: {
+    'rice':     { display: 'jasmine rice',   tips: { 1: '1 cup, rinsed', 2: '2 cups, rinsed', 3: '3 cups, rinsed' } },
+    'thighs':   { display: 'chicken thighs', tips: { 1: '2 bone-in skin-on, dry-brined', 2: '4 bone-in skin-on, dry-brined', 3: '6 bone-in skin-on, dry-brined' } },
+    'oil':      { display: 'avocado oil',    tips: { 1: '1 tsp', 2: '2 tsp', 3: '1 tbsp' } },
+    'side':     { display: 'charred side',   tips: { 1: '¼ head cabbage or ½ crown broccoli', 2: '½ head cabbage or 1 crown broccoli', 3: '¾ head cabbage or 1½ crowns broccoli' } },
+    'shallot':  { display: 'shallot',        tips: { 1: '1 small, minced', 2: '1 large, minced', 3: '2 large, minced' } },
+    'pepper':   { display: 'cracked pepper', tips: { 1: '½ tsp coarse', 2: '1 tsp coarse', 3: '1½ tsp coarse' } },
+    'thyme':    { display: 'fresh thyme',    tips: { 1: '5 sprigs', 2: '8–10 sprigs', 3: '12–15 sprigs' } },
+    'broth':    { display: 'bone broth',     tips: { 1: '½ cup', 2: '1 cup', 3: '1½ cups' } },
+    'acv':      { display: 'Bragg\'s ACV',   tips: { 1: '1 tsp + finish splash', 2: '2 tsp + finish splash', 3: '1 tbsp + finish splash' } },
+    'schmaltz': { display: 'cold schmaltz',  tips: { 1: '1 tbsp, in pieces', 2: '1½ tbsp, in pieces', 3: '2 tbsp, in pieces' } }
+  },
+
+  timers: {
+    'rice':  { label: 'Rice',            preset: 2100, bell: false },
+    'sear':  { label: 'Render skin',     preset: 540,  bell: false },
+    'oven':  { label: 'Oven finish',     preset: 780,  bell: true  },
+    'sauce': { label: 'Reduce the base', preset: 240,  bell: true  }
+  },
+
+  steps: [
+    {
+      label: 'Oven, rice, side',
+      text:  'Oven to 400°F. Start {{rice}} in the Zojirushi. Toss {{side}} in avocado oil and salt on a sheet pan and slide it in — it wants the full cook to char, so it goes in now and comes out when the thighs rest.',
+      tip:   'Cabbage wedges take longer than broccoli — if you\'re on cabbage, give it a head start and flip once for even char.',
+      timers: ['rice']
+    },
+    {
+      label: 'Rip the pan, render the skin',
+      text:  'D3 on medium-high, dry. Flick in water — when the drops ball up and skate like mercury, it\'s at temp. Film in {{oil}}, then lay {{thighs}} in SKIN-DOWN. Season the tops with black pepper. Now don\'t touch them. The skin grips at first and releases itself when it\'s crisp — 8 to 10 minutes. You\'re listening for a steady hard sizzle and watching the fat pool and render out. Deep mahogany skin, not blonde.',
+      tip:   'Yanking a thigh before it releases is how you tear the skin off and convince yourself stainless is cursed. It lets go when it\'s ready. Let it.',
+      timers: ['sear']
+    },
+    {
+      label: 'Flip and into the oven',
+      text:  'Flip the {{thighs}} skin-up — one minute to seal the underside — then move the whole pan into the 400° oven. Roast to 175°F at the bone, 12 to 15 minutes. Probe it, don\'t guess.',
+      tip:   'Skin-up from here to the plate, always. That crisp is fragile now — anything sitting on it or over it turns it back to rubber.',
+      timers: ['oven']
+    },
+    {
+      label: 'Thighs out, rest, pour off',
+      text:  'Pull the pan (DRY TOWEL — that handle is 400°). Lift {{thighs}} to a plate skin-up, not stacked, not covered. Pour off the excess fat, leaving about a tablespoon plus all the browned fond stuck to the pan. Pull the side out of the oven now too.',
+      tip:   'The fond is the whole sauce. If it\'s stuck and brown, you\'re golden. If it looks pale, your sear didn\'t go far enough — note it for next time.',
+      timers: []
+    },
+    {
+      label: 'Bloom, deglaze, reduce hard',
+      text:  'Pan back on medium (handle still hot — towel stays). {{shallot}} and {{pepper}} into the fond, stir until the shallot softens and goes translucent, about a minute. {{thyme}} in. Pour in {{broth}}, scraping every bit of fond up off the bottom. Add {{acv}}. Now reduce it hard — you want it to tighten to a scant, glossy few tablespoons before any fat goes near it. 3 to 4 minutes. Concentration now is what makes the mount hold later.',
+      tip:   'If it reduces too far and looks sticky, a splash of broth walks it back. Better slightly too tight than not tight enough — thin base is what breaks a mount.',
+      timers: ['sauce']
+    },
+    {
+      label: 'Pull thyme, mount off heat',
+      text:  'Fish out the {{thyme}} stems. Kill the heat. Let the bubbling fully stop — this is the part people rush. Now swirl in {{schmaltz}} one cold piece at a time, letting each fully disappear into the sauce before the next. It goes glossy and cohesive, coating a spoon. Taste, crack in more pepper if you want it, finish with a small splash of ACV.',
+      tip:   'Off heat, cold fat, patience. If it ever simmers again it splits straight back to greasy — that\'s the exact failure from the old cast-iron version, and it\'s a heat problem, not a you problem.',
+      timers: []
+    },
+    {
+      label: 'Plate',
+      text:  'Thighs skin-up over rice, charred side alongside. Spoon the sauce AROUND and under the thighs — never over the skin. That\'s the crisp you fought 10 minutes for; don\'t drown it at the finish line.',
+      tip:   null,
+      timers: []
+    }
+  ]
+}
 ];
 
 const PLACEHOLDERS = [
