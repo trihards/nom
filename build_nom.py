@@ -228,9 +228,20 @@ patch("const displayName = item.byScale ? item.byScale[currentScale] : item.name
             ? fmtQty(item.qty * currentMult) + (item.unit ? ' ' + item.unit : '') + ' ' + item.name
             : item.name);""")
 
-# 8) 'note' filter button
+# 8) 'note' filter button + ten tagging-run tags (soup/salad/noodles/bread/
+#    breakfast/drink/veg/starch/instant-pot/air-fryer), same markup as upstream
 patch("""<button class="filter-btn" data-tag="batch" onclick="toggleFilter('batch')">batch</button>""",
       """<button class="filter-btn" data-tag="batch" onclick="toggleFilter('batch')">batch</button>
+      <button class="filter-btn" data-tag="soup" onclick="toggleFilter('soup')">soup</button>
+      <button class="filter-btn" data-tag="salad" onclick="toggleFilter('salad')">salad</button>
+      <button class="filter-btn" data-tag="noodles" onclick="toggleFilter('noodles')">noodles</button>
+      <button class="filter-btn" data-tag="bread" onclick="toggleFilter('bread')">bread</button>
+      <button class="filter-btn" data-tag="breakfast" onclick="toggleFilter('breakfast')">breakfast</button>
+      <button class="filter-btn" data-tag="drink" onclick="toggleFilter('drink')">drink</button>
+      <button class="filter-btn" data-tag="veg" onclick="toggleFilter('veg')">veg</button>
+      <button class="filter-btn" data-tag="starch" onclick="toggleFilter('starch')">starch</button>
+      <button class="filter-btn" data-tag="instant-pot" onclick="toggleFilter('instant-pot')">instant-pot</button>
+      <button class="filter-btn" data-tag="air-fryer" onclick="toggleFilter('air-fryer')">air-fryer</button>
       <button class="filter-btn" data-tag="note" onclick="toggleFilter('note')">note</button>""")
 
 # ---------------------------------------------------------------- MORE tab
