@@ -1,0 +1,764 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>EL YES! Ticket Printer</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Barlow+Condensed:wght@600;800&display=swap">
+<style>
+/* Layout: one column paste station; ticket UI comes from the cookbook's ticket.js */
+:root{
+  --bg:#dfe3e4; --surface:#f4f6f6; --surface2:#e8ecec; --text:#16191a; --muted:#5d6668; --border:#c3c9cb; --border-mid:#a9b1b3;
+  --accent:#b8321f; --on-accent:#fff; --warn-bg:#f8ecd9; --warn-bdr:#d9a957;
+  --font-display:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;
+  --font-sans:"Atkinson Hyperlegible",system-ui,-apple-system,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#141718; --surface:#1d2122; --surface2:#262b2c; --text:#e9eced; --muted:#98a2a5; --border:#323839; --border-mid:#4a5254;
+  --accent:#e0644e; --on-accent:#141718; --warn-bg:#3a2d1c; --warn-bdr:#8a6a3a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#141718; --surface:#1d2122; --surface2:#262b2c; --text:#e9eced; --muted:#98a2a5; --border:#323839; --border-mid:#4a5254;
+  --accent:#e0644e; --on-accent:#141718; --warn-bg:#3a2d1c; --warn-bdr:#8a6a3a; color-scheme:dark}
+body{background:var(--bg);color:var(--text);font-family:var(--font-sans)}
+.page{max-width:820px;margin:0 auto;padding-block:20px 48px;padding-inline:16px;display:grid;gap:16px}
+h1{font-family:var(--font-display);font-weight:800;font-size:clamp(28px,6vw,40px);text-transform:uppercase;margin:0;line-height:1}
+h1 span{color:var(--accent)}
+.page>p{margin:0;color:var(--muted);max-width:62ch}
+.station{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px;min-width:0}
+</style>
+<div class="page">
+  <h1>EL YES! <span>Ticket</span> Printer</h1>
+  <p>Paste a cook-mode recipe from chat and send the strips to the printer app. Same renderer as the 🧾 button in the cookbook.</p>
+  <section class="station" id="station"></section>
+</div>
+<script>
+/* EL YES! ticket printer — one renderer for the cookbook and the paste box.
+ *
+ * Turns a recipe into 1-bit PNG strips for a 48mm thermal printer (384 dots @ 203dpi).
+ * Two inputs, one model:
+ *   NomTicket.fromRecipe(recipe, {scale, mult, fmtQty})  — a cookbook RECIPES entry
+ *   NomTicket.parseCookMode(text)                         — cook-mode text pasted from chat
+ * Nothing is dropped silently: lines in an unexpected shape print as plain text and are
+ * listed under "kept"; lines with no printable words are listed under "omitted".
+ *
+ * UI: NomTicket.open(cfg) shows an overlay; NomTicket.mount(el, cfg) renders inline.
+ * cfg = { recipe, ctx } for a cookbook recipe, or { paste: true } for the paste box.
+ * cfg.save(files) overrides how strips leave the page (default: share sheet, else download).
+ */
+(function () {
+'use strict';
+
+const DISPLAY = '"Barlow Condensed", "Arial Narrow", sans-serif';
+const BODY = '"Atkinson Hyperlegible", Arial, sans-serif';
+const DOTS = 384;
+
+/* ------------------------------------------------------------------ fonts */
+let fontsReady = null;
+function ensureFonts() {
+  if (fontsReady) return fontsReady;
+  if (!document.querySelector('link[data-nom-ticket-fonts]')) {
+    const l = document.createElement('link');
+    l.rel = 'stylesheet';
+    l.href = 'https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Barlow+Condensed:wght@600;800&display=swap';
+    l.setAttribute('data-nom-ticket-fonts', '');
+    document.head.appendChild(l);
+  }
+  const faces = ['800 30px "Barlow Condensed"', '600 30px "Barlow Condensed"',
+                 '400 20px "Atkinson Hyperlegible"', '700 20px "Atkinson Hyperlegible"'];
+  const loads = Promise.all(faces.map(f => document.fonts.load(f))).catch(() => {});
+  const timeout = new Promise(r => setTimeout(r, 2500)); // offline: fall back, don't hang
+  fontsReady = Promise.race([loads, timeout]);
+  return fontsReady;
+}
+
+/* ------------------------------------------------------------------ model */
+function emptyModel() {
+  return { title: '', meta: [], preheat: '', equipment: [], notes: [], mise: [], steps: [],
+           plate: [], kept: [], omitted: [], hidden: [] };
+}
+const hasWords = s => /[A-Za-z0-9\u00BC-\u00BE\u2150-\u215E]/.test(s);
+const isUpperLabel = s => { const L = s.replace(/[^A-Za-z]/g, ''); return L.length > 1 && L === L.toUpperCase(); };
+
+/* ------------------------------------------------------------ paste parser */
+// Emoji and pictographs print as black blobs on a 1-bit head. ⏱ (U+23F1) is handled before this.
+const EMOJI = /[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{2B00}-\u{2BFF}\u{2300}-\u{23FF}\u{FE0F}\u{200D}\u{20E3}]/gu;
+const SEPARATOR = /^(?:-{3,}|\*{3,}|_{3,}|={3,}|`{3,}.*|~{3,}.*)$/;
+const BULLET = /^(?:[·•▪◦‣\-*–+]|\[[ xX]\])\s+(.+)$/;
+const STEP = /^(?:step\s*)?(\d{1,2})[.):]\s+(.+)$/i;
+
+function cleanLine(raw, rep) {
+  let s = raw.replace(/\t/g, ' ').trim();
+  if (!s) return { s: '' };
+  if (SEPARATOR.test(s)) return { s: '', sep: true };
+  s = s.replace(/^>+\s*/, '');                              // blockquote
+  if (/^\|?[\s:\-|]+\|?$/.test(s) && s.includes('-') && s.includes('|')) return { s: '', sep: true }; // table rule
+  let table = false;
+  if (/^\|.*\|$/.test(s)) { s = s.slice(1, -1).split('|').map(c => c.trim()).filter(Boolean).join(' · '); table = true; }
+  s = s.replace(/^[-*+]\s+\[[ xX]\]\s+/, '· ');               // - [ ] task
+  const imgs = s.match(/!\[[^\]]*\]\([^)]*\)/g);
+  if (imgs) { rep.omitted.push(...imgs.map(i => 'image: ' + i)); s = s.replace(/!\[[^\]]*\]\([^)]*\)/g, ''); }
+  s = s.replace(/\[([^\]]+)\]\([^)]*\)/g, '$1');             // [text](url) → text
+  if (/<[a-z/][^>]*>/i.test(s)) { s = s.replace(/<br\s*\/?>/gi, ' ').replace(/<[^>]+>/g, ''); }
+  s = s.replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+  const bulletLead = s.match(/^[*+-]\s+/);                    // keep a leading "* " bullet
+  if (bulletLead) s = '· ' + s.slice(bulletLead[0].length);
+  s = s.replace(/\*\*|__|~~|`/g, '').replace(/(^|[\s(])\*(?=\S)|(?<=\S)\*(?=[\s).,;:!?]|$)/g, '$1');
+  const timer = /^⏱/.test(s);
+  if (timer) s = s.replace(/^⏱\uFE0F?\s*/, '');
+  const em = s.match(EMOJI);
+  if (em) { rep.emoji.push(...em.filter(e => !/[\uFE0F\u200D\u20E3]/.test(e))); s = s.replace(EMOJI, '').replace(/\s{2,}/g, ' ').trim(); }
+  return { s: s.trim(), timer, table };
+}
+
+function fmtTimerText(t) {
+  return t.split(/\s[—–-]\s|\s*—\s*/)[0].replace(/set (a )?timer( now)?\.?/i, '')
+    .replace(/\bminutes?\b|\bmins?\b/gi, 'MIN').replace(/\bseconds?\b|\bsecs?\b/gi, 'SEC')
+    .replace(/\bhours?\b|\bhrs?\b/gi, 'HR').replace(/[.,;:]+$/, '').trim().toUpperCase();
+}
+
+function parseCookMode(text) {
+  const m = emptyModel();
+  const rep = { omitted: m.omitted, emoji: [] };
+  let sec = 'head', step = null, group = null, stepSection = '';
+  const keep = (why, line) => m.kept.push(why + ': ' + line);
+  const note = (t, text) => m.notes.push({ t, text });
+
+  for (const raw of String(text).split(/\r?\n/)) {
+    const c = cleanLine(raw, rep);
+    let line = c.s;
+    if (!line) {
+      if (!c.sep && raw.trim()) m.omitted.push(raw.trim());
+      continue;
+    }
+    if (!hasWords(line)) { m.omitted.push(raw.trim()); continue; }
+
+    // timers attach to the step they follow
+    if (c.timer) {
+      const t = fmtTimerText(line);
+      if (step) step.timers.push(t);
+      else { keep('Timer outside a step', line); note('p', '⏱ ' + t); }
+      continue;
+    }
+
+    // headings: "# Title" first, then "## Anything" means a section header wherever we are
+    const h = line.match(/^(#{1,6})\s+(.+)$/);
+    let heading = null;
+    if (h) {
+      if (h[1].length === 1 && !m.title) { m.title = h[2].trim(); continue; }
+      heading = h[2].trim(); line = heading;
+    }
+
+    if (/^mise en place:?$/i.test(line) || /^mise:?$/i.test(line)) { sec = 'mise'; group = null; continue; }
+    if (/^(steps|method|directions|instructions):?$/i.test(line)) { sec = 'steps-wait'; continue; }
+
+    const pm = line.match(/^plate\s*[:—–-]\s*(.+)$/i);
+    if (pm) { m.plate.push(pm[1].trim()); sec = 'plate'; continue; }
+    if (/^plate:?$/i.test(line)) { sec = 'plate'; continue; }
+
+    const sm = !heading && line.match(STEP);
+    if (sm) {
+      const label = sm[2].trim();
+      const looksLikeQty = /^[\d\u00BC-\u00BE\u2150-\u215E]/.test(label);
+      if (sec !== 'mise' || !looksLikeQty) {   // "1. 2 cups rice" in the mise stays an ingredient
+        step = { n: sm[1], label, section: stepSection, paras: [], tip: '', timers: [] };
+        m.steps.push(step); sec = 'steps'; continue;
+      }
+    }
+
+    const bm = line.match(BULLET);
+    const body = bm ? bm[1].trim() : line;
+
+    if (sec === 'head') {
+      if (!m.meta.length && /^serves\b|\bpreheat\b/i.test(line) && !bm) {
+        const parts = line.split(/\s*·\s*/).filter(Boolean);
+        const pre = parts.find(p => /preheat/i.test(p) && /\d/.test(p) && !/^no\b/i.test(p));
+        if (pre) m.preheat = pre.replace(/^preheat( the)?( oven)?( to)?/i, '').trim();
+        m.meta = parts.filter(p => p !== pre);
+        continue;
+      }
+      if (!m.title) keep('Before the title', line);
+      if (c.table) keep('Table row', line);
+      if (heading || (isUpperLabel(line) && line.length <= 32 && !bm)) note('h', line.replace(/:$/, ''));
+      else note(bm ? 'b' : 'p', body);
+      continue;
+    }
+
+    if (sec === 'mise') {
+      if (bm || c.table) {
+        if (!group) { group = { name: '', items: [] }; m.mise.push(group); }
+        group.items.push({ text: body, note: '' });
+        if (c.table) keep('Table row', line);
+      } else if (heading || line.endsWith(':') || (line.length <= 40 && !/[.!?]$/.test(line))) {
+        group = { name: line.replace(/:$/, ''), items: [] }; m.mise.push(group);
+      } else {
+        if (!group) { group = { name: '', items: [] }; m.mise.push(group); }
+        group.items.push({ text: line, note: '', plain: true });
+        keep('Mise line without a bullet', line);
+      }
+      continue;
+    }
+
+    if (sec === 'steps' || sec === 'steps-wait') {
+      if (heading || (!step && isUpperLabel(line))) { stepSection = line; if (step && step.paras.length) step = null; continue; }
+      if (!step) {
+        step = { n: String(m.steps.length + 1), label: '', section: stepSection, paras: [], tip: '', timers: [] };
+        m.steps.push(step); sec = 'steps';
+        keep('Step text without a numbered label', line);
+      }
+      step.paras.push({ t: bm ? 'b' : 'p', text: body });
+      if (c.table) keep('Table row', line);
+      continue;
+    }
+
+    if (sec === 'plate') { m.plate.push(body); continue; }
+  }
+
+  if (rep.emoji.length) m.omitted.push('emoji (they print as black blobs): ' + [...new Set(rep.emoji)].join(' '));
+  return m;
+}
+
+/* -------------------------------------------------------- cookbook mapping */
+function plain(html) {
+  if (html == null) return '';
+  const d = document.createElement('div');
+  d.innerHTML = String(html).replace(/<br\s*\/?>/gi, '\n').replace(/<\/p>/gi, '\n\n');
+  return d.textContent.replace(/[ \t]+\n/g, '\n').trim();
+}
+function fmtSecs(s) {
+  s = Math.round(s || 0);
+  const h = Math.floor(s / 3600), mn = Math.floor((s % 3600) / 60), sc = s % 60;
+  const out = [];
+  if (h) out.push(h + ' HR');
+  if (mn) out.push(mn + ' MIN');
+  if (sc && !h) out.push(sc + ' SEC');
+  return out.join(' ') || '0 MIN';
+}
+
+function fromRecipe(r, ctx = {}, opts = {}) {
+  const m = emptyModel();
+  const scale = ctx.scale || 2, mult = ctx.mult || 1;
+  const fq = ctx.fmtQty || (q => String(Math.round(q * 100) / 100));
+  const pick = by => by[scale] || by[2] || by[1] || Object.values(by)[0] || '';
+
+  m.title = r.title || 'Untitled recipe';
+  const serves = r.scalable ? (ctx.serves || r.serves) : scale;
+  m.meta.push('Serves ' + serves);
+  if (r.prepTime) m.meta.push('Prep ' + r.prepTime);
+  if (r.cookTime) m.meta.push('Cook ' + r.cookTime);
+  if (r.preheat) m.preheat = String(r.preheat);
+
+  (r.equipment || []).forEach(e => {
+    m.equipment.push(opts.tips && e.note ? `${e.name} (${plain(e.note)})` : e.name);
+  });
+  const eqNotes = (r.equipment || []).filter(e => e.note).length;
+  if (eqNotes && !opts.tips) m.hidden.push(`${eqNotes} equipment note${eqNotes > 1 ? 's' : ''}`);
+
+  if (r.headnote) {
+    if (opts.headnote) plain(r.headnote).split(/\n{2,}/).forEach(p => p.trim() && m.notes.push({ t: 'p', text: p.replace(/\n/g, ' ').trim() }));
+    else m.hidden.push('the headnote');
+  }
+  if (r.variants && r.variants.length) {
+    m.notes.push({ t: 'h', text: 'Variants' });
+    r.variants.forEach(v => m.notes.push({ t: 'b', text: (v.name ? v.name + ': ' : '') + plain(v.notes) }));
+  }
+
+  (r.mise || []).forEach(g => {
+    const group = { name: g.group || '', items: [] };
+    (g.items || []).forEach(it => {
+      const text = it.byScale ? pick(it.byScale)
+        : (it.qty != null ? fq(it.qty * mult) + (it.unit ? ' ' + it.unit : '') + ' ' + it.name : it.name);
+      group.items.push({ text: plain(text), note: plain(it.note || '') });
+    });
+    m.mise.push(group);
+  });
+
+  const refs = r.refs || {}, timers = r.timers || {};
+  let tipCount = 0;
+  (r.steps || []).forEach((s, i) => {
+    const text = String(s.text || '').replace(/\{\{([\w-]+)\}\}/g, (_, id) => {
+      const ref = refs[id];
+      if (!ref) { m.kept.push(`Step ${i + 1}: {{${id}}} has no ref, printed as words`); return id.replace(/[-_]/g, ' '); }
+      // "(2 tbsp (marinade))" reads badly on paper; flatten inner parens to commas
+      const tip = (ref.tips ? pick(ref.tips) : '').replace(/\s*\(([^)]*)\)/g, ', $1');
+      return tip ? `${ref.display} (${tip})` : ref.display;
+    });
+    const st = { n: String(i + 1), label: s.label || '', section: s.section || '', paras: [], tip: '', timers: [] };
+    plain(text).split(/\n+/).forEach(p => p.trim() && st.paras.push({ t: 'p', text: p.trim() }));
+    if (s.tip) { tipCount++; if (opts.tips) st.tip = plain(s.tip); }
+    (s.timers || []).forEach(tid => {
+      const t = timers[tid];
+      if (!t) { m.omitted.push(`Step ${i + 1}: timer "${tid}" isn't defined`); return; }
+      const multi = (s.timers || []).length > 1 || (t.label && !/^step \d+$/i.test(t.label) && !s.label);
+      st.timers.push((multi && t.label ? t.label.toUpperCase() + ' · ' : '') + fmtSecs(t.preset));
+    });
+    m.steps.push(st);
+  });
+  if (tipCount && !opts.tips) m.hidden.push(`${tipCount} step tip${tipCount > 1 ? 's' : ''}`);
+
+  const extra = [];
+  if (r.sourceUrl) extra.push('source link');
+  if (r.nutrition) extra.push('nutrition');
+  if (extra.length) m.hidden.push(extra.join(' and ') + ' (screen only)');
+  return m;
+}
+
+/* ----------------------------------------------------------------- layout */
+const mctx = document.createElement('canvas').getContext('2d');
+function wrap(text, font, maxW) {
+  mctx.font = font;
+  const words = String(text).split(/\s+/).filter(Boolean), lines = [];
+  let cur = '';
+  for (const w of words) {
+    const t = cur ? cur + ' ' + w : w;
+    if (mctx.measureText(t).width <= maxW) { cur = t; continue; }
+    if (cur) lines.push(cur);
+    if (mctx.measureText(w).width > maxW) {
+      let piece = '';
+      for (const ch of w) { if (mctx.measureText(piece + ch).width > maxW) { lines.push(piece); piece = ch; } else piece += ch; }
+      cur = piece;
+    } else cur = w;
+  }
+  if (cur) lines.push(cur);
+  return lines.length ? lines : [''];
+}
+
+function build(md, opt) {
+  const W = opt.W || DOTS, k = W / 384 * (opt.size || 1), P = Math.round(10 * W / 384);
+  const inner = W - 2 * P;
+  const S = { head: [], notes: [], mise: [], steps: [] };
+  let ops = S.head;
+  const add = (h, draw, keep = false) => ops.push({ h: Math.round(h), draw, keep });
+  const gap = h => ops.push({ h: Math.round(h), draw: () => {}, gap: true });
+  const text = (t, font, lh, x, maxW, keepFirst = false) =>
+    wrap(t, font, maxW).forEach((ln, i) => add(lh, (c, y) => { c.font = font; c.fillStyle = '#000'; c.fillText(ln, x, y + lh * 0.8); }, keepFirst && i === 0));
+  const dashed = () => add(14 * k, (c, y) => { c.fillStyle = '#000'; for (let x = P; x < W - P; x += 12 * k) c.fillRect(x, y + 6 * k, 7 * k, 2 * k); });
+  const bar = (label, fs, right = '') => {
+    const h = fs * 1.45;
+    add(h, (c, y) => {
+      c.fillStyle = '#000'; c.fillRect(0, y, W, h); c.fillStyle = '#fff'; c.font = `800 ${fs}px ${DISPLAY}`;
+      let l = label, r = right;
+      if (r && c.measureText(l + '  ' + r).width > inner) { l = l + ' ' + r; r = ''; }
+      c.fillText(l, P, y + h * 0.76);
+      if (r) { c.textAlign = 'right'; c.fillText(r, W - P, y + h * 0.76); c.textAlign = 'left'; }
+    }, true);
+  };
+  const box = (c, x, y, s) => { c.lineWidth = 2 * k; c.strokeStyle = '#000'; c.strokeRect(x, y, s, s); };
+  const dot = (c, x, y, s) => { c.fillStyle = '#000'; c.fillRect(x, y, s, s); };
+
+  const fT = 36 * k, fB = 21 * k, fH = 26 * k, fN = 18 * k, lhB = Math.round(fB * 1.32), lhN = Math.round(fN * 1.3);
+  const body = `400 ${fB}px ${BODY}`, bodyB = `700 ${fB}px ${BODY}`, small = `400 ${fN}px ${BODY}`;
+  const sub = `800 ${22 * k}px ${DISPLAY}`, lhSub = Math.round(26 * k);
+  const bulletLines = (t, font, lh, indent) => {
+    const d = Math.round(7 * k);
+    wrap(t, font, inner - indent).forEach((ln, i) => add(lh, (c, y) => {
+      if (i === 0) dot(c, P + 2 * k, y + lh * 0.5 - d / 2, d);
+      c.font = font; c.fillStyle = '#000'; c.fillText(ln, P + indent, y + lh * 0.8);
+    }));
+  };
+
+  // header
+  add(26 * k, (c, y) => {
+    c.font = `600 ${15 * k}px ${DISPLAY}`; c.fillStyle = '#000'; c.fillText('EL YES! · PREP TICKET', P, y + 18 * k);
+    c.textAlign = 'right'; c.fillText(new Date().toLocaleDateString(undefined, { month: 'short', day: 'numeric' }).toUpperCase(), W - P, y + 18 * k); c.textAlign = 'left';
+  });
+  dashed();
+  text((md.title || 'Untitled recipe').toUpperCase(), `800 ${fT}px ${DISPLAY}`, Math.round(fT * 1.02), P, inner);
+  gap(6 * k);
+  if (md.meta.length) text(md.meta.join(' · ').toUpperCase(), `600 ${20 * k}px ${DISPLAY}`, Math.round(24 * k), P, inner);
+  if (md.equipment.length) { gap(4 * k); text('GEAR: ' + md.equipment.join(' · '), small, lhN, P, inner); }
+  if (md.preheat) { gap(8 * k); bar('PREHEAT', fH, md.preheat.toUpperCase()); }
+
+  // notes
+  let notesLines = 0;
+  if (md.notes.length) {
+    ops = S.notes; gap(14 * k); bar('NOTES', fH);
+    const before = ops.length;
+    md.notes.forEach(n => {
+      if (n.t === 'h') { gap(8 * k); text(n.text.toUpperCase(), sub, lhSub, P, inner, true); return; }
+      gap(n.t === 'b' ? 3 * k : 6 * k);
+      if (n.t === 'b') bulletLines(n.text, body, lhB, Math.round(18 * k));
+      else text(n.text, body, lhB, P, inner);
+    });
+    notesLines = ops.slice(before).filter(o => !o.gap).length;
+  }
+
+  // mise
+  ops = S.mise;
+  if (md.mise.length) {
+    gap(14 * k); bar('MISE', fH);
+    const bs = Math.round(16 * k), ind = bs + Math.round(10 * k);
+    md.mise.forEach(g => {
+      if (g.name) { gap(8 * k); text(g.name.toUpperCase(), sub, lhSub, P, inner, true); }
+      g.items.forEach(it => {
+        gap(3 * k);
+        if (it.plain) { text(it.text, body, lhB, P, inner); return; }
+        wrap(it.text, body, inner - ind).forEach((ln, i) => add(lhB, (c, y) => {
+          if (i === 0) box(c, P + 1 * k, y + (lhB - bs) / 2, bs);
+          c.font = body; c.fillStyle = '#000'; c.fillText(ln, P + ind, y + lhB * 0.8);
+        }));
+        if (it.note) text(it.note, small, lhN, P + ind, inner - ind);
+      });
+    });
+  }
+
+  // steps + plate
+  ops = S.steps;
+  if (md.steps.length) {
+    gap(16 * k); bar('STEPS', fH);
+    let lastSec = '';
+    md.steps.forEach(s => {
+      if (s.section && s.section !== lastSec) {
+        gap(14 * k);
+        text(s.section.toUpperCase(), sub, lhSub, P, inner, true);
+        add(4 * k, (c, y) => { c.fillStyle = '#000'; c.fillRect(P, y + 1 * k, inner, 2 * k); }, true);
+      }
+      lastSec = s.section;
+      gap(12 * k);
+      const bs = Math.round(22 * k), nW = Math.round(30 * k), fl = `800 ${24 * k}px ${DISPLAY}`, lhL = Math.round(27 * k);
+      const lx = P + bs + 6 * k + nW + 8 * k;
+      const label = (s.label || '').toUpperCase();
+      wrap(label || ' ', fl, W - P - lx).forEach((ln, i) => add(lhL, (c, y) => {
+        if (i === 0) {
+          box(c, P + 1 * k, y + (lhL - bs) / 2, bs);
+          const nx = P + bs + 6 * k;
+          c.fillStyle = '#000'; c.fillRect(nx, y, nW, lhL);
+          c.fillStyle = '#fff'; c.font = fl; c.textAlign = 'center'; c.fillText(s.n, nx + nW / 2, y + lhL * 0.82); c.textAlign = 'left';
+        }
+        c.fillStyle = '#000'; c.font = fl; c.fillText(ln, lx, y + lhL * 0.82);
+      }, true));
+      s.paras.forEach(p => {
+        gap(4 * k);
+        if (p.t === 'b') bulletLines(p.text, body, lhB, Math.round(18 * k));
+        else text(p.text, body, lhB, P, inner);
+      });
+      if (s.tip) {
+        gap(5 * k);
+        const tl = wrap('TIP ' + s.tip, small, inner - 12 * k);
+        const h0 = ops.length;
+        tl.forEach((ln, i) => add(lhN, (c, y) => {
+          c.fillStyle = '#000'; c.fillRect(P, y, 3 * k, lhN);
+          if (i === 0) {
+            c.font = `700 ${fN}px ${BODY}`; c.fillText('TIP', P + 12 * k, y + lhN * 0.8);
+            const w = c.measureText('TIP ').width;
+            c.font = small; c.fillText(ln.slice(4), P + 12 * k + w, y + lhN * 0.8);
+          } else { c.font = small; c.fillText(ln, P + 12 * k, y + lhN * 0.8); }
+        }));
+        void h0;
+      }
+      s.timers.forEach(t => {
+        gap(6 * k);
+        const th = Math.round(30 * k);
+        add(th, (c, y) => {
+          const f = `800 ${21 * k}px ${DISPLAY}`; c.font = f;
+          let label = t; const maxT = inner - th - 18 * k;
+          while (label.length > 3 && c.measureText(label).width > maxT) label = label.slice(0, -1);
+          const tw = c.measureText(label).width, w = tw + th + 18 * k;
+          c.fillStyle = '#000'; c.beginPath(); if (c.roundRect) c.roundRect(P, y, w, th, th / 2); else c.rect(P, y, w, th); c.fill();
+          const cx = P + th / 2 + 2 * k, cy = y + th / 2, rad = th * 0.3;
+          c.strokeStyle = '#fff'; c.lineWidth = 2.2 * k; c.beginPath(); c.arc(cx, cy, rad, 0, Math.PI * 2); c.stroke();
+          c.beginPath(); c.moveTo(cx, cy); c.lineTo(cx, cy - rad * 0.7); c.moveTo(cx, cy); c.lineTo(cx + rad * 0.55, cy); c.stroke();
+          c.fillStyle = '#fff'; c.fillText(label, P + th + 6 * k, y + th * 0.78);
+        });
+      });
+    });
+  }
+  if (md.plate.length) {
+    if (!md.steps.length) ops = S.steps;
+    gap(16 * k); dashed(); text('PLATE', sub, lhSub, P, inner, true);
+    md.plate.forEach(p => text(p, body, lhB, P, inner));
+  }
+
+  ops = []; gap(10 * k); dashed(); const end = ops;
+  return { S, end, notesLines, k, P, W };
+}
+
+/* Long notes get their own strip; short notes ride with the mise; steps + plate stand alone. */
+function strips(lay, split) {
+  const { S, end, notesLines } = lay, out = [];
+  const push = (name, ops) => { if (ops.some(o => !o.gap)) out.push({ name, ops: [...ops, ...end] }); };
+  if (!split) { push('Ticket', [...S.head, ...S.notes, ...S.mise, ...S.steps]); return out; }
+  if (notesLines > 4) { push('Notes', [...S.head, ...S.notes]); push('Mise', S.mise); }
+  else push(S.notes.length ? 'Notes + mise' : 'Mise', [...S.head, ...S.notes, ...S.mise]);
+  push('Steps', S.steps);
+  return out;
+}
+
+function paint(ops, lay, idx, total, title) {
+  const { k, P, W } = lay, top = Math.round(12 * k), feed = Math.round(48 * k);
+  const headH = idx > 0 ? Math.round(34 * k) : 0;
+  const H = top + headH + ops.reduce((a, o) => a + o.h, 0) + feed;
+  const c = document.createElement('canvas'); c.width = W; c.height = H;
+  const x = c.getContext('2d');
+  x.fillStyle = '#fff'; x.fillRect(0, 0, W, H); x.textBaseline = 'alphabetic';
+  let y = top;
+  if (idx > 0) {
+    x.font = `600 ${17 * k}px ${DISPLAY}`; x.fillStyle = '#000';
+    const t = (title || '').toUpperCase(); let s = t;
+    while (s.length > 4 && x.measureText(s + '…').width > W - 2 * P - 60 * k) s = s.slice(0, -1);
+    x.fillText(s === t ? s : s + '…', P, y + 20 * k);
+    x.textAlign = 'right'; x.fillText(`${idx + 1}/${total}`, W - P, y + 20 * k); x.textAlign = 'left';
+    x.fillRect(P, y + headH - 6 * k, W - 2 * P, 2 * k); y += headH;
+  }
+  for (const o of ops) { o.draw(x, y); y += o.h; }
+  // one bit deep: a thermal head prints black or nothing
+  const img = x.getImageData(0, 0, W, H), d = img.data;
+  for (let i = 0; i < d.length; i += 4) { const v = (d[i] * .299 + d[i + 1] * .587 + d[i + 2] * .114) < 150 ? 0 : 255; d[i] = d[i + 1] = d[i + 2] = v; d[i + 3] = 255; }
+  x.putImageData(img, 0, 0);
+  return c;
+}
+
+const slug = s => (s || 'recipe').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 40) || 'recipe';
+
+async function render(md, opt = {}) {
+  await ensureFonts();
+  const lay = build(md, opt);
+  const list = strips(lay, opt.split !== false);
+  const out = [];
+  for (let i = 0; i < list.length; i++) {
+    const canvas = paint(list[i].ops, lay, i, list.length, md.title);
+    const blob = await new Promise(r => canvas.toBlob(r, 'image/png'));
+    const filename = `${slug(md.title)}${list.length > 1 ? '-' + (i + 1) + '-' + slug(list[i].name) : ''}.png`;
+    out.push({ name: list[i].name, canvas, blob, filename, mm: Math.round(canvas.height / 8) });
+  }
+  return out;
+}
+
+/* --------------------------------------------------------------------- UI */
+const CSS = `
+.nt-overlay{position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.45);display:flex;align-items:flex-start;justify-content:center;overflow-y:auto;padding:max(16px,env(safe-area-inset-top)) 12px 32px}
+.nt-panel{background:var(--surface,#fff);color:var(--text,#1b1d1e);border:1px solid var(--border-mid,#bbb);border-radius:14px;width:100%;max-width:760px;padding:16px;box-shadow:0 10px 40px rgba(0,0,0,.25)}
+.nt{display:grid;gap:14px;color:var(--text,#1b1d1e);font-family:var(--font-sans,system-ui,sans-serif)}
+.nt-hd{display:flex;align-items:center;gap:10px}
+.nt-hd h2{font-family:var(--font-display,Georgia,serif);font-size:18px;font-weight:700;margin:0;flex:1;min-width:0}
+.nt-x{background:none;border:1px solid var(--border,#ccc);color:var(--muted,#555);border-radius:6px;padding:5px 10px;font-size:14px;cursor:pointer}
+.nt-sub{font-size:13px;color:var(--muted,#555);margin:-6px 0 0}
+.nt textarea{width:100%;box-sizing:border-box;min-height:220px;resize:vertical;font:13px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--bg,#f4f4f4);color:var(--text,#1b1d1e);border:1px solid var(--border,#ccc);border-radius:8px;padding:10px}
+.nt-opts{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;font-size:13px}
+.nt-opts label{display:flex;align-items:center;gap:6px;cursor:pointer}
+.nt-opts select{font:inherit;padding:4px 6px;border-radius:6px;border:1px solid var(--border,#ccc);background:var(--surface,#fff);color:var(--text,#1b1d1e)}
+.nt-btn{font:600 13px/1 var(--font-sans,system-ui,sans-serif);border-radius:7px;padding:9px 13px;cursor:pointer;border:1px solid var(--border-mid,#bbb);background:var(--surface,#fff);color:var(--text,#1b1d1e)}
+.nt-btn.pri{background:var(--accent,#8f5b29);border-color:var(--accent,#8f5b29);color:var(--on-accent,#fff)}
+.nt-btn:focus-visible,.nt-x:focus-visible,.nt textarea:focus-visible{outline:2px solid var(--accent,#8f5b29);outline-offset:2px}
+.nt-rep{border:1px solid var(--border,#ccc);border-radius:8px;padding:10px 12px;font-size:13px;line-height:1.45;display:grid;gap:6px}
+.nt-rep.warn{border-color:var(--warn-bdr,#e0b060);background:var(--warn-bg,#fbf1dc)}
+.nt-rep b{font-weight:700}
+.nt-rep ul{margin:0;padding-left:18px;display:grid;gap:2px}
+.nt-rep li{word-break:break-word}
+.nt-strips{display:flex;flex-wrap:wrap;gap:18px;justify-content:center;align-items:flex-start}
+.nt-strip{display:grid;gap:8px;justify-items:center;width:min(100%,240px)}
+.nt-strip img{width:100%;background:#fff;box-shadow:0 4px 14px rgba(0,0,0,.18);image-rendering:pixelated;display:block}
+.nt-meta{font-size:12px;color:var(--muted,#555);text-align:center}
+.nt-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.nt-status{font-size:12px;color:var(--muted,#555);min-height:1.2em;text-align:center}
+`;
+function injectCSS() {
+  if (document.getElementById('nt-css')) return;
+  const s = document.createElement('style'); s.id = 'nt-css'; s.textContent = CSS; document.head.appendChild(s);
+}
+const el = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
+
+async function defaultSave(files) {
+  if (navigator.canShare && navigator.canShare({ files })) {
+    try { await navigator.share({ files }); return 'Sent'; }
+    catch (e) { if (e && e.name === 'AbortError') return 'Cancelled'; }
+  }
+  files.forEach(f => {
+    const a = document.createElement('a'); a.href = URL.createObjectURL(f); a.download = f.name;
+    document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+  });
+  return 'Downloaded';
+}
+
+const store = {
+  get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+  set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+};
+
+function mount(root, cfg = {}) {
+  injectCSS();
+  const save = cfg.save || defaultSave;
+  const isPaste = !!cfg.paste;
+  const wrapEl = el('div', 'nt');
+  root.appendChild(wrapEl);
+
+  if (cfg.heading !== false) {
+    const hd = el('div', 'nt-hd');
+    hd.appendChild(el('h2', null, isPaste ? 'Print a pasted recipe' : 'Print ticket'));
+    if (cfg.onClose) { const x = el('button', 'nt-x', '✕'); x.type = 'button'; x.setAttribute('aria-label', 'Close'); x.onclick = cfg.onClose; hd.appendChild(x); }
+    wrapEl.appendChild(hd);
+    if (!isPaste) wrapEl.appendChild(el('p', 'nt-sub', `${cfg.recipe.title} · ${cfg.ctx && cfg.ctx.label ? cfg.ctx.label : ''}`));
+  }
+
+  let ta = null;
+  if (isPaste) {
+    ta = el('textarea'); ta.id = 'nt-src'; ta.spellcheck = false;
+    ta.placeholder = 'Paste the whole cook-mode reply here, from # Title to PLATE:';
+    ta.value = store.get('elyes-ticket-src') || cfg.example || '';
+    wrapEl.appendChild(ta);
+  }
+
+  const opts = el('div', 'nt-opts');
+  const prefs = JSON.parse(store.get('elyes-ticket-prefs') || '{}');
+  const mkCheck = (id, label, on) => { const l = el('label'); const i = el('input'); i.type = 'checkbox'; i.id = id; i.checked = on; l.append(i, document.createTextNode(label)); opts.appendChild(l); return i; };
+  const cSplit = mkCheck('nt-split', 'One strip per section', prefs.split !== false);
+  const cTips = isPaste ? null : mkCheck('nt-tips', 'Tips', !!prefs.tips);
+  const cHead = isPaste ? null : mkCheck('nt-head', 'Headnote', !!prefs.headnote);
+  const sl = el('label'); sl.appendChild(document.createTextNode('Type'));
+  const sel = el('select'); sel.id = 'nt-size';
+  [['0.88', 'Small'], ['1', 'Medium'], ['1.18', 'Large']].forEach(([v, t]) => { const o = el('option', null, t); o.value = v; sel.appendChild(o); });
+  sel.value = prefs.size || '1'; sl.appendChild(sel); opts.appendChild(sl);
+  if (isPaste) {
+    const ex = el('button', 'nt-btn', 'Load example'); ex.type = 'button';
+    ex.onclick = () => { ta.value = cfg.example || ''; run(); };
+    const cl = el('button', 'nt-btn', 'Clear'); cl.type = 'button';
+    cl.onclick = () => { ta.value = ''; run(); ta.focus(); };
+    if (cfg.example) opts.appendChild(ex);
+    opts.appendChild(cl);
+  }
+  wrapEl.appendChild(opts);
+
+  const reports = el('div'); reports.style.display = 'grid'; reports.style.gap = '8px';
+  const status = el('div', 'nt-status');
+  const all = el('div', 'nt-row');
+  const stripsEl = el('div', 'nt-strips');
+  wrapEl.append(reports, all, stripsEl, status);
+
+  let urls = [], seq = 0;
+  function report(title, items, warn) {
+    if (!items.length) return;
+    const box = el('div', 'nt-rep' + (warn ? ' warn' : ''));
+    box.appendChild(el('b', null, title));
+    const ul = el('ul'); items.forEach(i => ul.appendChild(el('li', null, i))); box.appendChild(ul);
+    reports.appendChild(box);
+  }
+
+  async function run() {
+    const my = ++seq;
+    const p = { split: cSplit.checked, tips: cTips ? cTips.checked : false, headnote: cHead ? cHead.checked : false, size: sel.value };
+    store.set('elyes-ticket-prefs', JSON.stringify(p));
+    let md;
+    if (isPaste) {
+      store.set('elyes-ticket-src', ta.value);
+      if (!ta.value.trim()) { reports.textContent = ''; stripsEl.textContent = ''; all.textContent = ''; status.textContent = 'Paste a cook-mode recipe to see the strips.'; return; }
+      md = parseCookMode(ta.value);
+    } else {
+      md = fromRecipe(cfg.recipe, cfg.ctx, p);
+    }
+    const out = await render(md, { size: +p.size, split: p.split });
+    if (my !== seq) return;
+    urls.forEach(u => URL.revokeObjectURL(u)); urls = [];
+    reports.textContent = ''; stripsEl.textContent = ''; all.textContent = '';
+    report('Left off the ticket', md.omitted, true);
+    report('Printed as plain text (unexpected format)', md.kept, false);
+    if (md.hidden.length) report('Not printed (Tips and Headnote toggles add theirs back)', [md.hidden.join(' · ')], false);
+
+    const files = out.map(o => new File([o.blob], o.filename, { type: 'image/png' }));
+    if (out.length > 1) {
+      const b = el('button', 'nt-btn pri', `Send all ${out.length} strips`); b.type = 'button';
+      b.onclick = async () => { b.textContent = await save(files) + ''; };
+      all.appendChild(b);
+    }
+    out.forEach((o, i) => {
+      const fig = el('div', 'nt-strip');
+      const url = URL.createObjectURL(o.blob); urls.push(url);
+      const img = el('img'); img.src = url; img.alt = `${o.name} strip for ${md.title}`;
+      fig.append(img, el('div', 'nt-meta', `${i + 1}/${out.length} · ${o.name} · about ${o.mm} mm`));
+      const b = el('button', 'nt-btn' + (out.length === 1 ? ' pri' : ''), out.length > 1 ? `Send ${o.name.toLowerCase()}` : 'Send to printer app');
+      b.type = 'button'; b.onclick = async () => { b.textContent = await save([files[i]]) + ''; };
+      fig.appendChild(b);
+      stripsEl.appendChild(fig);
+    });
+    const mise = md.mise.reduce((a, g) => a + g.items.length, 0);
+    status.textContent = `${mise} mise items · ${md.steps.length} steps · ${out.length} strip${out.length > 1 ? 's' : ''} · 384 dots wide`;
+  }
+
+  let t;
+  if (ta) ta.addEventListener('input', () => { clearTimeout(t); t = setTimeout(run, 250); });
+  [cSplit, cTips, cHead, sel].forEach(c => c && c.addEventListener('change', run));
+  run();
+  return { refresh: run, destroy() { urls.forEach(u => URL.revokeObjectURL(u)); wrapEl.remove(); } };
+}
+
+function open(cfg = {}) {
+  injectCSS();
+  const ov = el('div', 'nt-overlay');
+  const panel = el('div', 'nt-panel');
+  ov.appendChild(panel);
+  let inst;
+  const close = () => { inst && inst.destroy(); ov.remove(); document.removeEventListener('keydown', onKey); };
+  const onKey = e => { if (e.key === 'Escape') close(); };
+  ov.addEventListener('click', e => { if (e.target === ov) close(); });
+  document.addEventListener('keydown', onKey);
+  document.body.appendChild(ov);
+  inst = mount(panel, Object.assign({}, cfg, { onClose: close }));
+  return { close };
+}
+
+const EXAMPLE = `# Lamb Chops, Blueberry-Mint Pan Sauce
+Serves 2 · Preheat oven to 425°F
+
+GOTCHAS
+· Chops bone-dry or they steam.
+· Pull at 130°F; they climb while resting.
+· Deglaze within 30 seconds of pulling the chops or the fond burns.
+
+---
+MISE EN PLACE
+
+Carrots
+· 4 medium carrots, bias-cut ½"
+· 1 tbsp avocado oil
+· ½ tsp salt
+
+Lamb
+· 6 lamb loin chops (about 1½ lbs)
+· Salt + black pepper
+· 1 tbsp avocado oil
+
+Sauce
+· 1 cup blueberries
+· 3 tbsp Bragg's ACV
+· ½ cup bone broth
+· 2 garlic cloves, minced
+· 1 sprig rosemary + 6 mint leaves, chopped
+
+---
+1. ROAST THE CARROTS
+Toss carrots with 1 tbsp oil and ½ tsp salt, single layer on a sheet pan. Don't crowd them or they steam instead of roast. You want deep brown edges.
+⏱ 25 minutes — set timer now.
+
+2. SEAR THE LAMB
+Pat 6 chops bone-dry and season hard. Cast iron ripping hot, oil shimmering. Lay them in and don't touch them. That sizzle should stay loud.
+⏱ 3 minutes — set timer now.
+
+3. FLIP AND REST
+Flip, sear the fat-cap edge for 30 seconds, then pull at 130°F internal. Rest on a board.
+⏱ 5 minutes — set timer now.
+
+4. PAN SAUCE
+Pour off most of the fat. Garlic in for 30 seconds, then ½ cup broth and 3 tbsp ACV. Scrape up the fond, that's the flavor. Add 1 cup blueberries and the rosemary, smash a few, reduce until it coats a spoon.
+⏱ 4 minutes — set timer now.
+
+5. FINISH
+Off heat, stir in the mint and any resting juices. Taste. More ACV if it's flat.
+
+---
+PLATE: Chops over carrots, sauce spooned across, extra mint on top.`;
+
+window.NomTicket = { parseCookMode, fromRecipe, render, mount, open, ensureFonts, EXAMPLE };
+})();
+</script>
+<script>
+(async () => {
+  let downloads = null;
+  const save = async files => {
+    if (!downloads) return 'Press and hold the strip to save it';
+    let last = 'Sent';
+    for (const f of files) {
+      try { await downloads.save({ filename: f.name, data: f }); }
+      catch (e) { return e && e.code === 'declined' ? 'Cancelled' : e && e.code === 'rate_limited' ? 'One at a time, tap again' : 'Save unavailable here'; }
+    }
+    return last;
+  };
+  NomTicket.mount(document.getElementById('station'), { paste: true, example: NomTicket.EXAMPLE, heading: false, save });
+  try { if (window.claude && window.claude.use) downloads = await window.claude.use('downloads'); } catch (e) {}
+})();
+</script>
+
+</body></html>
